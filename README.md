@@ -23,7 +23,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 If you discover any security related issues, please email mail@vitaliy.in instead of using the issue tracker.
 
-## 5. Testing
+## Testing
 
 Run following command:
 
