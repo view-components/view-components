@@ -80,16 +80,14 @@ class Collection
     public function set(array $components)
     {
         $this->clean();
-        foreach($components as $component)
-        {
+        foreach ($components as $component) {
             $this->add($component);
         }
     }
 
     public function clean()
     {
-        foreach($this->items as $item)
-        {
+        foreach ($this->items as $item) {
             $item->internalUnsetParent();
         }
         $this->items = [];
@@ -148,12 +146,11 @@ class Collection
     public function findAllBySection($section_name)
     {
         $results = [];
-        foreach($this->items as $item) {
+        foreach ($this->items as $item) {
             if (
                 $item instanceof ChildViewInterface
                 and $item->getRenderSection() === $section_name
-            )
-            {
+            ) {
                 $results[] = $item;
             }
         }

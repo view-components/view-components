@@ -8,7 +8,8 @@ use PHPUnit_Framework_TestCase;
 
 class CollectionTest extends PHPUnit_Framework_TestCase
 {
-    public function test(){
+    public function test()
+    {
         $parent = new ParentClass();
         $collection = $parent->components();
 

@@ -8,7 +8,6 @@
 
 namespace Nayjest\ViewComponents\Test\Components;
 
-
 use Nayjest\ViewComponents\Components\HtmlTag;
 use Nayjest\ViewComponents\Components\Text;
 use PHPUnit_Framework_TestCase;
@@ -24,7 +23,7 @@ class HtmlTagTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<a></a>', $tag->render());
 
         $tag->setAttributes([
-           'class' => 'btn'
+            'class' => 'btn'
         ]);
         $this->assertEquals('<a class="btn"></a>', $tag->render());
 

@@ -3,7 +3,8 @@ namespace Nayjest\ViewComponents\Components;
 
 use Nayjest\ViewComponents\Components\Base\Container;
 
-class HtmlTag extends Container {
+class HtmlTag extends Container
+{
 
     protected $tag_name;
 

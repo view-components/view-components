@@ -8,6 +8,7 @@ trait ChildViewTrait
     //use ViewTrait;
 
     protected $render_section;
+
     /**
      * @param $section
      * @return $this

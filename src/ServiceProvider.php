@@ -3,6 +3,13 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
+/**
+ * Class ServiceProvider
+ *
+ * Service provider for Laravel.
+ *
+ * @package Nayjest\Grids
+ */
 class ServiceProvider extends BaseServiceProvider
 {
     /**
@@ -21,6 +28,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         return __DIR__;
     }
+
     /**
      * Bootstrap the application events.
      *
