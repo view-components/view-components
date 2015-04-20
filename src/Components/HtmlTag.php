@@ -1,9 +1,9 @@
 <?php
 namespace Nayjest\ViewComponents\Components;
 
-use Nayjest\ViewComponents\Components\Base\Container;
+use Nayjest\ViewComponents\Components\Base\Container as BaseContainer;
 
-class HtmlTag extends Container
+class HtmlTag extends BaseContainer
 {
 
     protected $tag_name;

@@ -38,7 +38,7 @@ trait TemplatedViewTrait
             return $this->getTheme();
         }
         /**
-         * @var ParentInterface|ChildInterface|TemplatedViewInterface $parent
+         * @var TemplatedViewInterface|null $parent
          */
         $parent = $this->findClosestParent([$this, 'isTemplatedView']);
         if ($parent !== null) {
