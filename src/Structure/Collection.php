@@ -149,7 +149,7 @@ class Collection
         foreach ($this->items as $item) {
             if (
                 $item instanceof ChildViewInterface
-                and $item->getRenderSection() === $section_name
+                && $item->getRenderSection() === $section_name
             ) {
                 $results[] = $item;
             }
