@@ -1,0 +1,8 @@
+destination: doc
+source:
+	- src
+	
+title: Nayjest/ViewComponents API Documentation
+sourceCode: true
+tree: true
+download: true
