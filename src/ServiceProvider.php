@@ -1,4 +1,4 @@
-<?php namespace Nayjest\Grids;
+<?php namespace Nayjest\ViewComponents;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
