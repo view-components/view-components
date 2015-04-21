@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\Components\Base;
+namespace Nayjest\ViewComponents\BaseComponents;
 
 use Nayjest\ViewComponents\Rendering\ParentViewInterface;
 use Nayjest\ViewComponents\Rendering\ParentViewTrait;

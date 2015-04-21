@@ -1,12 +1,18 @@
 <?php
-namespace Nayjest\ViewComponents\Components;
+namespace Nayjest\ViewComponents\BaseComponents\Html;
 
-use Nayjest\ViewComponents\Components\Base\Container as BaseContainer;
-
-class HtmlTag extends BaseContainer
+/**
+ * Class TagTrait
+ *
+ * Implements abstract methods from base container
+ * and common functionality of html tags.
+ *
+ * @package Nayjest\ViewComponents\Components\Base\Html
+ */
+trait TagTrait
 {
 
-    protected $tag_name;
+    abstract public function getTagName();
 
     /**
      * HTML tag attributes.
@@ -15,60 +21,30 @@ class HtmlTag extends BaseContainer
      */
     protected $attributes = [];
 
-
     /**
-     * @param string|null $tagName
-     * @param array|null $attributes
-     * @param array $components
+     * Returns html tag attributes.
+     * Keys are attribute names and values are attribute values.
+     *
+     * @return array
      */
-    public function __construct(
-        $tagName = null,
-        $attributes = null,
-        array $components = []
-    )
+    public function getAttributes()
     {
-        if ($tagName !== null) {
-            $this->setTagName($tagName);
-        }
-        if ($attributes !== null) {
-            $this->setAttributes($attributes);
-        }
-        parent::__construct($components);
+        return $this->attributes;
     }
 
-    /**
-     * Allows to specify HTML tag.
-     *
-     * @param string $name
-     * @return $this
-     */
-    public function setTagName($name)
+    public function getAttribute($name, $default = null)
     {
-        $this->tag_name = $name;
+        if (array_key_exists($name, $this->attributes)) {
+            return $this->attributes[$name];
+        } else {
+            return $default;
+        }
+    }
+
+    public function setAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
         return $this;
-    }
-
-    /**
-     * Returns HTML tag.
-     *
-     * @return string
-     */
-    public function getTagName()
-    {
-        return $this->tag_name ?: $this->suggestTagName();
-    }
-
-    /**
-     * Suggests tag name by class name.
-     *
-     * @return string
-     */
-    private function suggestTagName()
-    {
-        $class_name = get_class($this);
-        $parts = explode('\\', $class_name);
-        $base_name = array_pop($parts);
-        return ($base_name === 'HtmlTag') ? 'div' : strtolower($base_name);
     }
 
     /**
@@ -88,17 +64,6 @@ class HtmlTag extends BaseContainer
     {
         $this->attributes = array_merge($this->attributes, $attributes);
         return $this;
-    }
-
-    /**
-     * Returns html tag attributes.
-     * Keys are attribute names and values are attribute values.
-     *
-     * @return array
-     */
-    public function getAttributes()
-    {
-        return $this->attributes;
     }
 
     /**

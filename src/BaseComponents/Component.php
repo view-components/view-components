@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\Components\Base;
+namespace Nayjest\ViewComponents\BaseComponents;
 
 use Nayjest\ViewComponents\Rendering\ChildViewInterface;
 use Nayjest\ViewComponents\Rendering\ChildViewTrait;

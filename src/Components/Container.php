@@ -1,7 +1,7 @@
 <?php
 namespace Nayjest\ViewComponents\Components;
 
-use Nayjest\ViewComponents\Components\Base\Container as BaseContainer;
+use Nayjest\ViewComponents\BaseComponents\Container as BaseContainer;
 
 class Container extends BaseContainer
 {

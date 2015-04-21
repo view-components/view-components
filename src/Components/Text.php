@@ -2,7 +2,7 @@
 namespace Nayjest\ViewComponents\Components;
 
 use Closure;
-use Nayjest\ViewComponents\Components\Base\Component;
+use Nayjest\ViewComponents\BaseComponents\Component;
 
 class Text extends Component
 {
