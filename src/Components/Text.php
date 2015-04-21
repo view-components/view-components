@@ -17,7 +17,7 @@ class Text extends Component
     {
         return $this->value instanceof Closure ?
             call_user_func($this->value, $this)
-            : $this->value;
+            : (string)$this->value;
     }
 
     /**
