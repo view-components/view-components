@@ -16,12 +16,19 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($collection->isEmpty());
 
         $child = new ChildClass();
+        $this->assertFalse($collection->has($child));
         $this->assertTrue($child->getParent() === null);
         $collection->add($child);
         $this->assertTrue($collection->getSize() === 1);
+        $this->assertTrue($collection->has($child));
         $this->assertTrue($child->getParent() === $parent);
+
         $collection->add($child);
         $this->assertTrue($collection->getSize() === 1, 'Item can\'t be added to collection twice.');
+
+        $items = $collection->toArray();
+        $item1 = array_pop($items);
+        $this->assertEquals($item1, $child);
 
         $child2 = new ChildClass();
         $collection->add($child2);
