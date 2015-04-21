@@ -4,7 +4,7 @@ namespace Nayjest\ViewComponents\Structure;
 
 use LogicException;
 use Nayjest\ViewComponents\Rendering\ChildViewInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
+// use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class Collection
 {
