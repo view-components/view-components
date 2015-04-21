@@ -13,31 +13,48 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $parent = new ParentClass();
         $collection = $parent->components();
 
-        $this->assertTrue($collection->isEmpty());
+        self::assertTrue($collection->isEmpty());
 
         $child = new ChildClass();
-        $this->assertFalse($collection->has($child));
-        $this->assertTrue($child->getParent() === null);
+        self::assertFalse($collection->has($child));
+        self::assertTrue($child->getParent() === null);
         $collection->add($child);
-        $this->assertTrue($collection->getSize() === 1);
-        $this->assertTrue($collection->has($child));
-        $this->assertTrue($child->getParent() === $parent);
+        self::assertTrue($collection->getSize() === 1);
+        self::assertTrue($collection->has($child));
+        self::assertTrue($child->getParent() === $parent);
 
         $collection->add($child);
-        $this->assertTrue($collection->getSize() === 1, 'Item can\'t be added to collection twice.');
+        self::assertTrue($collection->getSize() === 1, 'Item can\'t be added to collection twice.');
 
         $items = $collection->toArray();
         $item1 = array_pop($items);
-        $this->assertEquals($item1, $child);
+        self::assertEquals($item1, $child);
 
         $child2 = new ChildClass();
         $collection->add($child2);
-        $this->assertTrue($collection->getSize() === 2);
+        self::assertTrue($collection->getSize() === 2);
         $collection->remove($child2);
-        $this->assertTrue($collection->getSize() === 1);
-        $this->assertTrue(
+        self::assertTrue($collection->getSize() === 1);
+        self::assertTrue(
             $child2->getParent() === null,
             'Parent must be detached from child item after removing it from collection.'
         );
+
+        // test clean
+        $collection->set([$child, $child2]);
+        $collection->clean();
+        self::assertTrue(
+            $collection->getSize() === 0,
+            'Collection must be empty after calling clean()'
+        );
+        self::assertTrue(
+            $child->getParent() === null,
+            'Item parents must be empty after Collection::clean()'
+        );
+        self::assertTrue(
+            $child2->getParent() === null,
+            'Item parents must be empty after Collection::clean()'
+        );
+
     }
 }
