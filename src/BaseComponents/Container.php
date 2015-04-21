@@ -20,7 +20,7 @@ abstract class Container extends Component implements
     public function __construct(array $components = [])
     {
         if (count($components) > 0) {
-            $this->components()->set($components);
+            $this->setComponents($components);
         }
     }
 
