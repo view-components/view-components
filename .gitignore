@@ -2,4 +2,5 @@ vendor
 composer.phar
 composer.lock
 apigen.phar
+build
 src/_Components
