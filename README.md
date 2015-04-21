@@ -1,6 +1,7 @@
 PHP View Components
 =====
-
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/?branch=master)
+[![Build Status](https://travis-ci.org/Nayjest/ViewComponents.svg?branch=master)](https://travis-ci.org/Nayjest/ViewComponents)
 
 ## Requirements
 
