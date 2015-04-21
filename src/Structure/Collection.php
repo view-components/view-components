@@ -141,7 +141,7 @@ class Collection
 
     /**
      * @param string $section_name
-     * @return ChildViewInterface
+     * @return ChildViewInterface[]
      */
     public function findAllBySection($section_name)
     {
