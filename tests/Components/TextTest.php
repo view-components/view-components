@@ -9,8 +9,10 @@ class TextTest extends PHPUnit_Framework_TestCase
     public function test()
     {
         $text = new Text('some text');
-        $this->assertEquals('some text', $text->render());
-        $text->setValue('some text 2');
-        $this->assertEquals('some text 2', $text->render());
+        self::assertEquals('some text', $text->render());
+        self::assertEquals('some text', $text->getValue());
+        $res = $text->setValue('some text 2');
+        self::assertEquals($text, $res);
+        self::assertEquals('some text 2', $text->render());
     }
 }
