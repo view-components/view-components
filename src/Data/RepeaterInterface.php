@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\DataView\Data\DataAcceptorInterface;
+namespace Nayjest\ViewComponents\Data;
 
 use Nayjest\ViewComponents\Rendering\ParentViewInterface;
 use Nayjest\ViewComponents\Structure\ParentInterface;

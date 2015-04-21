@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\DataView\Data;
+namespace Nayjest\ViewComponents\Data;
 
 /**
  * Interface DataAcceptorInterface

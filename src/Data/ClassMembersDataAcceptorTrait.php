@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\DataView\Data;
+namespace Nayjest\ViewComponents\Data;
 
 use InvalidArgumentException;
 use Nayjest\Builder\ClassUtils;
