@@ -1,22 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 20.04.2015
- * Time: 20:11
- */
 
-namespace Nayjest\ViewComponents\Test\Components;
+namespace Nayjest\ViewComponents\Test\Components\Html;
 
-use Nayjest\ViewComponents\Components\HtmlTag;
+use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Components\Text;
 use PHPUnit_Framework_TestCase;
 
-class HtmlTagTest extends PHPUnit_Framework_TestCase
+class TagTest extends PHPUnit_Framework_TestCase
 {
     public function test()
     {
-        $tag = new HtmlTag();
+        $tag = new Tag();
         $this->assertEquals('<div></div>', $tag->render());
 
         $tag->setTagName('a');
@@ -27,7 +21,7 @@ class HtmlTagTest extends PHPUnit_Framework_TestCase
         ]);
         $this->assertEquals('<a class="btn"></a>', $tag->render());
 
-        $first = new HtmlTag();
+        $first = new Tag();
         $first
             ->setTagName('i')
             ->setAttributes(['class' => 'icon']);
