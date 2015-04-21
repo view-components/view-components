@@ -41,13 +41,13 @@ class ServiceProvider extends BaseServiceProvider
 
         # only for Laravel 4 & some of 5-dev
         if (version_compare(Application::VERSION, '5.0.0', '<')) {
-            $this->package('nayjest/grids');
-            $this->app['view']->addNamespace('data-view', $views_path);
+            $this->package('nayjest/view-components');
+            $this->app['view']->addNamespace('view-components', $views_path);
         } else {
-            $this->loadViewsFrom($views_path, 'data-view');
-            $this->loadTranslationsFrom($pkg_path . '/resources/lang', 'data-view');
+            $this->loadViewsFrom($views_path, 'view-components');
+            $this->loadTranslationsFrom($pkg_path . '/resources/lang', 'view-components');
             $this->publishes([
-                $views_path => base_path('resources/views/nayjest/data-view')
+                $views_path => base_path('resources/views/nayjest/view-components')
             ]);
         }
     }
