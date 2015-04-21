@@ -13,7 +13,7 @@ class Collection
 
     protected $owner;
 
-    protected static $propertyAccessor;
+    //protected static $propertyAccessor;
 
     /**
      * Constructor.
