@@ -3,7 +3,6 @@ namespace Nayjest\ViewComponents\Rendering;
 
 /**
  * Interface ViewInterface
- * @package Nayjest\ViewComponents\Rendering
  */
 interface TemplatedViewInterface extends ViewInterface
 {

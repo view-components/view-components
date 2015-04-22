@@ -1,11 +1,8 @@
 <?php
 namespace Nayjest\ViewComponents\Rendering;
 
-//use Nayjest\ViewComponents\Structure\ParentTrait;
-
 trait ParentViewTrait
 {
-    //use ParentTrait;
     /**
      * Returns child components.
      *

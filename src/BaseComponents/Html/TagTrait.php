@@ -6,8 +6,6 @@ namespace Nayjest\ViewComponents\BaseComponents\Html;
  *
  * Implements abstract methods from base container
  * and common functionality of html tags.
- *
- * @package Nayjest\ViewComponents\Components\Base\Html
  */
 trait TagTrait
 {

@@ -10,9 +10,8 @@ use Traversable;
  *
  * Implementation of DataAcceptor,
  * that store accepted data array in existing public properties.
- *
+ * @experimental
  * @implements DataAcceptorInterface
- * @package Nayjest\DataView\Data\DataAcceptorInterface
  */
 trait ClassMembersDataAcceptorTrait
 {

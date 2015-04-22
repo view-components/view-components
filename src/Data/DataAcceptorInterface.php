@@ -5,8 +5,7 @@ namespace Nayjest\ViewComponents\Data;
  * Interface DataAcceptorInterface
  *
  * Interface describes components, that can accept custom data.
- *
- * @package Nayjest\DataView\Data
+ * @experimental
  */
 interface DataAcceptorInterface
 {

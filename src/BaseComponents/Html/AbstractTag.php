@@ -8,8 +8,6 @@ use Nayjest\ViewComponents\BaseComponents\AbstractContainer;
  *
  * Base class for html tags.
  * Class name must same as tag name.
- *
- * @package Nayjest\ViewComponents\Components\Html
  */
 abstract class AbstractTag extends AbstractContainer
 {

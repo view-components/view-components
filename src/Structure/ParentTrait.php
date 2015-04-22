@@ -5,8 +5,6 @@ namespace Nayjest\ViewComponents\Structure;
  * Class ParentTrait
  *
  * @implements ParentInterface
- *
- * @package Nayjest\ViewComponents\Structure
  */
 trait ParentTrait
 {

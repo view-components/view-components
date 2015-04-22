@@ -6,7 +6,6 @@ namespace Nayjest\ViewComponents\Structure;
  *
  * @implements ChildInterface
  *
- * @package Nayjest\ViewComponents\Structure
  */
 trait ChildTrait
 {

@@ -6,9 +6,9 @@ use Nayjest\ViewComponents\BaseComponents\AbstractContainer;
 class Container extends AbstractContainer
 {
 
-    protected $opening_text;
+    protected $openingText;
 
-    protected $closing_text;
+    protected $closingText;
 
     public function __construct(
         array $components = [],
@@ -36,16 +36,16 @@ class Container extends AbstractContainer
      */
     public function getOpeningText()
     {
-        return $this->opening_text;
+        return $this->openingText;
     }
 
     /**
-     * @param string|null $opening_text
+     * @param string|null $openingText
      * @return $this
      */
-    public function setOpeningText($opening_text)
+    public function setOpeningText($openingText)
     {
-        $this->opening_text = $opening_text;
+        $this->openingText = $openingText;
         return $this;
     }
 
@@ -54,16 +54,16 @@ class Container extends AbstractContainer
      */
     public function getClosingText()
     {
-        return $this->closing_text;
+        return $this->closingText;
     }
 
     /**
-     * @param string|null $closing_text
+     * @param string|null $closingText
      * @return $this
      */
-    public function setClosingText($closing_text)
+    public function setClosingText($closingText)
     {
-        $this->closing_text = $closing_text;
+        $this->closingText = $closingText;
         return $this;
     }
 }

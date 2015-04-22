@@ -8,7 +8,6 @@ use Illuminate\Support\ServiceProvider as BaseServiceProvider;
  *
  * Service provider for Laravel.
  *
- * @package Nayjest\Grids
  */
 class ServiceProvider extends BaseServiceProvider
 {

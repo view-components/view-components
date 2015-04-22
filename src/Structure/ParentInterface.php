@@ -3,7 +3,6 @@ namespace Nayjest\ViewComponents\Structure;
 
 /**
  * Interface ParentInterface
- * @package Nayjest\ViewComponents
  */
 interface ParentInterface
 {

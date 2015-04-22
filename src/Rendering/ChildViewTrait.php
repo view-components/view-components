@@ -1,13 +1,9 @@
 <?php
 namespace Nayjest\ViewComponents\Rendering;
 
-//use Nayjest\ViewComponents\Rendering\ViewTrait;
-
 trait ChildViewTrait
 {
-    //use ViewTrait;
-
-    protected $render_section;
+    protected $renderSection;
 
     /**
      * @param $section
@@ -15,7 +11,7 @@ trait ChildViewTrait
      */
     public function setRenderSection($section)
     {
-        $this->render_section = $section;
+        $this->renderSection = $section;
         return $this;
     }
 
@@ -24,6 +20,6 @@ trait ChildViewTrait
      */
     public function getRenderSection()
     {
-        return $this->render_section;
+        return $this->renderSection;
     }
 }

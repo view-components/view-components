@@ -10,6 +10,9 @@ use Traversable;
 
 // use Symfony\Component\PropertyAccess\PropertyAccess;
 
+/**
+ * Class Collection
+ */
 class Collection
 {
     /** @var ChildInterface[] */

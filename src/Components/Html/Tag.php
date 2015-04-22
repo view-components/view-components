@@ -10,7 +10,7 @@ class Tag extends AbstractContainer
 
     use TagTrait;
 
-    protected $tag_name;
+    protected $tagName;
 
     /**
      * @param string|null $tagName
@@ -40,7 +40,7 @@ class Tag extends AbstractContainer
      */
     public function setTagName($name)
     {
-        $this->tag_name = $name;
+        $this->tagName = $name;
         return $this;
     }
 
@@ -51,6 +51,6 @@ class Tag extends AbstractContainer
      */
     public function getTagName()
     {
-        return $this->tag_name ? : static::DEFAULT_TAG_NAME;
+        return $this->tagName ? : static::DEFAULT_TAG_NAME;
     }
 }
