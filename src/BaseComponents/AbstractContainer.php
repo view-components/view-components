@@ -6,7 +6,7 @@ use Nayjest\ViewComponents\Rendering\ParentViewTrait;
 use Nayjest\ViewComponents\Structure\ParentInterface;
 use Nayjest\ViewComponents\Structure\ParentTrait;
 
-abstract class Container extends Component implements
+abstract class AbstractContainer extends AbstractComponent implements
     ParentViewInterface,
     ParentInterface
 {

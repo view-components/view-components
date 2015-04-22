@@ -1,17 +1,17 @@
 <?php
 namespace Nayjest\ViewComponents\BaseComponents\Html;
 
-use Nayjest\ViewComponents\BaseComponents\Container as BaseContainer;
+use Nayjest\ViewComponents\BaseComponents\AbstractContainer;
 
 /**
- * Class BaseTag
+ * Class AbstractTag
  *
  * Base class for html tags.
  * Class name must same as tag name.
  *
  * @package Nayjest\ViewComponents\Components\Html
  */
-abstract class BaseTag extends BaseContainer
+abstract class AbstractTag extends AbstractContainer
 {
    use TagTrait;
 

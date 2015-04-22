@@ -2,9 +2,9 @@
 namespace Nayjest\ViewComponents\Components;
 
 use Closure;
-use Nayjest\ViewComponents\BaseComponents\Component;
+use Nayjest\ViewComponents\BaseComponents\AbstractComponent;
 
-class Text extends Component
+class Text extends AbstractComponent
 {
     protected $value;
 

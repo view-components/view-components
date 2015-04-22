@@ -1,9 +1,9 @@
 <?php
 namespace Nayjest\ViewComponents\Components;
 
-use Nayjest\ViewComponents\BaseComponents\Container as BaseContainer;
+use Nayjest\ViewComponents\BaseComponents\AbstractContainer;
 
-class Container extends BaseContainer
+class Container extends AbstractContainer
 {
 
     protected $opening_text;

@@ -1,7 +1,7 @@
 <?php
 namespace Nayjest\ViewComponents\Components;
 
-use Nayjest\ViewComponents\BaseComponents\Component;
+use Nayjest\ViewComponents\BaseComponents\AbstractComponent;
 use Nayjest\ViewComponents\Data\RepeaterInterface;
 use Nayjest\ViewComponents\Data\RepeaterTrait;
 use Nayjest\ViewComponents\Rendering\ParentViewInterface;
@@ -10,7 +10,7 @@ use Nayjest\ViewComponents\Structure\ParentInterface;
 use Nayjest\ViewComponents\Structure\ParentTrait;
 use Traversable;
 
-class Repeater extends Component implements
+class Repeater extends AbstractComponent implements
     ParentViewInterface,
     ParentInterface,
     RepeaterInterface

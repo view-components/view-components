@@ -1,10 +1,10 @@
 <?php
 namespace Nayjest\ViewComponents\Components\Html;
 
-use Nayjest\ViewComponents\BaseComponents\Container as BaseContainer;
+use Nayjest\ViewComponents\BaseComponents\AbstractContainer;
 use Nayjest\ViewComponents\BaseComponents\Html\TagTrait;
 
-class Tag extends BaseContainer
+class Tag extends AbstractContainer
 {
     const DEFAULT_TAG_NAME = 'div';
 

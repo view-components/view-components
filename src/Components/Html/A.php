@@ -1,5 +1,5 @@
 <?php
 namespace Nayjest\ViewComponents\Components\Html;
-use Nayjest\ViewComponents\BaseComponents\Html\BaseTag;
+use Nayjest\ViewComponents\BaseComponents\Html\AbstractTag;
 
-class A extends BaseTag {}
+class A extends AbstractTag {}
