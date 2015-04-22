@@ -10,11 +10,15 @@ class Container extends BaseContainer
 
     protected $closing_text;
 
-    public function __construct($opening = null, $closing = null, array $components = [])
+    public function __construct(
+        array $components = [],
+        $opening = null,
+        $closing = null
+    )
     {
         parent::__construct($components);
-        if ($opening !== null) $this->setOpeningText($opening);
-        if ($closing !== null) $this->setClosingText($closing);
+        $this->setOpeningText($opening);
+        $this->setClosingText($closing);
     }
 
     protected function renderOpening()
