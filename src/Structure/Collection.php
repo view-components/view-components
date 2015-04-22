@@ -2,8 +2,12 @@
 
 namespace Nayjest\ViewComponents\Structure;
 
+use InvalidArgumentException;
 use LogicException;
+use Nayjest\Builder\ClassUtils;
 use Nayjest\ViewComponents\Rendering\ChildViewInterface;
+use Traversable;
+
 // use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class Collection
@@ -155,5 +159,35 @@ class Collection
             }
         }
         return $results;
+    }
+
+    /**
+     * @param Traversable|array $data
+     * @return array
+     */
+    protected function convertToArray($data)
+    {
+        if ($data instanceof Traversable) {
+            $data = iterator_to_array($data);
+        }
+        if (!is_array($data)) {
+            throw new InvalidArgumentException(
+                'Data row must be array|Traversable|null'
+            );
+        }
+        return $data;
+    }
+
+    /**
+     * @param Traversable|array $data
+     * @return $this
+     */
+    public function fillItemsWith($data)
+    {
+        $properties = $this->convertToArray($data);
+        foreach($this->items as $item) {
+            ClassUtils::assign($item, $properties);
+        }
+        return $this;
     }
 }
