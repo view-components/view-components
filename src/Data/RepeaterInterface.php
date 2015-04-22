@@ -1,33 +1,22 @@
 <?php
 namespace Nayjest\ViewComponents\Data;
 
-use Nayjest\ViewComponents\Rendering\ParentViewInterface;
-use Nayjest\ViewComponents\Structure\ParentInterface;
-use Traversable;
-
 /**
  * Interface RepeaterInterface
  *
- * Component implementing this interface must
- * set each data row to children DataAcceptorInterface instances
- * and render all ViewInterface instances for each row consequentially.
- *
- * @package Nayjest\DataView\Data\DataAcceptorInterface
  */
-interface RepeaterInterface extends ParentViewInterface, ParentInterface
+interface RepeaterInterface
 {
     /**
      * Data source to iterate over.
      *
-     * @param array|Traversable $source
+     * @param array|\Traversable $iterator
      */
-    public function setDataSource($source);
+    public function setIterator($iterator);
 
     /**
-     * Renders one row
-     *
-     * @param $row
-     * @return string
+     * @param callable $callback
+     * @return mixed
      */
-    public function renderRow($row);
+    public function setCallback($callback);
 }
