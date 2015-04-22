@@ -8,7 +8,10 @@ class Text extends Component
 {
     protected $value;
 
-    public function __construct($value)
+    /**
+     * @param string|null $value
+     */
+    public function __construct($value = null)
     {
         $this->value = $value;
     }
