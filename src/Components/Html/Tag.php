@@ -2,13 +2,13 @@
 namespace Nayjest\ViewComponents\Components\Html;
 
 use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
+use Nayjest\ViewComponents\BaseComponents\DecoratedContainerTrait;
 use Nayjest\ViewComponents\BaseComponents\Html\TagInterface;
 use Nayjest\ViewComponents\BaseComponents\Html\TagTrait;
 
 class Tag implements ContainerInterface, TagInterface
 {
-    use ContainerTrait;
+    use DecoratedContainerTrait;
     use TagTrait;
 
     const DEFAULT_TAG_NAME = 'div';

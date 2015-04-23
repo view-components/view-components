@@ -2,10 +2,12 @@
 namespace Nayjest\ViewComponents\Components;
 
 use Closure;
-use Nayjest\ViewComponents\BaseComponents\AbstractComponent;
+use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
+use Nayjest\ViewComponents\BaseComponents\ComponentTrait;
 
-class Text extends AbstractComponent
+class Text implements ComponentInterface
 {
+    use ComponentTrait;
     protected $value;
 
     /**

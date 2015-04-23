@@ -2,7 +2,7 @@
 namespace Nayjest\ViewComponents\BaseComponents\Html;
 
 use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
+use Nayjest\ViewComponents\BaseComponents\DecoratedContainerTrait;
 
 /**
  * Class AbstractTag
@@ -12,7 +12,7 @@ use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
  */
 abstract class AbstractTag implements ContainerInterface, TagInterface
 {
-    use ContainerTrait;
+    use DecoratedContainerTrait;
     use TagTrait;
 
     /**

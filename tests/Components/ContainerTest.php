@@ -3,6 +3,7 @@ namespace Nayjest\ViewComponents\Test\Components;
 
 use Nayjest\ViewComponents\Components\Container;
 use Nayjest\ViewComponents\Components\Text;
+use Nayjest\ViewComponents\Rendering\ViewInterface;
 use Nayjest\ViewComponents\Test\Mock\ChildClass;
 use Nayjest\ViewComponents\Test\Mock\HierarchyItem;
 use Nayjest\ViewComponents\Test\Mock\ParentClass;

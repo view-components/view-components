@@ -1,22 +1,26 @@
 <?php
 namespace Nayjest\ViewComponents\Components;
 
-use Nayjest\ViewComponents\BaseComponents\AbstractContainer;
+use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
+use Nayjest\ViewComponents\BaseComponents\DecoratedContainerTrait;
 
-class Container extends AbstractContainer
+class Container implements ContainerInterface
 {
+    use DecoratedContainerTrait;
 
     protected $openingText;
 
     protected $closingText;
 
     public function __construct(
-        array $components = [],
+        array $components = null,
         $opening = null,
         $closing = null
     )
     {
-        parent::__construct($components);
+        if ($components !== null) {
+            $this->setComponents($components);
+        }
         $this->setOpeningText($opening);
         $this->setClosingText($closing);
     }

@@ -1,22 +1,17 @@
 <?php
 namespace Nayjest\ViewComponents\Components;
 
-use Nayjest\ViewComponents\BaseComponents\AbstractComponent;
+use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
+use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
 use Nayjest\ViewComponents\Data\RepeaterInterface;
 use Nayjest\ViewComponents\Data\RepeaterTrait;
-use Nayjest\ViewComponents\Rendering\ParentViewInterface;
-use Nayjest\ViewComponents\Rendering\ParentViewTrait;
-use Nayjest\ViewComponents\Structure\ParentNodeInterface;
-use Nayjest\ViewComponents\Structure\ParentNodeTrait;
 use Traversable;
 
-class Repeater extends AbstractComponent implements
-    ParentViewInterface,
-    ParentNodeInterface,
+class Repeater  implements
+    ContainerInterface,
     RepeaterInterface
 {
-    use ParentNodeTrait;
-    use ParentViewTrait;
+    use ContainerTrait;
     use RepeaterTrait;
 
     public static function defaultCallback(Repeater $repeater, $dataRow)

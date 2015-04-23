@@ -2,11 +2,14 @@
 namespace Nayjest\ViewComponents\BaseComponents;
 
 use Nayjest\ViewComponents\Structure\ParentNodeInterface;
-use Nayjest\ViewComponents\Rendering\ParentViewInterface;
 
 interface ContainerInterface extends
     ComponentInterface,
-    ParentViewInterface,
     ParentNodeInterface
 {
+    /**
+     * @param string|null $section
+     * @return string
+     */
+    public function renderComponents($section = null);
 }

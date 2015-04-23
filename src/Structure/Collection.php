@@ -5,7 +5,7 @@ namespace Nayjest\ViewComponents\Structure;
 use InvalidArgumentException;
 use LogicException;
 use Nayjest\Builder\ClassUtils;
-use Nayjest\ViewComponents\Rendering\ChildViewInterface;
+use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
 use Traversable;
 
 // use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -148,14 +148,14 @@ class Collection
 
     /**
      * @param string $section_name
-     * @return ChildViewInterface[]
+     * @return ComponentInterface[]
      */
     public function findAllBySection($section_name)
     {
         $results = [];
         foreach ($this->items as $item) {
             if (
-                $item instanceof ChildViewInterface
+                $item instanceof ComponentInterface
                 && $item->getRenderSection() === $section_name
             ) {
                 $results[] = $item;
