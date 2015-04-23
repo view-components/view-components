@@ -5,5 +5,4 @@ abstract class AbstractContainer implements
     ContainerInterface
 {
     use ContainerTrait;
-    use ComponentTrait;
 }

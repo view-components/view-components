@@ -8,6 +8,7 @@ trait ContainerTrait
 {
     use ParentTrait;
     use ParentViewTrait;
+    use ComponentTrait;
 
     abstract protected function renderOpening();
 
