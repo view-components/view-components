@@ -7,7 +7,7 @@ use Nayjest\ViewComponents\Data\RepeaterInterface;
 use Nayjest\ViewComponents\Data\RepeaterTrait;
 use Traversable;
 
-class Repeater  implements
+class Repeater implements
     ContainerInterface,
     RepeaterInterface
 {
