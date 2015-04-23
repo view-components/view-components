@@ -1,7 +1,8 @@
 <?php
 namespace Nayjest\ViewComponents\BaseComponents\Html;
 
-use Nayjest\ViewComponents\BaseComponents\AbstractContainer;
+use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
+use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
 
 /**
  * Class AbstractTag
@@ -9,23 +10,26 @@ use Nayjest\ViewComponents\BaseComponents\AbstractContainer;
  * Base class for html tags.
  * Class name must same as tag name.
  */
-abstract class AbstractTag extends AbstractContainer
+abstract class AbstractTag implements ContainerInterface, TagInterface
 {
-   use TagTrait;
+    use ContainerTrait;
+    use TagTrait;
 
     /**
      * @param array|null $attributes
      * @param array $components
      */
     public function __construct(
-        $attributes = null,
-        array $components = []
+        array $attributes = null,
+        array $components = null
     )
     {
         if ($attributes !== null) {
             $this->setAttributes($attributes);
         }
-        parent::__construct($components);
+        if ($components !== null) {
+            $this->setComponents($components);
+        }
     }
 
     /**
