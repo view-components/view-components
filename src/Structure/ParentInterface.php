@@ -3,6 +3,9 @@ namespace Nayjest\ViewComponents\Structure;
 
 /**
  * Interface ParentInterface
+ *
+ * Interface of parent node in the tree data structure.
+ *
  */
 interface ParentInterface
 {
