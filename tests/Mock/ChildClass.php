@@ -1,10 +1,10 @@
 <?php
 namespace Nayjest\ViewComponents\Test\Mock;
 
-use Nayjest\ViewComponents\Structure\ChildInterface;
-use Nayjest\ViewComponents\Structure\ChildTrait;
+use Nayjest\ViewComponents\Structure\ChildNodeInterface;
+use Nayjest\ViewComponents\Structure\ChildNodeTrait;
 
-class ChildClass implements ChildInterface
+class ChildClass implements ChildNodeInterface
 {
-    use ChildTrait;
+    use ChildNodeTrait;
 }

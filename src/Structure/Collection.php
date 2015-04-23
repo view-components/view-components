@@ -15,7 +15,7 @@ use Traversable;
  */
 class Collection
 {
-    /** @var ChildInterface[] */
+    /** @var ChildNodeInterface[] */
     protected $items = [];
 
     protected $owner;
@@ -25,9 +25,9 @@ class Collection
     /**
      * Constructor.
      *
-     * @param ParentInterface $owner
+     * @param ParentNodeInterface $owner
      */
-    public function __construct(ParentInterface $owner)
+    public function __construct(ParentNodeInterface $owner)
     {
         $this->owner = $owner;
     }
@@ -37,11 +37,11 @@ class Collection
      *
      * If component is already in collection, it will not be added twice.
      *
-     * @param ChildInterface $component
+     * @param ChildNodeInterface $component
      * @param bool $prepend Pass true to add component to the beginning of an array.
      * @return $this
      */
-    public function add(ChildInterface $component, $prepend = false)
+    public function add(ChildNodeInterface $component, $prepend = false)
     {
         $old = $component->getParent();
         if ($old !== $this->owner) {
@@ -61,7 +61,7 @@ class Collection
         return $this;
     }
 
-    public function remove(ChildInterface $component)
+    public function remove(ChildNodeInterface $component)
     {
         if ($component->getParent() === $this->owner) {
             $component->internalUnsetParent();
@@ -76,13 +76,13 @@ class Collection
         return $this;
     }
 
-    public function has(ChildInterface $component)
+    public function has(ChildNodeInterface $component)
     {
         return in_array($component, $this->items, true);
     }
 
     /**
-     * @param ChildInterface[] $components
+     * @param ChildNodeInterface[] $components
      */
     public function set(array $components)
     {
@@ -129,7 +129,7 @@ class Collection
 //    /**
 //     * @param string $attribute
 //     * @param $value
-//     * @return ChildInterface[]
+//     * @return ChildNodeInterface[]
 //     */
 //    public function findAllByAttribute($attribute, $value)
 //    {

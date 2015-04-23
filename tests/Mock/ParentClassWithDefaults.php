@@ -1,11 +1,11 @@
 <?php
 namespace Nayjest\ViewComponents\Test\Mock;
 
-use Nayjest\ViewComponents\Structure\ParentInterface;
-use Nayjest\ViewComponents\Structure\ParentTrait;
+use Nayjest\ViewComponents\Structure\ParentNodeInterface;
+use Nayjest\ViewComponents\Structure\ParentNodeTrait;
 
-class ParentClassWithDefaults implements ParentInterface {
-    use ParentTrait;
+class ParentClassWithDefaults implements ParentNodeInterface {
+    use ParentNodeTrait;
 
     protected function defaultComponents()
     {

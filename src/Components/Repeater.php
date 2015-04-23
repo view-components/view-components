@@ -6,16 +6,16 @@ use Nayjest\ViewComponents\Data\RepeaterInterface;
 use Nayjest\ViewComponents\Data\RepeaterTrait;
 use Nayjest\ViewComponents\Rendering\ParentViewInterface;
 use Nayjest\ViewComponents\Rendering\ParentViewTrait;
-use Nayjest\ViewComponents\Structure\ParentInterface;
-use Nayjest\ViewComponents\Structure\ParentTrait;
+use Nayjest\ViewComponents\Structure\ParentNodeInterface;
+use Nayjest\ViewComponents\Structure\ParentNodeTrait;
 use Traversable;
 
 class Repeater extends AbstractComponent implements
     ParentViewInterface,
-    ParentInterface,
+    ParentNodeInterface,
     RepeaterInterface
 {
-    use ParentTrait;
+    use ParentNodeTrait;
     use ParentViewTrait;
     use RepeaterTrait;
 
@@ -26,7 +26,7 @@ class Repeater extends AbstractComponent implements
 
     /**
      * @param array|Traversable $iterator
-     * @param \Nayjest\ViewComponents\Structure\ChildInterface[] $components
+     * @param \Nayjest\ViewComponents\Structure\ChildNodeInterface[] $components
      * @param $callback
      */
     public function __construct(

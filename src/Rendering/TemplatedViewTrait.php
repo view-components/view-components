@@ -2,11 +2,11 @@
 namespace Nayjest\ViewComponents\Rendering;
 
 use Illuminate\Support\Facades\View;
-use Nayjest\ViewComponents\Structure\ChildTrait;
+use Nayjest\ViewComponents\Structure\ChildNodeTrait;
 
 trait TemplatedViewTrait
 {
-    use ChildTrait;
+    use ChildNodeTrait;
     use ViewTrait;
 
     protected $template;

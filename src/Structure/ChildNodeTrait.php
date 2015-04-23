@@ -2,26 +2,26 @@
 namespace Nayjest\ViewComponents\Structure;
 
 /**
- * Class ChildTrait
+ * Class ChildNodeTrait
  *
- * @implements ChildInterface
+ * @implements ChildNodeInterface
  *
  */
-trait ChildTrait
+trait ChildNodeTrait
 {
     /**
      * @internal
-     * @var ParentInterface|ChildInterface
+     * @var ParentNodeInterface|ChildNodeInterface
      * */
     private $parent;
 
     /**
      * Attaches component to registry.
      *
-     * @param ParentInterface $parent
+     * @param ParentNodeInterface $parent
      * @return null
      */
-    final public function internalSetParent(ParentInterface $parent)
+    final public function internalSetParent(ParentNodeInterface $parent)
     {
         $this->parent = $parent;
     }
@@ -34,7 +34,7 @@ trait ChildTrait
     /**
      * Returns parent object.
      *
-     * @return ParentInterface|null
+     * @return ParentNodeInterface|null
      */
     final public function getParent()
     {
@@ -43,7 +43,7 @@ trait ChildTrait
 
     /**
      * @param callable $condition
-     * @return ParentInterface|ChildInterface|null
+     * @return ParentNodeInterface|ChildNodeInterface|null
      */
     final public function findClosestParent($condition)
     {

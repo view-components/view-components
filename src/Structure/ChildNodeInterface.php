@@ -2,33 +2,33 @@
 namespace Nayjest\ViewComponents\Structure;
 
 /**
- * Interface ChildInterface
+ * Interface ChildNodeInterface
  *
  * Interface of terminal node in the tree data structure.
  *
  */
-interface ChildInterface
+interface ChildNodeInterface
 {
     /**
      * Attaches component to parent.
      *
-     * @param ParentInterface $parent
+     * @param ParentNodeInterface $parent
      * @return null
      */
-    public function internalSetParent(ParentInterface $parent);
+    public function internalSetParent(ParentNodeInterface $parent);
 
     public function internalUnsetParent();
 
     /**
      * Returns parent object.
      *
-     * @return ParentInterface|null
+     * @return ParentNodeInterface|null
      */
     public function getParent();
 
     /**
      * @param callable $condition
-     * @return ParentInterface|ChildInterface|null
+     * @return ParentNodeInterface|ChildNodeInterface|null
      */
     public function findClosestParent($condition);
 }

@@ -1,9 +1,9 @@
 <?php
 namespace Nayjest\ViewComponents\Test\Mock;
 
-use Nayjest\ViewComponents\Structure\ParentInterface;
-use Nayjest\ViewComponents\Structure\ParentTrait;
+use Nayjest\ViewComponents\Structure\ParentNodeInterface;
+use Nayjest\ViewComponents\Structure\ParentNodeTrait;
 
-class ParentClass implements ParentInterface {
-    use ParentTrait;
+class ParentClass implements ParentNodeInterface {
+    use ParentNodeTrait;
 }

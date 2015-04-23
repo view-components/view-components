@@ -2,11 +2,11 @@
 namespace Nayjest\ViewComponents\BaseComponents;
 
 use Nayjest\ViewComponents\Rendering\ParentViewTrait;
-use Nayjest\ViewComponents\Structure\ParentTrait;
+use Nayjest\ViewComponents\Structure\ParentNodeTrait;
 
 trait ContainerTrait
 {
-    use ParentTrait;
+    use ParentNodeTrait;
     use ParentViewTrait;
     use ComponentTrait;
 

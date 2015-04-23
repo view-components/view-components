@@ -1,13 +1,13 @@
 <?php
 namespace Nayjest\ViewComponents\Test\Mock;
 
-use Nayjest\ViewComponents\Structure\ChildInterface;
-use Nayjest\ViewComponents\Structure\ChildTrait;
-use Nayjest\ViewComponents\Structure\ParentInterface;
-use Nayjest\ViewComponents\Structure\ParentTrait;
+use Nayjest\ViewComponents\Structure\ChildNodeInterface;
+use Nayjest\ViewComponents\Structure\ChildNodeTrait;
+use Nayjest\ViewComponents\Structure\ParentNodeInterface;
+use Nayjest\ViewComponents\Structure\ParentNodeTrait;
 
-class HierarchyItem implements ParentInterface, ChildInterface
+class HierarchyItem implements ParentNodeInterface, ChildNodeInterface
 {
-    use ParentTrait;
-    use ChildTrait;
+    use ParentNodeTrait;
+    use ChildNodeTrait;
 }

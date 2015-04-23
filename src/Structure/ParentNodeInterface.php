@@ -2,12 +2,12 @@
 namespace Nayjest\ViewComponents\Structure;
 
 /**
- * Interface ParentInterface
+ * Interface ParentNodeInterface
  *
  * Interface of parent node in the tree data structure.
  *
  */
-interface ParentInterface
+interface ParentNodeInterface
 {
     /**
      * Returns collection of attached components.

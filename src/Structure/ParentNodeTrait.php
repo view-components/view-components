@@ -2,11 +2,11 @@
 namespace Nayjest\ViewComponents\Structure;
 
 /**
- * Class ParentTrait
+ * Class ParentNodeTrait
  *
- * @implements ParentInterface
+ * @implements ParentNodeInterface
  */
-trait ParentTrait
+trait ParentNodeTrait
 {
     protected $componentsCollection;
 
@@ -15,7 +15,7 @@ trait ParentTrait
      *
      * Override this method.
      *
-     * @return ChildInterface[]
+     * @return ChildNodeInterface[]
      */
     protected function defaultComponents()
     {
