@@ -2,5 +2,6 @@ vendor
 composer.phar
 composer.lock
 apigen.phar
+phpunit.phar
 build
 src/_Components
