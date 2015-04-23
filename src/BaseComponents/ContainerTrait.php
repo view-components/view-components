@@ -14,9 +14,9 @@ trait ContainerTrait
 
     abstract protected function renderClosing();
 
-    public function __construct(array $components = [])
+    public function __construct(array $components = null)
     {
-        if (count($components) > 0) {
+        if ($components !== null) {
             $this->setComponents($components);
         }
     }

@@ -9,5 +9,4 @@ interface ContainerInterface extends
     ParentViewInterface,
     ParentInterface
 {
-
 }
