@@ -1,21 +1,8 @@
 <?php
 namespace Nayjest\ViewComponents\BaseComponents;
 
-use Nayjest\ViewComponents\Rendering\ChildViewInterface;
-use Nayjest\ViewComponents\Rendering\ChildViewTrait;
-use Nayjest\ViewComponents\Rendering\ViewTrait;
-use Nayjest\ViewComponents\Rendering\ViewInterface;
-use Nayjest\ViewComponents\Structure\ChildInterface;
-use Nayjest\ViewComponents\Structure\ChildTrait;
-
 abstract class AbstractComponent implements
-    ViewInterface,
-    ChildInterface,
-    ChildViewInterface
+    ComponentInterface
 {
-    use ChildTrait;
-    use ViewTrait;
-    use ChildViewTrait;
-
-    abstract public function render();
+    use ComponentTrait;
 }
