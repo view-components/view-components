@@ -1,26 +1,29 @@
 <?php
 namespace Nayjest\ViewComponents\Components\Html;
 
-use Nayjest\ViewComponents\BaseComponents\AbstractContainer;
+use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
+use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
+use Nayjest\ViewComponents\BaseComponents\Html\TagInterface;
 use Nayjest\ViewComponents\BaseComponents\Html\TagTrait;
 
-class Tag extends AbstractContainer
+class Tag implements ContainerInterface, TagInterface
 {
-    const DEFAULT_TAG_NAME = 'div';
-
+    use ContainerTrait;
     use TagTrait;
+
+    const DEFAULT_TAG_NAME = 'div';
 
     protected $tagName;
 
     /**
      * @param string|null $tagName
      * @param array|null $attributes
-     * @param array $components
+     * @param array|null $components
      */
     public function __construct(
         $tagName = null,
-        $attributes = null,
-        array $components = []
+        array $attributes = null,
+        array $components = null
     )
     {
         if ($tagName !== null) {
@@ -29,7 +32,9 @@ class Tag extends AbstractContainer
         if ($attributes !== null) {
             $this->setAttributes($attributes);
         }
-        parent::__construct($components);
+        if ($components !== null) {
+            $this->setComponents($components);
+        }
     }
 
     /**
@@ -51,6 +56,6 @@ class Tag extends AbstractContainer
      */
     public function getTagName()
     {
-        return $this->tagName ? : static::DEFAULT_TAG_NAME;
+        return $this->tagName ?: static::DEFAULT_TAG_NAME;
     }
 }
