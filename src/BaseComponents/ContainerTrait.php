@@ -16,9 +16,7 @@ trait ContainerTrait
             ->findAllBySection($section);
         $output = '';
         foreach ($components as $component) {
-            if ($component instanceof ViewInterface) {
-                $output .= $component->render();
-            }
+            $output .= $component->render();
         }
         return $output;
     }
