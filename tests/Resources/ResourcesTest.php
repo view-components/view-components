@@ -1,0 +1,58 @@
+<?php
+namespace Nayjest\ViewComponents\Test\Resources;
+
+use Nayjest\ViewComponents\Components\Text;
+use Nayjest\ViewComponents\Resources\AliasRegistry;
+use Nayjest\ViewComponents\Resources\IncludedResourcesRegistry;
+use Nayjest\ViewComponents\Resources\Resources;
+use PHPUnit_Framework_TestCase;
+
+class ResourcesTest extends PHPUnit_Framework_TestCase
+{
+    protected function make($jsAliases = [], $cssAliases = [])
+    {
+        $jsRegistry = new AliasRegistry($jsAliases);
+        $cssRegistry = new AliasRegistry($cssAliases);
+        $included = new IncludedResourcesRegistry();
+        return new Resources($jsRegistry, $cssRegistry, $included);
+    }
+
+    public function testCss()
+    {
+        $resources = $this->make();
+
+        $css = $resources->css('/main.css')->render();
+        self::assertStringStartsWith('<link ', $css);
+        self::assertContains('href="/main.css"', $css);
+    }
+
+    public function testJs()
+    {
+        $resources = $this->make();
+
+        $js = $resources->js('/main.js')->render();
+        self::assertStringStartsWith('<script ', $js);
+        self::assertContains('src="/main.js"', $js);
+    }
+
+    public function testUniqueCss()
+    {
+        $resources = $this->make();
+        $resources->css('/main.css')->render();
+        $css = $resources->css('/main.css')->render();
+        self::assertEmpty(
+            $css,
+            'Same resource must not be included twice.'
+        );
+    }
+
+    public function testJsAlias()
+    {
+        $resources = $this->make(['jquery' => 'http://example.com/jquery.js']);
+
+        // test alias
+        $js = $resources->js('jquery')->render();
+        self::assertStringStartsWith('<script', $js);
+        self::assertContains('src="http://example.com/jquery.js"', $js);
+    }
+}
