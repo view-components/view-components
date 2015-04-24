@@ -13,7 +13,6 @@ interface ChildNodeInterface
      * Attaches component to parent.
      *
      * @param ParentNodeInterface $parent
-     * @return null
      */
     public function internalSetParent(ParentNodeInterface $parent);
 

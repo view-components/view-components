@@ -51,12 +51,12 @@ class Collection
                     ->components()
                     ->remove($component);
             }
-            $component->internalSetParent($this->owner);
             if ($prepend) {
                 array_unshift($this->items, $component);
             } else {
                 $this->items[] = $component;
             }
+            $component->internalSetParent($this->owner);
         }
         return $this;
     }
