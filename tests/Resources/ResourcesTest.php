@@ -1,7 +1,6 @@
 <?php
 namespace Nayjest\ViewComponents\Test\Resources;
 
-use Nayjest\ViewComponents\Components\Text;
 use Nayjest\ViewComponents\Resources\AliasRegistry;
 use Nayjest\ViewComponents\Resources\IncludedResourcesRegistry;
 use Nayjest\ViewComponents\Resources\Resources;
