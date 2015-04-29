@@ -44,13 +44,13 @@ class FilterProcessor implements ProcessorInterface
         switch ($operator) {
             case Filter::OPERATOR_EQ:
                 return $value == $expected;
-            case Filter::OPERATOR_GT;
+            case Filter::OPERATOR_GT:
                 return $value > $expected;
-            case Filter::OPERATOR_GTE;
+            case Filter::OPERATOR_GTE:
                 return $value >= $expected;
-            case Filter::OPERATOR_LT;
+            case Filter::OPERATOR_LT:
                 return $value < $expected;
-            case Filter::OPERATOR_LTE;
+            case Filter::OPERATOR_LTE:
                 return $value <= $expected;
             case Filter::OPERATOR_NOT_EQ:
                 return $value != $expected;
