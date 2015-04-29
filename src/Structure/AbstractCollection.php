@@ -1,10 +1,12 @@
 <?php
 namespace Nayjest\ViewComponents\Structure;
 
+use ArrayIterator;
+use IteratorAggregate;
 use RuntimeException;
 
 
-class AbstractCollection
+class AbstractCollection implements IteratorAggregate
 {
     protected $items = [];
 
@@ -64,5 +66,10 @@ class AbstractCollection
     {
         $this->items = [];
         return $this;
+    }
+
+    public function getIterator()
+    {
+        return new ArrayIterator($this->items);
     }
 }
