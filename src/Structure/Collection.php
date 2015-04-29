@@ -3,7 +3,6 @@
 namespace Nayjest\ViewComponents\Structure;
 
 use InvalidArgumentException;
-use LogicException;
 use Nayjest\Builder\ClassUtils;
 use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
 use Traversable;
@@ -12,12 +11,11 @@ use Traversable;
 
 /**
  * Class Collection
+ *
+ * @property ChildNodeInterface[] $items
  */
-class Collection
+class Collection extends AbstractCollection
 {
-    /** @var ChildNodeInterface[] */
-    protected $items = [];
-
     protected $owner;
 
     //protected static $propertyAccessor;
@@ -37,59 +35,49 @@ class Collection
      *
      * If component is already in collection, it will not be added twice.
      *
-     * @param ChildNodeInterface $component
+     * @param ChildNodeInterface $item
      * @param bool $prepend Pass true to add component to the beginning of an array.
      * @return $this
      */
-    public function add(ChildNodeInterface $component, $prepend = false)
+    public function add($item, $prepend = false)
     {
-        $old = $component->getParent();
+        if (!$item instanceof ChildNodeInterface) {
+            throw new InvalidArgumentException('Collection accepts only objects implementing ChildNodeInterface');
+        }
+        $old = $item->getParent();
         if ($old !== $this->owner) {
             if ($old !== null) {
-                $component
+                $item
                     ->getParent()
                     ->components()
-                    ->remove($component);
+                    ->remove($item);
             }
-            if ($prepend) {
-                array_unshift($this->items, $component);
-            } else {
-                $this->items[] = $component;
-            }
-            $component->internalSetParent($this->owner);
+            parent::add($item, $prepend);
+            $item->internalSetParent($this->owner);
         }
         return $this;
-    }
-
-    public function remove(ChildNodeInterface $component)
-    {
-        if ($component->getParent() === $this->owner) {
-            $component->internalUnsetParent();
-            $key = array_search($component, $this->items, true);
-            if ($key === false) {
-                throw new LogicException(
-                    'Bidirectional association is broken.'
-                );
-            }
-            unset($this->items[$key]);
-        }
-        return $this;
-    }
-
-    public function has(ChildNodeInterface $component)
-    {
-        return in_array($component, $this->items, true);
     }
 
     /**
-     * @param ChildNodeInterface[] $components
+     * @param ChildNodeInterface $item
+     * @return $this
      */
-    public function set(array $components)
+    public function remove($item)
     {
-        $this->clean();
-        foreach ($components as $component) {
-            $this->add($component);
+        if ($item->getParent() === $this->owner) {
+            $item->internalUnsetParent();
+            parent::remove($item);
         }
+        return $this;
+    }
+
+    /**
+     * @param ChildNodeInterface[] $items
+     * @return $this
+     */
+    public function set(array $items)
+    {
+        return parent::set($items);
     }
 
     public function clean()
@@ -97,22 +85,7 @@ class Collection
         foreach ($this->items as $item) {
             $item->internalUnsetParent();
         }
-        $this->items = [];
-    }
-
-    public function toArray()
-    {
-        return $this->items;
-    }
-
-    public function isEmpty()
-    {
-        return count($this->items) === 0;
-    }
-
-    public function getSize()
-    {
-        return count($this->items);
+        return parent::clean();
     }
 
 //    /**
