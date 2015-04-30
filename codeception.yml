@@ -1,0 +1,17 @@
+actor: Tester
+paths:
+    tests: tests/codecept
+    log: tests/codecept/_output
+    data: tests/codecept/_data
+    helpers: tests/codecept/_support
+settings:
+    bootstrap: _bootstrap.php
+    colors: false
+    memory_limit: 1024M
+modules:
+    config:
+        Db:
+            dsn: ''
+            user: ''
+            password: ''
+            dump: tests/codecept/_data/dump.sql
