@@ -3,10 +3,10 @@ namespace Nayjest\ViewComponents\Components\Html;
 
 use Nayjest\ViewComponents\BaseComponents\Html\AbstractTag;
 
-class A extends AbstractTag
+class Script extends AbstractTag
 {
     public function getTagName()
     {
-        return 'a';
+        return 'script';
     }
 }

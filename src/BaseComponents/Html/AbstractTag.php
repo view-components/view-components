@@ -20,16 +20,12 @@ abstract class AbstractTag implements ContainerInterface, TagInterface
      * @param array $components
      */
     public function __construct(
-        array $attributes = null,
-        array $components = null
+        array $attributes = [],
+        array $components = []
     )
     {
-        if ($attributes !== null) {
-            $this->setAttributes($attributes);
-        }
-        if ($components !== null) {
-            $this->setComponents($components);
-        }
+        $this->setAttributes($attributes);
+        $this->setComponents($components);
     }
 
     /**
@@ -38,6 +34,11 @@ abstract class AbstractTag implements ContainerInterface, TagInterface
      * @return string
      */
     public function getTagName()
+    {
+        return $this->suggestTagByClassName();
+    }
+
+    protected function suggestTagByClassName()
     {
         $class_name = get_class($this);
         $parts = explode('\\', $class_name);
