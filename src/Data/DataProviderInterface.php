@@ -2,9 +2,9 @@
 
 namespace Nayjest\ViewComponents\Data;
 
-use Traversable;
+use IteratorAggregate;
 
-interface DataProviderInterface extends Traversable
+interface DataProviderInterface extends IteratorAggregate
 {
     /**
      * @return OperationsCollection

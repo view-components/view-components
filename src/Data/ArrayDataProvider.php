@@ -3,9 +3,8 @@
 namespace Nayjest\ViewComponents\Data;
 
 use ArrayIterator;
-use IteratorAggregate;
 
-class ArrayDataProvider implements DataProviderInterface, IteratorAggregate
+class ArrayDataProvider implements DataProviderInterface
 {
     protected $processingManager;
     protected $operationsCollection;
