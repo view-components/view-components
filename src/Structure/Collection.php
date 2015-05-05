@@ -3,7 +3,7 @@
 namespace Nayjest\ViewComponents\Structure;
 
 use InvalidArgumentException;
-use Nayjest\Builder\ClassUtils;
+use Nayjest\Manipulator\Manipulator;
 use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
 use Traversable;
 
@@ -137,22 +137,24 @@ class Collection extends AbstractCollection
         return $results;
     }
 
-    /**
-     * @param Traversable|array $data
-     * @return array
-     */
-    protected function convertToArray($data)
-    {
-        if ($data instanceof Traversable) {
-            $data = iterator_to_array($data);
-        }
-        if (!is_array($data)) {
-            throw new InvalidArgumentException(
-                'Data row must be array|Traversable|null'
-            );
-        }
-        return $data;
-    }
+//    /**
+//     * @param Traversable|array $data
+//     * @return array
+//     */
+//    protected function convertToArray($data)
+//    {
+//        if (method_exists($data, 'toArray')) {}
+//        if ($data instanceof Traversable) {
+//            $data = iterator_to_array($data);
+//        }
+//
+//        if (!is_array($data)) {
+//            throw new InvalidArgumentException(
+//                'Data row must be array|Traversable|null'
+//            );
+//        }
+//        return $data;
+//    }
 
     /**
      * @param Traversable|array $data
@@ -160,9 +162,10 @@ class Collection extends AbstractCollection
      */
     public function fillItemsWith($data)
     {
-        $properties = $this->convertToArray($data);
         foreach($this->items as $item) {
-            ClassUtils::assign($item, $properties);
+            $writable = Manipulator::getWritable($item);
+            $fields = Manipulator::getValues($data, $writable);
+            Manipulator::assign($item, $fields);
         }
         return $this;
     }
