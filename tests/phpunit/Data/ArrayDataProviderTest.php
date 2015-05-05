@@ -36,12 +36,12 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
         $provider = new ArrayDataProvider($this->getData());
         $provider->operations()->add(
             (new Filter)
-                ->setField('[id]')
+                ->setField('id')
                 ->setOperator(Filter::OPERATOR_GT)
                 ->setValue(3)
         );
         $provider->operations()->add(
-            new Filter('[id]', '<', 5)
+            new Filter('id', '<', 5)
         );
 
         $iterator = $provider->getIterator();
@@ -49,29 +49,27 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
 
         self::assertEquals(1, count($rows));
         $row = array_pop($rows);
-        self::assertEquals(4, $row['id']);
+        self::assertEquals(4, $row->id);
     }
 
     public function testSorting()
     {
         $provider = new ArrayDataProvider($this->getData());
-        $sorting = new Sorting('[id]', Sorting::DESC);
+        $sorting = new Sorting('id', Sorting::DESC);
         $provider->operations()->set([$sorting]);
         $res = '';
-        foreach($provider as $row)
-        {
-            $res .= $row['id'];
+        foreach ($provider as $row) {
+            $res .= $row->id;
         }
         self::assertEquals('54321', $res);
 
         // Test changing operations
         $provider->operations()->add(
-            new Filter('[id]',Filter::OPERATOR_NOT_EQ, 3)
+            new Filter('id', Filter::OPERATOR_NOT_EQ, 3)
         );
         $res = '';
-        foreach($provider as $row)
-        {
-            $res .= $row['id'];
+        foreach ($provider as $row) {
+            $res .= $row->id;
         }
         self::assertEquals('5421', $res);
     }
