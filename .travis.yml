@@ -9,5 +9,6 @@ php:
 before_script:
   - composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
+  - php -S localhost:9000 tests/webapp/index.php
 
 script: phpunit
