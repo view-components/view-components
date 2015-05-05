@@ -19,10 +19,12 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": ">=4.2",
-        "nayjest/builder": "~1.1.3"
+        "symfony/property-access" : "~2.5",
+        "nayjest/manipulator": "~1.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "4.*",
+        "codeception/codeception": "*"
     },
     "suggest": {
         "symfony/property-access" : "Probably will be used in future"
@@ -34,7 +36,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Nayjest\\ViewComponents\\Test\\": "tests/"
+            "Nayjest\\ViewComponents\\Test\\": "tests/phpunit",
+            "Nayjest\\ViewComponents\\Demo\\": "tests/webapp"
         }
     },
     "support": {
