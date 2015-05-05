@@ -2,6 +2,7 @@
 namespace Nayjest\ViewComponents\Resources;
 
 use Nayjest\ViewComponents\Components\Dummy;
+use Nayjest\ViewComponents\Components\Html\Script;
 use Nayjest\ViewComponents\Components\Html\Tag;
 
 class Resources
@@ -40,7 +41,7 @@ class Resources
         if (!$this->included->iIncluded($src)) {
             $this->included->markAsIncluded($src);
             $type = 'text/javascript';
-            return new Tag('script', compact('src', 'type'));
+            return new Script(compact('src', 'type'));
         } else {
             return $this->getDummyComponent();
         }
