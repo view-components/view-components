@@ -1,6 +1,8 @@
 <?php
 namespace Nayjest\ViewComponents\Data;
 
+use Traversable;
+
 /**
  * Interface RepeaterInterface
  *
@@ -8,14 +10,27 @@ namespace Nayjest\ViewComponents\Data;
 interface RepeaterInterface
 {
     /**
-     * Data source to iterate over.
+     * Sets data source to iterate over.
      *
-     * @param array|\Traversable $iterator
+     * @param array|Traversable $iterator
      */
     public function setIterator($iterator);
 
     /**
-     * @param callable $callback
+     * Returns iterated data source.
+     *
+     * @return array|Traversable
+     */
+    public function getIterator();
+
+    /**
+     * Sets iteration callback.
+     *
+     * Callback will be executed on each iteration
+     * with repeater instance passed to first argument and iterated data element
+     * passed to second argument.
+     *
+     * @param callable $callback arguments: repeater, iterated element
      * @return mixed
      */
     public function setCallback($callback);
