@@ -1,7 +1,10 @@
 <?php
 namespace Nayjest\ViewComponents\Demo;
 
+use Nayjest\ViewComponents\Components\Html\Form\ResetButton;
 use Nayjest\ViewComponents\Components\Container;
+use Nayjest\ViewComponents\Components\Controls\Filter;
+use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
 use Nayjest\ViewComponents\Data\Operations\Sorting;
 use Nayjest\ViewComponents\HtmlBuilder;
@@ -90,6 +93,32 @@ class Controller
                 ),
                 [new PersonView])
         ]);
+        return $view->render();
+    }
+
+    /**
+     * Filtering controls.
+     *
+     * @return string
+     */
+    public function demo4()
+    {
+        $provider = new ArrayDataProvider($this->getUsersData());
+
+        $view  = new Container([
+            new Tag('form', null, [
+                $filter = new Filter('name'),
+                new Tag('button', ['type' => 'submit'], [
+                    new Text('Filter')
+                ]),
+                new ResetButton()
+            ]),
+            new Text('<h1>Users List</h1>'),
+            new Repeater(
+                $provider,
+                [new PersonView])
+        ]);
+        $filter->initialize($provider, $_GET);
         return $view->render();
     }
 

@@ -10,5 +10,5 @@ $whoops->pushHandler(new PrettyPageHandler);
 $whoops->register();
 
 $controller = new Controller;
-$method = str_replace('/', '', $_SERVER['REQUEST_URI'])?:'index';
+$method = str_replace('/', '', $_SERVER['SCRIPT_NAME'])?:'index';
 echo $controller->{$method}();
