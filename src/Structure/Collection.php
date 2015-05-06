@@ -3,12 +3,7 @@
 namespace Nayjest\ViewComponents\Structure;
 
 use InvalidArgumentException;
-use Nayjest\Manipulator\Manipulator;
-use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
 use Nayjest\ViewComponents\Collection\Collection as BaseCollection;
-use Traversable;
-
-// use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Class Collection
@@ -19,9 +14,9 @@ use Traversable;
  */
 class Collection extends BaseCollection
 {
-    protected $owner;
+    use TreeNodesCollectionTrait;
 
-    //protected static $propertyAccessor;
+    protected $owner;
 
     /**
      * Constructor.
@@ -91,85 +86,8 @@ class Collection extends BaseCollection
         return parent::clean();
     }
 
-//    /**
-//     * @return \Symfony\Component\PropertyAccess\PropertyAccessor
-//     */
-//    protected static function getPropertyAccessor()
-//    {
-//        if (self::$propertyAccessor === null) {
-//            self::$propertyAccessor = PropertyAccess::createPropertyAccessor();
-//        }
-//        return self::$propertyAccessor;
-//    }
-
-//    /**
-//     * @param string $attribute
-//     * @param $value
-//     * @return ChildNodeInterface[]
-//     */
-//    public function findAllByAttribute($attribute, $value)
-//    {
-//        $accessor = self::getPropertyAccessor();
-//        $results = [];
-//        foreach($this->items as $item) {
-//            if (
-//                $accessor->isReadable($item, $attribute)
-//                and $accessor->getValue($item, $attribute) === $value
-//            ) {
-//                $results[] = $item;
-//            }
-//        }
-//        return $results;
-//    }
-
-    /**
-     * @param string $section_name
-     * @return ComponentInterface[]
-     */
-    public function findAllBySection($section_name)
+    public function readonly()
     {
-        $results = [];
-        foreach ($this->items as $item) {
-            if (
-                $item instanceof ComponentInterface
-                && $item->getRenderSection() === $section_name
-            ) {
-                $results[] = $item;
-            }
-        }
-        return $results;
-    }
-
-//    /**
-//     * @param Traversable|array $data
-//     * @return array
-//     */
-//    protected function convertToArray($data)
-//    {
-//        if (method_exists($data, 'toArray')) {}
-//        if ($data instanceof Traversable) {
-//            $data = iterator_to_array($data);
-//        }
-//
-//        if (!is_array($data)) {
-//            throw new InvalidArgumentException(
-//                'Data row must be array|Traversable|null'
-//            );
-//        }
-//        return $data;
-//    }
-
-    /**
-     * @param Traversable|array $data
-     * @return $this
-     */
-    public function fillItemsWith($data)
-    {
-        foreach($this->items as $item) {
-            $writable = Manipulator::getWritable($item);
-            $fields = Manipulator::getValues($data, $writable);
-            Manipulator::assign($item, $fields);
-        }
-        return $this;
+        return new ReadonlyCollection($this);
     }
 }
