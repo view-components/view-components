@@ -1,15 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 06.05.2015
- * Time: 17:09
- */
 
-namespace Nayjest\ViewComponents\Structure;
-
-
-use nayjest\ViewComponents\Collection\CollectionInterface;
+namespace Nayjest\ViewComponents\Collection;
 
 class ReadonlyCollection implements CollectionInterface
 {
