@@ -9,6 +9,14 @@ php:
 before_script:
   - composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
-  - php -S localhost:9000 tests/webapp/index.php
+  - php -S localhost:9000 tests/webapp/index.php &
+  - sleep 3  # give server some time to start
+  - php vendor/bin/codecept build
 
-script: phpunit
+script:
+  - phpunit
+  - php vendor/bin/codecept run acceptance
+
+after_failure:
+  - cat app/storage/logs/laravel.log
+  - cat tests/codecept/_output/*
