@@ -18,8 +18,8 @@ class ParentTraitTest extends PHPUnit_Framework_TestCase
     public function testWithDefaults()
     {
         $parent = new ParentClassWithDefaults();
-        self::assertTrue($parent->components()->getSize() === 2);
+        self::assertTrue($parent->components()->count() === 2);
         $parent->setComponents([]);
-        self::assertTrue($parent->components()->getSize() === 0);
+        self::assertTrue($parent->components()->count() === 0);
     }
 }

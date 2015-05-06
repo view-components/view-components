@@ -2,9 +2,9 @@
 namespace Nayjest\ViewComponents\Data;
 
 
-use Nayjest\ViewComponents\Structure\AbstractCollection;
+use Nayjest\ViewComponents\Collection\Collection;
 
-class OperationsCollection extends AbstractCollection
+class OperationsCollection extends Collection
 {
     /**
      * @return string

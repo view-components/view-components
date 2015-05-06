@@ -19,12 +19,12 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         self::assertFalse($collection->has($child));
         self::assertTrue($child->getParent() === null);
         $collection->add($child);
-        self::assertTrue($collection->getSize() === 1);
+        self::assertTrue($collection->count() === 1);
         self::assertTrue($collection->has($child));
         self::assertTrue($child->getParent() === $parent);
 
         $collection->add($child);
-        self::assertTrue($collection->getSize() === 1, 'Item can\'t be added to collection twice.');
+        self::assertTrue($collection->count() === 1, 'Item can\'t be added to collection twice.');
 
         $items = $collection->toArray();
         $item1 = array_pop($items);
@@ -32,9 +32,9 @@ class CollectionTest extends PHPUnit_Framework_TestCase
 
         $child2 = new ChildClass();
         $collection->add($child2);
-        self::assertTrue($collection->getSize() === 2);
+        self::assertTrue($collection->count() === 2);
         $collection->remove($child2);
-        self::assertTrue($collection->getSize() === 1);
+        self::assertTrue($collection->count() === 1);
         self::assertTrue(
             $child2->getParent() === null,
             'Parent must be detached from child item after removing it from collection.'
@@ -44,7 +44,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $collection->set([$child, $child2]);
         $collection->clean();
         self::assertTrue(
-            $collection->getSize() === 0,
+            $collection->count() === 0,
             'Collection must be empty after calling clean()'
         );
         self::assertTrue(

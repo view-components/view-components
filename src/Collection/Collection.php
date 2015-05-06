@@ -1,12 +1,10 @@
 <?php
-namespace Nayjest\ViewComponents\Structure;
+namespace Nayjest\ViewComponents\Collection;
 
 use ArrayIterator;
-use IteratorAggregate;
 use RuntimeException;
 
-
-class AbstractCollection implements IteratorAggregate
+class Collection implements CollectionInterface
 {
     protected $items = [];
 
@@ -43,7 +41,7 @@ class AbstractCollection implements IteratorAggregate
         return count($this->items) === 0;
     }
 
-    public function getSize()
+    public function count()
     {
         return count($this->items);
     }

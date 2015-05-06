@@ -5,6 +5,7 @@ namespace Nayjest\ViewComponents\Structure;
 use InvalidArgumentException;
 use Nayjest\Manipulator\Manipulator;
 use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
+use Nayjest\ViewComponents\Collection\Collection as BaseCollection;
 use Traversable;
 
 // use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -12,9 +13,11 @@ use Traversable;
 /**
  * Class Collection
  *
+ * Tree nodes collection.
+ *
  * @property ChildNodeInterface[] $items
  */
-class Collection extends AbstractCollection
+class Collection extends BaseCollection
 {
     protected $owner;
 
