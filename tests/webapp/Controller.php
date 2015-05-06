@@ -111,7 +111,6 @@ class Controller
                 new Tag('button', ['type' => 'submit'], [
                     new Text('Filter')
                 ]),
-                new ResetButton()
             ]),
             new Text('<h1>Users List</h1>'),
             new Repeater(
