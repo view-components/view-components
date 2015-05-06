@@ -72,4 +72,9 @@ class AbstractCollection implements IteratorAggregate
     {
         return new ArrayIterator($this->items);
     }
+
+    public function first()
+    {
+        return $this->isEmpty() ? null : array_values($this->items)[0];
+    }
 }
