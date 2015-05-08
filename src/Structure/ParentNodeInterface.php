@@ -12,9 +12,7 @@ interface ParentNodeInterface
     /**
      * Returns collection of attached components.
      *
-     * @return Collection
+     * @return NodesCollection
      */
     public function components();
-
-    public function setComponents(array $components = []);
 }

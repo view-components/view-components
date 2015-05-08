@@ -6,13 +6,13 @@ use InvalidArgumentException;
 use Nayjest\ViewComponents\Collection\Collection as BaseCollection;
 
 /**
- * Class Collection
+ * Class NodesCollection
  *
  * Tree nodes collection.
  *
  * @property ChildNodeInterface[] $items
  */
-class Collection extends BaseCollection
+class NodesCollection extends BaseCollection
 {
     use TreeNodesCollectionTrait;
 

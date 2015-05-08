@@ -24,7 +24,7 @@ trait ParentNodeTrait
 
     private function createComponentsCollection()
     {
-        $this->componentsCollection = new Collection($this);
+        $this->componentsCollection = new NodesCollection($this);
         $defaults = $this->defaultComponents();
         if (count($defaults) !== 0) {
             $this->componentsCollection->set($defaults);
@@ -34,9 +34,9 @@ trait ParentNodeTrait
     /**
      * Returns child components.
      *
-     * @return Collection
+     * @return NodesCollection
      */
-    final public function components()
+    public function components()
     {
         if ($this->componentsCollection === null) {
             $this->createComponentsCollection();
@@ -44,7 +44,7 @@ trait ParentNodeTrait
         return $this->componentsCollection;
     }
 
-    final public function setComponents(array $components = [])
+    public function setComponents(array $components = [])
     {
         $this->components()->set($components);
         return $this;

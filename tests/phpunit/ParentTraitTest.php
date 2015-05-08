@@ -11,7 +11,7 @@ class ParentTraitTest extends PHPUnit_Framework_TestCase
     public function test()
     {
         $parent = new ParentClass();
-        self::assertInstanceOf('\Nayjest\ViewComponents\Structure\Collection', $parent->components());
+        self::assertInstanceOf('\Nayjest\ViewComponents\Structure\NodesCollection', $parent->components());
         self::assertTrue($parent->components()->isEmpty());
     }
 

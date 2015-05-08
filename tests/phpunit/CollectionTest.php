@@ -1,7 +1,6 @@
 <?php
 namespace Nayjest\ViewComponents\Test;
 
-use Nayjest\ViewComponents\Structure\Collection;
 use Nayjest\ViewComponents\Test\Mock\ChildClass;
 use Nayjest\ViewComponents\Test\Mock\ParentClass;
 use PHPUnit_Framework_TestCase;

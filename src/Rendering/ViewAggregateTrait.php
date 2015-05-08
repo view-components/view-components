@@ -19,7 +19,7 @@ trait ViewAggregateTrait
     public function getView()
     {
         if ($this->view === null) {
-            $this->view = $this->makeDefaultView();
+            $this->setView($this->makeDefaultView());
         }
         return $this->view;
     }
