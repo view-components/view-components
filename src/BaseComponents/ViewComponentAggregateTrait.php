@@ -31,6 +31,7 @@ trait ViewComponentAggregateTrait
         }
         $this->setViewInternal($view);
         $this->internalComponents()->add($this->view);
+        return $this;
     }
 
     public function components()
