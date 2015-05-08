@@ -41,4 +41,20 @@ trait TreeNodesCollectionTrait
         }
         return $this;
     }
+
+    /**
+     * @todo unused now
+     * @return mixed
+     */
+    public function plain()
+    {
+        $children = $this->toArray();
+        $res = $children;
+        foreach($children as $item) {
+            if ($item instanceof ParentNodeTrait) {
+                $res += $item->components()->plain();
+            }
+        }
+        return $res;
+    }
 }
