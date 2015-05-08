@@ -7,6 +7,7 @@ use Nayjest\ViewComponents\Rendering\ViewAggregateTrait;
  * Class ViewComponentAggregateTrait
  *
  * Extended ViewAggregate that implements ContainerInterface
+ * @todo rename to ViewAggregateTrait
  *
  */
 trait ViewComponentAggregateTrait
