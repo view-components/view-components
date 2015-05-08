@@ -4,13 +4,22 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - 7.0
   - hhvm
+  - hhvm-nightly
+  - nightly
+matrix:
+  allow_failures:
+    - php: 7.0
+    - php: hhvm
+    - php: hhvm-nightly
+    - php: nightly
 
 before_script:
   - composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
   - php -S localhost:9000 tests/webapp/index.php &
-  - sleep 3  # give server some time to start
+  - sleep 1  # give server some time to start
   - php vendor/bin/codecept build
 
 script:
