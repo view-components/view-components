@@ -15,3 +15,4 @@ modules:
             user: ''
             password: ''
             dump: tests/codecept/_data/dump.sql
+
