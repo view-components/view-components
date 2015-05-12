@@ -6,21 +6,21 @@ use LogicException;
 trait InitializedOnceTrait
 {
 
-    protected $isInitialized = false;
+    protected $initialized = false;
 
-    protected function setIsInitialized()
+    protected function setInitialized()
     {
-        if ($this->isInitialized) {
+        if ($this->initialized) {
             throw new LogicException(
                 'Object initialization performed more than once.'
             );
         }
-        $this->isInitialized = true;
+        $this->initialized = true;
     }
 
     protected function checkInitialized()
     {
-        if ($this->isInitialized === false) {
+        if ($this->initialized === false) {
             throw new LogicException(
                 'Calling method that requires object initialization '
                 . 'while it\'s not initialized.'
