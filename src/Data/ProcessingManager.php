@@ -8,12 +8,6 @@ class ProcessingManager
     protected $processorResolver;
     protected $dataSource;
     protected $processedData;
-    protected $lastKey;
-
-    protected static $processors = [
-        'Nayjest\ViewComponents\Data\Operations\Sorting' => 'Nayjest\ViewComponents\Data\Processors\Sorting',
-        'Nayjest\ViewComponents\Data\Operations\Filter' => 'Nayjest\ViewComponents\Data\Processors\FilterProcessor'
-    ];
 
     public function __construct(
         ProcessorResolverInterface $processorResolver,
@@ -26,16 +20,6 @@ class ProcessingManager
         $this->dataSource = $dataSource;
     }
 
-
-    protected function process($src)
-    {
-        foreach ($this->operations->toArray() as $operation) {
-            $processor = $this->processorResolver->getProcessor($operation);
-            $src = $processor->process($src, $operation);
-        }
-        return $src;
-    }
-
     public function setDataSource($dataSource)
     {
         if ($this->dataSource !== $dataSource) {
@@ -46,11 +30,22 @@ class ProcessingManager
 
     public function getProcessedData()
     {
-        $key = $this->operations->getStateKey();
-        if ($this->processedData === null || $key !== $this->lastKey) {
+
+        if (
+            $this->processedData === null
+            || $this->operations->isChanged()
+        ) {
             $this->processedData = $this->process($this->dataSource);
-            $this->lastKey = $key;
         }
         return $this->processedData;
+    }
+
+    protected function process($src)
+    {
+        foreach ($this->operations->toArray() as $operation) {
+            $processor = $this->processorResolver->getProcessor($operation);
+            $src = $processor->process($src, $operation);
+        }
+        return $src;
     }
 }
