@@ -117,7 +117,7 @@ class Filter implements ControlInterface
 
     public function initialize(DataProviderInterface $provider, array $input)
     {
-        $this->setIsInitialized();
+        $this->setInitialized();
         $this->initializeInputValue($input);
 
         if ($this->hasValue()) {
