@@ -13,12 +13,19 @@ trait TemplatedViewTrait
 
     protected $theme;
 
+    /**
+     * @param string $theme
+     * @return $this
+     */
     public function setTheme($theme)
     {
         $this->theme = $theme;
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTheme()
     {
         return $this->theme;

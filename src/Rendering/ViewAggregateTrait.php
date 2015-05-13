@@ -29,5 +29,8 @@ trait ViewAggregateTrait
         return ($view = $this->getView()) ? $view->render() : '';
     }
 
+    /**
+     * @return ViewInterface|null
+     */
     abstract protected function makeDefaultView();
 }

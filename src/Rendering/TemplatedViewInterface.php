@@ -21,11 +21,14 @@ interface TemplatedViewInterface extends ViewInterface
      */
     public function setTemplate($template);
 
+    /**
+     * @return string|null
+     */
     public function getTheme();
 
     /**
-     * @param $theme
-     * @return mixed
+     * @param string $theme
+     * @return $this
      */
     public function setTheme($theme);
 }
