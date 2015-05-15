@@ -4,7 +4,7 @@ namespace Nayjest\ViewComponents\Data;
 use Nayjest\ViewComponents\Data\Operations\OperationInterface;
 use Nayjest\ViewComponents\Data\Processors\ProcessorInterface;
 
-class PhpArrayProcessorResolver implements ProcessorResolverInterface
+class ArrayProcessorResolver implements ProcessorResolverInterface
 {
     protected static $processors = [
         'Nayjest\ViewComponents\Data\Operations\Sorting'
