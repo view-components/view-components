@@ -18,10 +18,11 @@ trait ViewComponentAggregateTrait
     }
     use ViewAggregateTrait {
         ViewAggregateTrait::setView as protected setViewInternal;
-    };
+    }
 
     public function render()
     {
+        $this->useDefaultViewIfNull();
         return $this->renderComponents(null);
     }
 

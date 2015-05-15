@@ -18,15 +18,20 @@ trait ViewAggregateTrait
      */
     public function getView()
     {
-        if ($this->view === null) {
-            $this->setView($this->makeDefaultView());
-        }
+        $this->useDefaultViewIfNull();
         return $this->view;
     }
 
     public function render()
     {
         return ($view = $this->getView()) ? $view->render() : '';
+    }
+
+    protected function useDefaultViewIfNull()
+    {
+        if ($this->view === null) {
+            $this->setView($this->makeDefaultView());
+        }
     }
 
     /**
