@@ -2,20 +2,19 @@
 
 namespace Nayjest\ViewComponents\Components\Controls;
 
-use Nayjest\ViewComponents\BaseComponents\ComponentTrait;
+use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
 use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
+use Nayjest\ViewComponents\BaseComponents\ViewComponentAggregateTrait;
 use Nayjest\ViewComponents\Common\InitializedOnceTrait;
 use Nayjest\ViewComponents\Components\Container;
 use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Components\Text;
 use Nayjest\ViewComponents\Data\DataProviderInterface;
 use Nayjest\ViewComponents\Data\Operations\Filter as FilterOperation;
-use Nayjest\ViewComponents\Rendering\ViewAggregateTrait;
 
-class Filter implements ControlInterface
+class Filter implements ControlInterface, ContainerInterface
 {
-    use ComponentTrait;
-    use ViewAggregateTrait;
+    use ViewComponentAggregateTrait;
     use InitializedOnceTrait;
 
     protected $default;
