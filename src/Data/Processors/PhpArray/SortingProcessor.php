@@ -1,8 +1,9 @@
 <?php
-namespace Nayjest\ViewComponents\Data\Processors;
+namespace Nayjest\ViewComponents\Data\Processors\PhpArray;
 
 use Nayjest\ViewComponents\Data\Operations\OperationInterface;
 use Nayjest\ViewComponents\Data\Operations\Sorting;
+use Nayjest\ViewComponents\Data\Processors\ProcessorInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class SortingProcessor implements ProcessorInterface

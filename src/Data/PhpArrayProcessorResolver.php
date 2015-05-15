@@ -4,11 +4,13 @@ namespace Nayjest\ViewComponents\Data;
 use Nayjest\ViewComponents\Data\Operations\OperationInterface;
 use Nayjest\ViewComponents\Data\Processors\ProcessorInterface;
 
-class ProcessorResolver implements ProcessorResolverInterface
+class PhpArrayProcessorResolver implements ProcessorResolverInterface
 {
     protected static $processors = [
-        'Nayjest\ViewComponents\Data\Operations\Sorting' => 'Nayjest\ViewComponents\Data\Processors\SortingProcessor',
-        'Nayjest\ViewComponents\Data\Operations\Filter' => 'Nayjest\ViewComponents\Data\Processors\FilterProcessor'
+        'Nayjest\ViewComponents\Data\Operations\Sorting'
+        => 'Nayjest\ViewComponents\Data\Processors\PhpArray\SortingProcessor',
+        'Nayjest\ViewComponents\Data\Operations\Filter'
+        => 'Nayjest\ViewComponents\Data\Processors\PhpArray\FilterProcessor'
     ];
 
     /**

@@ -15,7 +15,7 @@ class ArrayDataProvider implements DataProviderInterface
         $this->operationsCollection->set($operations);
 
         $this->processingManager = new ProcessingManager(
-            new ProcessorResolver(),
+            new PhpArrayProcessorResolver(),
             $this->operationsCollection,
             $this->makeRowObjects($src)
         );
