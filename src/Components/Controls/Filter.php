@@ -11,11 +11,16 @@ use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Components\Text;
 use Nayjest\ViewComponents\Data\DataProviderInterface;
 use Nayjest\ViewComponents\Data\Operations\Filter as FilterOperation;
+use Nayjest\ViewComponents\Data\Operations\FilterAggregateTrait;
 
 class Filter implements ControlInterface, ContainerInterface
 {
     use ViewComponentAggregateTrait;
     use InitializedOnceTrait;
+    use FilterAggregateTrait {
+        # Forbid setting value directly to operation
+        FilterAggregateTrait::setValue as private setOperationValue;
+    }
 
     protected $default;
 
@@ -26,7 +31,7 @@ class Filter implements ControlInterface, ContainerInterface
     protected $inputName;
 
     /** @var Filter */
-    protected $operation;
+    protected $filterOperation;
 
     protected $label;
 
@@ -36,10 +41,8 @@ class Filter implements ControlInterface, ContainerInterface
         $default = null
     )
     {
-        $this->operation = new FilterOperation();
-        $this->setField($field);
+        $this->filterOperation = new FilterOperation($field, $operator);
         $this->setLabel($field);
-        $this->setOperator($operator);
         $this->setDefault($default);
     }
 
@@ -50,7 +53,6 @@ class Filter implements ControlInterface, ContainerInterface
     {
         return $this->label;
     }
-
 
     /**
      * @param string $label
@@ -63,40 +65,11 @@ class Filter implements ControlInterface, ContainerInterface
     }
 
     /**
-     * @return Filter
+     * @return FilterOperation
      */
-    public function getOperation()
+    protected function getFilterOperation()
     {
-        return $this->operation;
-    }
-
-    public function setOperator($operator)
-    {
-        $this->operation->setOperator($operator);
-        return $this;
-    }
-
-    public function getOperator()
-    {
-        return $this->operation->getOperator();
-    }
-
-    /**
-     * @return string
-     */
-    public function getField()
-    {
-        return $this->operation->getField();
-    }
-
-    /**
-     * @param string $field
-     * @return $this
-     */
-    public function setField($field)
-    {
-        $this->operation->setField($field);
-        return $this;
+        return $this->filterOperation;
     }
 
     public function getInputName()
@@ -120,8 +93,8 @@ class Filter implements ControlInterface, ContainerInterface
         $this->initializeInputValue($input);
 
         if ($this->hasValue()) {
-            $this->operation->setValue($this->getValue());
-            $provider->operations()->add($this->operation);
+            $this->filterOperation->setValue($this->getValue());
+            $provider->operations()->add($this->filterOperation);
         }
     }
 
@@ -148,7 +121,7 @@ class Filter implements ControlInterface, ContainerInterface
      */
     public function getInputKey()
     {
-        return $this->inputKey ?: $this->getField();
+        return $this->inputKey ?: $this->filterOperation->getField();
     }
 
     /**
