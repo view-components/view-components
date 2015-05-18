@@ -5,6 +5,7 @@ use Nayjest\ViewComponents\Components\Container;
 use Nayjest\ViewComponents\Components\Controls\Filter;
 use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
+use Nayjest\ViewComponents\Data\DbTableDataProvider;
 use Nayjest\ViewComponents\Data\Operations\Sorting;
 use Nayjest\ViewComponents\HtmlBuilder;
 use Nayjest\ViewComponents\Components\Repeater;
@@ -31,19 +32,18 @@ class Controller
         ];
     }
 
-    /**
-     * @return PDO
-     */
-    protected function db()
+    protected function getDataProvider($operations = [])
     {
-        static $db;
-        if ($db === null) {
-            $host = getenv('DB_HOST');
-            $dbName = getenv('DB_DATABASE');
-            $dsn = "mysql:host=$host;dbname=$dbName";
-            $db = new PDO($dsn, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
-        }
-        return $db;
+        return (isset($_GET['use-db']) && $_GET['use-db'])
+            ? new DbTableDataProvider(
+                db_connection(),
+                'users',
+                $operations
+            )
+            : new ArrayDataProvider(
+                $this->getUsersData(),
+                $operations
+            );
     }
 
     public function index()
@@ -118,7 +118,7 @@ class Controller
      */
     public function demo4()
     {
-        $provider = new ArrayDataProvider($this->getUsersData());
+        $provider = $this->getDataProvider([Sorting::asc('name')]);
 
         $view = new Container([
             new Tag('form', null, [
@@ -135,6 +135,5 @@ class Controller
         $filter->initialize($provider, $_GET);
         return $view->render();
     }
-
 
 }
