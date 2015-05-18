@@ -11,6 +11,16 @@ class Sorting implements OperationInterface
 
     protected $field;
 
+    public static function asc($field)
+    {
+        return new self($field, self::ASC);
+    }
+
+    public static function desc($field)
+    {
+        return new self($field, self::DESC);
+    }
+
     public function __construct($field = null, $order = self::ASC)
     {
         $this->setField($field);
