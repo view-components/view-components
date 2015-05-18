@@ -6,3 +6,4 @@ phpunit.phar
 build
 src/_Components
 tests/codecept/_output/*
+tests/webapp/.env

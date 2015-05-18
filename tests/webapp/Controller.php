@@ -1,7 +1,6 @@
 <?php
 namespace Nayjest\ViewComponents\Demo;
 
-use Nayjest\ViewComponents\Components\Html\Form\ResetButton;
 use Nayjest\ViewComponents\Components\Container;
 use Nayjest\ViewComponents\Components\Controls\Filter;
 use Nayjest\ViewComponents\Components\Html\Tag;
@@ -14,6 +13,7 @@ use Nayjest\ViewComponents\Demo\Components\PersonView;
 use Nayjest\ViewComponents\Resources\AliasRegistry;
 use Nayjest\ViewComponents\Resources\IncludedResourcesRegistry;
 use Nayjest\ViewComponents\Resources\Resources;
+use PDO;
 
 class Controller
 {
@@ -29,6 +29,21 @@ class Controller
             ['id' => '7', 'name' => 'Bruce', 'role' => 'User', 'birthday' => '1977-09-14'],
             ['id' => '8', 'name' => 'Julia', 'role' => 'User', 'birthday' => '1994-03-05'],
         ];
+    }
+
+    /**
+     * @return PDO
+     */
+    protected function db()
+    {
+        static $db;
+        if ($db === null) {
+            $host = getenv('DB_HOST');
+            $dbName = getenv('DB_DATABASE');
+            $dsn = "mysql:host=$host;dbname=$dbName";
+            $db = new PDO($dsn, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
+        }
+        return $db;
     }
 
     public function index()
@@ -49,7 +64,7 @@ class Controller
     public function demo1()
     {
         $data = $this->getUsersData();
-        $view  = new Container([
+        $view = new Container([
             new Text('<h1>Users List</h1>'),
             new Repeater($data, [new PersonView])
         ]);
@@ -65,7 +80,7 @@ class Controller
     {
         $html = new HtmlBuilder(new Resources(new AliasRegistry(), new AliasRegistry(), new IncludedResourcesRegistry()));
         $data = $this->getUsersData();
-        $view  = new Container([
+        $view = new Container([
             $html->h1('Users List'),
             $html->hr(),
             new Repeater($data, [new PersonView]),
@@ -84,7 +99,7 @@ class Controller
     {
         $data = $this->getUsersData();
 
-        $view  = new Container([
+        $view = new Container([
             new Text('<h1>Users List</h1>'),
             new Repeater(
                 new ArrayDataProvider(
@@ -105,7 +120,7 @@ class Controller
     {
         $provider = new ArrayDataProvider($this->getUsersData());
 
-        $view  = new Container([
+        $view = new Container([
             new Tag('form', null, [
                 $filter = new Filter('name'),
                 new Tag('button', ['type' => 'submit'], [

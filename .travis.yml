@@ -18,6 +18,7 @@ matrix:
 before_script:
   - composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
+  - php tests/webapp/install.php
   - php -S localhost:9000 tests/webapp/index.php &
   - sleep 1  # give server some time to start
   - php vendor/bin/codecept build
