@@ -2,13 +2,8 @@
 
 namespace Nayjest\ViewComponents\Data;
 
-use ArrayIterator;
-
-class ArrayDataProvider implements DataProviderInterface
+class ArrayDataProvider extends AbstractDataProvider
 {
-    protected $processingManager;
-    protected $operationsCollection;
-
     public function __construct($src, array $operations = [])
     {
         $this->operationsCollection = new OperationsCollection();
@@ -32,17 +27,5 @@ class ArrayDataProvider implements DataProviderInterface
             $newSrc[] = is_array($row)?(object)$row:$row;
         }
         return $newSrc;
-    }
-
-    public function operations()
-    {
-        return $this->operationsCollection;
-    }
-
-    public function getIterator()
-    {
-        return new ArrayIterator(
-            $this->processingManager->getProcessedData()
-        );
     }
 }
