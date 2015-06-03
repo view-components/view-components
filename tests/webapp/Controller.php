@@ -15,21 +15,14 @@ use Nayjest\ViewComponents\Resources\AliasRegistry;
 use Nayjest\ViewComponents\Resources\IncludedResourcesRegistry;
 use Nayjest\ViewComponents\Resources\Resources;
 use PDO;
+use ReflectionClass;
+use ReflectionMethod;
 
 class Controller
 {
     protected function getUsersData()
     {
-        return [
-            ['id' => '1', 'name' => 'John', 'role' => 'Admin', 'birthday' => '1970-01-16'],
-            ['id' => '2', 'name' => 'Max', 'role' => 'Manager', 'birthday' => '1980-11-20'],
-            ['id' => '3', 'name' => 'Anna', 'role' => 'Manager', 'birthday' => '1987-03-30'],
-            ['id' => '4', 'name' => 'Lisa', 'role' => 'User', 'birthday' => '1989-04-21'],
-            ['id' => '5', 'name' => 'Eric', 'role' => 'User', 'birthday' => '1990-10-23'],
-            ['id' => '6', 'name' => 'David', 'role' => 'User', 'birthday' => '1967-04-09'],
-            ['id' => '7', 'name' => 'Bruce', 'role' => 'User', 'birthday' => '1977-09-14'],
-            ['id' => '8', 'name' => 'Julia', 'role' => 'User', 'birthday' => '1994-03-05'],
-        ];
+        return include(dirname(__DIR__).'/fixtures/users.php');
     }
 
     protected function getDataProvider($operations = [])
@@ -46,14 +39,43 @@ class Controller
             );
     }
 
-    public function index()
+    protected function renderMenu()
     {
-        return '<h1>Nayjest/ViewComponents test app</h1><h2>Index Page</h2>';
+        $class = new ReflectionClass($this);
+        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+
+        $out = '<div style="float: right;"><ul class="menu">';
+        foreach ($actions as $action) {
+            $out.= "<li><a href='/{$action->name}'>{$action->name}</a></li>";
+        }
+        $out.='</ul></div>';
+        $out.= '
+        <style>
+            .menu li {
+                display: inline;
+                padding: 5px;
+                margin: 3px;
+                background-color: #99cb84;
+                border-radius: 3px;
+            }
+            .menu a {
+                text-decoration: none;
+                color: white;
+            }
+            .menu li:hover {
+                background-color: #000000;
+            }
+        </style>';
+        return $out;
     }
 
-    public function home()
+    public function index()
     {
-        return 'Welcome!';
+        $out = '';
+        $out .= $this->renderMenu();
+        $out .= '<h1>Nayjest/ViewComponents test app</h1><h2>Index Page</h2>';
+
+        return $out;
     }
 
     /**
@@ -68,7 +90,7 @@ class Controller
             new Text('<h1>Users List</h1>'),
             new Repeater($data, [new PersonView])
         ]);
-        return $view->render();
+        return $this->renderMenu() . $view->render();
     }
 
     /**
@@ -87,7 +109,7 @@ class Controller
             $html->hr(),
             $html->div('Footer')
         ]);
-        return $view->render();
+        return $this->renderMenu() . $view->render();
     }
 
     /**
@@ -108,7 +130,7 @@ class Controller
                 ),
                 [new PersonView])
         ]);
-        return $view->render();
+        return $this->renderMenu() . $view->render();
     }
 
     /**
@@ -133,7 +155,7 @@ class Controller
                 [new PersonView])
         ]);
         $filter->initialize($provider, $_GET);
-        return $view->render();
+        return $this->renderMenu() . $view->render();
     }
 
 }
