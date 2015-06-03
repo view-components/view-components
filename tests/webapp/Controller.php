@@ -39,34 +39,29 @@ class Controller
             );
     }
 
-    protected function renderMenu()
+    /**
+     * @return \ReflectionMethod[]
+     */
+    protected function getActions()
     {
         $class = new ReflectionClass($this);
-        $actions = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+        return $class->getMethods(ReflectionMethod::IS_PUBLIC);
 
-        $out = '<div style="float: right;"><ul class="menu">';
-        foreach ($actions as $action) {
-            $out.= "<li><a href='/{$action->name}'>{$action->name}</a></li>";
-        }
-        $out.='</ul></div>';
-        $out.= '
-        <style>
-            .menu li {
-                display: inline;
-                padding: 5px;
-                margin: 3px;
-                background-color: #99cb84;
-                border-radius: 3px;
-            }
-            .menu a {
-                text-decoration: none;
-                color: white;
-            }
-            .menu li:hover {
-                background-color: #000000;
-            }
-        </style>';
-        return $out;
+    }
+
+    protected function render($tpl, array $data = [])
+    {
+        extract($data);
+        ob_start();
+        $resourcesDir = __DIR__ . '/resources';
+        include "$resourcesDir/views/$tpl.php";
+        return ob_get_clean();
+    }
+
+
+    protected function renderMenu()
+    {
+        return $this->render('menu/menu');
     }
 
     public function index()
