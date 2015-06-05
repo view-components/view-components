@@ -2,9 +2,9 @@
 namespace Nayjest\ViewComponents\Rendering;
 
 /**
- * Interface ViewInterface
+ * Interface TemplateViewInterface
  */
-interface TemplatedViewInterface extends ViewInterface
+interface TemplateViewInterface extends ViewInterface
 {
     /**
      * Returns template.

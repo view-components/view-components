@@ -1,10 +1,15 @@
 <?php
 namespace Nayjest\ViewComponents\Rendering;
 
-use Illuminate\Support\Facades\View;
 use Nayjest\ViewComponents\Structure\ChildNodeTrait;
 
-trait TemplatedViewTrait
+/**
+ * Trait TemplateViewTrait
+ *
+ * Implements TemplateViewInterface
+ *
+ */
+trait TemplateViewTrait
 {
     use ChildNodeTrait;
     use ViewTrait;
@@ -33,7 +38,7 @@ trait TemplatedViewTrait
 
     private function isTemplatedView($object)
     {
-        return $object instanceof TemplatedViewInterface;
+        return $object instanceof TemplateViewInterface;
     }
 
     protected function resolveTheme()
@@ -42,7 +47,7 @@ trait TemplatedViewTrait
             return $this->getTheme();
         }
         /**
-         * @var TemplatedViewInterface|null $parent
+         * @var TemplateViewInterface|null $parent
          */
         $parent = $this->findClosestParent([$this, 'isTemplatedView']);
         if ($parent !== null) {
@@ -77,18 +82,5 @@ trait TemplatedViewTrait
     protected function getViewData()
     {
         return ['component' => $this];
-    }
-
-    /**
-     * Renders object.
-     *
-     * @return string
-     */
-    public function render()
-    {
-        return View::make(
-            $this->resolveTemplate(),
-            $this->getViewData()
-        )->render();
     }
 }
