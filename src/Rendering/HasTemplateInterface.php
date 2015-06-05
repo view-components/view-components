@@ -2,9 +2,9 @@
 namespace Nayjest\ViewComponents\Rendering;
 
 /**
- * Interface TemplateViewInterface
+ * Interface HasTemplateInterface
  */
-interface TemplateViewInterface extends ViewInterface
+interface HasTemplateInterface
 {
     /**
      * Returns template.
@@ -31,4 +31,11 @@ interface TemplateViewInterface extends ViewInterface
      * @return $this
      */
     public function setTheme($theme);
+
+    /**
+     * Returns template name considering used theme.
+     *
+     * @return string
+     */
+    public function resolveTemplate();
 }
