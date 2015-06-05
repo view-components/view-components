@@ -56,9 +56,14 @@ trait TemplateViewTrait
         return null;
     }
 
-    public function setTemplate()
+    /**
+     * @param string $template
+     * @return $this
+     */
+    public function setTemplate($template)
     {
-        return $this->template;
+        $this->template = $template;
+        return $this;
     }
 
     protected function getTemplate()
