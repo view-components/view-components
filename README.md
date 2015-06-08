@@ -44,7 +44,7 @@ Package dependencies must be installed via composer (just run composer install).
 
 Package dependencies must be installed via composer (just run composer install).
 
-**Step 1:** Install test web-application
+**Step 1:** Install test web-application.
 
 ```bash
 php tests/webapp/install.php
@@ -53,13 +53,13 @@ php tests/webapp/install.php
 ```bash
 php -S localhost:9000 tests/webapp/index.php
 ```
-**Step 3:** Open new terminal window
+**Step 3:** Open new terminal window.
 
-**Step 4:** Build codeception tests
+**Step 4:** Build codeception tests.
 ```bash
 php vendor/bin/codecept build
 ```
-**Step 5:** Run codeception tests
+**Step 5:** Run codeception tests.
 ```bash
 php vendor/bin/codecept run acceptance
 ```
