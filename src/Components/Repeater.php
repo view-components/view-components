@@ -22,7 +22,7 @@ class Repeater implements
     /**
      * @param array|Traversable $iterator
      * @param \Nayjest\ViewComponents\Structure\ChildNodeInterface[] $components
-     * @param $callback
+     * @param callable $callback receives Repeater as argument1 and row of data as argument 2.
      */
     public function __construct(
         $iterator = null,
