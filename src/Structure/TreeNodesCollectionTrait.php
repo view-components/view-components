@@ -4,6 +4,7 @@ namespace Nayjest\ViewComponents\Structure;
 
 use Nayjest\Manipulator\Manipulator;
 use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
+use Nayjest\ViewComponents\Data\DataAcceptorInterface;
 use Traversable;
 
 trait TreeNodesCollectionTrait
@@ -35,9 +36,13 @@ trait TreeNodesCollectionTrait
     public function fillItemsWith($data)
     {
         foreach($this->toArray() as $item) {
-            $writable = Manipulator::getWritable($item);
-            $fields = Manipulator::getValues($data, $writable);
-            Manipulator::assign($item, $fields);
+            if ($item instanceof DataAcceptorInterface) {
+                $item->setData($data);
+            } else {
+                $writable = Manipulator::getWritable($item);
+                $fields = Manipulator::getValues($data, $writable);
+                Manipulator::assign($item, $fields);
+            }
         }
         return $this;
     }
