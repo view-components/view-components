@@ -27,10 +27,41 @@ If you discover any security related issues, please email mail@vitaliy.in instea
 
 ## Testing
 
-Run following command:
+### Overview
+
+The package bundled with phpunit tests and web-application for integration/acceptance tests using codeception.
+
+### Running Unit Tests
+
+Just execute phpunit from package folder.
 
 ```bash
 phpunit
+```
+Package dependencies must be installed via composer (just run composer install).
+
+### Running Acceptance Tests
+
+Package dependencies must be installed via composer (just run composer install).
+
+**Step 1:** Install test web-application
+
+```bash
+php tests/webapp/install.php
+```
+**Step 2:** Start test web-application server. Do not close terminal with running server.
+```bash
+php -S localhost:9000 tests/webapp/index.php
+```
+**Step 3:** Open new terminal window
+
+**Step 4:** Build codeception tests
+```bash
+php vendor/bin/codecept build
+```
+**Step 5:** Run codeception tests
+```bash
+php vendor/bin/codecept run acceptance
 ```
 
 ## License
