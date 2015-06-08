@@ -2,7 +2,9 @@
 namespace Nayjest\ViewComponents\Components\Debug;
 
 use Nayjest\ViewComponents\BaseComponents\AbstractItemView;
-use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\HtmlDumper;
 
 /**
  * Class SymfonyVarDump
@@ -14,6 +16,10 @@ class SymfonyVarDump extends AbstractItemView
 {
     public function render()
     {
-        return VarDumper::dump($this->data);
+        $cloner = new VarCloner();
+        $dumper = ('cli' === PHP_SAPI ? new CliDumper : new HtmlDumper);
+        $output = fopen('php://memory', 'r+b');
+        $dumper->dump($cloner->cloneVar($this->data), $output);
+        return stream_get_contents($output, -1, 0);
     }
 }
