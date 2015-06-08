@@ -2,10 +2,10 @@
 
 namespace Nayjest\ViewComponents\Data;
 
-use ArrayIterator;
+use Nayjest\ViewComponents\Data\ProcessorResolvers\ProcessorResolverInterface;
 use Traversable;
 
-class ProcessingManager
+abstract class AbstractProcessingManager
 {
     /** @var OperationsCollection  */
     protected $operations;
@@ -18,6 +18,18 @@ class ProcessingManager
 
     /** @var  Traversable */
     protected $processedData;
+
+    /**
+     * @param mixed $data
+     * @return mixed
+     */
+    abstract protected function beforeOperations($data);
+
+    /**
+     * @param mixed $data
+     * @return Traversable
+     */
+    abstract protected function afterOperations($data);
 
     public function __construct(
         ProcessorResolverInterface $processorResolver,
@@ -49,29 +61,38 @@ class ProcessingManager
      */
     public function getProcessedData()
     {
-
         if (
             $this->processedData === null
             || $this->operations->isChanged()
         ) {
             $this->processedData = $this->process($this->dataSource);
-            if (is_array($this->processedData)) {
-                $this->processedData = new ArrayIterator($this->processedData);
-            }
         }
         return $this->processedData;
     }
 
     /**
-     * @param $src
-     * @return Traversable|array
+     * @param mixed $data
+     * @return mixed
      */
-    protected function process($src)
+    protected function applyOperations($data)
     {
         foreach ($this->operations->toArray() as $operation) {
             $processor = $this->processorResolver->getProcessor($operation);
-            $src = $processor->process($src, $operation);
+            $data = $processor->process($data, $operation);
         }
-        return $src;
+        return $data;
+    }
+
+    /**
+     * @param $src
+     * @return Traversable
+     */
+    protected function process($src)
+    {
+        return $this->afterOperations(
+            $this->applyOperations(
+                $this->beforeOperations($src)
+            )
+        );
     }
 }

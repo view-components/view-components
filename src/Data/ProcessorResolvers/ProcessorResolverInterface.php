@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\Data;
+namespace Nayjest\ViewComponents\Data\ProcessorResolvers;
 
 use Nayjest\ViewComponents\Data\Operations\OperationInterface;
 use Nayjest\ViewComponents\Data\Processors\ProcessorInterface;

@@ -6,17 +6,20 @@ use Traversable;
 
 class AbstractDataProvider implements DataProviderInterface
 {
-    /** @var ProcessingManager */
+    /** @var ArrayProcessingManager */
     protected $processingManager;
 
     /** @var OperationsCollection */
-    protected $operationsCollection;
+    private $operationsCollection;
 
     /**
      * @return OperationsCollection
      */
     public function operations()
     {
+        if (null === $this->operationsCollection) {
+            $this->operationsCollection = new OperationsCollection();
+        }
         return $this->operationsCollection;
     }
 

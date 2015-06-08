@@ -4,6 +4,7 @@ namespace Nayjest\ViewComponents\Data;
 
 use Nayjest\ViewComponents\Data\DbTable\Query;
 use Nayjest\ViewComponents\Data\Operations\OperationInterface;
+use Nayjest\ViewComponents\Data\ProcessorResolvers\DbTableProcessorResolver;
 use PDO;
 
 class DbTableDataProvider extends AbstractDataProvider
@@ -16,12 +17,10 @@ class DbTableDataProvider extends AbstractDataProvider
      */
     public function __construct(PDO $connection, $table, array $operations = [])
     {
-        $this->operationsCollection = new OperationsCollection();
-        $this->operationsCollection->set($operations);
-
+        $this->operations()->set($operations);
         $this->processingManager = new DbTableProcessingManager(
             new DbTableProcessorResolver(),
-            $this->operationsCollection,
+            $this->operations(),
             new Query($connection, $table)
         );
     }

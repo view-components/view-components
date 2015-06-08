@@ -4,24 +4,29 @@ namespace Nayjest\ViewComponents\Data;
 
 use Nayjest\ViewComponents\Data\DbTable\Query;
 use RuntimeException;
+use Traversable;
 
 /**
  * Class DbTableProcessingManager
  *
  * @package Nayjest\ViewComponents\Data
  */
-class DbTableProcessingManager extends ProcessingManager
+class DbTableProcessingManager extends AbstractProcessingManager
 {
-    /**
-     * @param Query $src
-     * @return bool
-     */
-    protected function process($src)
+
+    protected function beforeOperations($data)
     {
-        /** @var  Query $preparedQuery */
-        $preparedQuery = parent::process($src);
-        $statement = $preparedQuery->getPdoStatement();
-        $result = $statement->execute($preparedQuery->bindings);
+        return $data;
+    }
+
+    /**
+     * @param Query $data
+     * @return Traversable
+     */
+    protected function afterOperations($data)
+    {
+        $statement = $data->getPdoStatement();
+        $result = $statement->execute($data->bindings);
         if (!$result) {
             $errorInfo = $statement->errorInfo();
             throw new RuntimeException(
@@ -31,5 +36,4 @@ class DbTableProcessingManager extends ProcessingManager
         }
         return $statement;
     }
-
 }
