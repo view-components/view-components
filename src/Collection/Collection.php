@@ -10,7 +10,6 @@ class Collection implements CollectionReadInterface
 
     public function add($item, $prepend = false)
     {
-
         if ($prepend) {
             array_unshift($this->items, $item);
         } else {
@@ -53,14 +52,14 @@ class Collection implements CollectionReadInterface
 
     public function set(array $items)
     {
-        $this->clean();
+        $this->clear();
         foreach ($items as $item) {
             $this->add($item);
         }
         return $this;
     }
 
-    public function clean()
+    public function clear()
     {
         $this->items = [];
         return $this;

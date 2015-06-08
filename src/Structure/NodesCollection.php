@@ -78,12 +78,12 @@ class NodesCollection extends BaseCollection
         return parent::set($items);
     }
 
-    public function clean()
+    public function clear()
     {
         foreach ($this->items as $item) {
             $item->internalUnsetParent();
         }
-        return parent::clean();
+        return parent::clear();
     }
 
     public function readonly()

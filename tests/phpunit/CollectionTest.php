@@ -41,7 +41,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
 
         // test clean
         $collection->set([$child, $child2]);
-        $collection->clean();
+        $collection->clear();
         self::assertTrue(
             $collection->count() === 0,
             'Collection must be empty after calling clean()'
