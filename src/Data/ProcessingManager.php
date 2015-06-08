@@ -7,9 +7,16 @@ use Traversable;
 
 class ProcessingManager
 {
+    /** @var OperationsCollection  */
     protected $operations;
+
+    /** @var ProcessorResolverInterface  */
     protected $processorResolver;
+
+    /** @var  mixed */
     protected $dataSource;
+
+    /** @var  Traversable */
     protected $processedData;
 
     public function __construct(
@@ -23,14 +30,23 @@ class ProcessingManager
         $this->dataSource = $dataSource;
     }
 
+
+    /**
+     * @param $dataSource
+     * @return $this
+     */
     public function setDataSource($dataSource)
     {
         if ($this->dataSource !== $dataSource) {
             $this->dataSource = $dataSource;
             $this->processedData = null;
         }
+        return $this;
     }
 
+    /**
+     * @return Traversable
+     */
     public function getProcessedData()
     {
 
