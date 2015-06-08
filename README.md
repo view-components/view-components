@@ -27,11 +27,11 @@ If you discover any security related issues, please email mail@vitaliy.in instea
 
 ## Testing
 
-### Overview
+#### Overview
 
 The package bundled with phpunit tests and web-application for integration/acceptance tests using codeception.
 
-### Running Unit Tests
+#### Running Unit Tests
 
 Just execute phpunit from package folder.
 
@@ -40,7 +40,7 @@ phpunit
 ```
 Package dependencies must be installed via composer (just run composer install).
 
-### Running Acceptance Tests
+#### Running Acceptance Tests
 
 Package dependencies must be installed via composer (just run composer install).
 
