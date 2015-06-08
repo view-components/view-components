@@ -3,7 +3,7 @@
 namespace Nayjest\ViewComponents\Structure;
 
 use InvalidArgumentException;
-use Nayjest\ViewComponents\Collection\Collection as BaseCollection;
+use Nayjest\ViewComponents\Collection\GroupedCollection;
 
 /**
  * Class NodesCollection
@@ -12,7 +12,7 @@ use Nayjest\ViewComponents\Collection\Collection as BaseCollection;
  *
  * @property ChildNodeInterface[] $items
  */
-class NodesCollection extends BaseCollection
+class NodesCollection extends GroupedCollection
 {
     use TreeNodesCollectionTrait;
 
@@ -37,7 +37,7 @@ class NodesCollection extends BaseCollection
      * @param bool $prepend Pass true to add component to the beginning of an array.
      * @return $this
      */
-    public function add($item, $prepend = false)
+    public function add($item, $prepend = false, $group = null)
     {
         if (!$item instanceof ChildNodeInterface) {
             throw new InvalidArgumentException('Collection accepts only objects implementing ChildNodeInterface');
@@ -50,7 +50,7 @@ class NodesCollection extends BaseCollection
                     ->components()
                     ->remove($item);
             }
-            parent::add($item, $prepend);
+            parent::add($item, $prepend, $group);
             $item->internalSetParent($this->owner);
         }
         return $this;
