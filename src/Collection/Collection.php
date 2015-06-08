@@ -4,7 +4,7 @@ namespace Nayjest\ViewComponents\Collection;
 use ArrayIterator;
 use RuntimeException;
 
-class Collection implements CollectionInterface
+class Collection implements CollectionReadInterface
 {
     protected $items = [];
 

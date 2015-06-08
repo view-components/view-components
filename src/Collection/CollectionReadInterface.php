@@ -4,7 +4,7 @@ namespace nayjest\ViewComponents\Collection;
 use Countable;
 use IteratorAggregate;
 
-interface CollectionInterface extends IteratorAggregate, Countable
+interface CollectionReadInterface extends IteratorAggregate, Countable
 {
     public function toArray();
 

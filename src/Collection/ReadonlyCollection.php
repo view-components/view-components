@@ -2,11 +2,11 @@
 
 namespace Nayjest\ViewComponents\Collection;
 
-class ReadonlyCollection implements CollectionInterface
+class ReadonlyCollection implements CollectionReadInterface
 {
     protected $collection;
 
-    public function __construct(CollectionInterface $collection)
+    public function __construct(CollectionReadInterface $collection)
     {
         $this->collection = $collection;
     }
