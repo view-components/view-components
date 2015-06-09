@@ -2,11 +2,11 @@
 
 namespace Nayjest\ViewComponents\Collection;
 
-use Nayjest\ViewComponents\Common\HasGroups;
+use Nayjest\ViewComponents\Common\HasGroupsTrait;
 
 class GroupedCollection extends Collection
 {
-    use HasGroups;
+    use HasGroupsTrait;
 
     public function setByGroups(array $groupedItems, $updateGroups = false)
     {

@@ -5,7 +5,7 @@ namespace Nayjest\ViewComponents\Common;
 use Nayjest\ViewComponents\Exceptions\GroupIsNotEmptyException;
 use Nayjest\ViewComponents\Exceptions\NonExistingGroupException;
 
-trait HasGroups
+trait HasGroupsTrait
 {
 
     protected $groups = [
