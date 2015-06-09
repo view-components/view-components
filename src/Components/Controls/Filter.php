@@ -12,6 +12,7 @@ use Nayjest\ViewComponents\Components\Text;
 use Nayjest\ViewComponents\Data\DataProviderInterface;
 use Nayjest\ViewComponents\Data\Operations\Filter as FilterOperation;
 use Nayjest\ViewComponents\Data\Operations\FilterAggregateTrait;
+use Symfony\Component\Process\Exception\LogicException;
 
 class Filter implements ControlInterface, ContainerInterface
 {
@@ -34,6 +35,8 @@ class Filter implements ControlInterface, ContainerInterface
     protected $filterOperation;
 
     protected $label;
+
+    protected $inputSourceInitialized = false;
 
     public function __construct(
         $field,
@@ -90,7 +93,7 @@ class Filter implements ControlInterface, ContainerInterface
     public function initialize(DataProviderInterface $provider, array $input)
     {
         $this->setInitialized();
-        $this->initializeInputValue($input);
+        $this->setInputSource($input);
 
         if ($this->hasValue()) {
             $this->filterOperation->setValue($this->getValue());
@@ -143,6 +146,11 @@ class Filter implements ControlInterface, ContainerInterface
 
     public function getValue()
     {
+        if (!$this->inputSourceInitialized) {
+            throw new LogicException(
+                'Cant extract value from control before initializing input source'
+            );
+        }
         return $this->hasInputValue()
             ? $this->getInputValue()
             : $this->getDefault();
@@ -165,8 +173,9 @@ class Filter implements ControlInterface, ContainerInterface
         return $this->hasInputValue() || $this->hasDefaultValue();
     }
 
-    protected function initializeInputValue($input)
+    public function setInputSource($input)
     {
+        $this->inputSourceInitialized = true;
         if (array_key_exists(
             $this->getInputKey(),
             $input
@@ -180,7 +189,9 @@ class Filter implements ControlInterface, ContainerInterface
      */
     protected function makeDefaultView()
     {
-        return new Container([
+        $container = new Tag('span');
+        $container->setAttribute('data-role','control-container');
+        $container->components()->set([
             new Tag('label', [
                 'for' => $this->getInputName()
             ], [
@@ -189,7 +200,9 @@ class Filter implements ControlInterface, ContainerInterface
             new Tag('input', [
                 'value' => $this->getValue(),
                 'name' => $this->getInputName()
-            ])
+            ]),
+            new Text('&nbsp;')
         ]);
+        return $container;
     }
 }
