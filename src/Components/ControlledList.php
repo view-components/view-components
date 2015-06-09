@@ -2,15 +2,16 @@
 
 namespace Nayjest\ViewComponents\Components;
 
-
 use Nayjest\ViewComponents\BaseComponents\AbstractControlledList;
-use Nayjest\ViewComponents\Components\Html\Tag;
+use Nayjest\ViewComponents\Components\Html\Div;
+use Nayjest\ViewComponents\Components\Html\Form;
+use Nayjest\ViewComponents\Components\Html\Input;
 
 class ControlledList extends AbstractControlledList
 {
     protected function createComponentsTree()
     {
-        $mainContainer = new Tag('div');
+        $mainContainer = new Div();
         $mainContainer->setAttribute('data-role', 'list-container');
         $mainContainer->components()->set([
             $this->createForm(),
@@ -21,7 +22,7 @@ class ControlledList extends AbstractControlledList
 
     protected function createForm()
     {
-        $form = new Tag('form');
+        $form = new Form();
         $form->setAttribute('data-role', 'controls-from');
         $form->components()->set($this->controls);
         $form->components()->add($this->createSubmitButton());
@@ -30,7 +31,7 @@ class ControlledList extends AbstractControlledList
 
     protected function createSubmitButton()
     {
-        $button = new Tag('input');
+        $button = new Input();
         $button->setAttributes([
            'type' => 'submit'
         ]);
@@ -39,7 +40,7 @@ class ControlledList extends AbstractControlledList
 
     protected function createItemsContainer()
     {
-        $itemsContainer = new Tag('div');
+        $itemsContainer = new Div();
         $itemsContainer->setAttribute('data-role', 'items-container');
         $itemsContainer->components()->add($this->repeater);
         return $itemsContainer;
