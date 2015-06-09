@@ -22,7 +22,6 @@ trait ViewComponentAggregateTrait
 
     public function render()
     {
-        $this->useDefaultViewIfNull();
         return $this->renderComponents(null);
     }
 
@@ -38,6 +37,7 @@ trait ViewComponentAggregateTrait
 
     public function components()
     {
+        $this->useDefaultViewIfNull();
         return $this->internalComponents()->readonly();
     }
 }
