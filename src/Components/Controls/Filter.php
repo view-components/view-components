@@ -6,7 +6,6 @@ use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
 use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
 use Nayjest\ViewComponents\BaseComponents\ViewComponentAggregateTrait;
 use Nayjest\ViewComponents\Common\InitializedOnceTrait;
-use Nayjest\ViewComponents\Components\Html\Span;
 use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Components\Text;
 use Nayjest\ViewComponents\Data\DataProviderInterface;
@@ -189,17 +188,19 @@ class Filter implements ControlInterface, ContainerInterface
      */
     protected function makeDefaultView()
     {
-        $container = new Span();
+        $container = new Tag('span');
         $container->setAttribute('data-role','control-container');
         $container->components()->set([
             new Tag('label', [
-                'for' => $this->getInputName()
+                'for' => $this->getInputName() . '_input'
             ], [
                 new Text($this->getLabel())
             ]),
             new Tag('input', [
                 'value' => $this->getValue(),
-                'name' => $this->getInputName()
+                'type' => 'text',
+                'name' => $this->getInputName(),
+                'id' => $this->getInputName() . '_input'
             ]),
             new Text('&nbsp;')
         ]);
