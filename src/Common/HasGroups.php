@@ -46,7 +46,7 @@ trait HasGroups
         return $this;
     }
 
-    protected function addGroups(array $groups)
+    public function addGroups(array $groups)
     {
         // add new groups
         foreach ($groups as $newGroup) {
