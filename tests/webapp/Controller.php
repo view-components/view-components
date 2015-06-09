@@ -2,7 +2,10 @@
 namespace Nayjest\ViewComponents\Demo;
 
 use Nayjest\ViewComponents\Components\Container;
+use Nayjest\ViewComponents\Components\ControlledList;
 use Nayjest\ViewComponents\Components\Controls\Filter;
+use Nayjest\ViewComponents\Components\Debug\SymfonyVarDump;
+use Nayjest\ViewComponents\Components\Debug\VarExport;
 use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
 use Nayjest\ViewComponents\Data\DbTableDataProvider;
@@ -151,6 +154,23 @@ class Controller
         ]);
         $filter->initialize($provider, $_GET);
         return $this->renderMenu() . $view->render();
+    }
+
+    /**
+     * ControlledList
+     *
+     * @return string
+     */
+    public function demo5()
+    {
+        $provider = $this->getDataProvider();
+        $list = new ControlledList(new SymfonyVarDump, [
+            new Filter('name'),
+            new Filter('role')
+        ]);
+
+        $list->initialize($provider, $_GET);
+        return $this->renderMenu() . $list->render();
     }
 
 }
