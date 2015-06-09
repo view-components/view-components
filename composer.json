@@ -2,9 +2,9 @@
     "name": "nayjest/view-components",
     "description": "View Components",
     "keywords": [
-        "laravel",
-        "laravel-5",
-        "laravel5"
+        "html",
+        "view",
+        "widgets"
     ],
     "homepage": "https://github.com/Nayjest/ViewComponents",
     "type": "library",
