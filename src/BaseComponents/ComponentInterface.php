@@ -8,7 +8,4 @@ interface ComponentInterface extends
     ViewInterface,
     ChildNodeInterface
 {
-    public function getRenderSection();
-
-    public function setRenderSection($section);
 }

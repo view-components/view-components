@@ -3,31 +3,12 @@
 namespace Nayjest\ViewComponents\Structure;
 
 use Nayjest\Manipulator\Manipulator;
-use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
 use Nayjest\ViewComponents\Data\DataAcceptorInterface;
 use Traversable;
 
 trait TreeNodesCollectionTrait
 {
     abstract public function toArray();
-
-    /**
-     * @param string $section_name
-     * @return ComponentInterface[]
-     */
-    public function findAllBySection($section_name)
-    {
-        $results = [];
-        foreach ($this->toArray() as $item) {
-            if (
-                $item instanceof ComponentInterface
-                && $item->getRenderSection() === $section_name
-            ) {
-                $results[] = $item;
-            }
-        }
-        return $results;
-    }
 
     /**
      * @param Traversable|array $data

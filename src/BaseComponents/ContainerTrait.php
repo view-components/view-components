@@ -1,7 +1,6 @@
 <?php
 namespace Nayjest\ViewComponents\BaseComponents;
 
-use Nayjest\ViewComponents\Rendering\ViewInterface;
 use Nayjest\ViewComponents\Structure\ParentNodeTrait;
 
 trait ContainerTrait
@@ -9,12 +8,13 @@ trait ContainerTrait
     use ParentNodeTrait;
     use ComponentTrait;
 
-    public function renderComponents($section = null)
+    public function renderComponents($group = null)
     {
         $components = $this
             ->components()
-            ->findAllBySection($section);
+            ->getByGroup($group);
         $output = '';
+        /** @var ComponentInterface $component */
         foreach ($components as $component) {
             $output .= $component->render();
         }
