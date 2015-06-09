@@ -10,10 +10,17 @@ abstract class AbstractStyling
     {
         $this->applyInternal($component);
         if ($component instanceof ContainerInterface) {
-            foreach ($component->components() as $child) {
-                $this->apply($child);
-            }
+            $this->applyToChildren($component);
+        }
+    }
 
+    protected function applyToChildren(ContainerInterface $component)
+    {
+        foreach ($component->components() as $child) {
+            $this->applyInternal($child);
+            if ($child instanceof ContainerInterface) {
+                $this->applyToChildren($child);
+            }
         }
     }
 

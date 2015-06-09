@@ -5,7 +5,6 @@ use Nayjest\ViewComponents\Components\Container;
 use Nayjest\ViewComponents\Components\ControlledList;
 use Nayjest\ViewComponents\Components\Controls\Filter;
 use Nayjest\ViewComponents\Components\Debug\SymfonyVarDump;
-use Nayjest\ViewComponents\Components\Debug\VarExport;
 use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
 use Nayjest\ViewComponents\Data\DbTableDataProvider;
@@ -17,6 +16,7 @@ use Nayjest\ViewComponents\Demo\Components\PersonView;
 use Nayjest\ViewComponents\Resources\AliasRegistry;
 use Nayjest\ViewComponents\Resources\IncludedResourcesRegistry;
 use Nayjest\ViewComponents\Resources\Resources;
+use Nayjest\ViewComponents\Styling\Bootstrap\BootstrapStyling;
 use PDO;
 use ReflectionClass;
 use ReflectionMethod;
@@ -171,6 +171,28 @@ class Controller
 
         $list->initialize($provider, $_GET);
         return $this->renderMenu() . $list->render();
+    }
+
+    /**
+     * ControlledList with styling
+     *
+     * @return string
+     */
+    public function demo6()
+    {
+        $provider = $this->getDataProvider();
+        $list = new ControlledList(new SymfonyVarDump, [
+            new Filter('name'),
+            new Filter('role')
+        ]);
+        $list->initialize($provider, $_GET);
+
+        $container = new Container([$list]);
+        $resources = new Resources(new AliasRegistry(),new AliasRegistry(), new IncludedResourcesRegistry());
+        $styling = new BootstrapStyling($resources);
+        $styling->apply($container);
+
+        return $this->renderMenu() . $container->render();
     }
 
 }

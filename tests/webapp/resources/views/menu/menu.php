@@ -12,3 +12,4 @@
         <?php endforeach ?>
     </ul>
 </div>
+<div style="clear: both"></div>
