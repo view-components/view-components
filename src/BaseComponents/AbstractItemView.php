@@ -7,6 +7,10 @@ abstract class AbstractItemView implements ComponentInterface, DataAcceptorInter
 {
     use ComponentTrait;
 
+    protected $data;
+
+    abstract public function render();
+
     /**
      * @param mixed $data
      */
@@ -14,8 +18,6 @@ abstract class AbstractItemView implements ComponentInterface, DataAcceptorInter
     {
         $this->data = $data;
     }
-
-    abstract public function render();
 
     public function setData($data)
     {
