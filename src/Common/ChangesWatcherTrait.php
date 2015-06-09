@@ -17,7 +17,7 @@ trait ChangesWatcherTrait
         $key = spl_object_hash($this);
         $currentState = $this->getStateHash();
         $result = !array_key_exists($key, self::$lastStates)
-            || self::$lastStates[$key] === $currentState;
+            || self::$lastStates[$key] !== $currentState;
         self::$lastStates[$key] = $currentState;
         return $result;
     }
