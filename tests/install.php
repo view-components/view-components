@@ -10,17 +10,14 @@ function create_env_file()
     echo 'Done.', PHP_EOL;
 }
 
-function is_sqlite()
-{
-    return strpos(getenv('DB_DSN'), 'sqlite:') !== false;
-}
+
 
 function db_seed()
 {
     echo PHP_EOL, 'Seeding db... ';
 
-    $pdo = db_connection(false);
-    $sql = file_get_contents(__DIR__ . '/fixtures/db.sql');
+    $pdo = db_connection();
+    $sql = file_get_contents(FIXTURES_DIR . '/db.sql');
     foreach(explode(';', $sql) as $query) {
         if (!trim($query)) {
             continue;

@@ -4,6 +4,8 @@ namespace Nayjest\ViewComponents\Demo;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+define('FIXTURES_DIR', __DIR__ . '/fixtures');
+
 use Dotenv;
 use PDO;
 
@@ -19,11 +21,17 @@ Dotenv::required([
     'DB_PASSWORD'
 ]);
 
-function db_connection($selectDb = true) {
+function is_sqlite()
+{
+    return strpos(getenv('DB_DSN'), 'sqlite:') !== false;
+}
+
+function db_connection() {
     static $db;
     if ($db === null) {
         $dsn = getenv('DB_DSN');
 
+        $selectDb = !is_sqlite();
         if ($selectDb) {
             $dbName = getenv('DB_NAME');
             $dsn.=";dbname=$dbName";
@@ -40,3 +48,4 @@ function db_connection($selectDb = true) {
     }
     return $db;
 }
+chdir(__DIR__);
