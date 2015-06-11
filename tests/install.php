@@ -2,14 +2,11 @@
 
 namespace Nayjest\ViewComponents\Demo;
 
-
-use PDO;
-
 function create_env_file()
 {
     echo PHP_EOL, 'Creating .env file... ';
     $dir = __DIR__;
-    `cp .env.example .env`;
+    `cp $dir/.env.example $dir/.env`;
     echo 'Done.';
 }
 
@@ -23,7 +20,7 @@ function db_seed()
     echo PHP_EOL, 'Seeding db... ';
 
     $pdo = db_connection(false);
-    $sql = file_get_contents(dirname(__DIR__) . '/fixtures/db.sql');
+    $sql = file_get_contents(__DIR__ . '/fixtures/db.sql');
     foreach(explode(';', $sql) as $query) {
         if (!trim($query)) {
             continue;
@@ -49,8 +46,6 @@ function db_seed()
 
 chdir(__DIR__);
 create_env_file();
-
-
 
 require __DIR__ . '/bootstrap.php';
 

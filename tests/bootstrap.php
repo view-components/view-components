@@ -2,7 +2,7 @@
 
 namespace Nayjest\ViewComponents\Demo;
 
-require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv;
 use PDO;

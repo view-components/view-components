@@ -6,5 +6,5 @@ phpunit.phar
 build
 src/_Components
 tests/codecept/_output/*
-tests/webapp/.env
-tests/webapp/db.sqlite
+tests/.env
+tests/db.sqlite

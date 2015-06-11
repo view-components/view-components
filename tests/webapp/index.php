@@ -5,7 +5,7 @@ namespace Nayjest\ViewComponents\Demo;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 # Use only for web
 $whoops = new Run;
