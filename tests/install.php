@@ -7,7 +7,7 @@ function create_env_file()
     echo PHP_EOL, 'Creating .env file... ';
     $dir = __DIR__;
     `cp $dir/.env.example $dir/.env`;
-    echo 'Done.';
+    echo 'Done.', PHP_EOL;
 }
 
 function is_sqlite()
@@ -41,7 +41,7 @@ function db_seed()
             die();
         }
     }
-    echo 'Done.';
+    echo 'Done.', PHP_EOL;
 }
 
 chdir(__DIR__);
