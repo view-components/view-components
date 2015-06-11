@@ -16,7 +16,8 @@ class DbTableProcessingManager extends AbstractProcessingManager
 
     protected function beforeOperations($data)
     {
-        return $data;
+        # Clone query to not modify data source
+        return clone $data;
     }
 
     /**
@@ -25,15 +26,16 @@ class DbTableProcessingManager extends AbstractProcessingManager
      */
     protected function afterOperations($data)
     {
-        $statement = $data->getPdoStatement();
-        $result = $statement->execute($data->bindings);
-        if (!$result) {
-            $errorInfo = $statement->errorInfo();
-            throw new RuntimeException(
-                $errorInfo[1],
-                $errorInfo[2]
-            );
-        }
-        return $statement;
+        return $data->execute();
+    }
+
+    /**
+     * @return Query
+     */
+    public function count()
+    {
+        return $this->applyOperations(
+            $this->beforeOperations($this->dataSource)
+        )->count();
     }
 }

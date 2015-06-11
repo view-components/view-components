@@ -4,13 +4,18 @@ namespace Nayjest\ViewComponents\Data;
 
 use Traversable;
 
-class AbstractDataProvider implements DataProviderInterface
+abstract class AbstractDataProvider implements DataProviderInterface
 {
     /** @var ArrayProcessingManager */
     protected $processingManager;
 
     /** @var OperationsCollection */
     private $operationsCollection;
+
+    public function count()
+    {
+        return $this->processingManager->count();
+    }
 
     /**
      * @return OperationsCollection

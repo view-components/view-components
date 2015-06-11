@@ -3,6 +3,8 @@
 namespace Nayjest\ViewComponents\Data\DbTable;
 
 use PDO;
+use PDOStatement;
+use RuntimeException;
 
 /**
  * Class Query
@@ -19,6 +21,7 @@ class Query
     public $conditions = [];
     public $bindings = [];
     public $order = '';
+    public $select = '*';
 
     /**
      * @param PDO $connection
@@ -30,18 +33,44 @@ class Query
         $this->table = $table;
     }
 
-    public function getSql()
+    protected function getSql()
     {
         $where = (count($this->conditions) === 0)
             ? ''
             : 'WHERE ' . implode(' and ', $this->conditions);
-        $sql = "SELECT * FROM $this->table $where $this->order";
+        $sql = "SELECT $this->select FROM $this->table $where $this->order";
         return $sql;
     }
 
-    public function getPdoStatement()
+    protected function getPdoStatement()
     {
         return $this->connection->prepare($this->getSql());
     }
 
+    /**
+     * @return PDOStatement
+     */
+    public function execute()
+    {
+        $statement = $this->getPdoStatement();
+        $result = $statement->execute($this->bindings);
+        if (!$result) {
+            $errorInfo = $statement->errorInfo();
+            throw new RuntimeException(
+                $errorInfo[1],
+                $errorInfo[2]
+            );
+        }
+        return $statement;
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        $query = clone $this;
+        $query->select = 'count(*)';
+        return (int)$query->execute()->fetch(PDO::FETCH_NUM)[0];
+    }
 }

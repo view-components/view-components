@@ -19,6 +19,8 @@ abstract class AbstractProcessingManager
     /** @var  Traversable */
     protected $processedData;
 
+    abstract public function count();
+
     /**
      * @param mixed $data
      * @return mixed

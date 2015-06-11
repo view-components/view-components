@@ -30,10 +30,15 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
         ];
     }
 
+    protected function makeProvider()
+    {
+        return new ArrayDataProvider($this->getData());
+    }
+
     public function testFiltering()
     {
 
-        $provider = new ArrayDataProvider($this->getData());
+        $provider = $this->makeProvider();
         $provider->operations()->add(
             (new Filter)
                 ->setField('id')
@@ -54,7 +59,7 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
 
     public function testSorting()
     {
-        $provider = new ArrayDataProvider($this->getData());
+        $provider = $this->makeProvider();
         $sorting = new Sorting('id', Sorting::DESC);
         $provider->operations()->set([$sorting]);
         $res = '';
@@ -74,4 +79,9 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
         self::assertEquals('5421', $res);
     }
 
+    public function testCount()
+    {
+        $provider = $this->makeProvider();
+        self::assertCount(5, $provider);
+    }
 }

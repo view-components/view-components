@@ -8,9 +8,16 @@ use Traversable;
 class ArrayProcessingManager extends AbstractProcessingManager
 {
 
+    public function count()
+    {
+        /** @var ArrayIterator $data */
+        $data = $this->getProcessedData();
+        return $data->count();
+    }
+
     /**
      * @param mixed $data
-     * @return Traversable
+     * @return Traversable|ArrayIterator
      */
     protected function afterOperations($data)
     {
