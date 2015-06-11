@@ -74,4 +74,37 @@ class Collection implements CollectionReadInterface
     {
         return $this->isEmpty() ? null : array_values($this->items)[0];
     }
+
+    /**
+     * @draft
+     *
+     * @param string $className
+     * @return array
+     */
+    public function ofType($className)
+    {
+        $res = [];
+        foreach($this->items as $item) {
+            if ($item instanceof $className) {
+                $res[] = $item;
+            }
+        }
+        return $res;
+    }
+
+    /**
+     * @draft
+     *
+     * @param $className
+     * @return null
+     */
+    public function firstOfType($className)
+    {
+        foreach($this->items as $item) {
+            if ($item instanceof $className) {
+                return $item;
+            }
+        }
+        return null;
+    }
 }
