@@ -10,8 +10,6 @@ interface CollectionReadInterface extends IteratorAggregate, Countable
 
     public function isEmpty();
 
-    //public function getSize();
-
     public function has($item);
 
     public function getIterator();
