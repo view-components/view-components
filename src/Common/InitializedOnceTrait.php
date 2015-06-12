@@ -27,4 +27,13 @@ trait InitializedOnceTrait
             );
         }
     }
+
+    protected function checkNotInitialized()
+    {
+        if ($this->initialized === true) {
+            throw new LogicException(
+                'Calling method that isn\'t allowed after initialization.'
+            );
+        }
+    }
 }

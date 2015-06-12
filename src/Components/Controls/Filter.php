@@ -4,39 +4,33 @@ namespace Nayjest\ViewComponents\Components\Controls;
 
 use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
 use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
+use Nayjest\ViewComponents\BaseComponents\Controls\ControlTrait;
 use Nayjest\ViewComponents\BaseComponents\ViewComponentAggregateTrait;
-use Nayjest\ViewComponents\Common\InitializedOnceTrait;
 use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Components\Text;
 use Nayjest\ViewComponents\Data\DataProviderInterface;
 use Nayjest\ViewComponents\Data\Operations\Filter as FilterOperation;
-use Nayjest\ViewComponents\Data\Operations\FilterAggregateTrait;
-use Symfony\Component\Process\Exception\LogicException;
 
 class Filter implements ControlInterface, ContainerInterface
 {
     use ViewComponentAggregateTrait;
-    use InitializedOnceTrait;
-    use FilterAggregateTrait {
-        # Forbid setting value directly to operation
-        FilterAggregateTrait::setValue as private setOperationValue;
-    }
-
-    protected $default;
-
-    protected $inputValue;
-
-    protected $inputKey;
-
-    protected $inputName;
-
-    /** @var Filter */
-    protected $filterOperation;
+    use ControlTrait;
 
     protected $label;
 
-    protected $inputSourceInitialized = false;
+    protected function applyOperations(DataProviderInterface $provider)
+    {
+        $this->filterOperation->setValue(
+            $this->inputValueReader->getValue()
+        );
+        $provider->operations()->add($this->filterOperation);
+    }
 
+    /**
+     * @param string $field
+     * @param string $operator
+     * @param mixed|null $default
+     */
     public function __construct(
         $field,
         $operator = FilterOperation::OPERATOR_EQ,
@@ -44,8 +38,8 @@ class Filter implements ControlInterface, ContainerInterface
     )
     {
         $this->filterOperation = new FilterOperation($field, $operator);
+        $this->makeInputValueReader($field, $default);
         $this->setLabel($field);
-        $this->setDefault($default);
     }
 
     /**
@@ -66,121 +60,14 @@ class Filter implements ControlInterface, ContainerInterface
         return $this;
     }
 
-    /**
-     * @return FilterOperation
-     */
-    protected function getFilterOperation()
-    {
-        return $this->filterOperation;
-    }
-
     public function getInputName()
     {
-        return $this->inputName ?: $this->getInputKey();
+        return $this->inputValueReader->getInputKey();
     }
 
-    /**
-     * @param string $inputName
-     * @return $this
-     */
-    public function setInputName($inputName)
+    public function getInputId()
     {
-        $this->inputName = $inputName;
-        return $this;
-    }
-
-    public function initialize(DataProviderInterface $provider, array $input)
-    {
-        $this->setInitialized();
-        $this->setInputSource($input);
-
-        if ($this->hasValue()) {
-            $this->filterOperation->setValue($this->getValue());
-            $provider->operations()->add($this->filterOperation);
-        }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDefault()
-    {
-        return $this->default;
-    }
-
-    /**
-     * @param $value
-     * @return $this
-     */
-    public function setDefault($value)
-    {
-        $this->default = $value;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getInputKey()
-    {
-        return $this->inputKey ?: $this->filterOperation->getField();
-    }
-
-    /**
-     * @param string $inputKey
-     */
-    public function setInputKey($inputKey)
-    {
-        $this->inputKey = $inputKey;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getInputValue()
-    {
-        $this->checkInitialized();
-        return $this->inputValue;
-    }
-
-    public function getValue()
-    {
-        if (!$this->inputSourceInitialized) {
-            throw new LogicException(
-                'Cant extract value from control before initializing input source'
-            );
-        }
-        return $this->hasInputValue()
-            ? $this->getInputValue()
-            : $this->getDefault();
-    }
-
-    public function hasInputValue()
-    {
-        $this->checkInitialized();
-        return $this->inputValue !== null && $this->inputValue !== '';
-    }
-
-    public function hasDefaultValue()
-    {
-        $default = $this->getDefault();
-        return $default !== null && $default !== '';
-    }
-
-    public function hasValue()
-    {
-        return $this->hasInputValue() || $this->hasDefaultValue();
-    }
-
-    public function setInputSource($input)
-    {
-        $this->inputSourceInitialized = true;
-        if (array_key_exists(
-            $this->getInputKey(),
-            $input
-        )) {
-            $this->inputValue = $input[$this->getInputKey()];
-        }
+        return $this->getInputName() . '_input';
     }
 
     /**
@@ -192,15 +79,15 @@ class Filter implements ControlInterface, ContainerInterface
         $container->setAttribute('data-role','control-container');
         $container->components()->set([
             new Tag('label', [
-                'for' => $this->getInputName() . '_input'
+                'for' => $this->getInputId()
             ], [
                 new Text($this->getLabel())
             ]),
             new Tag('input', [
-                'value' => $this->getValue(),
+                'value' => $this->inputValueReader->getValue(),
                 'type' => 'text',
                 'name' => $this->getInputName(),
-                'id' => $this->getInputName() . '_input'
+                'id' => $this->getInputId()
             ]),
             new Text('&nbsp;')
         ]);
