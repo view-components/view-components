@@ -2,7 +2,7 @@
 namespace Nayjest\ViewComponents\Data\Operations;
 
 
-class Paginate implements OperationInterface
+class PaginateOperation implements OperationInterface
 {
     protected $pageNumber;
 
