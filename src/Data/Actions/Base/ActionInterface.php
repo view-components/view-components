@@ -12,4 +12,7 @@ use Nayjest\ViewComponents\Data\DataProviderInterface;
 interface ActionInterface
 {
     public function apply(DataProviderInterface $provider, array $input);
+
+    public function after(callable $callback);
+    public function before(callable $callback);
 }

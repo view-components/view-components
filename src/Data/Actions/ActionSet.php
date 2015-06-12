@@ -9,10 +9,11 @@
 namespace Nayjest\ViewComponents\Data\Actions;
 
 
+use Nayjest\ViewComponents\Data\Actions\Base\AbstractAction;
 use Nayjest\ViewComponents\Data\Actions\Base\ActionInterface;
 use Nayjest\ViewComponents\Data\DataProviderInterface;
 
-class ActionSet implements ActionInterface
+class ActionSet extends AbstractAction
 {
     /** @var ActionInterface[]  */
     protected $actions;
@@ -25,7 +26,7 @@ class ActionSet implements ActionInterface
         $this->actions = $actions;
     }
 
-    public function apply(DataProviderInterface $provider, array $input)
+    protected function applyInternal(DataProviderInterface $provider, array $input)
     {
         foreach($this->actions as $action)
         {

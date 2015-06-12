@@ -13,7 +13,7 @@ use Nayjest\ViewComponents\Data\Operations\OperationInterface;
  * that provides single operation.
  *
  */
-abstract class AbstractSimpleAction implements ActionInterface
+abstract class AbstractSimpleAction extends AbstractAction
 {
     protected $operation;
 
@@ -31,15 +31,20 @@ abstract class AbstractSimpleAction implements ActionInterface
         $this->operation = $operation;
     }
 
-    public function apply(DataProviderInterface $provider, array $input)
+    protected function applyInternal(DataProviderInterface $provider, array $input)
     {
-        $this->inputValueReader->initialize($input);
         if ($this->inputValueReader->hasValue()) {
             $this->initializeOperation(
                 $this->inputValueReader->getValue()
             );
             $provider->operations()->add($this->operation);
         }
+    }
+
+    public function apply(DataProviderInterface $provider, array $input)
+    {
+        $this->inputValueReader->initialize($input);
+        parent::apply($provider, $input);
     }
 
     public function getInputValueReader()
