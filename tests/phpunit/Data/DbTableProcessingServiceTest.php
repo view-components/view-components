@@ -2,22 +2,23 @@
 
 namespace Nayjest\ViewComponents\Test\Data;
 
-use Nayjest\ViewComponents\Data\ArrayProcessingManager;
 use Nayjest\ViewComponents\Data\DbTable\Query;
-use Nayjest\ViewComponents\Data\DbTableProcessingManager;
 use Nayjest\ViewComponents\Data\OperationsCollection;
-use Nayjest\ViewComponents\Data\ProcessorResolvers\ArrayProcessorResolver;
+use Nayjest\ViewComponents\Data\ProcessingServices\DbTableProcessingService;
 use Nayjest\ViewComponents\Data\ProcessorResolvers\DbTableProcessorResolver;
 use PDO;
 use PHPUnit_Framework_TestCase;
 
-class DbTableProcessingManagerTest extends AbstractProcessingManagerTest
+class DbTableProcessingServiceTest extends AbstractProcessingServiceTest
 {
     public function setUp()
     {
-        $this->data = new Query(\Nayjest\ViewComponents\Demo\db_connection(), 'users');
+        $this->data = new Query(
+            \Nayjest\ViewComponents\Demo\db_connection(),
+            'users'
+        );
         $this->operations = new OperationsCollection();
-        $this->manager = new DbTableProcessingManager(
+        $this->service = new DbTableProcessingService(
             new DbTableProcessorResolver(),
             $this->operations,
             $this->data

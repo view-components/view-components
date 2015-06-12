@@ -1,11 +1,12 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data;
+namespace Nayjest\ViewComponents\Data\ProcessingServices;
 
+use Nayjest\ViewComponents\Data\OperationsCollection;
 use Nayjest\ViewComponents\Data\ProcessorResolvers\ProcessorResolverInterface;
 use Traversable;
 
-abstract class AbstractProcessingManager
+abstract class AbstractProcessingService implements ProcessingServiceInterface
 {
     /** @var OperationsCollection  */
     protected $operations;
@@ -33,6 +34,11 @@ abstract class AbstractProcessingManager
      */
     abstract protected function afterOperations($data);
 
+    /**
+     * @param ProcessorResolverInterface $processorResolver
+     * @param OperationsCollection $operations
+     * @param $dataSource
+     */
     public function __construct(
         ProcessorResolverInterface $processorResolver,
         OperationsCollection $operations,
@@ -42,20 +48,6 @@ abstract class AbstractProcessingManager
         $this->operations = $operations;
         $this->processorResolver = $processorResolver;
         $this->dataSource = $dataSource;
-    }
-
-
-    /**
-     * @param $dataSource
-     * @return $this
-     */
-    public function setDataSource($dataSource)
-    {
-        if ($this->dataSource !== $dataSource) {
-            $this->dataSource = $dataSource;
-            $this->processedData = null;
-        }
-        return $this;
     }
 
     /**

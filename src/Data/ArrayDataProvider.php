@@ -2,6 +2,7 @@
 
 namespace Nayjest\ViewComponents\Data;
 
+use Nayjest\ViewComponents\Data\ProcessingServices\ArrayProcessingService;
 use Nayjest\ViewComponents\Data\ProcessorResolvers\ArrayProcessorResolver;
 use Nayjest\ViewComponents\Data\ProcessorResolvers\ProcessorResolverInterface;
 
@@ -14,7 +15,7 @@ class ArrayDataProvider extends AbstractDataProvider
     )
     {
         $this->operations()->set($operations);
-        $this->processingManager = new ArrayProcessingManager(
+        $this->processingService = new ArrayProcessingService(
             $processorResolver ?: new ArrayProcessorResolver(),
             $this->operations(),
             $src

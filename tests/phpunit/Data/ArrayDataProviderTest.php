@@ -4,7 +4,7 @@ namespace Nayjest\ViewComponents\Test\Data;
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
 use Nayjest\ViewComponents\Data\Operations\Filter;
 use Nayjest\ViewComponents\Data\Operations\Sorting;
-use Nayjest\ViewComponents\Data\ArrayProcessingManager;
+use Nayjest\ViewComponents\Data\ArrayProcessingService;
 use PHPUnit_Framework_TestCase;
 
 class ArrayDataProviderTest extends PHPUnit_Framework_TestCase

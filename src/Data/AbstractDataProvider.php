@@ -2,19 +2,20 @@
 
 namespace Nayjest\ViewComponents\Data;
 
+use Nayjest\ViewComponents\Data\ProcessingServices\ProcessingServiceInterface;
 use Traversable;
 
 abstract class AbstractDataProvider implements DataProviderInterface
 {
-    /** @var ArrayProcessingManager */
-    protected $processingManager;
+    /** @var ProcessingServiceInterface */
+    protected $processingService;
 
     /** @var OperationsCollection */
     private $operationsCollection;
 
     public function count()
     {
-        return $this->processingManager->count();
+        return $this->processingService->count();
     }
 
     /**
@@ -33,6 +34,6 @@ abstract class AbstractDataProvider implements DataProviderInterface
      */
     public function getIterator()
     {
-        return $this->processingManager->getProcessedData();
+        return $this->processingService->getProcessedData();
     }
 }

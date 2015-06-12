@@ -1,9 +1,8 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data;
+namespace Nayjest\ViewComponents\Data\ProcessingServices;
 
 use Nayjest\ViewComponents\Data\DbTable\Query;
-use RuntimeException;
 use Traversable;
 
 /**
@@ -11,7 +10,7 @@ use Traversable;
  *
  * @package Nayjest\ViewComponents\Data
  */
-class DbTableProcessingManager extends AbstractProcessingManager
+class DbTableProcessingService extends AbstractProcessingService
 {
 
     protected function beforeOperations($data)

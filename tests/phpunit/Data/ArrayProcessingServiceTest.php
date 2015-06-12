@@ -2,18 +2,18 @@
 
 namespace Nayjest\ViewComponents\Test\Data;
 
-use Nayjest\ViewComponents\Data\ArrayProcessingManager;
 use Nayjest\ViewComponents\Data\OperationsCollection;
+use Nayjest\ViewComponents\Data\ProcessingServices\ArrayProcessingService;
 use Nayjest\ViewComponents\Data\ProcessorResolvers\ArrayProcessorResolver;
 use PHPUnit_Framework_TestCase;
 
-class ArrayProcessingManagerTest extends AbstractProcessingManagerTest
+class ArrayProcessingServiceTest extends AbstractProcessingServiceTest
 {
     public function setUp()
     {
         $this->data = include FIXTURES_DIR . '/users.php';
         $this->operations = new OperationsCollection();
-        $this->manager = new ArrayProcessingManager(
+        $this->service = new ArrayProcessingService(
             new ArrayProcessorResolver(),
             $this->operations,
             $this->data

@@ -1,11 +1,11 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data;
+namespace Nayjest\ViewComponents\Data\ProcessingServices;
 
 use ArrayIterator;
 use Traversable;
 
-class ArrayProcessingManager extends AbstractProcessingManager
+class ArrayProcessingService extends AbstractProcessingService
 {
 
     public function count()

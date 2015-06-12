@@ -3,15 +3,15 @@
 namespace Nayjest\ViewComponents\Test\Data;
 
 use Exception;
-use Nayjest\ViewComponents\Data\ArrayProcessingManager;
 use Nayjest\ViewComponents\Data\Operations\Filter;
 use Nayjest\ViewComponents\Data\OperationsCollection;
+use Nayjest\ViewComponents\Data\ProcessingServices\ArrayProcessingService;
 use PHPUnit_Framework_TestCase;
 
-abstract class AbstractProcessingManagerTest extends PHPUnit_Framework_TestCase
+abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase
 {
-    /** @var  ArrayProcessingManager */
-    protected $manager;
+    /** @var  ArrayProcessingService */
+    protected $service;
     protected $data;
     /** @var  OperationsCollection */
     protected $operations;
@@ -40,7 +40,7 @@ abstract class AbstractProcessingManagerTest extends PHPUnit_Framework_TestCase
     {
         self::assertEquals(
             $this->totalCount,
-            $this->manager->count()
+            $this->service->count()
         );
     }
 
@@ -48,8 +48,8 @@ abstract class AbstractProcessingManagerTest extends PHPUnit_Framework_TestCase
     {
         $op = new Filter('id','<=', 3);
         $this->operations->add($op);
-        self::assertEquals(3, $this->manager->count());
+        self::assertEquals(3, $this->service->count());
         $this->operations->remove($op);
-        self::assertEquals($this->totalCount, $this->manager->count());
+        self::assertEquals($this->totalCount, $this->service->count());
     }
 }
