@@ -102,7 +102,7 @@ class InputValueReader
      */
     protected function isValueEmpty($value)
     {
-        return $value === null or $value === '';
+        return $value === null || $value === '';
     }
 
 }
