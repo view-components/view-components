@@ -18,7 +18,11 @@ class Filter implements OperationInterface
 
     protected $operator;
 
-
+    /**
+     * @param string|null $field
+     * @param string|null $operator
+     * @param mixed $value
+     */
     public function __construct(
         $field = null,
         $operator = self::OPERATOR_EQ,
