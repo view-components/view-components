@@ -14,5 +14,9 @@ class ArrayProcessorResolver extends ProcessorResolver
             'Nayjest\ViewComponents\Data\Operations\FilterOperation',
             'Nayjest\ViewComponents\Data\Processors\PhpArray\FilterProcessor'
         );
+        $this->register(
+            'Nayjest\ViewComponents\Data\Operations\PaginateOperation',
+            'Nayjest\ViewComponents\Data\Processors\PhpArray\PaginateProcessor'
+        );
     }
 }
