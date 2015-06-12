@@ -4,7 +4,7 @@ namespace Nayjest\ViewComponents\Data\Actions;
 
 use Nayjest\ViewComponents\Common\InputValueReader;
 use Nayjest\ViewComponents\Data\Actions\Base\AbstractSimpleAction;
-use Nayjest\ViewComponents\Data\Operations\FilterOperation as FilterOperation;
+use Nayjest\ViewComponents\Data\Operations\FilterOperation;
 
 /**
  * Class FilterAction
