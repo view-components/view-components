@@ -1,16 +1,19 @@
 <?php
 namespace Nayjest\ViewComponents\BaseComponents\Controls;
 
-use Nayjest\ViewComponents\Data\DataProviderInterface;
+use Nayjest\ViewComponents\Data\Actions\Base\ActionInterface;
 use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
 
 /**
  * Interface ControlInterface
  *
- * Controls can accept input and affect on data provider.
+ * Controls can provide actions that accepts input and affects on data provider.
  *
  */
 interface ControlInterface extends ComponentInterface
 {
-    public function initialize(DataProviderInterface $provider, array $input);
+    /**
+     * @return ActionInterface
+     */
+    public function getAction();
 }

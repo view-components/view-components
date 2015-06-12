@@ -8,38 +8,27 @@ use Nayjest\ViewComponents\BaseComponents\Controls\ControlTrait;
 use Nayjest\ViewComponents\BaseComponents\ViewComponentAggregateTrait;
 use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Components\Text;
-use Nayjest\ViewComponents\Data\DataProviderInterface;
-use Nayjest\ViewComponents\Data\Operations\Filter as FilterOperation;
+use Nayjest\ViewComponents\Data\Actions\FilterAction;
 
-class Filter implements ControlInterface, ContainerInterface
+class FilterControl implements ControlInterface, ContainerInterface
 {
     use ViewComponentAggregateTrait;
     use ControlTrait;
 
     protected $label;
 
-    protected function applyOperations(DataProviderInterface $provider)
-    {
-        $this->filterOperation->setValue(
-            $this->inputValueReader->getValue()
-        );
-        $provider->operations()->add($this->filterOperation);
-    }
 
     /**
-     * @param string $field
-     * @param string $operator
-     * @param mixed|null $default
+     * @param FilterAction $action
+     * @param string|null $label
      */
     public function __construct(
-        $field,
-        $operator = FilterOperation::OPERATOR_EQ,
-        $default = null
+        FilterAction $action,
+        $label = null
     )
     {
-        $this->filterOperation = new FilterOperation($field, $operator);
-        $this->makeInputValueReader($field, $default);
-        $this->setLabel($field);
+        $this->action = $action;
+        $this->setLabel($label);
     }
 
     /**
@@ -51,18 +40,23 @@ class Filter implements ControlInterface, ContainerInterface
     }
 
     /**
-     * @param string $label
+     * @param string|null $label
      * @return $this
      */
-    public function setLabel($label)
+    protected function setLabel($label)
     {
+        if ($label === null) {
+            $label = ucfirst(
+                $this->action->getInputValueReader()->getInputKey()
+            );
+        }
         $this->label = $label;
         return $this;
     }
 
     public function getInputName()
     {
-        return $this->inputValueReader->getInputKey();
+        return $this->action->getInputValueReader()->getInputKey();
     }
 
     public function getInputId()
@@ -83,8 +77,9 @@ class Filter implements ControlInterface, ContainerInterface
             ], [
                 new Text($this->getLabel())
             ]),
+            new Text('&nbsp;'),
             new Tag('input', [
-                'value' => $this->inputValueReader->getValue(),
+                'value' => $this->action->getInputValueReader()->getValue(),
                 'type' => 'text',
                 'name' => $this->getInputName(),
                 'id' => $this->getInputId()

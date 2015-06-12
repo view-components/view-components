@@ -1,28 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 08.06.2015
- * Time: 22:20
- */
-
 namespace Nayjest\ViewComponents\BaseComponents;
 
-
 use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
+use Nayjest\ViewComponents\BaseComponents\Controls\ControlTrait;
 use Nayjest\ViewComponents\Components\Repeater;
+use Nayjest\ViewComponents\Data\Actions\ActionSet;
+use Nayjest\ViewComponents\Data\Actions\Base\ActionInterface;
 use Nayjest\ViewComponents\Data\DataProviderInterface;
 use Nayjest\ViewComponents\Data\RepeaterInterface;
 use Nayjest\ViewComponents\Rendering\ViewInterface;
 
-
 abstract class AbstractControlledList implements
     ViewInterface,
-    ContainerInterface
+    ContainerInterface,
+    ControlInterface
 {
-    const GROUP_CONTROLS = 'controls';
-
     use ContainerTrait;
+    use ControlTrait;
 
     /** @var ControlInterface[] */
     protected $controls;
@@ -33,21 +27,53 @@ abstract class AbstractControlledList implements
 
     abstract protected function createComponentsTree();
 
+    /**
+     * @param ComponentInterface $itemView
+     * @param ComponentInterface[]|ControlInterface[] $controls
+     * @param DataProviderInterface $provider
+     */
     public function __construct(
         ComponentInterface $itemView,
-        array $controls = []
-    ) {
+        array $controls = [],
+        DataProviderInterface $provider
+    )
+    {
         $this->itemView = $itemView;
         $this->controls = $controls;
+        $this->provider = $provider;
+        $this->createActionSet();
         $this->createRepeater();
         $this->createComponentsTree();
+
     }
 
     protected function createRepeater()
     {
         $this->repeater = new Repeater(
-            null,
+            $this->provider,
             [$this->itemView]
+        );
+    }
+
+    /**
+     * @return ActionInterface[]
+     */
+    private function extractChildActions()
+    {
+
+        $res = [];
+        foreach ($this->controls as $control) {
+            if ($control instanceof ControlInterface) {
+                $res[] = $control->getAction();
+            }
+        }
+        return $res;
+    }
+
+    protected function createActionSet()
+    {
+        $this->action = new ActionSet(
+            $this->extractChildActions()
         );
     }
 
@@ -75,18 +101,8 @@ abstract class AbstractControlledList implements
         return $this->itemView;
     }
 
-    protected function setDataProvider(DataProviderInterface $provider)
+    public function applyInput(array $input)
     {
-        $this->provider = $provider;
-        $this->repeater->setIterator($provider);
-    }
-
-    public function initialize(DataProviderInterface $provider, array $input)
-    {
-        $this->setDataProvider($provider);
-        foreach($this->controls as $control)
-        {
-            $control->initialize($this->provider, $input);
-        }
+        $this->getAction()->apply($this->provider, $input);
     }
 }

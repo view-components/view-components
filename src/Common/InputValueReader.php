@@ -11,7 +11,7 @@ class InputValueReader
 
     protected $inputKey;
 
-    public function __construct($inputKey, $defaultValue)
+    public function __construct($inputKey, $defaultValue = null)
     {
         $this->inputKey = $inputKey;
         $this->defaultValue = $defaultValue;

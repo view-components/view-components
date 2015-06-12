@@ -7,7 +7,7 @@ use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
 use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
 use Nayjest\ViewComponents\BaseComponents\Html\AbstractTag;
 use Nayjest\ViewComponents\BaseComponents\Html\TagInterface;
-use Nayjest\ViewComponents\Components\Controls\Filter;
+use Nayjest\ViewComponents\Components\Controls\FilterControl;
 use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Resources\Resources;
 use Nayjest\ViewComponents\Styling\CustomStyling;
@@ -57,7 +57,7 @@ class BootstrapStyling extends CustomStyling
                         'tagCallback'
                     ]
                 ],
-            'Nayjest\ViewComponents\Components\Controls\Filter' => [
+            'Nayjest\ViewComponents\Components\Controls\FilterControl' => [
                 [
                     $this,
                     'filterControlCallback'
@@ -97,7 +97,7 @@ class BootstrapStyling extends CustomStyling
         }
     }
 
-    protected function filterControlCallback(Filter $component)
+    protected function filterControlCallback(FilterControl $component)
     {
         $view = $component->getView();
         if ($view instanceof Tag) {
