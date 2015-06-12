@@ -23,7 +23,7 @@ class GroupedCollection extends Collection
     public function add($item, $prepend = false, $group = null)
     {
         $this->addToGroup($item, $prepend, $group);
-        return parent::add($item, $prepend, $group);
+        return parent::add($item, $prepend);
     }
 
     public function remove($item)
