@@ -1,11 +1,13 @@
 <?php
 namespace Nayjest\ViewComponents\Demo;
 
+
 use Nayjest\ViewComponents\Components\Container;
 use Nayjest\ViewComponents\Components\ControlledList;
-use Nayjest\ViewComponents\Components\Controls\Filter;
+use Nayjest\ViewComponents\Components\Controls\FilterControl;
 use Nayjest\ViewComponents\Components\Debug\SymfonyVarDump;
 use Nayjest\ViewComponents\Components\Html\Tag;
+use Nayjest\ViewComponents\Data\Actions\FilterAction;
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
 use Nayjest\ViewComponents\Data\DbTableDataProvider;
 use Nayjest\ViewComponents\Data\Operations\Sorting;
@@ -142,7 +144,9 @@ class Controller
 
         $view = new Container([
             new Tag('form', null, [
-                $filter = new Filter('name'),
+                new FilterControl(
+                    $action = new FilterAction('name')
+                ),
                 new Tag('button', ['type' => 'submit'], [
                     new Text('Filter')
                 ]),
@@ -152,7 +156,7 @@ class Controller
                 $provider,
                 [new PersonView])
         ]);
-        $filter->initialize($provider, $_GET);
+        $action->apply($provider, $_GET);
         return $this->renderMenu() . $view->render();
     }
 
@@ -164,12 +168,16 @@ class Controller
     public function demo5()
     {
         $provider = $this->getDataProvider();
-        $list = new ControlledList(new SymfonyVarDump, [
-            new Filter('name'),
-            new Filter('role')
-        ]);
-
-        $list->initialize($provider, $_GET);
+        $list = new ControlledList(
+            new SymfonyVarDump,
+            [
+                new FilterControl(new FilterAction('name')),
+                new FilterControl(new FilterAction('role'))
+            ]
+            ,
+            $provider
+        );
+        $list->applyInput($_GET);
         return $this->renderMenu() . $list->render();
     }
 
@@ -182,10 +190,10 @@ class Controller
     {
         $provider = $this->getDataProvider();
         $list = new ControlledList(new SymfonyVarDump, [
-            new Filter('name'),
-            new Filter('role')
-        ]);
-        $list->initialize($provider, $_GET);
+            new FilterControl(new FilterAction('name')),
+            new FilterControl(new FilterAction('role'))
+        ], $provider);
+        $list->applyInput($_GET);
 
         $container = new Container([$list]);
         $resources = new Resources(new AliasRegistry(),new AliasRegistry(), new IncludedResourcesRegistry());
