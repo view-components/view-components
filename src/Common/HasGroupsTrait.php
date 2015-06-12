@@ -5,6 +5,11 @@ namespace Nayjest\ViewComponents\Common;
 use Nayjest\ViewComponents\Exceptions\GroupIsNotEmptyException;
 use Nayjest\ViewComponents\Exceptions\NonExistingGroupException;
 
+/**
+ * Class HasGroupsTrait
+ *
+ * @property-read array $items;
+ */
 trait HasGroupsTrait
 {
 
