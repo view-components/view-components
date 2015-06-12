@@ -28,7 +28,10 @@ class ProcessorResolver implements ProcessorResolverInterface
     {
         $operationClass = get_class($operation);
         if (!array_key_exists($operationClass, $this->processors)) {
-            throw new ProcessorNotFoundException();
+            throw new ProcessorNotFoundException(
+                $operationClass,
+                get_class($this)
+            );
         }
         $processorClass = $this->processors[$operationClass];
         return new $processorClass();
