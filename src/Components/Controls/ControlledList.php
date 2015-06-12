@@ -1,9 +1,9 @@
 <?php
 
-namespace Nayjest\ViewComponents\Components;
+namespace Nayjest\ViewComponents\Components\Controls;
 
-use Nayjest\ViewComponents\BaseComponents\AbstractControlledList;
 use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
+use Nayjest\ViewComponents\BaseComponents\Controls\ControlledList\AbstractControlledList;
 use Nayjest\ViewComponents\Components\Html\Div;
 use Nayjest\ViewComponents\Components\Html\Form;
 use Nayjest\ViewComponents\Components\Html\Input;

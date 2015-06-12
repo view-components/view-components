@@ -3,7 +3,7 @@ namespace Nayjest\ViewComponents\Demo;
 
 
 use Nayjest\ViewComponents\Components\Container;
-use Nayjest\ViewComponents\Components\ControlledList;
+use Nayjest\ViewComponents\Components\Controls\ControlledList;
 use Nayjest\ViewComponents\Components\Controls\FilterControl;
 use Nayjest\ViewComponents\Components\Debug\SymfonyVarDump;
 use Nayjest\ViewComponents\Components\Html\Tag;
@@ -173,10 +173,8 @@ class Controller
                 new FilterControl(new FilterAction('name')),
                 new FilterControl(new FilterAction('role'))
             ]
-            ,
-            $provider
         );
-        $list->applyInput($_GET);
+        $list->getAction()->apply($provider, $_GET);
         return $this->renderMenu() . $list->render();
     }
 
@@ -191,8 +189,8 @@ class Controller
         $list = new ControlledList(new SymfonyVarDump, [
             new FilterControl(new FilterAction('name')),
             new FilterControl(new FilterAction('role'))
-        ], $provider);
-        $list->applyInput($_GET);
+        ]);
+        $list->getAction()->apply($provider, $_GET);
 
         $container = new Container([$list]);
         $resources = new Resources(new AliasRegistry(),new AliasRegistry(), new IncludedResourcesRegistry());

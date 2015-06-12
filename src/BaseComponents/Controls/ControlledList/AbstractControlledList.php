@@ -1,17 +1,17 @@
 <?php
-namespace Nayjest\ViewComponents\BaseComponents;
+namespace Nayjest\ViewComponents\BaseComponents\Controls\ControlledList;
 
+use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
+use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
+use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
 use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
 use Nayjest\ViewComponents\BaseComponents\Controls\ControlTrait;
 use Nayjest\ViewComponents\Components\Repeater;
 use Nayjest\ViewComponents\Data\Actions\ActionSet;
 use Nayjest\ViewComponents\Data\Actions\Base\ActionInterface;
-use Nayjest\ViewComponents\Data\DataProviderInterface;
 use Nayjest\ViewComponents\Data\RepeaterInterface;
-use Nayjest\ViewComponents\Rendering\ViewInterface;
 
 abstract class AbstractControlledList implements
-    ViewInterface,
     ContainerInterface,
     ControlInterface
 {
@@ -21,7 +21,7 @@ abstract class AbstractControlledList implements
     /** @var ControlInterface[] */
     protected $controls;
     protected $itemView;
-    protected $provider;
+
     /** @var  RepeaterInterface|ComponentInterface */
     protected $repeater;
 
@@ -30,19 +30,17 @@ abstract class AbstractControlledList implements
     /**
      * @param ComponentInterface $itemView
      * @param ComponentInterface[]|ControlInterface[] $controls
-     * @param DataProviderInterface $provider
      */
     public function __construct(
         ComponentInterface $itemView,
-        array $controls = [],
-        DataProviderInterface $provider
+        array $controls = []
     )
     {
         $this->itemView = $itemView;
         $this->controls = $controls;
-        $this->provider = $provider;
-        $this->createActionSet();
+
         $this->createRepeater();
+        $this->createActionSet();
         $this->createComponentsTree();
 
     }
@@ -50,7 +48,7 @@ abstract class AbstractControlledList implements
     protected function createRepeater()
     {
         $this->repeater = new Repeater(
-            $this->provider,
+            null,
             [$this->itemView]
         );
     }
@@ -75,6 +73,9 @@ abstract class AbstractControlledList implements
         $this->action = new ActionSet(
             $this->extractChildActions()
         );
+        $this->action->after(
+            new ControlledListHandler($this->repeater)
+        );
     }
 
     /**
@@ -86,7 +87,7 @@ abstract class AbstractControlledList implements
     }
 
     /**
-     * @return array|Controls\ControlInterface[]
+     * @return array|ControlInterface[]
      */
     public function getControls()
     {
@@ -99,10 +100,5 @@ abstract class AbstractControlledList implements
     public function getItemView()
     {
         return $this->itemView;
-    }
-
-    public function applyInput(array $input)
-    {
-        $this->getAction()->apply($this->provider, $input);
     }
 }
