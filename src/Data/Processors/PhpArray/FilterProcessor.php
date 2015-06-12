@@ -2,7 +2,7 @@
 
 namespace Nayjest\ViewComponents\Data\Processors\PhpArray;
 
-use Nayjest\ViewComponents\Data\Operations\Filter;
+use Nayjest\ViewComponents\Data\Operations\FilterOperation;
 use Nayjest\ViewComponents\Data\Operations\OperationInterface;
 use InvalidArgumentException;
 use Nayjest\ViewComponents\Data\Processors\ProcessorInterface;
@@ -12,7 +12,7 @@ class FilterProcessor implements ProcessorInterface
 {
     /**
      * @param $src
-     * @param OperationInterface|Filter $operation
+     * @param OperationInterface|FilterOperation $operation
      * @return mixed
      *
      * @todo Cache propertyAccessor
@@ -43,17 +43,17 @@ class FilterProcessor implements ProcessorInterface
     protected function checkValue($value, $expected, $operator)
     {
         switch ($operator) {
-            case Filter::OPERATOR_EQ:
+            case FilterOperation::OPERATOR_EQ:
                 return $value == $expected;
-            case Filter::OPERATOR_GT:
+            case FilterOperation::OPERATOR_GT:
                 return $value > $expected;
-            case Filter::OPERATOR_GTE:
+            case FilterOperation::OPERATOR_GTE:
                 return $value >= $expected;
-            case Filter::OPERATOR_LT:
+            case FilterOperation::OPERATOR_LT:
                 return $value < $expected;
-            case Filter::OPERATOR_LTE:
+            case FilterOperation::OPERATOR_LTE:
                 return $value <= $expected;
-            case Filter::OPERATOR_NOT_EQ:
+            case FilterOperation::OPERATOR_NOT_EQ:
                 return $value != $expected;
             default:
                 throw new InvalidArgumentException(

@@ -1,7 +1,7 @@
 <?php
 namespace Nayjest\ViewComponents\Data\Operations;
 
-class Filter implements OperationInterface
+class FilterOperation implements OperationInterface
 {
 
     const OPERATOR_LIKE = 'like';

@@ -10,7 +10,7 @@ use Nayjest\ViewComponents\Components\Html\Tag;
 use Nayjest\ViewComponents\Data\Actions\FilterAction;
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
 use Nayjest\ViewComponents\Data\DbTableDataProvider;
-use Nayjest\ViewComponents\Data\Operations\Sorting;
+use Nayjest\ViewComponents\Data\Operations\SortOperation;
 use Nayjest\ViewComponents\HtmlBuilder;
 use Nayjest\ViewComponents\Components\Repeater;
 use Nayjest\ViewComponents\Components\Text;
@@ -19,7 +19,6 @@ use Nayjest\ViewComponents\Resources\AliasRegistry;
 use Nayjest\ViewComponents\Resources\IncludedResourcesRegistry;
 use Nayjest\ViewComponents\Resources\Resources;
 use Nayjest\ViewComponents\Styling\Bootstrap\BootstrapStyling;
-use PDO;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -126,7 +125,7 @@ class Controller
             new Repeater(
                 new ArrayDataProvider(
                     $data,
-                    [new Sorting('name')]
+                    [new SortOperation('name')]
                 ),
                 [new PersonView])
         ]);
@@ -140,7 +139,7 @@ class Controller
      */
     public function demo4()
     {
-        $provider = $this->getDataProvider([Sorting::asc('name')]);
+        $provider = $this->getDataProvider([SortOperation::asc('name')]);
 
         $view = new Container([
             new Tag('form', null, [

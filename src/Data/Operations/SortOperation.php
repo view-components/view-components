@@ -2,7 +2,7 @@
 namespace Nayjest\ViewComponents\Data\Operations;
 
 
-class Sorting implements OperationInterface
+class SortOperation implements OperationInterface
 {
     const ASC = 'asc';
     const DESC = 'desc';

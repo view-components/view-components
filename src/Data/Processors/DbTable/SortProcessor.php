@@ -4,14 +4,14 @@ namespace Nayjest\ViewComponents\Data\Processors\DbTable;
 
 use Nayjest\ViewComponents\Data\DbTable\Query;
 use Nayjest\ViewComponents\Data\Operations\OperationInterface;
-use Nayjest\ViewComponents\Data\Operations\Sorting;
+use Nayjest\ViewComponents\Data\Operations\SortOperation;
 use Nayjest\ViewComponents\Data\Processors\ProcessorInterface;
 
-class SortingProcessor implements ProcessorInterface
+class SortProcessor implements ProcessorInterface
 {
     /**
      * @param Query $src
-     * @param OperationInterface|Sorting $operation
+     * @param OperationInterface|SortOperation $operation
      * @return mixed
      */
     public function process($src, OperationInterface $operation)

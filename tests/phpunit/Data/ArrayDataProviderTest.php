@@ -2,8 +2,8 @@
 namespace Nayjest\ViewComponents\Test\Data;
 
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
-use Nayjest\ViewComponents\Data\Operations\Filter;
-use Nayjest\ViewComponents\Data\Operations\Sorting;
+use Nayjest\ViewComponents\Data\Operations\FilterOperation;
+use Nayjest\ViewComponents\Data\Operations\SortOperation;
 use Nayjest\ViewComponents\Data\ArrayProcessingService;
 use PHPUnit_Framework_TestCase;
 
@@ -40,13 +40,13 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
 
         $provider = $this->makeProvider();
         $provider->operations()->add(
-            (new Filter)
+            (new FilterOperation)
                 ->setField('id')
-                ->setOperator(Filter::OPERATOR_GT)
+                ->setOperator(FilterOperation::OPERATOR_GT)
                 ->setValue(3)
         );
         $provider->operations()->add(
-            new Filter('id', '<', 5)
+            new FilterOperation('id', '<', 5)
         );
 
         $iterator = $provider->getIterator();
@@ -60,7 +60,7 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
     public function testSorting()
     {
         $provider = $this->makeProvider();
-        $sorting = new Sorting('id', Sorting::DESC);
+        $sorting = new SortOperation('id', SortOperation::DESC);
         $provider->operations()->set([$sorting]);
         $res = '';
         foreach ($provider as $row) {
@@ -70,7 +70,7 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
 
         // Test changing operations
         $provider->operations()->add(
-            new Filter('id', Filter::OPERATOR_NOT_EQ, 3)
+            new FilterOperation('id', FilterOperation::OPERATOR_NOT_EQ, 3)
         );
         $res = '';
         foreach ($provider as $row) {
