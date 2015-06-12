@@ -29,4 +29,9 @@ class PaginateAction extends AbstractSimpleAction
             new PaginateOperation(1, $pageSize)
         );
     }
+
+    public function getOperation()
+    {
+        return $this->operation;
+    }
 }

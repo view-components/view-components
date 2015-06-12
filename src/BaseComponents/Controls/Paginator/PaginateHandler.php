@@ -31,7 +31,7 @@ class PaginateHandler extends RequiredHandler
         array $input
     )
     {
-        $this->paginateOperation = $action->operation;
+        $this->paginateOperation = $action->getOperation();
         $this->dataProvider = $dataProvider;
         return parent::__invoke($action, $dataProvider, $input);
     }
