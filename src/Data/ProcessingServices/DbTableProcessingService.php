@@ -29,7 +29,7 @@ class DbTableProcessingService extends AbstractProcessingService
     }
 
     /**
-     * @return Query
+     * @return int
      */
     public function count()
     {
