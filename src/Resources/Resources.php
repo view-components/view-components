@@ -38,7 +38,7 @@ class Resources
     public function js($name)
     {
         $src = $this->jsRegistry->get($name, $name);
-        if (!$this->included->iIncluded($src)) {
+        if (!$this->included->isIncluded($src)) {
             $this->included->markAsIncluded($src);
             $type = 'text/javascript';
             return new Script(compact('src', 'type'));
@@ -55,7 +55,7 @@ class Resources
     public function css($name, array $attributes = [])
     {
         $href = $this->cssRegistry->get($name, $name);
-        if (!$this->included->iIncluded($href)) {
+        if (!$this->included->isIncluded($href)) {
             $this->included->markAsIncluded($href);
             return new Tag('link', array_merge([
                 'type' => 'text/css',

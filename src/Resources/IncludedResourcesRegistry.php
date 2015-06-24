@@ -6,7 +6,7 @@ class IncludedResourcesRegistry
 {
     protected $included = [];
 
-    public function iIncluded($src)
+    public function isIncluded($src)
     {
         return in_array($src, $this->included, true);
     }
