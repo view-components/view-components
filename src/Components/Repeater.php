@@ -22,17 +22,20 @@ class Repeater implements
     /**
      * @param array|Traversable $iterator
      * @param \Nayjest\ViewComponents\Structure\ChildNodeInterface[] $components
-     * @param callable $callback receives Repeater as argument1 and row of data as argument 2.
+     * @param callable|null $callback receives Repeater as argument1 and row of data as argument 2.
      */
     public function __construct(
         $iterator = null,
         array $components = [],
-        callable $callback = [
-            'Nayjest\ViewComponents\Components\Repeater',
-            'defaultCallback'
-        ]
+        callable $callback = null
     )
     {
+        if ($callback === null) {
+            $callback = [
+                'Nayjest\ViewComponents\Components\Repeater',
+                'defaultCallback'
+            ];
+        }
         $this->setComponents($components);
         $this->setIterator($iterator);
         $this->setCallback($callback);
