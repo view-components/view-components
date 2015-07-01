@@ -27,7 +27,7 @@ class Repeater implements
     public function __construct(
         $iterator = null,
         array $components = [],
-        $callback = [
+        callable $callback = [
             'Nayjest\ViewComponents\Components\Repeater',
             'defaultCallback'
         ]
