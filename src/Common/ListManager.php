@@ -1,7 +1,7 @@
 <?php
 namespace Nayjest\ViewComponents\Common;
 
-use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface2;
+use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
 use Nayjest\ViewComponents\Data\DataProviderInterface;
 use Nayjest\ViewComponents\Data\RepeaterInterface;
@@ -15,7 +15,7 @@ class ListManager
 {
     /**
      * @param RepeaterInterface $repeater
-     * @param ControlInterface2[] $controls
+     * @param ControlInterface[] $controls
      */
     public function manage(RepeaterInterface $repeater, array $controls)
     {
