@@ -13,7 +13,7 @@ $I->see('John');
 $I->seeNumberOfElements('div[data-id]', count(Fixtures::get('users_array')));
 
 $I->wantTo('filter users by name="Bruce"');
-$I->fillField('[name="name"]', 'Bruce');
+$I->fillField('[name="name_filter"]', 'Bruce');
 $I->click('Filter');
 $I->see('Bruce');
 $I->seeNumberOfElements('div[data-id]', 1);
