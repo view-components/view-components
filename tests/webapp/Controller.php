@@ -1,7 +1,7 @@
 <?php
 namespace Nayjest\ViewComponents\Demo;
 
-use Nayjest\ViewComponents\Common\InputValueResolver;
+use Nayjest\ViewComponents\Common\InputValueReader;
 use Nayjest\ViewComponents\Common\ListManager;
 use Nayjest\ViewComponents\Components\Container;
 use Nayjest\ViewComponents\Components\Controls\FilterControl;
@@ -145,12 +145,12 @@ class Controller
         $filter1 = new FilterControl(
                     'name',
                     FilterOperation::OPERATOR_EQ,
-                    new InputValueResolver('name_filter', $_GET)
+                    new InputValueReader('name_filter', $_GET)
         );
         $filter2 = new FilterControl(
             'role',
             FilterOperation::OPERATOR_EQ,
-            new InputValueResolver('role_filter', $_GET)
+            new InputValueReader('role_filter', $_GET)
         );
 
         $view = new Container([
@@ -186,12 +186,12 @@ class Controller
         $filter1 = new FilterControl(
             'name',
             FilterOperation::OPERATOR_EQ,
-            new InputValueResolver('name_filter', $_GET)
+            new InputValueReader('name_filter', $_GET)
         );
         $filter2 = new FilterControl(
             'role',
             FilterOperation::OPERATOR_EQ,
-            new InputValueResolver('role_filter', $_GET)
+            new InputValueReader('role_filter', $_GET)
         );
 
         $view = new Container([
@@ -231,12 +231,12 @@ class Controller
                 new FilterControl(
                     'name',
                     FilterOperation::OPERATOR_EQ,
-                    new InputValueResolver('name_filter', $_GET)
+                    new InputValueReader('name_filter', $_GET)
                 ),
                 new FilterControl(
                     'role',
                     FilterOperation::OPERATOR_EQ,
-                    new InputValueResolver('role_filter', $_GET)
+                    new InputValueReader('role_filter', $_GET)
                 )
             ]
         );
@@ -261,12 +261,12 @@ class Controller
                 new FilterControl(
                     'name',
                     FilterOperation::OPERATOR_EQ,
-                    new InputValueResolver('name_filter', $_GET)
+                    new InputValueReader('name_filter', $_GET)
                 ),
                 new FilterControl(
                     'role',
                     FilterOperation::OPERATOR_EQ,
-                    new InputValueResolver('role_filter', $_GET)
+                    new InputValueReader('role_filter', $_GET)
                 )
             ]
         );

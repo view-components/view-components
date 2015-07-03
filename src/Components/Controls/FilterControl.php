@@ -5,7 +5,7 @@ namespace Nayjest\ViewComponents\Components\Controls;
 use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
 use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
 use Nayjest\ViewComponents\BaseComponents\ViewComponentAggregateTrait;
-use Nayjest\ViewComponents\Common\InputValueResolver;
+use Nayjest\ViewComponents\Common\InputValueReader;
 use Nayjest\ViewComponents\Components\Controls\FilterControl\FilterControlView;
 use Nayjest\ViewComponents\Data\Operations\DummyOperation;
 use Nayjest\ViewComponents\Data\Operations\FilterOperation;
@@ -21,18 +21,18 @@ class FilterControl implements ControlInterface, ContainerInterface
     /** @var string */
     protected $operator;
 
-    /** @var InputValueResolver */
+    /** @var InputValueReader */
     protected $input;
 
     /**
      * @param string $field
      * @param string $operator
-     * @param InputValueResolver $input
+     * @param InputValueReader $input
      */
     public function __construct(
         $field,
         $operator = FilterOperation::OPERATOR_EQ,
-        InputValueResolver $input = null
+        InputValueReader $input = null
     )
     {
         $this->field = $field;
