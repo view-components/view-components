@@ -1,15 +1,16 @@
 <?php
 namespace Nayjest\ViewComponents\Demo;
 
-
+use Nayjest\ViewComponents\Common\InputValueResolver;
+use Nayjest\ViewComponents\Common\ListManager;
 use Nayjest\ViewComponents\Components\Container;
-use Nayjest\ViewComponents\Components\Controls\ControlledList;
 use Nayjest\ViewComponents\Components\Controls\FilterControl;
+use Nayjest\ViewComponents\Components\ManagedList;
 use Nayjest\ViewComponents\Components\Debug\SymfonyVarDump;
 use Nayjest\ViewComponents\Components\Html\Tag;
-use Nayjest\ViewComponents\Data\Actions\FilterAction;
 use Nayjest\ViewComponents\Data\ArrayDataProvider;
 use Nayjest\ViewComponents\Data\DbTableDataProvider;
+use Nayjest\ViewComponents\Data\Operations\FilterOperation;
 use Nayjest\ViewComponents\Data\Operations\SortOperation;
 use Nayjest\ViewComponents\HtmlBuilder;
 use Nayjest\ViewComponents\Components\Repeater;
@@ -141,11 +142,21 @@ class Controller
     {
         $provider = $this->getDataProvider([SortOperation::asc('name')]);
 
+        $filter1 = new FilterControl(
+                    'name',
+                    FilterOperation::OPERATOR_EQ,
+                    new InputValueResolver('name_filter', $_GET)
+        );
+        $filter2 = new FilterControl(
+            'role',
+            FilterOperation::OPERATOR_EQ,
+            new InputValueResolver('role_filter', $_GET)
+        );
+
         $view = new Container([
             new Tag('form', null, [
-                new FilterControl(
-                    $action = new FilterAction('name')
-                ),
+                $filter1,
+                $filter2,
                 new Tag('button', ['type' => 'submit'], [
                     new Text('Filter')
                 ]),
@@ -155,42 +166,110 @@ class Controller
                 $provider,
                 [new PersonView])
         ]);
-        $action->apply($provider, $_GET);
+
+        $provider->operations()->add($filter1->getOperation());
+        $provider->operations()->add($filter2->getOperation());
+
+        return $this->renderMenu() . $view->render();
+    }
+
+
+    /**
+     * Filtering controls + ListManager
+     *
+     * @return string
+     */
+    public function demo4_1()
+    {
+        $provider = $this->getDataProvider([SortOperation::asc('name')]);
+
+        $filter1 = new FilterControl(
+            'name',
+            FilterOperation::OPERATOR_EQ,
+            new InputValueResolver('name_filter', $_GET)
+        );
+        $filter2 = new FilterControl(
+            'role',
+            FilterOperation::OPERATOR_EQ,
+            new InputValueResolver('role_filter', $_GET)
+        );
+
+        $view = new Container([
+            new Tag('form', null, [
+                $filter1,
+                $filter2,
+                new Tag('button', ['type' => 'submit'], [
+                    new Text('Filter')
+                ]),
+            ]),
+            new Text('<h1>Users List</h1>'),
+            $repeater = new Repeater(
+                $provider,
+                [new PersonView])
+        ]);
+
+        $manager = new ListManager();
+        $manager->manage($repeater, [$filter1,$filter2]);
+
         return $this->renderMenu() . $view->render();
     }
 
     /**
-     * ControlledList
+     * Filtering controls in managed list
      *
      * @return string
      */
-    public function demo5()
+    public function demo4_2()
     {
         $provider = $this->getDataProvider();
-        $list = new ControlledList(
-            new SymfonyVarDump,
+        $list = new ManagedList(
+            new Repeater(
+                $provider,
+                [new SymfonyVarDump]
+            ),
             [
-                new FilterControl(new FilterAction('name')),
-                new FilterControl(new FilterAction('role'))
+                new FilterControl(
+                    'name',
+                    FilterOperation::OPERATOR_EQ,
+                    new InputValueResolver('name_filter', $_GET)
+                ),
+                new FilterControl(
+                    'role',
+                    FilterOperation::OPERATOR_EQ,
+                    new InputValueResolver('role_filter', $_GET)
+                )
             ]
         );
-        $list->getAction()->apply($provider, $_GET);
         return $this->renderMenu() . $list->render();
     }
 
+
     /**
-     * ControlledList with styling
+     * Filtering controls in managed list + styling
      *
      * @return string
      */
-    public function demo6()
+    public function demo4_3()
     {
         $provider = $this->getDataProvider();
-        $list = new ControlledList(new SymfonyVarDump, [
-            new FilterControl(new FilterAction('name')),
-            new FilterControl(new FilterAction('role'))
-        ]);
-        $list->getAction()->apply($provider, $_GET);
+        $list = new ManagedList(
+            new Repeater(
+                $provider,
+                [new SymfonyVarDump]
+            ),
+            [
+                new FilterControl(
+                    'name',
+                    FilterOperation::OPERATOR_EQ,
+                    new InputValueResolver('name_filter', $_GET)
+                ),
+                new FilterControl(
+                    'role',
+                    FilterOperation::OPERATOR_EQ,
+                    new InputValueResolver('role_filter', $_GET)
+                )
+            ]
+        );
 
         $container = new Container([$list]);
         $resources = new Resources(new AliasRegistry(),new AliasRegistry(), new IncludedResourcesRegistry());
@@ -199,5 +278,4 @@ class Controller
 
         return $this->renderMenu() . $container->render();
     }
-
 }

@@ -4,88 +4,61 @@ namespace Nayjest\ViewComponents\Components\Controls;
 
 use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
 use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
-use Nayjest\ViewComponents\BaseComponents\Controls\ControlTrait;
 use Nayjest\ViewComponents\BaseComponents\ViewComponentAggregateTrait;
-use Nayjest\ViewComponents\Components\Html\Tag;
-use Nayjest\ViewComponents\Components\Text;
-use Nayjest\ViewComponents\Data\Actions\FilterAction;
+use Nayjest\ViewComponents\Common\InputValueResolver;
+use Nayjest\ViewComponents\Components\Controls\FilterControl\FilterControlView;
+use Nayjest\ViewComponents\Data\Operations\DummyOperation;
+use Nayjest\ViewComponents\Data\Operations\FilterOperation;
+use Stringy\StaticStringy;
 
 class FilterControl implements ControlInterface, ContainerInterface
 {
     use ViewComponentAggregateTrait;
-    use ControlTrait;
 
-    protected $label;
+    /** @var string */
+    protected $field;
 
+    /** @var string */
+    protected $operator;
+
+    /** @var InputValueResolver */
+    protected $input;
 
     /**
-     * @param FilterAction $action
-     * @param string|null $label
+     * @param string $field
+     * @param string $operator
+     * @param InputValueResolver $input
      */
     public function __construct(
-        FilterAction $action,
-        $label = null
+        $field,
+        $operator = FilterOperation::OPERATOR_EQ,
+        InputValueResolver $input = null
     )
     {
-        $this->action = $action;
-        $this->setLabel($label);
+        $this->field = $field;
+        $this->operator = $operator;
+        $this->input = $input;
     }
 
-    /**
-     * @return string
-     */
-    public function getLabel()
+    public function getOperation()
     {
-        return $this->label;
-    }
-
-    /**
-     * @param string|null $label
-     * @return $this
-     */
-    protected function setLabel($label)
-    {
-        if ($label === null) {
-            $label = ucfirst(
-                $this->action->getInputValueReader()->getInputKey()
-            );
+        if (!$this->input->hasValue()) {
+            return new DummyOperation();
         }
-        $this->label = $label;
-        return $this;
+        return new FilterOperation(
+            $this->field,
+            $this->operator,
+            $this->input->getValue()
+        );
     }
 
-    public function getInputName()
-    {
-        return $this->action->getInputValueReader()->getInputKey();
-    }
-
-    public function getInputId()
-    {
-        return $this->getInputName() . '_input';
-    }
-
-    /**
-     * @return \Nayjest\ViewComponents\Rendering\ViewInterface
-     */
     protected function makeDefaultView()
     {
-        $container = new Tag('span');
-        $container->setAttribute('data-role','control-container');
-        $container->components()->set([
-            new Tag('label', [
-                'for' => $this->getInputId()
-            ], [
-                new Text($this->getLabel())
-            ]),
-            new Text('&nbsp;'),
-            new Tag('input', [
-                'value' => $this->action->getInputValueReader()->getValue(),
-                'type' => 'text',
-                'name' => $this->getInputName(),
-                'id' => $this->getInputId()
-            ]),
-            new Text('&nbsp;')
-        ]);
-        return $container;
+        return new FilterControlView(
+            $this->input->getKey(),
+            $this->input->getValue(),
+            StaticStringy::humanize($this->field)
+        );
     }
+
 }

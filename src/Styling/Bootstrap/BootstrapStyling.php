@@ -26,6 +26,10 @@ class BootstrapStyling extends CustomStyling
         parent::__construct($this->getCallbacks());
     }
 
+    /**
+     * @param ComponentInterface|ContainerInterface $component
+     * @param ContainerInterface $resourcesContainer
+     */
     public function apply(ComponentInterface $component, ContainerInterface $resourcesContainer = null)
     {
         $resourcesContainer = $resourcesContainer ?: $component;

@@ -1,19 +1,12 @@
 <?php
 namespace Nayjest\ViewComponents\BaseComponents\Controls;
 
-use Nayjest\ViewComponents\Data\Actions\Base\ActionInterface;
-use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
+use Nayjest\ViewComponents\Data\Operations\OperationInterface;
 
-/**
- * Interface ControlInterface
- *
- * Controls can provide actions that accepts input and affects on data provider.
- *
- */
-interface ControlInterface extends ComponentInterface
+interface ControlInterface
 {
     /**
-     * @return ActionInterface
+     * @return OperationInterface
      */
-    public function getAction();
+    public function getOperation();
 }
