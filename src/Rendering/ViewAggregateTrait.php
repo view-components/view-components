@@ -27,7 +27,7 @@ trait ViewAggregateTrait
         return ($view = $this->getView()) ? $view->render() : '';
     }
 
-    protected function useDefaultViewIfNull()
+    protected final function useDefaultViewIfNull()
     {
         if ($this->view === null) {
             $this->setView($this->makeDefaultView());
