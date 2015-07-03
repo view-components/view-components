@@ -43,6 +43,9 @@ class BootstrapStyling extends CustomStyling
     protected function addResources(ContainerInterface $container)
     {
         $container->components()->add(
+            $this->resources->js('jquery')
+        );
+        $container->components()->add(
             $this->resources->css($this->options->cssFile)
         );
         $container->components()->add(

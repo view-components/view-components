@@ -272,7 +272,9 @@ class Controller
         );
 
         $container = new Container([$list]);
-        $resources = new Resources(new AliasRegistry(),new AliasRegistry(), new IncludedResourcesRegistry());
+        $resources = new Resources(new AliasRegistry([
+            'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
+        ]),new AliasRegistry(), new IncludedResourcesRegistry());
         $styling = new BootstrapStyling($resources);
         $styling->apply($container);
 
