@@ -7,6 +7,7 @@ class InputValueReader
 
     private $inputValue;
     private $key;
+    private $default;
 
     public function __construct(
         $key,
