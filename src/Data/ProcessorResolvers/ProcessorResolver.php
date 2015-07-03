@@ -12,7 +12,10 @@ use Nayjest\ViewComponents\Exceptions\ProcessorNotFoundException;
  */
 class ProcessorResolver implements ProcessorResolverInterface
 {
-    protected $processors = [];
+    protected $processors = [
+        'Nayjest\ViewComponents\Data\Operations\DummyOperation' =>
+        '\Nayjest\ViewComponents\Data\Processors\DummyProcessor'
+    ];
 
     public function register($operation, $processor)
     {
