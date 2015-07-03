@@ -27,7 +27,7 @@ class Controller
 {
     protected function getUsersData()
     {
-        return include(dirname(__DIR__).'/fixtures/users.php');
+        return include(dirname(__DIR__) . '/fixtures/users.php');
     }
 
     protected function getDataProvider($operations = [])
@@ -143,9 +143,9 @@ class Controller
         $provider = $this->getDataProvider([SortOperation::asc('name')]);
 
         $filter1 = new FilterControl(
-                    'name',
-                    FilterOperation::OPERATOR_EQ,
-                    new InputValueReader('name_filter', $_GET)
+            'name',
+            FilterOperation::OPERATOR_EQ,
+            new InputValueReader('name_filter', $_GET)
         );
         $filter2 = new FilterControl(
             'role',
@@ -209,7 +209,7 @@ class Controller
         ]);
 
         $manager = new ListManager();
-        $manager->manage($repeater, [$filter1,$filter2]);
+        $manager->manage($repeater, [$filter1, $filter2]);
 
         return $this->renderMenu() . $view->render();
     }
@@ -274,7 +274,7 @@ class Controller
         $container = new Container([$list]);
         $resources = new Resources(new AliasRegistry([
             'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
-        ]),new AliasRegistry(), new IncludedResourcesRegistry());
+        ]), new AliasRegistry(), new IncludedResourcesRegistry());
         $styling = new BootstrapStyling($resources);
         $styling->apply($container);
 
