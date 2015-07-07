@@ -5,6 +5,7 @@ use Presentation\Framework\Common\InputOption;
 use Presentation\Framework\Common\ListManager;
 use Presentation\Framework\Components\Container;
 use Presentation\Framework\Components\Controls\FilterControl;
+use Presentation\Framework\Components\Controls\SortingSelectControl;
 use Presentation\Framework\Components\ManagedList;
 use Presentation\Framework\Components\Debug\SymfonyVarDump;
 use Presentation\Framework\Components\Html\Tag;
@@ -210,6 +211,17 @@ class Controller extends AbstractController
                     'role',
                     FilterOperation::OPERATOR_EQ,
                     new InputOption('role_filter', $_GET)
+                ),
+                new SortingSelectControl(
+                    [
+                        null => 'None',
+                        'id' => 'ID',
+                        'name' => 'Name',
+                        'role' => 'Role',
+                        'birthday' => 'Birthday',
+                    ],
+                    new InputOption('sort_field', $_GET),
+                    new InputOption('sort_direction', $_GET)
                 )
             ]
         );
@@ -239,6 +251,17 @@ class Controller extends AbstractController
                     'role',
                     FilterOperation::OPERATOR_EQ,
                     new InputOption('role_filter', $_GET)
+                ),
+                new SortingSelectControl(
+                    [
+                        null => 'None',
+                        'id' => 'ID',
+                        'name' => 'Name',
+                        'role' => 'Role',
+                        'birthday' => 'Birthday',
+                    ],
+                    new InputOption('sort_field', $_GET),
+                    new InputOption('sort_direction', $_GET)
                 )
             ]
         );
