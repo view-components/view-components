@@ -6,7 +6,7 @@ use Presentation\Framework\BaseComponents\ContainerInterface;
 use Presentation\Framework\BaseComponents\Controls\ControlInterface;
 use Presentation\Framework\BaseComponents\ViewComponentAggregateTrait;
 use Presentation\Framework\Common\InputOption;
-use Presentation\Framework\Components\Controls\FilterControl\FilterControlView;
+use Presentation\Framework\Components\Controls\View\FilterControlView;
 use Presentation\Framework\Data\Operations\DummyOperation;
 use Presentation\Framework\Data\Operations\FilterOperation;
 use Stringy\StaticStringy;

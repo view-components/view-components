@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Components\Controls\FilterControl;
+namespace Presentation\Framework\Components\Controls\View;
 
 use Presentation\Framework\Components\Html\Tag;
 use Presentation\Framework\Components\Text;
