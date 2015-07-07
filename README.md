@@ -5,7 +5,7 @@ PHP Presentation Framework
 [![Build Status](https://travis-ci.org/presentation-framework/presentation-framework.svg?branch=master)](https://travis-ci.org/presentation-framework/presentation-framework)
 [![Code Coverage](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/?branch=master)
 
-**Current status: pre-alpha**
+**Project status: pre-alpha**
 
 ## Requirements
 
