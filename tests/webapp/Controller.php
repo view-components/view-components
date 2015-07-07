@@ -20,10 +20,8 @@ use Presentation\Framework\Resources\AliasRegistry;
 use Presentation\Framework\Resources\IncludedResourcesRegistry;
 use Presentation\Framework\Resources\Resources;
 use Presentation\Framework\Styling\Bootstrap\BootstrapStyling;
-use ReflectionClass;
-use ReflectionMethod;
 
-class Controller
+class Controller extends AbstractController
 {
     protected function getUsersData()
     {
@@ -42,31 +40,6 @@ class Controller
                 $this->getUsersData(),
                 $operations
             );
-    }
-
-    /**
-     * @return \ReflectionMethod[]
-     */
-    protected function getActions()
-    {
-        $class = new ReflectionClass($this);
-        return $class->getMethods(ReflectionMethod::IS_PUBLIC);
-
-    }
-
-    protected function render($tpl, array $data = [])
-    {
-        extract($data);
-        ob_start();
-        $resourcesDir = __DIR__ . '/resources';
-        include "$resourcesDir/views/$tpl.php";
-        return ob_get_clean();
-    }
-
-
-    protected function renderMenu()
-    {
-        return $this->render('menu/menu');
     }
 
     public function index()
@@ -242,7 +215,6 @@ class Controller
         );
         return $this->renderMenu() . $list->render();
     }
-
 
     /**
      * Filtering controls in managed list + styling
