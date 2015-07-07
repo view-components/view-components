@@ -1,7 +1,7 @@
 <?php
 namespace Presentation\Framework\Demo;
 
-use Presentation\Framework\Common\InputValueReader;
+use Presentation\Framework\Common\InputOption;
 use Presentation\Framework\Common\ListManager;
 use Presentation\Framework\Components\Container;
 use Presentation\Framework\Components\Controls\FilterControl;

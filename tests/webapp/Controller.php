@@ -1,7 +1,7 @@
 <?php
 namespace Presentation\Framework\Demo;
 
-use Presentation\Framework\Common\InputValueReader;
+use Presentation\Framework\Common\InputOption;
 use Presentation\Framework\Common\ListManager;
 use Presentation\Framework\Components\Container;
 use Presentation\Framework\Components\Controls\FilterControl;
@@ -118,12 +118,12 @@ class Controller extends AbstractController
         $filter1 = new FilterControl(
             'name',
             FilterOperation::OPERATOR_EQ,
-            new InputValueReader('name_filter', $_GET)
+            new InputOption('name_filter', $_GET)
         );
         $filter2 = new FilterControl(
             'role',
             FilterOperation::OPERATOR_EQ,
-            new InputValueReader('role_filter', $_GET)
+            new InputOption('role_filter', $_GET)
         );
 
         $view = new Container([
@@ -159,12 +159,12 @@ class Controller extends AbstractController
         $filter1 = new FilterControl(
             'name',
             FilterOperation::OPERATOR_EQ,
-            new InputValueReader('name_filter', $_GET)
+            new InputOption('name_filter', $_GET)
         );
         $filter2 = new FilterControl(
             'role',
             FilterOperation::OPERATOR_EQ,
-            new InputValueReader('role_filter', $_GET)
+            new InputOption('role_filter', $_GET)
         );
 
         $view = new Container([
@@ -204,12 +204,12 @@ class Controller extends AbstractController
                 new FilterControl(
                     'name',
                     FilterOperation::OPERATOR_EQ,
-                    new InputValueReader('name_filter', $_GET)
+                    new InputOption('name_filter', $_GET)
                 ),
                 new FilterControl(
                     'role',
                     FilterOperation::OPERATOR_EQ,
-                    new InputValueReader('role_filter', $_GET)
+                    new InputOption('role_filter', $_GET)
                 )
             ]
         );
@@ -233,12 +233,12 @@ class Controller extends AbstractController
                 new FilterControl(
                     'name',
                     FilterOperation::OPERATOR_EQ,
-                    new InputValueReader('name_filter', $_GET)
+                    new InputOption('name_filter', $_GET)
                 ),
                 new FilterControl(
                     'role',
                     FilterOperation::OPERATOR_EQ,
-                    new InputValueReader('role_filter', $_GET)
+                    new InputOption('role_filter', $_GET)
                 )
             ]
         );

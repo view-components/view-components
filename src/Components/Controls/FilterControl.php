@@ -5,7 +5,7 @@ namespace Presentation\Framework\Components\Controls;
 use Presentation\Framework\BaseComponents\ContainerInterface;
 use Presentation\Framework\BaseComponents\Controls\ControlInterface;
 use Presentation\Framework\BaseComponents\ViewComponentAggregateTrait;
-use Presentation\Framework\Common\InputValueReader;
+use Presentation\Framework\Common\InputOption;
 use Presentation\Framework\Components\Controls\FilterControl\FilterControlView;
 use Presentation\Framework\Data\Operations\DummyOperation;
 use Presentation\Framework\Data\Operations\FilterOperation;
@@ -21,18 +21,18 @@ class FilterControl implements ControlInterface, ContainerInterface
     /** @var string */
     protected $operator;
 
-    /** @var InputValueReader */
+    /** @var InputOption */
     protected $input;
 
     /**
      * @param string $field
      * @param string $operator
-     * @param InputValueReader $input
+     * @param InputOption $input
      */
     public function __construct(
         $field,
         $operator = FilterOperation::OPERATOR_EQ,
-        InputValueReader $input = null
+        InputOption $input
     )
     {
         $this->field = $field;

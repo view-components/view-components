@@ -2,7 +2,7 @@
 
 namespace Presentation\Framework\Common;
 
-class InputValueReader
+class InputOption
 {
 
     private $inputValue;
@@ -26,6 +26,16 @@ class InputValueReader
         return $this->hasInputValue()
             ? $this->inputValue
             : $this->default;
+    }
+
+    public function getDefaultValue()
+    {
+        return $this->default;
+    }
+
+    public function getInputValue()
+    {
+        return $this->inputValue;
     }
 
     /**
