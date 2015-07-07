@@ -1,8 +1,9 @@
 PHP Presentation Framework
 =====
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/?branch=master)
-[![Build Status](https://travis-ci.org/Nayjest/ViewComponents.svg?branch=master)](https://travis-ci.org/Nayjest/ViewComponents)
-[![Code Coverage](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/?branch=master)
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/?branch=master)
+[![Build Status](https://travis-ci.org/presentation-framework/presentation-framework.svg?branch=master)](https://travis-ci.org/presentation-framework/presentation-framework)
+[![Code Coverage](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/?branch=master)
 
 **Current status: pre-alpha**
 
