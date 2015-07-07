@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\ViewComponents\Demo;
+namespace Presentation\Framework\Demo;
 
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;

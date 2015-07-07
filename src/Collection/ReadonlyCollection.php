@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\ViewComponents\Collection;
+namespace Presentation\Framework\Collection;
 
 class ReadonlyCollection implements CollectionReadInterface
 {

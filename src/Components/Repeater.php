@@ -1,10 +1,10 @@
 <?php
-namespace Nayjest\ViewComponents\Components;
+namespace Presentation\Framework\Components;
 
-use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
-use Nayjest\ViewComponents\Data\RepeaterInterface;
-use Nayjest\ViewComponents\Data\RepeaterTrait;
+use Presentation\Framework\BaseComponents\ContainerInterface;
+use Presentation\Framework\BaseComponents\ContainerTrait;
+use Presentation\Framework\Data\RepeaterInterface;
+use Presentation\Framework\Data\RepeaterTrait;
 use Traversable;
 
 class Repeater implements
@@ -21,7 +21,7 @@ class Repeater implements
 
     /**
      * @param array|Traversable $iterator
-     * @param \Nayjest\ViewComponents\Structure\ChildNodeInterface[] $components
+     * @param \Presentation\Framework\Structure\ChildNodeInterface[] $components
      * @param callable|null $callback receives Repeater as argument1 and row of data as argument 2.
      */
     public function __construct(
@@ -32,7 +32,7 @@ class Repeater implements
     {
         if ($callback === null) {
             $callback = [
-                'Nayjest\ViewComponents\Components\Repeater',
+                'Presentation\Framework\Components\Repeater',
                 'defaultCallback'
             ];
         }

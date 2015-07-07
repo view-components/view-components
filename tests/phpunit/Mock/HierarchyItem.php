@@ -1,10 +1,10 @@
 <?php
-namespace Nayjest\ViewComponents\Test\Mock;
+namespace Presentation\Framework\Test\Mock;
 
-use Nayjest\ViewComponents\Structure\ChildNodeInterface;
-use Nayjest\ViewComponents\Structure\ChildNodeTrait;
-use Nayjest\ViewComponents\Structure\ParentNodeInterface;
-use Nayjest\ViewComponents\Structure\ParentNodeTrait;
+use Presentation\Framework\Structure\ChildNodeInterface;
+use Presentation\Framework\Structure\ChildNodeTrait;
+use Presentation\Framework\Structure\ParentNodeInterface;
+use Presentation\Framework\Structure\ParentNodeTrait;
 
 class HierarchyItem implements ParentNodeInterface, ChildNodeInterface
 {

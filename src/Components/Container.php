@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\Components;
+namespace Presentation\Framework\Components;
 
-use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\DecoratedContainerTrait;
+use Presentation\Framework\BaseComponents\ContainerInterface;
+use Presentation\Framework\BaseComponents\DecoratedContainerTrait;
 
 class Container implements ContainerInterface
 {

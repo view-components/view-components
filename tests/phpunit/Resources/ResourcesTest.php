@@ -1,9 +1,9 @@
 <?php
-namespace Nayjest\ViewComponents\Test\Resources;
+namespace Presentation\Framework\Test\Resources;
 
-use Nayjest\ViewComponents\Resources\AliasRegistry;
-use Nayjest\ViewComponents\Resources\IncludedResourcesRegistry;
-use Nayjest\ViewComponents\Resources\Resources;
+use Presentation\Framework\Resources\AliasRegistry;
+use Presentation\Framework\Resources\IncludedResourcesRegistry;
+use Presentation\Framework\Resources\Resources;
 use PHPUnit_Framework_TestCase;
 
 class ResourcesTest extends PHPUnit_Framework_TestCase

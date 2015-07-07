@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\ViewComponents\Common;
+namespace Presentation\Framework\Common;
 
 class InputValueReader
 {

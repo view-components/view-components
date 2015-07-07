@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\Demo\Components;
+namespace Presentation\Framework\Demo\Components;
 
-use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
-use Nayjest\ViewComponents\BaseComponents\ComponentTrait;
+use Presentation\Framework\BaseComponents\ComponentInterface;
+use Presentation\Framework\BaseComponents\ComponentTrait;
 
 class Person
 {

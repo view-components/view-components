@@ -1,8 +1,10 @@
-PHP View Components
+PHP Presentation Framework
 =====
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/?branch=master)
 [![Build Status](https://travis-ci.org/Nayjest/ViewComponents.svg?branch=master)](https://travis-ci.org/Nayjest/ViewComponents)
 [![Code Coverage](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Nayjest/ViewComponents/?branch=master)
+
+**Current status: pre-alpha**
 
 ## Requirements
 
@@ -15,7 +17,7 @@ The recommended way of installing the component is through [Composer](https://ge
 Run following command:
 
 ```bash
-composer require nayjest/view-components
+composer require presentation/framework
 ```
 ## Contributing
 

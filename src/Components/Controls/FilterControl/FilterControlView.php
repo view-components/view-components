@@ -1,9 +1,9 @@
 <?php
 
-namespace Nayjest\ViewComponents\Components\Controls\FilterControl;
+namespace Presentation\Framework\Components\Controls\FilterControl;
 
-use Nayjest\ViewComponents\Components\Html\Tag;
-use Nayjest\ViewComponents\Components\Text;
+use Presentation\Framework\Components\Html\Tag;
+use Presentation\Framework\Components\Text;
 
 /**
  * Class FilterControlView

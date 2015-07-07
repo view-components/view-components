@@ -1,9 +1,9 @@
 <?php
 
-namespace Nayjest\ViewComponents\Structure;
+namespace Presentation\Framework\Structure;
 
 use Nayjest\Manipulator\Manipulator;
-use Nayjest\ViewComponents\Data\DataAcceptorInterface;
+use Presentation\Framework\Data\DataAcceptorInterface;
 use Traversable;
 
 trait TreeNodesCollectionTrait

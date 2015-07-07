@@ -1,8 +1,8 @@
 <?php
 
-namespace Nayjest\ViewComponents\Collection;
+namespace Presentation\Framework\Collection;
 
-use Nayjest\ViewComponents\Common\HasGroupsTrait;
+use Presentation\Framework\Common\HasGroupsTrait;
 
 class GroupedCollection extends Collection
 {

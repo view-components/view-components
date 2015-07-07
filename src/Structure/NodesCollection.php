@@ -1,9 +1,9 @@
 <?php
 
-namespace Nayjest\ViewComponents\Structure;
+namespace Presentation\Framework\Structure;
 
 use InvalidArgumentException;
-use Nayjest\ViewComponents\Collection\GroupedCollection;
+use Presentation\Framework\Collection\GroupedCollection;
 
 /**
  * Class NodesCollection

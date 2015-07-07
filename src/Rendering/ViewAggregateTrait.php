@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\Rendering;
+namespace Presentation\Framework\Rendering;
 
 trait ViewAggregateTrait
 {

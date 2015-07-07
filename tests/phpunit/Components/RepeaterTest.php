@@ -1,9 +1,9 @@
 <?php
-namespace Nayjest\ViewComponents\Test\Components;
+namespace Presentation\Framework\Test\Components;
 
-use Nayjest\ViewComponents\Components\Container;
-use Nayjest\ViewComponents\Components\Text;
-use Nayjest\ViewComponents\Components\Repeater;
+use Presentation\Framework\Components\Container;
+use Presentation\Framework\Components\Text;
+use Presentation\Framework\Components\Repeater;
 use PHPUnit_Framework_TestCase;
 
 class RepeaterTest extends PHPUnit_Framework_TestCase

@@ -1,12 +1,12 @@
 <?php
-namespace Nayjest\ViewComponents\Test\Components;
+namespace Presentation\Framework\Test\Components;
 
-use Nayjest\ViewComponents\Components\Container;
-use Nayjest\ViewComponents\Components\Text;
-use Nayjest\ViewComponents\Rendering\ViewInterface;
-use Nayjest\ViewComponents\Test\Mock\ChildClass;
-use Nayjest\ViewComponents\Test\Mock\HierarchyItem;
-use Nayjest\ViewComponents\Test\Mock\ParentClass;
+use Presentation\Framework\Components\Container;
+use Presentation\Framework\Components\Text;
+use Presentation\Framework\Rendering\ViewInterface;
+use Presentation\Framework\Test\Mock\ChildClass;
+use Presentation\Framework\Test\Mock\HierarchyItem;
+use Presentation\Framework\Test\Mock\ParentClass;
 use PHPUnit_Framework_TestCase;
 
 class ContainerTest extends PHPUnit_Framework_TestCase

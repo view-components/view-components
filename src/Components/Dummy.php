@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\Components;
+namespace Presentation\Framework\Components;
 
-use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
-use Nayjest\ViewComponents\BaseComponents\ComponentTrait;
+use Presentation\Framework\BaseComponents\ComponentInterface;
+use Presentation\Framework\BaseComponents\ComponentTrait;
 
 class Dummy implements ComponentInterface
 {

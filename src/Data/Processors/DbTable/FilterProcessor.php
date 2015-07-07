@@ -1,11 +1,11 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data\Processors\DbTable;
+namespace Presentation\Framework\Data\Processors\DbTable;
 
-use Nayjest\ViewComponents\Data\DbTable\Query;
-use Nayjest\ViewComponents\Data\Operations\FilterOperation;
-use Nayjest\ViewComponents\Data\Operations\OperationInterface;
-use Nayjest\ViewComponents\Data\Processors\ProcessorInterface;
+use Presentation\Framework\Data\DbTable\Query;
+use Presentation\Framework\Data\Operations\FilterOperation;
+use Presentation\Framework\Data\Operations\OperationInterface;
+use Presentation\Framework\Data\Processors\ProcessorInterface;
 
 class FilterProcessor implements ProcessorInterface
 {

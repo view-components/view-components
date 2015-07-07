@@ -1,10 +1,10 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data;
+namespace Presentation\Framework\Data;
 
-use Nayjest\ViewComponents\Data\ProcessingServices\ArrayProcessingService;
-use Nayjest\ViewComponents\Data\ProcessorResolvers\ArrayProcessorResolver;
-use Nayjest\ViewComponents\Data\ProcessorResolvers\ProcessorResolverInterface;
+use Presentation\Framework\Data\ProcessingServices\ArrayProcessingService;
+use Presentation\Framework\Data\ProcessorResolvers\ArrayProcessorResolver;
+use Presentation\Framework\Data\ProcessorResolvers\ProcessorResolverInterface;
 
 class ArrayDataProvider extends AbstractDataProvider
 {

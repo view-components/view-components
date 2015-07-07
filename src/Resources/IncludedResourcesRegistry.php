@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\ViewComponents\Resources;
+namespace Presentation\Framework\Resources;
 
 class IncludedResourcesRegistry
 {

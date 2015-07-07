@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\Test\Components;
+namespace Presentation\Framework\Test\Components;
 
-use Nayjest\ViewComponents\Components\Text;
+use Presentation\Framework\Components\Text;
 use PHPUnit_Framework_TestCase;
 
 class TextTest extends PHPUnit_Framework_TestCase

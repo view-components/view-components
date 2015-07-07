@@ -1,12 +1,12 @@
 <?php
-namespace Nayjest\ViewComponents\Components\Google;
+namespace Presentation\Framework\Components\Google;
 
-use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
-use Nayjest\ViewComponents\Components\Html\Script;
-use Nayjest\ViewComponents\Components\Html\Tag;
-use Nayjest\ViewComponents\Components\Text;
-use Nayjest\ViewComponents\Resources\Resources;
+use Presentation\Framework\BaseComponents\ContainerInterface;
+use Presentation\Framework\BaseComponents\ContainerTrait;
+use Presentation\Framework\Components\Html\Script;
+use Presentation\Framework\Components\Html\Tag;
+use Presentation\Framework\Components\Text;
+use Presentation\Framework\Resources\Resources;
 
 
 class GeoChart implements ContainerInterface

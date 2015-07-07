@@ -1,10 +1,10 @@
 <?php
-namespace Nayjest\ViewComponents;
+namespace Presentation\Framework;
 
-use Nayjest\ViewComponents\Components\Html\A;
-use Nayjest\ViewComponents\Components\Html\Tag;
-use Nayjest\ViewComponents\Components\Text;
-use Nayjest\ViewComponents\Resources\Resources;
+use Presentation\Framework\Components\Html\A;
+use Presentation\Framework\Components\Html\Tag;
+use Presentation\Framework\Components\Text;
+use Presentation\Framework\Resources\Resources;
 
 class HtmlBuilder
 {

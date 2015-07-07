@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\ViewComponents\Exceptions;
+namespace Presentation\Framework\Exceptions;
 
 use Exception;
 use RuntimeException;

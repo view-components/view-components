@@ -1,14 +1,14 @@
 <?php
 
-namespace Nayjest\ViewComponents\Components\Controls;
+namespace Presentation\Framework\Components\Controls;
 
-use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
-use Nayjest\ViewComponents\BaseComponents\ViewComponentAggregateTrait;
-use Nayjest\ViewComponents\Common\InputValueReader;
-use Nayjest\ViewComponents\Components\Controls\FilterControl\FilterControlView;
-use Nayjest\ViewComponents\Data\Operations\DummyOperation;
-use Nayjest\ViewComponents\Data\Operations\FilterOperation;
+use Presentation\Framework\BaseComponents\ContainerInterface;
+use Presentation\Framework\BaseComponents\Controls\ControlInterface;
+use Presentation\Framework\BaseComponents\ViewComponentAggregateTrait;
+use Presentation\Framework\Common\InputValueReader;
+use Presentation\Framework\Components\Controls\FilterControl\FilterControlView;
+use Presentation\Framework\Data\Operations\DummyOperation;
+use Presentation\Framework\Data\Operations\FilterOperation;
 use Stringy\StaticStringy;
 
 class FilterControl implements ControlInterface, ContainerInterface

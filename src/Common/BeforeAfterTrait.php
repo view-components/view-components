@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\Common;
+namespace Presentation\Framework\Common;
 
 trait BeforeAfterTrait
 {

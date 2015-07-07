@@ -1,11 +1,11 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data;
+namespace Presentation\Framework\Data;
 
-use Nayjest\ViewComponents\Collection\Collection;
-use Nayjest\ViewComponents\Common\ChangesWatcherInterface;
-use Nayjest\ViewComponents\Common\ChangesWatcherTrait;
-use Nayjest\ViewComponents\Common\StateHashInterface;
+use Presentation\Framework\Collection\Collection;
+use Presentation\Framework\Common\ChangesWatcherInterface;
+use Presentation\Framework\Common\ChangesWatcherTrait;
+use Presentation\Framework\Common\StateHashInterface;
 
 class OperationsCollection extends Collection implements
     ChangesWatcherInterface,

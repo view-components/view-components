@@ -1,8 +1,8 @@
 <?php
 
-namespace Nayjest\ViewComponents\Structure;
+namespace Presentation\Framework\Structure;
 
-use Nayjest\ViewComponents\Collection\ReadonlyGroupedCollection as BaseCollection;
+use Presentation\Framework\Collection\ReadonlyGroupedCollection as BaseCollection;
 
 class ReadonlyCollection extends BaseCollection
 {

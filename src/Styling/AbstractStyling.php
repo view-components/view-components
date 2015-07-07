@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\Styling;
+namespace Presentation\Framework\Styling;
 
-use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
-use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
+use Presentation\Framework\BaseComponents\ComponentInterface;
+use Presentation\Framework\BaseComponents\ContainerInterface;
 
 abstract class AbstractStyling
 {

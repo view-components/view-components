@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\Test\Mock;
+namespace Presentation\Framework\Test\Mock;
 
-use Nayjest\ViewComponents\Structure\ChildNodeInterface;
-use Nayjest\ViewComponents\Structure\ChildNodeTrait;
+use Presentation\Framework\Structure\ChildNodeInterface;
+use Presentation\Framework\Structure\ChildNodeTrait;
 
 class ChildClass implements ChildNodeInterface
 {

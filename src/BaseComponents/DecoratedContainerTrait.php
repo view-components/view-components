@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\BaseComponents;
+namespace Presentation\Framework\BaseComponents;
 
 trait DecoratedContainerTrait
 {

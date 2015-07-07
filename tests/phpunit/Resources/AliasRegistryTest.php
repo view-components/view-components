@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\Test\Resources;
+namespace Presentation\Framework\Test\Resources;
 
 
-use Nayjest\ViewComponents\Resources\AliasRegistry;
+use Presentation\Framework\Resources\AliasRegistry;
 use PHPUnit_Framework_TestCase;
 
 class AliasRegistryTest extends PHPUnit_Framework_TestCase

@@ -1,8 +1,8 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data;
+namespace Presentation\Framework\Data;
 
-use Nayjest\ViewComponents\Data\ProcessingServices\ProcessingServiceInterface;
+use Presentation\Framework\Data\ProcessingServices\ProcessingServiceInterface;
 use Traversable;
 
 abstract class AbstractDataProvider implements DataProviderInterface

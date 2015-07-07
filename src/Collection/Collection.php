@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\Collection;
+namespace Presentation\Framework\Collection;
 
 use ArrayIterator;
 use RuntimeException;

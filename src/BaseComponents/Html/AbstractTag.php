@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\BaseComponents\Html;
+namespace Presentation\Framework\BaseComponents\Html;
 
-use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\DecoratedContainerTrait;
+use Presentation\Framework\BaseComponents\ContainerInterface;
+use Presentation\Framework\BaseComponents\DecoratedContainerTrait;
 
 /**
  * Class AbstractTag

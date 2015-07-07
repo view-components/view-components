@@ -1,11 +1,11 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data\Processors\PhpArray;
+namespace Presentation\Framework\Data\Processors\PhpArray;
 
-use Nayjest\ViewComponents\Data\Operations\FilterOperation;
-use Nayjest\ViewComponents\Data\Operations\OperationInterface;
+use Presentation\Framework\Data\Operations\FilterOperation;
+use Presentation\Framework\Data\Operations\OperationInterface;
 use InvalidArgumentException;
-use Nayjest\ViewComponents\Data\Processors\ProcessorInterface;
+use Presentation\Framework\Data\Processors\ProcessorInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class FilterProcessor implements ProcessorInterface

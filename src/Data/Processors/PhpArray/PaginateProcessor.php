@@ -1,9 +1,9 @@
 <?php
-namespace Nayjest\ViewComponents\Data\Processors\PhpArray;
+namespace Presentation\Framework\Data\Processors\PhpArray;
 
-use Nayjest\ViewComponents\Data\Operations\OperationInterface;
-use Nayjest\ViewComponents\Data\Operations\PaginateOperation;
-use Nayjest\ViewComponents\Data\Processors\AbstractPaginateProcessor;
+use Presentation\Framework\Data\Operations\OperationInterface;
+use Presentation\Framework\Data\Operations\PaginateOperation;
+use Presentation\Framework\Data\Processors\AbstractPaginateProcessor;
 
 class PaginateProcessor extends AbstractPaginateProcessor
 {

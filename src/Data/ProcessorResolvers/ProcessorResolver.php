@@ -1,9 +1,9 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data\ProcessorResolvers;
+namespace Presentation\Framework\Data\ProcessorResolvers;
 
-use Nayjest\ViewComponents\Data\Operations\OperationInterface;
-use Nayjest\ViewComponents\Exceptions\ProcessorNotFoundException;
+use Presentation\Framework\Data\Operations\OperationInterface;
+use Presentation\Framework\Exceptions\ProcessorNotFoundException;
 
 /**
  * Class ProcessorResolver
@@ -13,8 +13,8 @@ use Nayjest\ViewComponents\Exceptions\ProcessorNotFoundException;
 class ProcessorResolver implements ProcessorResolverInterface
 {
     protected $processors = [
-        'Nayjest\ViewComponents\Data\Operations\DummyOperation' =>
-        '\Nayjest\ViewComponents\Data\Processors\DummyProcessor'
+        'Presentation\Framework\Data\Operations\DummyOperation' =>
+        '\Presentation\Framework\Data\Processors\DummyProcessor'
     ];
 
     public function register($operation, $processor)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\ViewComponents\Styling\Bootstrap;
+namespace Presentation\Framework\Styling\Bootstrap;
 
 
 class BootstrapStylingOptions

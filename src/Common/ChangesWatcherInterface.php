@@ -1,13 +1,13 @@
 <?php
 
-namespace Nayjest\ViewComponents\Common;
+namespace Presentation\Framework\Common;
 
 /**
  * Interface ChangesWatcherInterface
  *
  * The interface describes objects that can track it's state changes.
  *
- * @package Nayjest\ViewComponents\Common
+ * @package Presentation\Framework\Common
  */
 interface ChangesWatcherInterface
 {

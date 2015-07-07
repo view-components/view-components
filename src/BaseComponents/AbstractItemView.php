@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\BaseComponents;
+namespace Presentation\Framework\BaseComponents;
 
-use Nayjest\ViewComponents\Data\DataAcceptorInterface;
+use Presentation\Framework\Data\DataAcceptorInterface;
 
 abstract class AbstractItemView implements ComponentInterface, DataAcceptorInterface
 {

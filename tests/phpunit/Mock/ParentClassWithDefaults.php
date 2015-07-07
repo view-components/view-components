@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\Test\Mock;
+namespace Presentation\Framework\Test\Mock;
 
-use Nayjest\ViewComponents\Structure\ParentNodeInterface;
-use Nayjest\ViewComponents\Structure\ParentNodeTrait;
+use Presentation\Framework\Structure\ParentNodeInterface;
+use Presentation\Framework\Structure\ParentNodeTrait;
 
 class ParentClassWithDefaults implements ParentNodeInterface {
     use ParentNodeTrait;

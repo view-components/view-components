@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\Components\Html;
+namespace Presentation\Framework\Components\Html;
 
-use Nayjest\ViewComponents\BaseComponents\Html\AbstractTag;
+use Presentation\Framework\BaseComponents\Html\AbstractTag;
 
 class Span extends AbstractTag
 {

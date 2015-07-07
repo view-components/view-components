@@ -1,9 +1,9 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data\ProcessingServices;
+namespace Presentation\Framework\Data\ProcessingServices;
 
-use Nayjest\ViewComponents\Data\OperationsCollection;
-use Nayjest\ViewComponents\Data\ProcessorResolvers\ProcessorResolverInterface;
+use Presentation\Framework\Data\OperationsCollection;
+use Presentation\Framework\Data\ProcessorResolvers\ProcessorResolverInterface;
 use Traversable;
 
 abstract class AbstractProcessingService implements ProcessingServiceInterface

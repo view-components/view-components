@@ -1,18 +1,18 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data\ProcessorResolvers;
+namespace Presentation\Framework\Data\ProcessorResolvers;
 
 class DbTableProcessorResolver extends ProcessorResolver
 {
     public function __construct()
     {
         $this->register(
-            'Nayjest\ViewComponents\Data\Operations\SortOperation',
-            'Nayjest\ViewComponents\Data\Processors\DbTable\SortProcessor'
+            'Presentation\Framework\Data\Operations\SortOperation',
+            'Presentation\Framework\Data\Processors\DbTable\SortProcessor'
         );
         $this->register(
-            'Nayjest\ViewComponents\Data\Operations\FilterOperation',
-            'Nayjest\ViewComponents\Data\Processors\DbTable\FilterProcessor'
+            'Presentation\Framework\Data\Operations\FilterOperation',
+            'Presentation\Framework\Data\Processors\DbTable\FilterProcessor'
         );
     }
 }

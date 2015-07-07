@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\BaseComponents;
+namespace Presentation\Framework\BaseComponents;
 
-use Nayjest\ViewComponents\Rendering\ViewInterface;
-use Nayjest\ViewComponents\Structure\ParentNodeTrait;
+use Presentation\Framework\Rendering\ViewInterface;
+use Presentation\Framework\Structure\ParentNodeTrait;
 
 trait ContainerTrait
 {

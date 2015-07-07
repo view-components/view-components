@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\BaseComponents\Controls;
+namespace Presentation\Framework\BaseComponents\Controls;
 
-use Nayjest\ViewComponents\Data\Operations\OperationInterface;
+use Presentation\Framework\Data\Operations\OperationInterface;
 
 interface ControlInterface
 {

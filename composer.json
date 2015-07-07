@@ -1,12 +1,14 @@
 {
-    "name": "nayjest/view-components",
-    "description": "View Components",
+    "name": "presentation/framework",
+    "description": "PHP Presentation Framework",
     "keywords": [
         "html",
         "view",
-        "widgets"
+        "widgets",
+        "presenter",
+        "rendering"
     ],
-    "homepage": "https://github.com/Nayjest/ViewComponents",
+    "homepage": "https://github.com/presentation-framework/presentation-framework",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -36,19 +38,19 @@
     },
     "autoload": {
         "psr-4": {
-            "Nayjest\\ViewComponents\\": "src/"
+            "Presentation\\Framework\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nayjest\\ViewComponents\\Test\\": "tests/phpunit",
-            "Nayjest\\ViewComponents\\Demo\\": "tests/webapp"
+            "Presentation\\Framework\\Test\\": "tests/phpunit",
+            "Presentation\\Framework\\Demo\\": "tests/webapp"
         }
     },
     "support": {
         "email": "mail@vitaliy.in",
-        "source": "https://github.com/Nayjest/ViewComponents",
-        "issues": "https://github.com/Nayjest/ViewComponents/issues"
+        "source": "https://github.com/presentation-framework/presentation-framework",
+        "issues": "https://github.com/presentation-framework/presentation-framework/issues"
     },
     "minimum-stability": "dev"
 }

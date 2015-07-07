@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\Data\ProcessorResolvers;
+namespace Presentation\Framework\Data\ProcessorResolvers;
 
-use Nayjest\ViewComponents\Data\Operations\OperationInterface;
-use Nayjest\ViewComponents\Data\Processors\ProcessorInterface;
+use Presentation\Framework\Data\Operations\OperationInterface;
+use Presentation\Framework\Data\Processors\ProcessorInterface;
 
 interface ProcessorResolverInterface
 {

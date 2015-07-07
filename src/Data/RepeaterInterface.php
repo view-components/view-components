@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\Data;
+namespace Presentation\Framework\Data;
 
 use Traversable;
 

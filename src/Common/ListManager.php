@@ -1,10 +1,10 @@
 <?php
-namespace Nayjest\ViewComponents\Common;
+namespace Presentation\Framework\Common;
 
-use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
-use Nayjest\ViewComponents\Data\ArrayDataProvider;
-use Nayjest\ViewComponents\Data\DataProviderInterface;
-use Nayjest\ViewComponents\Data\RepeaterInterface;
+use Presentation\Framework\BaseComponents\Controls\ControlInterface;
+use Presentation\Framework\Data\ArrayDataProvider;
+use Presentation\Framework\Data\DataProviderInterface;
+use Presentation\Framework\Data\RepeaterInterface;
 
 /**
  * Class ListManager

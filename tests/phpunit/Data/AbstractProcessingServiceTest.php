@@ -1,11 +1,11 @@
 <?php
 
-namespace Nayjest\ViewComponents\Test\Data;
+namespace Presentation\Framework\Test\Data;
 
 use Exception;
-use Nayjest\ViewComponents\Data\Operations\FilterOperation;
-use Nayjest\ViewComponents\Data\OperationsCollection;
-use Nayjest\ViewComponents\Data\ProcessingServices\ArrayProcessingService;
+use Presentation\Framework\Data\Operations\FilterOperation;
+use Presentation\Framework\Data\OperationsCollection;
+use Presentation\Framework\Data\ProcessingServices\ArrayProcessingService;
 use PHPUnit_Framework_TestCase;
 
 abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase

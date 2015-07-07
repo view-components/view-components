@@ -1,9 +1,9 @@
 <?php
 
-namespace Nayjest\ViewComponents\Test\Components\Html;
+namespace Presentation\Framework\Test\Components\Html;
 
-use Nayjest\ViewComponents\Components\Html\Tag;
-use Nayjest\ViewComponents\Components\Text;
+use Presentation\Framework\Components\Html\Tag;
+use Presentation\Framework\Components\Text;
 use PHPUnit_Framework_TestCase;
 
 class TagTest extends PHPUnit_Framework_TestCase

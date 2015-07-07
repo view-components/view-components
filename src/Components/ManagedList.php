@@ -1,12 +1,12 @@
 <?php
-namespace Nayjest\ViewComponents\Components;
+namespace Presentation\Framework\Components;
 
-use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\ContainerTrait;
-use Nayjest\ViewComponents\BaseComponents\Controls\ControlInterface;
-use Nayjest\ViewComponents\Common\ListManager;
-use Nayjest\ViewComponents\Components\Html\Tag;
-use Nayjest\ViewComponents\Data\RepeaterInterface;
+use Presentation\Framework\BaseComponents\ContainerInterface;
+use Presentation\Framework\BaseComponents\ContainerTrait;
+use Presentation\Framework\BaseComponents\Controls\ControlInterface;
+use Presentation\Framework\Common\ListManager;
+use Presentation\Framework\Components\Html\Tag;
+use Presentation\Framework\Data\RepeaterInterface;
 
 class ManagedList implements
     ContainerInterface

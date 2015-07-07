@@ -1,22 +1,22 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data\ProcessorResolvers;
+namespace Presentation\Framework\Data\ProcessorResolvers;
 
 class ArrayProcessorResolver extends ProcessorResolver
 {
     public function __construct()
     {
         $this->register(
-            'Nayjest\ViewComponents\Data\Operations\SortOperation',
-            'Nayjest\ViewComponents\Data\Processors\PhpArray\SortProcessor'
+            'Presentation\Framework\Data\Operations\SortOperation',
+            'Presentation\Framework\Data\Processors\PhpArray\SortProcessor'
         );
         $this->register(
-            'Nayjest\ViewComponents\Data\Operations\FilterOperation',
-            'Nayjest\ViewComponents\Data\Processors\PhpArray\FilterProcessor'
+            'Presentation\Framework\Data\Operations\FilterOperation',
+            'Presentation\Framework\Data\Processors\PhpArray\FilterProcessor'
         );
         $this->register(
-            'Nayjest\ViewComponents\Data\Operations\PaginateOperation',
-            'Nayjest\ViewComponents\Data\Processors\PhpArray\PaginateProcessor'
+            'Presentation\Framework\Data\Operations\PaginateOperation',
+            'Presentation\Framework\Data\Processors\PhpArray\PaginateProcessor'
         );
     }
 }

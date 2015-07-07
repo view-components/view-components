@@ -1,9 +1,9 @@
 <?php
-namespace Nayjest\ViewComponents\Test;
+namespace Presentation\Framework\Test;
 
-use Nayjest\ViewComponents\Test\Mock\ChildClass;
-use Nayjest\ViewComponents\Test\Mock\ParentClass;
-use Nayjest\ViewComponents\Test\Mock\ParentClassWithDefaults;
+use Presentation\Framework\Test\Mock\ChildClass;
+use Presentation\Framework\Test\Mock\ParentClass;
+use Presentation\Framework\Test\Mock\ParentClassWithDefaults;
 use PHPUnit_Framework_TestCase;
 
 class ParentTraitTest extends PHPUnit_Framework_TestCase
@@ -11,7 +11,7 @@ class ParentTraitTest extends PHPUnit_Framework_TestCase
     public function test()
     {
         $parent = new ParentClass();
-        self::assertInstanceOf('\Nayjest\ViewComponents\Structure\NodesCollection', $parent->components());
+        self::assertInstanceOf('\Presentation\Framework\Structure\NodesCollection', $parent->components());
         self::assertTrue($parent->components()->isEmpty());
     }
 

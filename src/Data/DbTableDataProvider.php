@@ -1,11 +1,11 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data;
+namespace Presentation\Framework\Data;
 
-use Nayjest\ViewComponents\Data\DbTable\Query;
-use Nayjest\ViewComponents\Data\Operations\OperationInterface;
-use Nayjest\ViewComponents\Data\ProcessingServices\DbTableProcessingService;
-use Nayjest\ViewComponents\Data\ProcessorResolvers\DbTableProcessorResolver;
+use Presentation\Framework\Data\DbTable\Query;
+use Presentation\Framework\Data\Operations\OperationInterface;
+use Presentation\Framework\Data\ProcessingServices\DbTableProcessingService;
+use Presentation\Framework\Data\ProcessorResolvers\DbTableProcessorResolver;
 use PDO;
 
 class DbTableDataProvider extends AbstractDataProvider

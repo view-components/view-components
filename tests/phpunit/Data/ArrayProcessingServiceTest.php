@@ -1,10 +1,10 @@
 <?php
 
-namespace Nayjest\ViewComponents\Test\Data;
+namespace Presentation\Framework\Test\Data;
 
-use Nayjest\ViewComponents\Data\OperationsCollection;
-use Nayjest\ViewComponents\Data\ProcessingServices\ArrayProcessingService;
-use Nayjest\ViewComponents\Data\ProcessorResolvers\ArrayProcessorResolver;
+use Presentation\Framework\Data\OperationsCollection;
+use Presentation\Framework\Data\ProcessingServices\ArrayProcessingService;
+use Presentation\Framework\Data\ProcessorResolvers\ArrayProcessorResolver;
 use PHPUnit_Framework_TestCase;
 
 class ArrayProcessingServiceTest extends AbstractProcessingServiceTest

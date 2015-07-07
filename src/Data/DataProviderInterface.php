@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\ViewComponents\Data;
+namespace Presentation\Framework\Data;
 
 use Countable;
 use IteratorAggregate;

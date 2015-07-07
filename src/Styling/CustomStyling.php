@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\Styling;
+namespace Presentation\Framework\Styling;
 
-use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
+use Presentation\Framework\BaseComponents\ComponentInterface;
 
 class CustomStyling extends AbstractStyling
 {

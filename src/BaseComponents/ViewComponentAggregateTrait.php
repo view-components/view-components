@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\BaseComponents;
+namespace Presentation\Framework\BaseComponents;
 
-use Nayjest\ViewComponents\Rendering\ViewAggregateTrait;
+use Presentation\Framework\Rendering\ViewAggregateTrait;
 
 /**
  * Class ViewComponentAggregateTrait

@@ -1,10 +1,10 @@
 <?php
-namespace Nayjest\ViewComponents\Components\Html;
+namespace Presentation\Framework\Components\Html;
 
-use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\DecoratedContainerTrait;
-use Nayjest\ViewComponents\BaseComponents\Html\TagInterface;
-use Nayjest\ViewComponents\BaseComponents\Html\TagTrait;
+use Presentation\Framework\BaseComponents\ContainerInterface;
+use Presentation\Framework\BaseComponents\DecoratedContainerTrait;
+use Presentation\Framework\BaseComponents\Html\TagInterface;
+use Presentation\Framework\BaseComponents\Html\TagTrait;
 
 class Tag implements ContainerInterface, TagInterface
 {

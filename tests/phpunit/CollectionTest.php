@@ -1,8 +1,8 @@
 <?php
-namespace Nayjest\ViewComponents\Test;
+namespace Presentation\Framework\Test;
 
-use Nayjest\ViewComponents\Test\Mock\ChildClass;
-use Nayjest\ViewComponents\Test\Mock\ParentClass;
+use Presentation\Framework\Test\Mock\ChildClass;
+use Presentation\Framework\Test\Mock\ParentClass;
 use PHPUnit_Framework_TestCase;
 
 class CollectionTest extends PHPUnit_Framework_TestCase

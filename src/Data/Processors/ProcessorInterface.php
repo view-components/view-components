@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\Data\Processors;
+namespace Presentation\Framework\Data\Processors;
 
-use Nayjest\ViewComponents\Data\Operations\OperationInterface;
+use Presentation\Framework\Data\Operations\OperationInterface;
 
 interface ProcessorInterface
 {

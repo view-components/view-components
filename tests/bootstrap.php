@@ -1,6 +1,6 @@
 <?php
 
-namespace Nayjest\ViewComponents\Demo;
+namespace Presentation\Framework\Demo;
 
 require __DIR__ . '/../vendor/autoload.php';
 

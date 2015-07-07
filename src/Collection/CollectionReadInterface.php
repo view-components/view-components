@@ -1,5 +1,5 @@
 <?php
-namespace nayjest\ViewComponents\Collection;
+namespace Presentation\Framework\Collection;
 
 use Countable;
 use IteratorAggregate;

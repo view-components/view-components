@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\Structure;
+namespace Presentation\Framework\Structure;
 
 /**
  * Class ChildNodeTrait

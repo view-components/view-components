@@ -1,9 +1,9 @@
 <?php
-namespace Nayjest\ViewComponents\Resources;
+namespace Presentation\Framework\Resources;
 
-use Nayjest\ViewComponents\Components\Dummy;
-use Nayjest\ViewComponents\Components\Html\Script;
-use Nayjest\ViewComponents\Components\Html\Tag;
+use Presentation\Framework\Components\Dummy;
+use Presentation\Framework\Components\Html\Script;
+use Presentation\Framework\Components\Html\Tag;
 
 class Resources
 {

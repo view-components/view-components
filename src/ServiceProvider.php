@@ -1,4 +1,4 @@
-<?php namespace Nayjest\ViewComponents;
+<?php namespace Presentation\Framework;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;

@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\Data\Operations;
+namespace Presentation\Framework\Data\Operations;
 
 class DummyOperation implements OperationInterface
 {

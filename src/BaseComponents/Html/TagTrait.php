@@ -1,5 +1,5 @@
 <?php
-namespace Nayjest\ViewComponents\BaseComponents\Html;
+namespace Presentation\Framework\BaseComponents\Html;
 
 /**
  * Class TagTrait

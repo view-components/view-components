@@ -1,16 +1,16 @@
 <?php
 
-namespace Nayjest\ViewComponents\Styling\Bootstrap;
+namespace Presentation\Framework\Styling\Bootstrap;
 
 use LogicException;
-use Nayjest\ViewComponents\BaseComponents\ComponentInterface;
-use Nayjest\ViewComponents\BaseComponents\ContainerInterface;
-use Nayjest\ViewComponents\BaseComponents\Html\AbstractTag;
-use Nayjest\ViewComponents\BaseComponents\Html\TagInterface;
-use Nayjest\ViewComponents\Components\Controls\FilterControl;
-use Nayjest\ViewComponents\Components\Html\Tag;
-use Nayjest\ViewComponents\Resources\Resources;
-use Nayjest\ViewComponents\Styling\CustomStyling;
+use Presentation\Framework\BaseComponents\ComponentInterface;
+use Presentation\Framework\BaseComponents\ContainerInterface;
+use Presentation\Framework\BaseComponents\Html\AbstractTag;
+use Presentation\Framework\BaseComponents\Html\TagInterface;
+use Presentation\Framework\Components\Controls\FilterControl;
+use Presentation\Framework\Components\Html\Tag;
+use Presentation\Framework\Resources\Resources;
+use Presentation\Framework\Styling\CustomStyling;
 use Symfony\Component\VarDumper\VarDumper;
 
 class BootstrapStyling extends CustomStyling
@@ -57,14 +57,14 @@ class BootstrapStyling extends CustomStyling
     {
 
         return [
-            'Nayjest\ViewComponents\BaseComponents\Html\TagInterface' =>
+            'Presentation\Framework\BaseComponents\Html\TagInterface' =>
                 [
                     [
                         $this,
                         'tagCallback'
                     ]
                 ],
-            'Nayjest\ViewComponents\Components\Controls\FilterControl' => [
+            'Presentation\Framework\Components\Controls\FilterControl' => [
                 [
                     $this,
                     'filterControlCallback'

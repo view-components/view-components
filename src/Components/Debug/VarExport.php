@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\Components\Debug;
+namespace Presentation\Framework\Components\Debug;
 
-use Nayjest\ViewComponents\BaseComponents\AbstractItemView;
+use Presentation\Framework\BaseComponents\AbstractItemView;
 
 class VarExport extends AbstractItemView
 {

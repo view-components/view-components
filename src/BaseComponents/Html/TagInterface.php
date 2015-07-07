@@ -6,7 +6,7 @@
  * Time: 17:19
  */
 
-namespace Nayjest\ViewComponents\BaseComponents\Html;
+namespace Presentation\Framework\BaseComponents\Html;
 
 
 interface TagInterface {

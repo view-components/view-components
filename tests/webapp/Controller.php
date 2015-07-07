@@ -1,25 +1,25 @@
 <?php
-namespace Nayjest\ViewComponents\Demo;
+namespace Presentation\Framework\Demo;
 
-use Nayjest\ViewComponents\Common\InputValueReader;
-use Nayjest\ViewComponents\Common\ListManager;
-use Nayjest\ViewComponents\Components\Container;
-use Nayjest\ViewComponents\Components\Controls\FilterControl;
-use Nayjest\ViewComponents\Components\ManagedList;
-use Nayjest\ViewComponents\Components\Debug\SymfonyVarDump;
-use Nayjest\ViewComponents\Components\Html\Tag;
-use Nayjest\ViewComponents\Data\ArrayDataProvider;
-use Nayjest\ViewComponents\Data\DbTableDataProvider;
-use Nayjest\ViewComponents\Data\Operations\FilterOperation;
-use Nayjest\ViewComponents\Data\Operations\SortOperation;
-use Nayjest\ViewComponents\HtmlBuilder;
-use Nayjest\ViewComponents\Components\Repeater;
-use Nayjest\ViewComponents\Components\Text;
-use Nayjest\ViewComponents\Demo\Components\PersonView;
-use Nayjest\ViewComponents\Resources\AliasRegistry;
-use Nayjest\ViewComponents\Resources\IncludedResourcesRegistry;
-use Nayjest\ViewComponents\Resources\Resources;
-use Nayjest\ViewComponents\Styling\Bootstrap\BootstrapStyling;
+use Presentation\Framework\Common\InputValueReader;
+use Presentation\Framework\Common\ListManager;
+use Presentation\Framework\Components\Container;
+use Presentation\Framework\Components\Controls\FilterControl;
+use Presentation\Framework\Components\ManagedList;
+use Presentation\Framework\Components\Debug\SymfonyVarDump;
+use Presentation\Framework\Components\Html\Tag;
+use Presentation\Framework\Data\ArrayDataProvider;
+use Presentation\Framework\Data\DbTableDataProvider;
+use Presentation\Framework\Data\Operations\FilterOperation;
+use Presentation\Framework\Data\Operations\SortOperation;
+use Presentation\Framework\HtmlBuilder;
+use Presentation\Framework\Components\Repeater;
+use Presentation\Framework\Components\Text;
+use Presentation\Framework\Demo\Components\PersonView;
+use Presentation\Framework\Resources\AliasRegistry;
+use Presentation\Framework\Resources\IncludedResourcesRegistry;
+use Presentation\Framework\Resources\Resources;
+use Presentation\Framework\Styling\Bootstrap\BootstrapStyling;
 use ReflectionClass;
 use ReflectionMethod;
 

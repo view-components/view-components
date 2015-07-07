@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\Components;
+namespace Presentation\Framework\Components;
 
-use Nayjest\ViewComponents\BaseComponents\AbstractItemView;
+use Presentation\Framework\BaseComponents\AbstractItemView;
 
 class Json extends AbstractItemView
 {

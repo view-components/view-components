@@ -1,9 +1,9 @@
 <?php
 
-namespace Nayjest\ViewComponents\Common;
+namespace Presentation\Framework\Common;
 
-use Nayjest\ViewComponents\Exceptions\GroupIsNotEmptyException;
-use Nayjest\ViewComponents\Exceptions\NonExistingGroupException;
+use Presentation\Framework\Exceptions\GroupIsNotEmptyException;
+use Presentation\Framework\Exceptions\NonExistingGroupException;
 
 /**
  * Class HasGroupsTrait

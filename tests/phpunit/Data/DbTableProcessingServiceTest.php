@@ -1,11 +1,11 @@
 <?php
 
-namespace Nayjest\ViewComponents\Test\Data;
+namespace Presentation\Framework\Test\Data;
 
-use Nayjest\ViewComponents\Data\DbTable\Query;
-use Nayjest\ViewComponents\Data\OperationsCollection;
-use Nayjest\ViewComponents\Data\ProcessingServices\DbTableProcessingService;
-use Nayjest\ViewComponents\Data\ProcessorResolvers\DbTableProcessorResolver;
+use Presentation\Framework\Data\DbTable\Query;
+use Presentation\Framework\Data\OperationsCollection;
+use Presentation\Framework\Data\ProcessingServices\DbTableProcessingService;
+use Presentation\Framework\Data\ProcessorResolvers\DbTableProcessorResolver;
 use PDO;
 use PHPUnit_Framework_TestCase;
 
@@ -14,7 +14,7 @@ class DbTableProcessingServiceTest extends AbstractProcessingServiceTest
     public function setUp()
     {
         $this->data = new Query(
-            \Nayjest\ViewComponents\Demo\db_connection(),
+            \Presentation\Framework\Demo\db_connection(),
             'users'
         );
         $this->operations = new OperationsCollection();

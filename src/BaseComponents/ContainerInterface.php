@@ -1,7 +1,7 @@
 <?php
-namespace Nayjest\ViewComponents\BaseComponents;
+namespace Presentation\Framework\BaseComponents;
 
-use Nayjest\ViewComponents\Structure\ParentNodeInterface;
+use Presentation\Framework\Structure\ParentNodeInterface;
 
 interface ContainerInterface extends
     ComponentInterface,

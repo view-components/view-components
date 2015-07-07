@@ -1,10 +1,10 @@
 <?php
-namespace Nayjest\ViewComponents\Test\Data;
+namespace Presentation\Framework\Test\Data;
 
-use Nayjest\ViewComponents\Data\ArrayDataProvider;
-use Nayjest\ViewComponents\Data\Operations\FilterOperation;
-use Nayjest\ViewComponents\Data\Operations\SortOperation;
-use Nayjest\ViewComponents\Data\ArrayProcessingService;
+use Presentation\Framework\Data\ArrayDataProvider;
+use Presentation\Framework\Data\Operations\FilterOperation;
+use Presentation\Framework\Data\Operations\SortOperation;
+use Presentation\Framework\Data\ArrayProcessingService;
 use PHPUnit_Framework_TestCase;
 
 class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
