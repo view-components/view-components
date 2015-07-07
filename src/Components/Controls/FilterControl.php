@@ -22,7 +22,7 @@ class FilterControl implements ControlInterface, ContainerInterface
     protected $operator;
 
     /** @var InputOption */
-    protected $input;
+    protected $valueOption;
 
     /**
      * @param string $field
@@ -37,26 +37,26 @@ class FilterControl implements ControlInterface, ContainerInterface
     {
         $this->field = $field;
         $this->operator = $operator;
-        $this->input = $input;
+        $this->valueOption = $input;
     }
 
     public function getOperation()
     {
-        if (!$this->input->hasValue()) {
+        if (!$this->valueOption->hasValue()) {
             return new DummyOperation();
         }
         return new FilterOperation(
             $this->field,
             $this->operator,
-            $this->input->getValue()
+            $this->valueOption->getValue()
         );
     }
 
     protected function makeDefaultView()
     {
         return new FilterControlView(
-            $this->input->getKey(),
-            $this->input->getValue(),
+            $this->valueOption->getKey(),
+            $this->valueOption->getValue(),
             StaticStringy::humanize($this->field)
         );
     }
