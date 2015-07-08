@@ -83,6 +83,7 @@ class BootstrapStyling extends CustomStyling
 
     protected function tagCallback(TagInterface $tag)
     {
+        /** @var Tag $tag */
         $type = $tag->getAttribute('type');
         switch ($tag->getTagName()) {
             case 'select':
@@ -112,6 +113,21 @@ class BootstrapStyling extends CustomStyling
                 $this->customizeTable($tag);
                 break;
         }
+
+        if ($tag->getAttribute('data-control') === 'pagination') {
+            $tag->components()->first()->setAttribute('class','pagination');
+            /** @var Tag $item */
+            foreach($tag->components()->plain() as $item) {
+
+                if ($item instanceof TagInterface
+                    &&  $item->getTagName() === 'li'
+                    &&  $item->getAttribute('data-disabled')
+                ) {
+                    $item->setAttribute('class', 'disabled');
+                }
+            }
+        }
+
     }
 
     protected function filterControlCallback(FilterControl $component)

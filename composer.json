@@ -19,10 +19,11 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.5.0",
         "symfony/property-access" : "~2.5",
         "nayjest/manipulator": "~1.1",
-        "danielstjules/stringy": "~1.9"
+        "danielstjules/stringy": "~1.9",
+        "league/url": "^4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "4.6.*",
