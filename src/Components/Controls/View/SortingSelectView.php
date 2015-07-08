@@ -9,17 +9,19 @@ use Presentation\Framework\Components\Text;
 
 /**
  * Class FilterControlView
+ *
  * @internal
  */
 class SortingSelectView extends Tag
 {
 
     /**
+     * Constructor.
+     *
      * @param SortingSelectControl $control
      */
     public function __construct(SortingSelectControl $control)
     {
-
         parent::__construct(
             'span',
             [

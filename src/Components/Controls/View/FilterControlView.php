@@ -7,13 +7,16 @@ use Presentation\Framework\Components\Text;
 
 /**
  * Class FilterControlView
+ *
  * @internal
  */
 class FilterControlView extends Tag
 {
     /**
+     * Constructor.
+     *
      * @param string $name
-     * @param mixed $value
+     * @param string|null $value
      * @param string|null $label
      */
     public function __construct($name, $value = null, $label = null)
