@@ -85,9 +85,19 @@ class BootstrapStyling extends CustomStyling
     {
         $type = $tag->getAttribute('type');
         switch ($tag->getTagName()) {
+            case 'select':
+                $this->customizeInput($tag);
+                break;
             case 'input':
-                if ($type === 'button' || $type === 'submit') {
-                    $this->customizeButton($tag);
+                switch($type) {
+                    case 'button':
+                        $this->customizeButton($tag);
+                        break;
+                    case 'submit':
+                        $this->customizeButton($tag, 'btn-primary');
+                        break;
+                    default:
+                        $this->customizeInput($tag);
                 }
                 break;
             case 'button':
@@ -111,22 +121,35 @@ class BootstrapStyling extends CustomStyling
             $view->setTagName('div');
             $view->setAttribute('class', 'form-group');
             $component->getParent()->setAttribute('class', 'form-inline');
-            foreach ($view->components() as $child) {
-                if ($child instanceof Tag && $child->getTagName() === 'input') {
-                    $child->setAttribute('class', 'form-control');
-                }
-            }
         }
     }
 
-
-    protected function customizeButton(TagInterface $tag)
+    protected function customizeInput(TagInterface $tag)
     {
         /** @var Tag|AbstractTag $tag */
         $tag->setAttribute(
             'class',
+            str_replace(
+                'from-control',
+                '',
+                $tag->getAttribute('class')
+            ). 'form-control'
+        );
+    }
+
+
+    /**
+     * @param TagInterface $tag
+     * @param null|string $buttonStyle optional ('btn-default', 'btn-primary', etc)
+     */
+    protected function customizeButton(TagInterface $tag, $buttonStyle = null)
+    {
+        $buttonStyle = $buttonStyle?:$this->options->buttonStyle;
+        /** @var Tag|AbstractTag $tag */
+        $tag->setAttribute(
+            'class',
             $tag->getAttribute('class') .
-            "btn {$this->options->buttonStyle} {$this->options->buttonSize}"
+            "btn {$buttonStyle} {$this->options->buttonSize}"
         );
     }
 
