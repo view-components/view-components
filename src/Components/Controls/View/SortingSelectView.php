@@ -8,7 +8,7 @@ use Presentation\Framework\Components\Html\Tag;
 use Presentation\Framework\Components\Text;
 
 /**
- * Class FilterControlView
+ * Class SortingSelectView
  *
  * @internal
  */
