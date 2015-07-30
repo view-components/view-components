@@ -2,7 +2,7 @@
 
 namespace Presentation\Framework\Data;
 
-use Presentation\Framework\Collection\Collection;
+use Nayjest\Collection\Collection;
 use Presentation\Framework\Common\ChangesWatcherInterface;
 use Presentation\Framework\Common\ChangesWatcherTrait;
 use Presentation\Framework\Common\StateHashInterface;

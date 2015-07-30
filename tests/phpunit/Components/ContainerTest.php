@@ -1,8 +1,8 @@
 <?php
 namespace Presentation\Framework\Test\Components;
 
-use Presentation\Framework\Components\Container;
-use Presentation\Framework\Components\Text;
+use Presentation\Framework\Component\Container;
+use Presentation\Framework\Component\Text;
 use Presentation\Framework\Rendering\ViewInterface;
 use Presentation\Framework\Test\Mock\ChildClass;
 use Presentation\Framework\Test\Mock\HierarchyItem;
@@ -19,38 +19,14 @@ class ContainerTest extends PHPUnit_Framework_TestCase
         self::assertEquals('[]', $c->render());
 
         $t = new Text('inner');
-        $c->setComponents([$t]);
+        $c->children()->setItems([$t]);
         self::assertEquals('[inner]', $c->render());
 
         $c2 = new Container();
         $c2->setOpeningText('{')
             ->setClosingText('}');
-        $c->components()->add($c2);
-        $c2->setComponents([$t, $t]);
+        $c->children()->addItem($c2);
+        $c2->children()->setItems([$t, $t]);
         self::assertEquals('[{inner}]', $c->render());
-    }
-
-    public function testNotRenderableComponents()
-    {
-        // Renderable container can store not renderable items.
-        $container = new Container([
-            new ChildClass,
-            new Text('test')
-        ]);
-        self::assertEquals(
-            'test',
-            $container->render()
-        );
-
-        // Renderable store not renderable that store renderable
-        $container->setComponents([
-            new Text('ok'),
-            (new HierarchyItem)
-                ->setComponents([new Text('Must not be rendered')])
-        ]);
-        self::assertEquals(
-            'ok',
-            $container->render()
-        );
     }
 }

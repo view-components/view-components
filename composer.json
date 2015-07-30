@@ -22,6 +22,8 @@
         "php": ">=5.5.0",
         "symfony/property-access" : "~2.5",
         "nayjest/manipulator": "~1.1",
+        "nayjest/tree": "0.2.*",
+        "nayjest/collection": "0.4.*",
         "danielstjules/stringy": "~1.9",
         "league/url": "^4.0"
     },

@@ -1,7 +1,7 @@
 <?php
 namespace Presentation\Framework\Test\Components;
 
-use Presentation\Framework\Components\Text;
+use Presentation\Framework\Component\Text;
 use PHPUnit_Framework_TestCase;
 
 class TextTest extends PHPUnit_Framework_TestCase

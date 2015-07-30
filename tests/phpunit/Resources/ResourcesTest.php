@@ -3,7 +3,7 @@ namespace Presentation\Framework\Test\Resources;
 
 use Presentation\Framework\Resources\AliasRegistry;
 use Presentation\Framework\Resources\IncludedResourcesRegistry;
-use Presentation\Framework\Resources\Resources;
+use Presentation\Framework\Resources\ResourceManager;
 use PHPUnit_Framework_TestCase;
 
 class ResourcesTest extends PHPUnit_Framework_TestCase
@@ -13,7 +13,7 @@ class ResourcesTest extends PHPUnit_Framework_TestCase
         $jsRegistry = new AliasRegistry($jsAliases);
         $cssRegistry = new AliasRegistry($cssAliases);
         $included = new IncludedResourcesRegistry();
-        return new Resources($jsRegistry, $cssRegistry, $included);
+        return new ResourceManager($jsRegistry, $cssRegistry, $included);
     }
 
     public function testCss()

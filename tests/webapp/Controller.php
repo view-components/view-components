@@ -1,25 +1,27 @@
 <?php
 namespace Presentation\Framework\Demo;
 
-use Presentation\Framework\Common\InputOption;
+use Presentation\Framework\Input\InputOption;
+use Presentation\Framework\Input\InputOptionFactory;
 use Presentation\Framework\Common\ListManager;
-use Presentation\Framework\Components\Container;
-use Presentation\Framework\Components\Controls\FilterControl;
-use Presentation\Framework\Components\Controls\SortingSelectControl;
-use Presentation\Framework\Components\ManagedList;
-use Presentation\Framework\Components\Debug\SymfonyVarDump;
-use Presentation\Framework\Components\Html\Tag;
+use Presentation\Framework\Component\Container;
+use Presentation\Framework\Control\FilterControl;
+use Presentation\Framework\Control\PaginationControl;
+use Presentation\Framework\Control\SortingSelectControl;
+use Presentation\Framework\Component\ManagedList;
+use Presentation\Framework\Component\Debug\SymfonyVarDump;
+use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Data\ArrayDataProvider;
 use Presentation\Framework\Data\DbTableDataProvider;
 use Presentation\Framework\Data\Operations\FilterOperation;
 use Presentation\Framework\Data\Operations\SortOperation;
 use Presentation\Framework\HtmlBuilder;
-use Presentation\Framework\Components\Repeater;
-use Presentation\Framework\Components\Text;
+use Presentation\Framework\Component\Repeater;
+use Presentation\Framework\Component\Text;
 use Presentation\Framework\Demo\Components\PersonView;
 use Presentation\Framework\Resources\AliasRegistry;
 use Presentation\Framework\Resources\IncludedResourcesRegistry;
-use Presentation\Framework\Resources\Resources;
+use Presentation\Framework\Resources\ResourceManager;
 use Presentation\Framework\Styling\Bootstrap\BootstrapStyling;
 
 class Controller extends AbstractController
@@ -74,7 +76,7 @@ class Controller extends AbstractController
      */
     public function demo2()
     {
-        $html = new HtmlBuilder(new Resources(new AliasRegistry(), new AliasRegistry(), new IncludedResourcesRegistry()));
+        $html = new HtmlBuilder(new ResourceManager(new AliasRegistry(), new AliasRegistry(), new IncludedResourcesRegistry()));
         $data = $this->getUsersData();
         $view = new Container([
             $html->h1('Users List'),
@@ -129,8 +131,8 @@ class Controller extends AbstractController
 
         $view = new Container([
             new Tag('form', null, [
-                $filter1,
-                $filter2,
+                $filter1->getView(),
+                $filter2->getView(),
                 new Tag('button', ['type' => 'submit'], [
                     new Text('Filter')
                 ]),
@@ -141,8 +143,8 @@ class Controller extends AbstractController
                 [new PersonView])
         ]);
 
-        $provider->operations()->add($filter1->getOperation());
-        $provider->operations()->add($filter2->getOperation());
+        $provider->operations()->addItem($filter1->getOperation());
+        $provider->operations()->addItem($filter2->getOperation());
 
         return $this->renderMenu() . $view->render();
     }
@@ -167,11 +169,19 @@ class Controller extends AbstractController
             FilterOperation::OPERATOR_EQ,
             new InputOption('role_filter', $_GET)
         );
+        $pagination = new PaginationControl(
+            new InputOption('page', $_GET, 1),
+            5,
+            $provider
+        );
+
+        $manager = new ListManager();
+        $manager->manage($provider, [$filter1, $filter2, $pagination]);
 
         $view = new Container([
             new Tag('form', null, [
-                $filter1,
-                $filter2,
+                $filter1->getView(),
+                $filter2->getView(),
                 new Tag('button', ['type' => 'submit'], [
                     new Text('Filter')
                 ]),
@@ -179,11 +189,10 @@ class Controller extends AbstractController
             new Text('<h1>Users List</h1>'),
             $repeater = new Repeater(
                 $provider,
-                [new PersonView])
+                [new PersonView]
+            ),
+            $pagination->getView()
         ]);
-
-        $manager = new ListManager();
-        $manager->manage($repeater, [$filter1, $filter2]);
 
         return $this->renderMenu() . $view->render();
     }
@@ -229,13 +238,14 @@ class Controller extends AbstractController
     }
 
     /**
-     * Filtering controls in managed list + styling
+     * Filtering controls in managed list + styling + pagination + InputOptionFactory
      *
      * @return string
      */
     public function demo4_3()
     {
         $provider = $this->getDataProvider();
+        $input = new InputOptionFactory($_GET);
         $list = new ManagedList(
             new Repeater(
                 $provider,
@@ -245,12 +255,12 @@ class Controller extends AbstractController
                 new FilterControl(
                     'name',
                     FilterOperation::OPERATOR_EQ,
-                    new InputOption('name_filter', $_GET)
+                    $input('name_filter')
                 ),
                 new FilterControl(
                     'role',
                     FilterOperation::OPERATOR_EQ,
-                    new InputOption('role_filter', $_GET)
+                    $input('role_filter')
                 ),
                 new SortingSelectControl(
                     [
@@ -260,14 +270,19 @@ class Controller extends AbstractController
                         'role' => 'Role',
                         'birthday' => 'Birthday',
                     ],
-                    new InputOption('sort_field', $_GET),
-                    new InputOption('sort_direction', $_GET)
+                    $input('sort_field'),
+                    $input('sort_dir')
+                ),
+                $pagination = new PaginationControl(
+                    $input('page', 1),
+                    10,
+                    $provider
                 )
             ]
         );
 
-        $container = new Container([$list]);
-        $resources = new Resources(new AliasRegistry([
+        $container = new Container([$list, $pagination->getView()]);
+        $resources = new ResourceManager(new AliasRegistry([
             'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
         ]), new AliasRegistry(), new IncludedResourcesRegistry());
         $styling = new BootstrapStyling($resources);

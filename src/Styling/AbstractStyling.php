@@ -1,24 +1,23 @@
 <?php
 namespace Presentation\Framework\Styling;
 
-use Presentation\Framework\BaseComponents\ComponentInterface;
-use Presentation\Framework\BaseComponents\ContainerInterface;
+use Presentation\Framework\Base\ComponentInterface;
 
 abstract class AbstractStyling
 {
     public function apply(ComponentInterface $component)
     {
         $this->applyInternal($component);
-        if ($component instanceof ContainerInterface) {
+        if ($component instanceof ComponentInterface) {
             $this->applyToChildren($component);
         }
     }
 
-    protected function applyToChildren(ContainerInterface $component)
+    protected function applyToChildren(ComponentInterface $component)
     {
-        foreach ($component->components() as $child) {
+        foreach ($component->children() as $child) {
             $this->applyInternal($child);
-            if ($child instanceof ContainerInterface) {
+            if ($child instanceof ComponentInterface) {
                 $this->applyToChildren($child);
             }
         }

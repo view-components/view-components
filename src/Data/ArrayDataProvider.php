@@ -14,7 +14,7 @@ class ArrayDataProvider extends AbstractDataProvider
         ProcessorResolverInterface $processorResolver = null
     )
     {
-        $this->operations()->set($operations);
+        $this->operations()->setItems($operations);
         $this->processingService = new ArrayProcessingService(
             $processorResolver ?: new ArrayProcessorResolver(),
             $this->operations(),
