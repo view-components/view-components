@@ -1,8 +1,8 @@
 <?php
 namespace Presentation\Framework\Demo\Components;
 
-use Presentation\Framework\BaseComponents\ComponentInterface;
-use Presentation\Framework\BaseComponents\ComponentTrait;
+use Presentation\Framework\Base\ComponentInterface;
+use Presentation\Framework\Base\ComponentTrait;
 
 class Person
 {

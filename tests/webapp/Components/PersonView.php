@@ -1,11 +1,15 @@
 <?php
 namespace Presentation\Framework\Demo\Components;
 
-use Presentation\Framework\BaseComponents\ComponentInterface;
-use Presentation\Framework\BaseComponents\ComponentTrait;
+use Nayjest\Tree\NodeTrait;
+use Presentation\Framework\Base\ComponentInterface;
+use Presentation\Framework\Base\ComponentTrait;
+use Presentation\Framework\Rendering\ViewTrait;
 
 class PersonView extends Person implements ComponentInterface
 {
+    use ViewTrait;
+    use NodeTrait;
     use ComponentTrait;
 
     public function render()

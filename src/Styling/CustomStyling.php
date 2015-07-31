@@ -1,7 +1,7 @@
 <?php
 namespace Presentation\Framework\Styling;
 
-use Presentation\Framework\BaseComponents\ComponentInterface;
+use Presentation\Framework\Base\ComponentInterface;
 
 class CustomStyling extends AbstractStyling
 {

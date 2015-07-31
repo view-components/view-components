@@ -3,13 +3,14 @@
 namespace Presentation\Framework\Styling\Bootstrap;
 
 use LogicException;
-use Presentation\Framework\BaseComponents\ComponentInterface;
-use Presentation\Framework\BaseComponents\ContainerInterface;
-use Presentation\Framework\BaseComponents\Html\AbstractTag;
-use Presentation\Framework\BaseComponents\Html\TagInterface;
-use Presentation\Framework\Components\Controls\FilterControl;
-use Presentation\Framework\Components\Html\Tag;
-use Presentation\Framework\Resources\Resources;
+use Presentation\Framework\Base\ComponentInterface;
+use Presentation\Framework\Base\ContainerInterface;
+use Presentation\Framework\Base\Html\AbstractTag;
+use Presentation\Framework\Base\Html\TagInterface;
+use Presentation\Framework\Component\Controls\FilterControl;
+use Presentation\Framework\Component\ControlView\FilterControlView;
+use Presentation\Framework\Component\Html\Tag;
+use Presentation\Framework\Resources\ResourceManager;
 use Presentation\Framework\Styling\CustomStyling;
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -19,7 +20,7 @@ class BootstrapStyling extends CustomStyling
     protected $resources;
     protected $options;
 
-    public function __construct(Resources $resources, BootstrapStylingOptions $options = null)
+    public function __construct(ResourceManager $resources, BootstrapStylingOptions $options = null)
     {
         $this->options = $options ?: new BootstrapStylingOptions();
         $this->resources = $resources;
@@ -28,43 +29,39 @@ class BootstrapStyling extends CustomStyling
 
     /**
      * @param ComponentInterface|ContainerInterface $component
-     * @param ContainerInterface $resourcesContainer
+     * @param ComponentInterface $resourcesContainer
      */
-    public function apply(ComponentInterface $component, ContainerInterface $resourcesContainer = null)
+    public function apply(ComponentInterface $component, ComponentInterface $resourcesContainer = null)
     {
         $resourcesContainer = $resourcesContainer ?: $component;
-        if (!$resourcesContainer instanceof ContainerInterface) {
-            throw new LogicException('Styling must be applied to container');
+        if (!$resourcesContainer->children()->isWritable()) {
+            throw new LogicException('Styling must be applied to writable container');
         }
         $this->addResources($resourcesContainer);
         parent::apply($component);
     }
 
-    protected function addResources(ContainerInterface $container)
+    protected function addResources(ComponentInterface $container)
     {
-        $container->components()->add(
-            $this->resources->js('jquery')
-        );
-        $container->components()->add(
-            $this->resources->css($this->options->cssFile)
-        );
-        $container->components()->add(
-            $this->resources->js($this->options->jsFile)
-        );
+        $container
+            ->children()
+            ->add($this->resources->js('jquery'))
+            ->add($this->resources->css($this->options->cssFile))
+            ->add($this->resources->js($this->options->jsFile));
     }
 
     protected function getCallbacks()
     {
 
         return [
-            'Presentation\Framework\BaseComponents\Html\TagInterface' =>
+            'Presentation\Framework\Base\Html\TagInterface' =>
                 [
                     [
                         $this,
                         'tagCallback'
                     ]
                 ],
-            'Presentation\Framework\Components\Controls\FilterControl' => [
+            'Presentation\Framework\Component\ControlView\FilterControlView' => [
                 [
                     $this,
                     'filterControlCallback'
@@ -115,9 +112,9 @@ class BootstrapStyling extends CustomStyling
         }
 
         if ($tag->getAttribute('data-control') === 'pagination') {
-            $tag->components()->first()->setAttribute('class','pagination');
+            $tag->children()->first()->setAttribute('class','pagination');
             /** @var Tag $item */
-            foreach($tag->components()->plain() as $item) {
+            foreach($tag->getChildrenRecursive() as $item) {
 
                 if ($item instanceof TagInterface
                     &&  $item->getTagName() === 'li'
@@ -130,13 +127,16 @@ class BootstrapStyling extends CustomStyling
 
     }
 
-    protected function filterControlCallback(FilterControl $component)
+    protected function filterControlCallback(FilterControlView $view)
     {
-        $view = $component->getView();
-        if ($view instanceof Tag) {
+
+        if ($view instanceof TagInterface) {
             $view->setTagName('div');
             $view->setAttribute('class', 'form-group');
-            $component->getParent()->setAttribute('class', 'form-inline');
+            if ($view->parent() instanceof TagInterface) {
+                $view->parent()->setAttribute('class', 'form-inline');
+            }
+
         }
     }
 

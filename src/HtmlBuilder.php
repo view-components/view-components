@@ -1,16 +1,17 @@
 <?php
 namespace Presentation\Framework;
 
-use Presentation\Framework\Components\Html\A;
-use Presentation\Framework\Components\Html\Tag;
-use Presentation\Framework\Components\Text;
-use Presentation\Framework\Resources\Resources;
+use Presentation\Framework\Base\ComponentInterface;
+use Presentation\Framework\Component\Html\A;
+use Presentation\Framework\Component\Html\Tag;
+use Presentation\Framework\Component\Text;
+use Presentation\Framework\Resources\ResourceManager;
 
 class HtmlBuilder
 {
     protected $resources;
 
-    public function __construct(Resources $resources)
+    public function __construct(ResourceManager $resources)
     {
         $this->resources = $resources;
     }
@@ -30,6 +31,12 @@ class HtmlBuilder
         return $this->resources->css($src, $attributes);
     }
 
+    /**
+     * @param $name
+     * @param ComponentInterface[]|string $content
+     * @param array $attributes
+     * @return Tag
+     */
     public function tag($name, $content = [], $attributes = [])
     {
         if (is_string($content)) {

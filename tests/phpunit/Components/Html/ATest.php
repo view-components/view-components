@@ -2,8 +2,8 @@
 namespace Presentation\Framework\Test\Components\Html;
 
 
-use Presentation\Framework\Components\Html\A;
-use Presentation\Framework\Components\Text;
+use Presentation\Framework\Component\Html\A;
+use Presentation\Framework\Component\Text;
 use PHPUnit_Framework_TestCase;
 
 class ATest extends PHPUnit_Framework_TestCase
