@@ -2,7 +2,7 @@ destination: doc
 source:
 	- src
 	
-title: Nayjest/ViewComponents API Documentation
+title: Presentation Framework API Documentation
 sourceCode: true
 tree: true
 download: true
