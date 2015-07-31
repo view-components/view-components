@@ -4,7 +4,6 @@ composer.lock
 apigen.phar
 phpunit.phar
 build
-src/_Components
 tests/codecept/_output/*
 tests/.env
 tests/db.sqlite
