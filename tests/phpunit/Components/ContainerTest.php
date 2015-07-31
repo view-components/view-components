@@ -19,14 +19,14 @@ class ContainerTest extends PHPUnit_Framework_TestCase
         self::assertEquals('[]', $c->render());
 
         $t = new Text('inner');
-        $c->children()->setItems([$t]);
+        $c->children()->set([$t]);
         self::assertEquals('[inner]', $c->render());
 
         $c2 = new Container();
         $c2->setOpeningText('{')
             ->setClosingText('}');
-        $c->children()->addItem($c2);
-        $c2->children()->setItems([$t, $t]);
+        $c->children()->add($c2);
+        $c2->children()->set([$t, $t]);
         self::assertEquals('[{inner}]', $c->render());
     }
 }

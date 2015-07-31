@@ -30,7 +30,7 @@ abstract class AbstractTag implements ComponentInterface, TagInterface
     {
         $this->setAttributes($attributes);
         if ($components) {
-            $this->children()->setItems($components);
+            $this->children()->set($components);
         }
     }
 

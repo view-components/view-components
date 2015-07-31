@@ -19,7 +19,7 @@ class ListManager
     {
 
         foreach ($controls as $control) {
-            $dataProvider->operations()->addItem($control->getOperation());
+            $dataProvider->operations()->add($control->getOperation());
         }
     }
 }

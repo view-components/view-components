@@ -29,7 +29,7 @@ class ManagedList implements ComponentInterface
     )
     {
         static::manage($repeater, $controls);
-        $this->children()->setItems(
+        $this->children()->set(
             static::makeComponents($repeater, $controls)
         );
     }
@@ -65,7 +65,7 @@ class ManagedList implements ComponentInterface
             ],
             static::extractViews($controls)
         );
-        $form->children()->addItem(
+        $form->children()->add(
             new Tag('input', ['type' => 'submit'])
         );
         $itemsContainer = new Tag(

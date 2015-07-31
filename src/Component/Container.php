@@ -28,7 +28,7 @@ class Container implements ComponentInterface
     )
     {
         if ($children !== null) {
-            $this->children()->setItems($children);
+            $this->children()->set($children);
         }
         $this->setOpeningText($openingText);
         $this->setClosingText($closingText);

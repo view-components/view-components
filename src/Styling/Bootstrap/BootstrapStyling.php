@@ -45,9 +45,9 @@ class BootstrapStyling extends CustomStyling
     {
         $container
             ->children()
-            ->addItem($this->resources->js('jquery'))
-            ->addItem($this->resources->css($this->options->cssFile))
-            ->addItem($this->resources->js($this->options->jsFile));
+            ->add($this->resources->js('jquery'))
+            ->add($this->resources->css($this->options->cssFile))
+            ->add($this->resources->js($this->options->jsFile));
     }
 
     protected function getCallbacks()

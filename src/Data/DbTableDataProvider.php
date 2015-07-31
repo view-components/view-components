@@ -18,7 +18,7 @@ class DbTableDataProvider extends AbstractDataProvider
      */
     public function __construct(PDO $connection, $table, array $operations = [])
     {
-        $this->operations()->setItems($operations);
+        $this->operations()->set($operations);
         $this->processingService = new DbTableProcessingService(
             new DbTableProcessorResolver(),
             $this->operations(),

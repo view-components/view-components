@@ -64,7 +64,7 @@ class PaginationControl implements ControlInterface
         }
         $operations->remove($this->operation);
         $count = $this->dataProvider->count();
-        $operations->addItem($this->operation);
+        $operations->add($this->operation);
         return $count;
     }
 

@@ -47,7 +47,7 @@ class Repeater implements ComponentInterface, RepeaterInterface
             $callback = '\Presentation\Framework\Component\defaultRepeaterCallback';
         }
         if ($components !== null) {
-            $this->children()->setItems($components);
+            $this->children()->set($components);
         }
         $this->setIterator($iterator);
         $this->setCallback($callback);

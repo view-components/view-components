@@ -37,7 +37,7 @@ class Tag implements ComponentInterface, TagInterface
             $this->setAttributes($attributes);
         }
         if ($components !== null) {
-            $this->children()->setItems($components);
+            $this->children()->set($components);
         }
     }
 

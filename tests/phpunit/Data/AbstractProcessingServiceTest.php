@@ -47,7 +47,7 @@ abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase
     public function testOperations()
     {
         $op = new FilterOperation('id','<=', 3);
-        $this->operations->addItem($op);
+        $this->operations->add($op);
         self::assertEquals(3, $this->service->count());
         $this->operations->remove($op);
         self::assertEquals($this->totalCount, $this->service->count());

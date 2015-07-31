@@ -143,8 +143,8 @@ class Controller extends AbstractController
                 [new PersonView])
         ]);
 
-        $provider->operations()->addItem($filter1->getOperation());
-        $provider->operations()->addItem($filter2->getOperation());
+        $provider->operations()->add($filter1->getOperation());
+        $provider->operations()->add($filter2->getOperation());
 
         return $this->renderMenu() . $view->render();
     }

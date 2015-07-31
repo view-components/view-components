@@ -25,9 +25,9 @@ class TagTest extends PHPUnit_Framework_TestCase
         $first
             ->setTagName('i')
             ->setAttributes(['class' => 'icon']);
-        $first->children()->addItem(new Text('&nbsp;'));
+        $first->children()->add(new Text('&nbsp;'));
         $second = new Text('Hi!');
-        $tag->children()->setItems([$first, $second]);
+        $tag->children()->set([$first, $second]);
         $this->assertEquals(
             '<a class="btn"><i class="icon">&nbsp;</i>Hi!</a>',
             $tag->render()

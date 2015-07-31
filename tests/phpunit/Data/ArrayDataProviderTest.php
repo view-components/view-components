@@ -39,13 +39,13 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
     {
 
         $provider = $this->makeProvider();
-        $provider->operations()->addItem(
+        $provider->operations()->add(
             (new FilterOperation)
                 ->setField('id')
                 ->setOperator(FilterOperation::OPERATOR_GT)
                 ->setValue(3)
         );
-        $provider->operations()->addItem(
+        $provider->operations()->add(
             new FilterOperation('id', '<', 5)
         );
 
@@ -61,7 +61,7 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
     {
         $provider = $this->makeProvider();
         $sorting = new SortOperation('id', SortOperation::DESC);
-        $provider->operations()->setItems([$sorting]);
+        $provider->operations()->set([$sorting]);
         $res = '';
         foreach ($provider as $row) {
             $res .= $row->id;
@@ -69,7 +69,7 @@ class ArrayDataProviderTest extends PHPUnit_Framework_TestCase
         self::assertEquals('54321', $res);
 
         // Test changing operations
-        $provider->operations()->addItem(
+        $provider->operations()->add(
             new FilterOperation('id', FilterOperation::OPERATOR_NOT_EQ, 3)
         );
         $res = '';
