@@ -112,6 +112,9 @@ class BootstrapStyling extends CustomStyling
         }
 
         if ($tag->getAttribute('data-control') === 'pagination') {
+            if ($tag->children()->isEmpty()) {
+                return null;
+            }
             $tag->children()->first()->setAttribute('class','pagination');
             /** @var Tag $item */
             foreach($tag->getChildrenRecursive() as $item) {

@@ -2,6 +2,7 @@
 
 namespace Presentation\Framework\Component\ControlView;
 
+use Closure;
 use League\Url\Query;
 use League\Url\Url;
 use Presentation\Framework\Component\Html\Tag;
@@ -31,27 +32,45 @@ class PaginationView extends Tag
 
     /**
      * @param int $current
-     * @param int $total
+     * @param int|Closure $total
      * @param string $inputKey
      */
     public function __construct($current, $total, $inputKey)
     {
-        $this->current = (int)$current;
-        $this->total = (int)$total;
-        $this->inputKey = $inputKey;
-        $this->makeLinks();
         parent::__construct(
             'nav',
             [
                 'data-role' => 'control-container',
                 'data-control' => 'pagination',
-            ],
-            [
-                new Tag('ul', [], $this->items),
             ]
         );
+        $this->current = (int)$current;
+        $this->total = is_numeric($total) ? (int)$total : $total;
+        $this->inputKey = $inputKey;
+        if (!$total instanceof Closure) {
+            $this->initializeChildren();
+        }
     }
 
+    protected function initializeChildren()
+    {
+        $this->makeLinks();
+        $this->children()->set([new Tag('ul', [], $this->items)]);
+    }
+
+    public function render()
+    {
+        if ($this->total instanceof Closure) {
+            $closure = $this->total;
+            $this->total = (int)($closure());
+            $this->initializeChildren();
+        }
+        // hide if there is no need in pagination
+        if ($this->total <= 1) {
+            $this->setAttribute('style', 'display:none;');
+        }
+        return parent::render();
+    }
     protected function makeLinks()
     {
         $maxLinks = 10;
@@ -74,15 +93,15 @@ class PaginationView extends Tag
                     $this->total - $minNumLinksNearEnd,
                     $this->total
                 );
-            // 1 separator before current page item
-            } elseif($this->total - ($this->current - $minNumLinksAroundCurrent) < $maxLinks) {
+                // 1 separator before current page item
+            } elseif ($this->total - ($this->current - $minNumLinksAroundCurrent) < $maxLinks) {
                 $this->makeLinksRange(1, 1 + $minNumLinksNearEnd);
                 $this->makeSeparator();
                 $this->makeLinksRange(
                     $this->current - $minNumLinksAroundCurrent,
                     $this->total
                 );
-            // 2 separators
+                // 2 separators
             } else {
                 $this->makeLinksRange(1, 1 + $minNumLinksNearEnd);
                 $this->makeSeparator();
@@ -111,14 +130,15 @@ class PaginationView extends Tag
         $text = new Text((string)$title);
 
         $disabled = ($page === $this->current);
-        $this->items[] = new Tag('li', $disabled?['data-disabled'=>1]:[], [
+        $this->items[] = new Tag('li', $disabled ? ['data-disabled' => 1] : [], [
             new Tag(
-                $disabled?'span':'a',
-                $disabled?[]:['href' => $this->makeUrl($page)],
+                $disabled ? 'span' : 'a',
+                $disabled ? [] : ['href' => $this->makeUrl($page)],
                 [$text]
             )
         ]);
     }
+
     protected function makeSeparator()
     {
         $this->items[] = new Tag('li', [], [
@@ -128,7 +148,7 @@ class PaginationView extends Tag
 
     protected function makeLinksRange($from, $to)
     {
-        for($page = $from; $page <= $to; $page++) {
+        for ($page = $from; $page <= $to; $page++) {
             $this->makeLink($page);
         }
     }
@@ -136,7 +156,7 @@ class PaginationView extends Tag
     protected function makeUrl($page)
     {
         return Url::createFromServer($_SERVER)->mergeQuery(
-            Query::createFromArray([$this->inputKey=>$page])
+            Query::createFromArray([$this->inputKey => $page])
         )->__toString();
 
     }

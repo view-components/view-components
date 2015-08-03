@@ -75,13 +75,9 @@ class PaginationControl implements ControlInterface
 
     protected function makeDefaultView()
     {
-        $pageCount = $this->getPageCount();
-        if ($pageCount <= 1) {
-            return new Dummy();
-        }
         return new PaginationView(
             (int)$this->page->getValue(),
-            $pageCount,
+            (int)$this->getPageCount(),
             $this->page->getKey()
         );
     }
