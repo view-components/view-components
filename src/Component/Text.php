@@ -16,7 +16,7 @@ class Text implements ComponentInterface
     protected $value;
 
     /**
-     * @param string|null $value
+     * @param string|null|Closure $value
      */
     public function __construct($value = null)
     {
