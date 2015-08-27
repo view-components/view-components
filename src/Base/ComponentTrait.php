@@ -2,8 +2,12 @@
 namespace Presentation\Framework\Base;
 
 
+use Presentation\Framework\Event\BeforeRenderTrait;
+
 trait ComponentTrait
 {
+    use BeforeRenderTrait;
+
     /** @return \Nayjest\Collection\CollectionInterface */
     abstract public function children();
 
@@ -11,7 +15,7 @@ trait ComponentTrait
     {
         $output = '';
         /** @var ComponentInterface $child */
-        foreach($this->children() as $child) {
+        foreach ($this->children() as $child) {
             $output .= $child->render();
         }
         return $output;
@@ -19,6 +23,7 @@ trait ComponentTrait
 
     public function render()
     {
-        return $this->renderChildren();
+        return $this->beforeRender()->notify()
+        . $this->renderChildren();
     }
 }
