@@ -23,47 +23,49 @@ class ManagedList implements ComponentInterface
     use ViewTrait;
     use ComponentTrait;
 
+    private $repeater;
+
+    /** @var array|ControlInterface[] $controls */
+    private $controls;
+
+    private $isOperationsApplied = false;
+
     public function __construct(
         RepeaterInterface $repeater,
         array $controls = []
     )
     {
-        static::manage($repeater, $controls);
-        $this->children()->set(
-            static::makeComponents($repeater, $controls)
-        );
+        $this->repeater = $repeater;
+        $this->controls = $controls;
+    }
+
+    protected function defaultChildren()
+    {
+        $this->applyOperations();
+        return $this->makeComponents();
     }
 
     /**
-     * @param ControlInterface[] $controls
      * @return ComponentInterface[]
      */
-    protected static function extractViews(array $controls)
+    private function extractControlViews()
     {
         $controlViews = [];
-        foreach($controls as $control)
+        foreach($this->controls as $control)
         {
             $controlViews[] = $control->getView();
         }
         return $controlViews;
     }
 
-    /**
-     * @param RepeaterInterface $repeater
-     * @param ControlInterface[] $controls
-     * @return array
-     */
-    protected static function makeComponents(
-        RepeaterInterface $repeater,
-        array $controls
-    )
+    private function makeComponents()
     {
         $form = new Tag(
             'form',
             [
                 'data-role' => 'controls-form'
             ],
-            static::extractViews($controls)
+            static::extractControlViews()
         );
         $form->children()->add(
             new Tag('input', ['type' => 'submit'])
@@ -71,7 +73,7 @@ class ManagedList implements ComponentInterface
         $itemsContainer = new Tag(
             'div',
             ['data-role' => 'items-container'],
-            [$repeater]
+            [$this->repeater]
         );
         return [$form, $itemsContainer];
     }
@@ -79,29 +81,26 @@ class ManagedList implements ComponentInterface
     /**
      * Obtains iterator from repeater and replaces it to data provider.
      *
-     * @param RepeaterInterface $repeater
      * @return DataProviderInterface
      */
-    private static function resolveDataProvider(RepeaterInterface $repeater)
+    private function resolveDataProvider()
     {
-        $iterator = $repeater->getIterator();
+        $iterator = $this->repeater->getIterator();
         if ($iterator instanceof DataProviderInterface) {
             $provider = $iterator;
         } else {
             $provider = new ArrayDataProvider($iterator);
-            $repeater->setIterator($provider);
+            $this->repeater->setIterator($provider);
         }
         return $provider;
     }
 
-    /**
-     * @param RepeaterInterface $repeater
-     * @param ControlInterface[] $controls
-     * @return array
-     */
-    protected static function manage(RepeaterInterface $repeater, array $controls)
+    public function applyOperations()
     {
-        $manager = new ListManager();
-        $manager->manage(static::resolveDataProvider($repeater), $controls);
+        if (!$this->isOperationsApplied) {
+            $manager = new ListManager();
+            $manager->manage($this->resolveDataProvider(), $this->controls);
+            $this->isOperationsApplied = true;
+        }
     }
 }

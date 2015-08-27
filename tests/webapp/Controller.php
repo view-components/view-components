@@ -1,6 +1,7 @@
 <?php
 namespace Presentation\Framework\Demo;
 
+use Presentation\Framework\Component\ControlView\PaginationView;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Input\InputOptionFactory;
 use Presentation\Framework\Common\ListManager;
@@ -273,7 +274,7 @@ class Controller extends AbstractController
                     $input('sort_field'),
                     $input('sort_dir')
                 ),
-                $pagination = new PaginationControl(
+                new PaginationControl(
                     $input('page', 1),
                     10,
                     $provider
@@ -281,10 +282,18 @@ class Controller extends AbstractController
             ]
         );
 
-        $container = new Container([$list, $pagination->getView()]);
-        $resources = new ResourceManager(new AliasRegistry([
+        // move pagination to container bottom
+        $paginationView = $list->getChildrenRecursive()->find('is_a', [PaginationView::class]);
+        $container = new Container([$list, $paginationView]);
+
+        $resources = new ResourceManager(
+            new AliasRegistry([
             'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
-        ]), new AliasRegistry(), new IncludedResourcesRegistry());
+            ]),
+            new AliasRegistry(),
+            new IncludedResourcesRegistry()
+        );
+
         $styling = new BootstrapStyling($resources);
         $styling->apply($container);
 
