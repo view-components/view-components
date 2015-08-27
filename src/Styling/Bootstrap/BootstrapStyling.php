@@ -10,6 +10,7 @@ use Presentation\Framework\Base\Html\TagInterface;
 use Presentation\Framework\Component\Controls\FilterControl;
 use Presentation\Framework\Component\ControlView\FilterControlView;
 use Presentation\Framework\Component\Html\Tag;
+use Presentation\Framework\Event\CallbackObserver;
 use Presentation\Framework\Resources\ResourceManager;
 use Presentation\Framework\Styling\CustomStyling;
 use Symfony\Component\VarDumper\VarDumper;
@@ -112,22 +113,23 @@ class BootstrapStyling extends CustomStyling
         }
 
         if ($tag->getAttribute('data-control') === 'pagination') {
-            if ($tag->children()->isEmpty()) {
-                return null;
-            }
-            $tag->children()->first()->setAttribute('class','pagination');
-            /** @var Tag $item */
-            foreach($tag->getChildrenRecursive() as $item) {
-
-                if ($item instanceof TagInterface
-                    &&  $item->getTagName() === 'li'
-                    &&  $item->getAttribute('data-disabled')
-                ) {
-                    $item->setAttribute('class', 'disabled');
+            $tag->beforeRender()->attach(new CallbackObserver(function(ComponentInterface $component) {
+                if ($component->children()->isEmpty()) {
+                    return null;
                 }
-            }
-        }
+                $component->children()->first()->setAttribute('class','pagination');
+                /** @var Tag $item */
+                foreach($component->getChildrenRecursive() as $item) {
 
+                    if ($item instanceof TagInterface
+                        &&  $item->getTagName() === 'li'
+                        &&  $item->getAttribute('data-disabled')
+                    ) {
+                        $item->setAttribute('class', 'disabled');
+                    }
+                }
+            }));
+        }
     }
 
     protected function filterControlCallback(FilterControlView $view)
