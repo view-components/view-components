@@ -4,7 +4,6 @@ namespace Presentation\Framework\Control;
 
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Component\ControlView\PaginationView;
-use Presentation\Framework\Component\Dummy;
 use Presentation\Framework\Data\DataProviderInterface;
 use Presentation\Framework\Data\Operations\PaginateOperation;
 use RuntimeException;
@@ -16,7 +15,7 @@ class PaginationControl implements ControlInterface
     /**
      * @var \Presentation\Framework\Input\InputOption
      */
-    private $page;
+    private $pageInputOption;
     /**
      * @var int
      */
@@ -38,7 +37,7 @@ class PaginationControl implements ControlInterface
         DataProviderInterface $dataProvider
     )
     {
-        $this->page = $page;
+        $this->pageInputOption = $page;
         $this->recordsPerPage = $recordsPerPage;
         $this->dataProvider = $dataProvider;
     }
@@ -46,7 +45,7 @@ class PaginationControl implements ControlInterface
     public function getOperation()
     {
         if ($this->operation === null) {
-            $page = $this->page->getValue();
+            $page = $this->pageInputOption->getValue();
             $this->operation = new PaginateOperation($page, $this->recordsPerPage);
         }
         return $this->operation;
@@ -76,9 +75,9 @@ class PaginationControl implements ControlInterface
     protected function makeDefaultView()
     {
         return new PaginationView(
-            (int)$this->page->getValue(),
+            (int)$this->pageInputOption->getValue(),
             (int)$this->getPageCount(),
-            $this->page->getKey()
+            $this->pageInputOption->getKey()
         );
     }
 
