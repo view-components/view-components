@@ -24,7 +24,7 @@ class SortingSelectControl implements ControlInterface
     private $directionOption;
 
     /**
-     * @param array $fields
+     * @param array $fields list of fields allowed to sort (<name> => <Label>)
      * @param InputOption $fieldOption
      * @param InputOption $directionOption
      */
