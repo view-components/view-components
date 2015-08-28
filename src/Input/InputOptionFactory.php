@@ -2,8 +2,10 @@
 
 namespace Presentation\Framework\Input;
 
-use Presentation\Framework\Input\InputOption;
-
+/**
+ * Class InputOptionFactory.
+ *
+ */
 class InputOptionFactory
 {
     /**
