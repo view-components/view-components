@@ -65,7 +65,7 @@ class ManagedList implements ComponentInterface
             [
                 'data-role' => 'controls-form'
             ],
-            static::extractControlViews()
+            $this->extractControlViews()
         );
         $form->children()->add(
             new Tag('input', ['type' => 'submit'])
