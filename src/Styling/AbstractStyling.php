@@ -3,7 +3,7 @@ namespace Presentation\Framework\Styling;
 
 use Presentation\Framework\Base\ComponentInterface;
 
-abstract class AbstractStyling
+abstract class AbstractStyling implements StylingInterface
 {
     public function apply(ComponentInterface $component)
     {
