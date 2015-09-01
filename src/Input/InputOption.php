@@ -9,6 +9,13 @@ class InputOption
     private $key;
     private $default;
 
+    /**
+     * Constructor.
+     *
+     * @param string $key
+     * @param array $input
+     * @param mixed $default
+     */
     public function __construct(
         $key,
         array $input,
@@ -28,11 +35,21 @@ class InputOption
             : $this->default;
     }
 
+    /**
+     * Returns default value or NULL if no default value was specified.
+     *
+     * @return mixed
+     */
     public function getDefaultValue()
     {
         return $this->default;
     }
 
+    /**
+     * Returns value from input or NULL if value not exists.
+     *
+     * @return mixed
+     */
     public function getInputValue()
     {
         return $this->inputValue;
