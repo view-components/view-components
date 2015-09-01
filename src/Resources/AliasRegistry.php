@@ -15,7 +15,7 @@ class AliasRegistry
     /**
      * Constructor.
      *
-     * @param array $aliases (alias => url)
+     * @param array $aliases where keys are aliases and values are aliased values (names, URIs).
      */
     public function __construct(array $aliases = [])
     {
