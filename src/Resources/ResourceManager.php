@@ -82,7 +82,7 @@ class ResourceManager
     public function css($name, array $attributes = [])
     {
 
-        if ($this->jsRegistry->has($name)) {
+        if ($this->cssRegistry->has($name)) {
             $url = $this->cssRegistry->get($name);
         } else {
             if (static::isCssUrl($name)) {
