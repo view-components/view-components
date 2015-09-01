@@ -68,7 +68,7 @@ class ResourceManager
         if (!$this->included->isIncluded($url)) {
             $this->included->markAsIncluded($url);
             $type = 'text/javascript';
-            return new Script(compact('url', 'type'));
+            return new Script(['src' => $url, 'type' => $type]);
         } else {
             return Dummy::getInstance();
         }
