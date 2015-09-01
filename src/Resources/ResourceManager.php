@@ -1,6 +1,7 @@
 <?php
 namespace Presentation\Framework\Resources;
 
+use InvalidArgumentException;
 use Presentation\Framework\Component\Dummy;
 use Presentation\Framework\Component\Html\Script;
 use Presentation\Framework\Component\Html\Tag;
@@ -12,6 +13,13 @@ class ResourceManager
     protected $included;
     protected $dummyComponent;
 
+    /**
+     * Constructor.
+     *
+     * @param AliasRegistry $js
+     * @param AliasRegistry $css
+     * @param IncludedResourcesRegistry $included
+     */
     public function __construct(
         AliasRegistry $js,
         AliasRegistry $css,
@@ -23,12 +31,22 @@ class ResourceManager
         $this->included = $included;
     }
 
-    protected function getDummyComponent()
+    /**
+     * @param string $name
+     * @return bool
+     */
+    protected static function isJsUrl($name)
     {
-        if ($this->dummyComponent === null) {
-            $this->dummyComponent = new Dummy();
-        }
-        return $this->dummyComponent;
+        return strpos($name, '.js') !== false || strpos($name, '//') !== false;
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    protected static function isCssUrl($name)
+    {
+        return strpos($name, '.css') !== false  || strpos($name, '//') !== false;
     }
 
     /**
@@ -37,13 +55,22 @@ class ResourceManager
      */
     public function js($name)
     {
-        $src = $this->jsRegistry->get($name, $name);
-        if (!$this->included->isIncluded($src)) {
-            $this->included->markAsIncluded($src);
-            $type = 'text/javascript';
-            return new Script(compact('src', 'type'));
+
+        if ($this->jsRegistry->has($name)) {
+            $url = $this->jsRegistry->get($name);
         } else {
-            return $this->getDummyComponent();
+            if (static::isJsUrl($name)) {
+                $url = $name;
+            } else {
+                throw new InvalidArgumentException('Unknown JavaScript alias or invalid URL');
+            }
+        }
+        if (!$this->included->isIncluded($url)) {
+            $this->included->markAsIncluded($url);
+            $type = 'text/javascript';
+            return new Script(compact('url', 'type'));
+        } else {
+            return Dummy::getInstance();
         }
     }
 
@@ -54,17 +81,26 @@ class ResourceManager
      */
     public function css($name, array $attributes = [])
     {
-        $href = $this->cssRegistry->get($name, $name);
-        if (!$this->included->isIncluded($href)) {
-            $this->included->markAsIncluded($href);
+
+        if ($this->jsRegistry->has($name)) {
+            $url = $this->cssRegistry->get($name);
+        } else {
+            if (static::isCssUrl($name)) {
+                $url = $name;
+            } else {
+                throw new InvalidArgumentException('Unknown CSS alias or invalid URL');
+            }
+        }
+        if (!$this->included->isIncluded($url)) {
+            $this->included->markAsIncluded($url);
             return new Tag('link', array_merge([
                 'type' => 'text/css',
                 'rel' => 'stylesheet',
-                'href' => $href,
+                'href' => $url,
                 'media' => 'all'
             ], $attributes));
         } else {
-            return $this->getDummyComponent();
+            return Dummy::getInstance();
         }
     }
 }

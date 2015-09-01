@@ -5,6 +5,11 @@ class AliasRegistry
 {
     protected $aliases;
 
+    /**
+     * Constructor.
+     *
+     * @param array $aliases (alias => url)
+     */
     public function __construct(array $aliases = [])
     {
         $this->aliases = $aliases;
@@ -26,5 +31,10 @@ class AliasRegistry
         } else {
             return $default;
         }
+    }
+
+    public function has($name)
+    {
+        return array_key_exists($name, $this->aliases);
     }
 }
