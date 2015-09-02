@@ -62,7 +62,7 @@ class ResourceManager
             if (static::isJsUrl($name)) {
                 $url = $name;
             } else {
-                throw new InvalidArgumentException('Unknown JavaScript alias or invalid URL');
+                throw new InvalidArgumentException('Unknown JavaScript alias or invalid URL: ' . $name);
             }
         }
         if (!$this->included->isIncluded($url)) {
