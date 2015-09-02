@@ -5,7 +5,7 @@ use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Component\Html\A;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Component\Text;
-use Presentation\Framework\Resources\ResourceManager;
+use Presentation\Framework\Resource\ResourceManager;
 
 class HtmlBuilder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessingServices;
+namespace Presentation\Framework\Data\ProcessingService;
 
 use Presentation\Framework\Data\DbTable\Query;
 use Traversable;

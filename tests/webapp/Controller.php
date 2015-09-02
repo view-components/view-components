@@ -14,15 +14,15 @@ use Presentation\Framework\Component\Debug\SymfonyVarDump;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Data\ArrayDataProvider;
 use Presentation\Framework\Data\DbTableDataProvider;
-use Presentation\Framework\Data\Operations\FilterOperation;
-use Presentation\Framework\Data\Operations\SortOperation;
+use Presentation\Framework\Data\Operation\FilterOperation;
+use Presentation\Framework\Data\Operation\SortOperation;
 use Presentation\Framework\HtmlBuilder;
 use Presentation\Framework\Component\Repeater;
 use Presentation\Framework\Component\Text;
 use Presentation\Framework\Demo\Components\PersonView;
-use Presentation\Framework\Resources\AliasRegistry;
-use Presentation\Framework\Resources\IncludedResourcesRegistry;
-use Presentation\Framework\Resources\ResourceManager;
+use Presentation\Framework\Resource\AliasRegistry;
+use Presentation\Framework\Resource\IncludedResourcesRegistry;
+use Presentation\Framework\Resource\ResourceManager;
 use Presentation\Framework\Styling\Bootstrap\BootstrapStyling;
 
 class Controller extends AbstractController

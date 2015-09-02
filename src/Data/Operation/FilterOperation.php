@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Data\Operations;
+namespace Presentation\Framework\Data\Operation;
 
 class FilterOperation implements OperationInterface
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Presentation\Framework\Data\Processors;
+namespace Presentation\Framework\Data\Processor;
 
-use Presentation\Framework\Data\Operations\OperationInterface;
+use Presentation\Framework\Data\Operation\OperationInterface;
 
 interface ProcessorInterface
 {

@@ -2,7 +2,7 @@
 namespace Presentation\Framework\Control;
 
 use Presentation\Framework\Base\ComponentInterface;
-use Presentation\Framework\Data\Operations\OperationInterface;
+use Presentation\Framework\Data\Operation\OperationInterface;
 
 interface ControlInterface
 {

@@ -3,9 +3,9 @@
 namespace Presentation\Framework\Test\Data;
 
 use Exception;
-use Presentation\Framework\Data\Operations\FilterOperation;
+use Presentation\Framework\Data\Operation\FilterOperation;
 use Presentation\Framework\Data\OperationsCollection;
-use Presentation\Framework\Data\ProcessingServices\ArrayProcessingService;
+use Presentation\Framework\Data\ProcessingService\ArrayProcessingService;
 use PHPUnit_Framework_TestCase;
 
 abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase

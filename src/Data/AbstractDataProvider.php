@@ -2,7 +2,7 @@
 
 namespace Presentation\Framework\Data;
 
-use Presentation\Framework\Data\ProcessingServices\ProcessingServiceInterface;
+use Presentation\Framework\Data\ProcessingService\ProcessingServiceInterface;
 use Traversable;
 
 abstract class AbstractDataProvider implements DataProviderInterface

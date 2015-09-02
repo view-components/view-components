@@ -8,7 +8,7 @@ use Presentation\Framework\Component\Html\Script;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Component\Text;
 use Presentation\Framework\Rendering\ViewTrait;
-use Presentation\Framework\Resources\ResourceManager;
+use Presentation\Framework\Resource\ResourceManager;
 
 /**
  * Class GeoChart

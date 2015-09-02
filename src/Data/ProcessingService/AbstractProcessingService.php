@@ -1,9 +1,9 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessingServices;
+namespace Presentation\Framework\Data\ProcessingService;
 
 use Presentation\Framework\Data\OperationsCollection;
-use Presentation\Framework\Data\ProcessorResolvers\ProcessorResolverInterface;
+use Presentation\Framework\Data\ProcessorResolver\ProcessorResolverInterface;
 use Traversable;
 
 abstract class AbstractProcessingService implements ProcessingServiceInterface

@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Resources;
+namespace Presentation\Framework\Resource;
 
 use InvalidArgumentException;
 use Presentation\Framework\Component\Dummy;

@@ -4,8 +4,8 @@ namespace Presentation\Framework\Control;
 
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Component\ControlView\FilterControlView;
-use Presentation\Framework\Data\Operations\DummyOperation;
-use Presentation\Framework\Data\Operations\FilterOperation;
+use Presentation\Framework\Data\Operation\DummyOperation;
+use Presentation\Framework\Data\Operation\FilterOperation;
 use Stringy\StaticStringy;
 
 class FilterControl implements ControlInterface

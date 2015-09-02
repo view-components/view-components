@@ -3,8 +3,8 @@
 namespace Presentation\Framework\Test\Data;
 
 use Presentation\Framework\Data\OperationsCollection;
-use Presentation\Framework\Data\ProcessingServices\ArrayProcessingService;
-use Presentation\Framework\Data\ProcessorResolvers\ArrayProcessorResolver;
+use Presentation\Framework\Data\ProcessingService\ArrayProcessingService;
+use Presentation\Framework\Data\ProcessorResolver\ArrayProcessorResolver;
 use PHPUnit_Framework_TestCase;
 
 class ArrayProcessingServiceTest extends AbstractProcessingServiceTest

@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Resources;
+namespace Presentation\Framework\Resource;
 
 class IncludedResourcesRegistry
 {

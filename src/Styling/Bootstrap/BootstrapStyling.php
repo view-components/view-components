@@ -7,13 +7,11 @@ use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Base\ContainerInterface;
 use Presentation\Framework\Base\Html\AbstractTag;
 use Presentation\Framework\Base\Html\TagInterface;
-use Presentation\Framework\Component\Controls\FilterControl;
 use Presentation\Framework\Component\ControlView\FilterControlView;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Event\CallbackObserver;
-use Presentation\Framework\Resources\ResourceManager;
+use Presentation\Framework\Resource\ResourceManager;
 use Presentation\Framework\Styling\CustomStyling;
-use Symfony\Component\VarDumper\VarDumper;
 
 class BootstrapStyling extends CustomStyling
 {

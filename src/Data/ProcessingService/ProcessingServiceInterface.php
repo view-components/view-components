@@ -1,10 +1,10 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessingServices;
+namespace Presentation\Framework\Data\ProcessingService;
 
 use Countable;
 use Presentation\Framework\Data\OperationsCollection;
-use Presentation\Framework\Data\ProcessorResolvers\ProcessorResolverInterface;
+use Presentation\Framework\Data\ProcessorResolver\ProcessorResolverInterface;
 use Traversable;
 
 interface ProcessingServiceInterface extends Countable

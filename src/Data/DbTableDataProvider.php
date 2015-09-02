@@ -3,9 +3,9 @@
 namespace Presentation\Framework\Data;
 
 use Presentation\Framework\Data\DbTable\Query;
-use Presentation\Framework\Data\Operations\OperationInterface;
-use Presentation\Framework\Data\ProcessingServices\DbTableProcessingService;
-use Presentation\Framework\Data\ProcessorResolvers\DbTableProcessorResolver;
+use Presentation\Framework\Data\Operation\OperationInterface;
+use Presentation\Framework\Data\ProcessingService\DbTableProcessingService;
+use Presentation\Framework\Data\ProcessorResolver\DbTableProcessorResolver;
 use PDO;
 
 class DbTableDataProvider extends AbstractDataProvider

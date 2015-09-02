@@ -2,8 +2,8 @@
 namespace Presentation\Framework\Test\Data;
 
 use Presentation\Framework\Data\ArrayDataProvider;
-use Presentation\Framework\Data\Operations\FilterOperation;
-use Presentation\Framework\Data\Operations\SortOperation;
+use Presentation\Framework\Data\Operation\FilterOperation;
+use Presentation\Framework\Data\Operation\SortOperation;
 use Presentation\Framework\Data\ArrayProcessingService;
 use PHPUnit_Framework_TestCase;
 

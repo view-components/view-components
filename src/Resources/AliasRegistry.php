@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Resources;
+namespace Presentation\Framework\Resource;
 
 /**
  * Class AliasRegistry.

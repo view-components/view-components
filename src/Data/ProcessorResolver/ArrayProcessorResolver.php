@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessorResolvers;
+namespace Presentation\Framework\Data\ProcessorResolver;
 
 class ArrayProcessorResolver extends ProcessorResolver
 {

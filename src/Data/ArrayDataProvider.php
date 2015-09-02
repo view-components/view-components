@@ -2,9 +2,9 @@
 
 namespace Presentation\Framework\Data;
 
-use Presentation\Framework\Data\ProcessingServices\ArrayProcessingService;
-use Presentation\Framework\Data\ProcessorResolvers\ArrayProcessorResolver;
-use Presentation\Framework\Data\ProcessorResolvers\ProcessorResolverInterface;
+use Presentation\Framework\Data\ProcessingService\ArrayProcessingService;
+use Presentation\Framework\Data\ProcessorResolver\ArrayProcessorResolver;
+use Presentation\Framework\Data\ProcessorResolver\ProcessorResolverInterface;
 
 class ArrayDataProvider extends AbstractDataProvider
 {

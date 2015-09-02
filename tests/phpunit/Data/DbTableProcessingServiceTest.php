@@ -4,8 +4,8 @@ namespace Presentation\Framework\Test\Data;
 
 use Presentation\Framework\Data\DbTable\Query;
 use Presentation\Framework\Data\OperationsCollection;
-use Presentation\Framework\Data\ProcessingServices\DbTableProcessingService;
-use Presentation\Framework\Data\ProcessorResolvers\DbTableProcessorResolver;
+use Presentation\Framework\Data\ProcessingService\DbTableProcessingService;
+use Presentation\Framework\Data\ProcessorResolver\DbTableProcessorResolver;
 use PDO;
 use PHPUnit_Framework_TestCase;
 

@@ -5,7 +5,7 @@ namespace Presentation\Framework\Control;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Component\ControlView\PaginationView;
 use Presentation\Framework\Data\DataProviderInterface;
-use Presentation\Framework\Data\Operations\PaginateOperation;
+use Presentation\Framework\Data\Operation\PaginateOperation;
 use RuntimeException;
 
 class PaginationControl implements ControlInterface
