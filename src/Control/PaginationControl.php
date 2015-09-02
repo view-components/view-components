@@ -19,7 +19,7 @@ class PaginationControl implements ControlInterface
     /**
      * @var int
      */
-    private $recordsPerPage;
+    protected $recordsPerPage;
 
     protected $operation;
 
