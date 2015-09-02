@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Test\Components;
+namespace Presentation\Framework\Test\Component;
 
 use Presentation\Framework\Component\Container;
 use Presentation\Framework\Component\Text;

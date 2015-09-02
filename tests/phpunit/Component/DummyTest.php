@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Test\Components;
+namespace Presentation\Framework\Test\Component;
 
 use PHPUnit_Framework_TestCase;
 use Presentation\Framework\Component\Dummy;

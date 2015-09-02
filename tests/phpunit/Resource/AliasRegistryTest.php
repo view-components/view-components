@@ -1,6 +1,5 @@
 <?php
-namespace Presentation\Framework\Test\Resources;
-
+namespace Presentation\Framework\Test\Resource;
 
 use Presentation\Framework\Resource\AliasRegistry;
 use PHPUnit_Framework_TestCase;

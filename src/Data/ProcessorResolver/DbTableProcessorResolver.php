@@ -2,17 +2,16 @@
 
 namespace Presentation\Framework\Data\ProcessorResolver;
 
+use Presentation\Framework\Data\Operation\FilterOperation;
+use Presentation\Framework\Data\Operation\SortOperation;
+use Presentation\Framework\Data\Processor\DbTable\FilterProcessor;
+use Presentation\Framework\Data\Processor\DbTable\SortProcessor;
+
 class DbTableProcessorResolver extends ProcessorResolver
 {
     public function __construct()
     {
-        $this->register(
-            'Presentation\Framework\Data\Operations\SortOperation',
-            'Presentation\Framework\Data\Processors\DbTable\SortProcessor'
-        );
-        $this->register(
-            'Presentation\Framework\Data\Operations\FilterOperation',
-            'Presentation\Framework\Data\Processors\DbTable\FilterProcessor'
-        );
+        $this->register(SortOperation::class, SortProcessor::class);
+        $this->register(FilterOperation::class, FilterProcessor::class);
     }
 }

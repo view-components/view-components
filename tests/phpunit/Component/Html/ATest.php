@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Test\Components\Html;
+namespace Presentation\Framework\Test\Component\Html;
 
 
 use Presentation\Framework\Component\Html\A;

@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Test\Components;
+namespace Presentation\Framework\Test\Component;
 
 use Presentation\Framework\Component\Text;
 use PHPUnit_Framework_TestCase;
@@ -14,5 +14,9 @@ class TextTest extends PHPUnit_Framework_TestCase
         $res = $text->setValue('some text 2');
         self::assertEquals($text, $res);
         self::assertEquals('some text 2', $text->render());
+
+        $text->children()->add(new Text(function(){return '!';}));
+        self::assertEquals('some text 2!', $text->render());
+
     }
 }

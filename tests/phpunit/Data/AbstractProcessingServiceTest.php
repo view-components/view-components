@@ -2,7 +2,7 @@
 
 namespace Presentation\Framework\Test\Data;
 
-use Exception;
+use LogicException;
 use Presentation\Framework\Data\Operation\FilterOperation;
 use Presentation\Framework\Data\OperationsCollection;
 use Presentation\Framework\Data\ProcessingService\ArrayProcessingService;
@@ -12,6 +12,7 @@ abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase
 {
     /** @var  ArrayProcessingService */
     protected $service;
+
     protected $data;
     /** @var  OperationsCollection */
     protected $operations;
@@ -20,21 +21,8 @@ abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        throw new Exception('Override me!');
+        throw new LogicException('Override me!');
     }
-
-//    public function testGetSource()
-//    {
-//        self::assertEquals($this->data, $this->manager->getDataSource());
-//
-//        // do some stuff
-//        $op = new FilterControl('id','<=', 3);
-//        $this->operations->add($op);
-//
-//        // test again
-//        self::assertEquals($this->data, $this->manager->getDataSource());
-//
-//    }
 
     public function testGetProcessedData()
     {

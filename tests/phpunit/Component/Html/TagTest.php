@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Test\Components\Html;
+namespace Presentation\Framework\Test\Component\Html;
 
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Component\Text;

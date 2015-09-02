@@ -2,7 +2,10 @@
 
 namespace Presentation\Framework\Data\ProcessorResolver;
 
+use Presentation\Framework\Data\Operation\DummyOperation;
 use Presentation\Framework\Data\Operation\OperationInterface;
+use Presentation\Framework\Data\Processor\DummyProcessor;
+use Presentation\Framework\Data\Processor\ProcessorInterface;
 use Presentation\Framework\Exceptions\ProcessorNotFoundException;
 
 /**
@@ -13,19 +16,27 @@ use Presentation\Framework\Exceptions\ProcessorNotFoundException;
 class ProcessorResolver implements ProcessorResolverInterface
 {
     protected $processors = [
-        'Presentation\Framework\Data\Operations\DummyOperation' =>
-        '\Presentation\Framework\Data\Processors\DummyProcessor'
+        DummyOperation::class => DummyProcessor::class
     ];
 
-    public function register($operation, $processor)
+    /**
+     * Registers operation processor.
+     *
+     * @param string $operationClass
+     * @param string $processorClass
+     * @return $this
+     */
+    public function register($operationClass, $processorClass)
     {
-        $this->processors[$operation] = $processor;
+        $this->processors[$operationClass] = $processorClass;
         return $this;
     }
 
     /**
+     * Returns operation processor instance.
+     *
      * @param OperationInterface $operation
-     * @return mixed
+     * @return ProcessorInterface
      */
     public function getProcessor(OperationInterface $operation)
     {
