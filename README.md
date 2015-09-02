@@ -10,7 +10,7 @@ PHP Presentation Framework
 
 ## Requirements
 
-* php 5.4+
+* php 5.5+
 
 ## Installation
 
