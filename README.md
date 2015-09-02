@@ -1,6 +1,7 @@
 PHP Presentation Framework
 =====
 
+[![Release](https://img.shields.io/packagist/v/presentation/framework.svg)](https://packagist.org/packages/presentation/framework)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/?branch=master)
 [![Build Status](https://travis-ci.org/presentation-framework/presentation-framework.svg?branch=master)](https://travis-ci.org/presentation-framework/presentation-framework)
 [![Code Coverage](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/?branch=master)
