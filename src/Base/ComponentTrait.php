@@ -8,6 +8,8 @@ trait ComponentTrait
 {
     use BeforeRenderTrait;
 
+    protected $componentName;
+
     /** @return \Nayjest\Collection\CollectionInterface */
     abstract public function children();
 
@@ -25,5 +27,21 @@ trait ComponentTrait
     {
         return $this->beforeRender()->notify()
         . $this->renderChildren();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getComponentName()
+    {
+        return $this->componentName;
+    }
+
+    /**
+     * @param string|null $componentName
+     */
+    public function setComponentName($componentName)
+    {
+        $this->componentName = $componentName;
     }
 }

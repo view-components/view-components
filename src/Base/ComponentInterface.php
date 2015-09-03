@@ -16,4 +16,9 @@ interface ComponentInterface extends NodeInterface, ViewInterface
      * @return Observable
      */
     public function beforeRender();
+
+    /**
+     * @return string|null
+     */
+    public function getComponentName();
 }
