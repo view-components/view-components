@@ -2,6 +2,13 @@
 
 namespace Presentation\Framework\Input;
 
+/**
+ * Class InputOption.
+ *
+ * InputOption class resolves option specified by key
+ * from input or returns pre-configured default value.
+ *
+ */
 class InputOption
 {
 
@@ -13,21 +20,26 @@ class InputOption
      * Constructor.
      *
      * @param string $key
-     * @param array $input
+     * @param array $inputSource
      * @param mixed $default
      */
     public function __construct(
         $key,
-        array $input,
+        array $inputSource,
         $default = null
     )
     {
 
-        $this->inputValue = array_key_exists($key, $input) ? $input[$key] : null;
+        $this->inputValue = array_key_exists($key, $inputSource) ? $inputSource[$key] : null;
         $this->default = $default;
         $this->key = $key;
     }
 
+    /**
+     * Returns value (from input or default).
+     *
+     * @return mixed
+     */
     public function getValue()
     {
         return $this->hasInputValue()
@@ -63,6 +75,11 @@ class InputOption
         return $this->key;
     }
 
+    /**
+     * Returns true if object has value (default or from input).
+     *
+     * @return bool
+     */
     public function hasValue()
     {
         return $this->getValue() !== null;
