@@ -7,6 +7,7 @@ use Presentation\Framework\Base\DecoratedContainerTrait;
 use Presentation\Framework\Base\Html\TagInterface;
 use Presentation\Framework\Base\Html\TagTrait;
 use Presentation\Framework\Rendering\ViewTrait;
+use Traversable;
 
 class Tag implements ComponentInterface, TagInterface
 {
@@ -22,12 +23,12 @@ class Tag implements ComponentInterface, TagInterface
     /**
      * @param string|null $tagName
      * @param array|null $attributes
-     * @param array|null $components
+     * @param array|Traversable|null $components
      */
     public function __construct(
         $tagName = null,
         array $attributes = null,
-        array $components = null
+        $components = null
     )
     {
         if ($tagName !== null) {

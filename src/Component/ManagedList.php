@@ -6,6 +6,7 @@ use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Base\ComponentTrait;
 use Presentation\Framework\Common\ListManager;
 use Presentation\Framework\Component\Html\Tag;
+use Presentation\Framework\Control\ControlCollection;
 use Presentation\Framework\Control\ControlInterface;
 use Presentation\Framework\Data\ArrayDataProvider;
 use Presentation\Framework\Data\DataProviderInterface;
@@ -36,26 +37,13 @@ class ManagedList implements ComponentInterface
     )
     {
         $this->repeater = $repeater;
-        $this->controls = $controls;
+        $this->controls = new ControlCollection($controls);
     }
 
     protected function defaultChildren()
     {
         $this->applyOperations();
         return $this->makeComponents();
-    }
-
-    /**
-     * @return ComponentInterface[]
-     */
-    private function extractControlViews()
-    {
-        $controlViews = [];
-        foreach($this->controls as $control)
-        {
-            $controlViews[] = $control->getView();
-        }
-        return $controlViews;
     }
 
     private function makeComponents()
@@ -65,7 +53,7 @@ class ManagedList implements ComponentInterface
             [
                 'data-role' => 'controls-form'
             ],
-            $this->extractControlViews()
+            $this->controls->getViews()
         );
         $form->children()->add(
             new Tag('input', ['type' => 'submit'])
@@ -98,8 +86,7 @@ class ManagedList implements ComponentInterface
     public function applyOperations()
     {
         if (!$this->isOperationsApplied) {
-            $manager = new ListManager();
-            $manager->manage($this->resolveDataProvider(), $this->controls);
+            $this->controls->applyOperations($this->resolveDataProvider());
             $this->isOperationsApplied = true;
         }
     }
