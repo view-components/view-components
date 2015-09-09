@@ -50,7 +50,7 @@ class Controller extends AbstractController
     {
         $out = '';
         $out .= $this->renderMenu();
-        $out .= '<h1>Nayjest/ViewComponents test app</h1><h2>Index Page</h2>';
+        $out .= '<h1>Presentation/Framework Test Application</h1><h2>Index Page</h2>';
 
         return $out;
     }
