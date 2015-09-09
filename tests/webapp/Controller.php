@@ -3,7 +3,7 @@ namespace Presentation\Framework\Demo;
 
 use Presentation\Framework\Component\ControlView\PaginationView;
 use Presentation\Framework\Input\InputOption;
-use Presentation\Framework\Input\InputOptionFactory;
+use Presentation\Framework\Input\InputSource;
 use Presentation\Framework\Common\ListManager;
 use Presentation\Framework\Component\Container;
 use Presentation\Framework\Control\FilterControl;
@@ -239,14 +239,14 @@ class Controller extends AbstractController
     }
 
     /**
-     * Filtering controls in managed list + styling + pagination + InputOptionFactory
+     * Filtering controls in managed list + styling + pagination + InputSource
      *
      * @return string
      */
     public function demo4_3()
     {
         $provider = $this->getDataProvider();
-        $input = new InputOptionFactory($_GET);
+        $input = new InputSource($_GET);
         $list = new ManagedList(
             new Repeater(
                 $provider,

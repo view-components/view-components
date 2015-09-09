@@ -3,10 +3,12 @@
 namespace Presentation\Framework\Input;
 
 /**
- * Class InputOptionFactory.
+ * Class InputSource.
+ *
+ * InputSource class is a factory for InputOption objects.
  *
  */
-class InputOptionFactory
+class InputSource
 {
     /**
      * @var array
@@ -30,13 +32,13 @@ class InputOptionFactory
      * @param null $default optional default value
      * @return InputOption
      */
-    public final function make($name, $default = null)
+    public final function option($name, $default = null)
     {
         return new InputOption($name, $this->input, $default);
     }
 
     /**
-     * Shortcut for InputOptionFactory::make.
+     * Shortcut for InputSource::option().
      *
      * @param string $name
      * @param null $default optional default value
@@ -44,6 +46,6 @@ class InputOptionFactory
      */
     public function __invoke($name, $default = null)
     {
-        return $this->make($name, $default);
+        return $this->option($name, $default);
     }
 }
