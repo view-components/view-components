@@ -7,7 +7,7 @@ use Traversable;
  * Interface RepeaterInterface
  *
  */
-interface RepeaterInterface
+interface RepeaterInterface extends ComponentInterface
 {
     /**
      * Sets data source to iterate over.
