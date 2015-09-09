@@ -25,10 +25,11 @@ class Text implements ComponentInterface
 
     public function render()
     {
+        $before = $this->beforeRender()->notify();
         $text = $this->value instanceof Closure ?
             call_user_func($this->value, $this)
             : (string)$this->value;
-        return $text . $this->renderChildren();
+        return $before . $text . $this->renderChildren();
     }
 
     /**
