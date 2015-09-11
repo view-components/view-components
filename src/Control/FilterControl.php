@@ -49,6 +49,22 @@ class FilterControl implements ControlInterface
         );
     }
 
+    /**
+     * @return string
+     */
+    public function getField()
+    {
+        return $this->field;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOperator()
+    {
+        return $this->operator;
+    }
+
     protected function makeDefaultView()
     {
         return new FilterControlView(
