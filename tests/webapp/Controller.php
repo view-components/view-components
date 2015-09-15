@@ -23,7 +23,7 @@ use Presentation\Framework\Demo\Components\PersonView;
 use Presentation\Framework\Resource\AliasRegistry;
 use Presentation\Framework\Resource\IncludedResourcesRegistry;
 use Presentation\Framework\Resource\ResourceManager;
-use Presentation\Framework\Styling\Bootstrap\BootstrapStyling;
+use Presentation\Framework\Customization\Bootstrap\BootstrapStyling;
 
 class Controller extends AbstractController
 {

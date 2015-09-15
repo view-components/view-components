@@ -1,72 +1,56 @@
 <?php
 
-namespace Presentation\Framework\Styling\Bootstrap;
+namespace Presentation\Framework\Customization\Bootstrap;
 
 use LogicException;
 use Presentation\Framework\Base\ComponentInterface;
-use Presentation\Framework\Base\ContainerInterface;
 use Presentation\Framework\Base\Html\AbstractTag;
 use Presentation\Framework\Base\Html\TagInterface;
 use Presentation\Framework\Component\ControlView\FilterControlView;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Event\CallbackObserver;
 use Presentation\Framework\Resource\ResourceManager;
-use Presentation\Framework\Styling\CustomStyling;
+use Presentation\Framework\Customization\ConfigurableCustomization;
 
-class BootstrapStyling extends CustomStyling
+class BootstrapStyling extends ConfigurableCustomization
 {
 
-    protected $resources;
+    protected $resourceManager;
     protected $options;
 
     public function __construct(ResourceManager $resources, BootstrapStylingOptions $options = null)
     {
         $this->options = $options ?: new BootstrapStylingOptions();
-        $this->resources = $resources;
-        parent::__construct($this->getCallbacks());
+        $this->resourceManager = $resources;
+        $this->initializeCallbacks();
     }
 
     /**
-     * @param ComponentInterface|ContainerInterface $component
-     * @param ComponentInterface $resourcesContainer
+     * @param ComponentInterface $component
+     * @param ComponentInterface $resourceRoot root component for JS & CSS
      */
-    public function apply(ComponentInterface $component, ComponentInterface $resourcesContainer = null)
+    public function apply(ComponentInterface $component, ComponentInterface $resourceRoot = null)
     {
-        $resourcesContainer = $resourcesContainer ?: $component;
-        if (!$resourcesContainer->children()->isWritable()) {
-            throw new LogicException('Styling must be applied to writable container');
-        }
-        $this->addResources($resourcesContainer);
+        $this->addResources($resourceRoot ?: $component);
         parent::apply($component);
     }
 
     protected function addResources(ComponentInterface $container)
     {
+        if (!$container->children()->isWritable()) {
+            throw new LogicException('Styling must be applied to writable container');
+        }
         $container
             ->children()
-            ->add($this->resources->js('jquery'))
-            ->add($this->resources->css($this->options->cssFile))
-            ->add($this->resources->js($this->options->jsFile));
+            ->add($this->resourceManager->js('jquery'))
+            ->add($this->resourceManager->css($this->options->cssFile))
+            ->add($this->resourceManager->js($this->options->jsFile));
     }
 
-    protected function getCallbacks()
+    protected function initializeCallbacks()
     {
-
-        return [
-            'Presentation\Framework\Base\Html\TagInterface' =>
-                [
-                    [
-                        $this,
-                        'tagCallback'
-                    ]
-                ],
-            'Presentation\Framework\Component\ControlView\FilterControlView' => [
-                [
-                    $this,
-                    'filterControlCallback'
-                ]
-            ]
-        ];
+        $this->register(TagInterface::class, [$this, 'tagCallback']);
+        $this->register(FilterControlView::class, [$this, 'filterControlCallback']);
     }
 
     /**

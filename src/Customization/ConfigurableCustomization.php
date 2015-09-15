@@ -1,16 +1,11 @@
 <?php
-namespace Presentation\Framework\Styling;
+namespace Presentation\Framework\Customization;
 
 use Presentation\Framework\Base\ComponentInterface;
 
-class CustomStyling extends AbstractStyling
+class ConfigurableCustomization extends AbstractRecursiveCustomization
 {
-    protected $callbacks;
-
-    public function __construct(array $callbacks = [])
-    {
-        $this->callbacks = $callbacks;
-    }
+    protected $callbacks = [];
 
     public function register($class, callable $callback)
     {

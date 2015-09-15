@@ -1,14 +1,14 @@
 <?php
 
-namespace Presentation\Framework\Styling;
+namespace Presentation\Framework\Customization;
 
 use Presentation\Framework\Base\ComponentInterface;
 
 /**
- * Interface StylingInterface.
+ * Interface CustomizationInterface.
  *
  */
-interface StylingInterface
+interface CustomizationInterface
 {
     /**
      * Applies customizations to component & its children.
