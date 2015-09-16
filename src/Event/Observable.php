@@ -23,6 +23,11 @@ class Observable implements SplSubject
         $this->getStorage()->attach($observer);
     }
 
+    public function attachCallback(callable $callback)
+    {
+        $this->attach(new CallbackObserver($callback));
+    }
+
     public function detach(SplObserver $observer)
     {
         $this->getStorage()->detach($observer);
