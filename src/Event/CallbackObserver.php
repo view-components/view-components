@@ -11,8 +11,8 @@ class CallbackObserver extends AbstractObserver
         $this->callback = $callback;
     }
     
-    protected function updateInternal(Observable $subject)
+    protected function updateInternal(Observable $observable)
     {
-        call_user_func($this->callback, $subject->getComponent());
+        call_user_func($this->callback, $observable->getSubject());
     }
 }

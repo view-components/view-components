@@ -8,7 +8,7 @@ use SplSubject;
 
 abstract class AbstractObserver implements SplObserver
 {
-    abstract protected function updateInternal(Observable $subject);
+    abstract protected function updateInternal(Observable $observable);
 
     public function update(SplSubject $subject)
     {

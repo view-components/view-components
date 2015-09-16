@@ -11,11 +11,11 @@ class Observable implements SplSubject
 {
     private $storage;
 
-    private $component;
+    private $subject;
 
-    public function __construct(ComponentInterface $component)
+    public function __construct($subject)
     {
-        $this->component = $component;
+        $this->subject = $subject;
     }
 
     public function attach(SplObserver $observer)
@@ -36,9 +36,9 @@ class Observable implements SplSubject
     /**
      * @return ComponentInterface
      */
-    public function getComponent()
+    public function getSubject()
     {
-        return $this->component;
+        return $this->subject;
     }
     /**
      * @return string
