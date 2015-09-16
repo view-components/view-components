@@ -16,7 +16,7 @@ abstract class AbstractDataView implements ComponentInterface, DataAcceptorInter
     use ViewTrait;
     use NodeTrait;
     use ComponentTrait {
-        ComponentTrait::render as RenderInternal;
+        ComponentTrait::render as private origRender;
     }
 
     protected $data;
