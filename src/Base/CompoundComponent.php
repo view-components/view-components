@@ -83,7 +83,7 @@ class CompoundComponent implements ComponentInterface
     {
         if ($this->componentCollection === null) {
             $this->componentCollection = $this->defaultComponentsCollection();
-            $this->componentCollection->onChange(function(){
+            $this->componentCollection->onChange(function () {
                 $this->isTreeUpdateRequired = true;
             });
         }
@@ -112,12 +112,17 @@ class CompoundComponent implements ComponentInterface
      *
      * @return ChildNodeInterface[]
      */
-    final protected function defaultChildren()
+    protected function defaultChildren()
+    {
+        return $this->buildTree();
+    }
+
+    protected function buildTree()
     {
         $builder = new TreeBuilder();
         $plainItems = [];
         /** @var ComponentInterface $component */
-        foreach($this->componentCollection as $component) {
+        foreach ($this->componentCollection as $component) {
             $key = $component->getComponentName();
             if (array_key_exists($key, $plainItems)) {
                 throw new \RuntimeException(
