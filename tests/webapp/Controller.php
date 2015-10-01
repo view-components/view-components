@@ -1,6 +1,7 @@
 <?php
 namespace Presentation\Framework\Demo;
 
+use Presentation\Framework\Base\CompoundComponent;
 use Presentation\Framework\Component\ControlView\PaginationView;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Input\InputSource;
@@ -296,6 +297,44 @@ class Controller extends AbstractController
 
         $styling = new BootstrapStyling($resources);
         $styling->apply($container);
+
+        return $this->renderMenu() . $container->render();
+    }
+
+    public function demo5()
+    {
+        $compound = new CompoundComponent(
+            [
+                'panel' => [
+                    'header',
+                    'body',
+                    'footer'
+                ]
+            ],
+            [
+                $panel = (new Tag('div', ['class' => 'panel panel-success']))->setComponentName('panel'),
+                $header = (new Tag('div', ['class' => 'panel-heading']))->setComponentName('header'),
+                $body = (new Tag('div', ['class' => 'panel-body']))->setComponentName('body'),
+                $footer = (new Tag('div', ['class' => 'panel-footer']))->setComponentName('footer'),
+            ]
+        );
+        $header->addChild(new Text('<b>Panel Header</b>'));
+        $body->addChild(new Text('Panel Body'));
+        $footer->addChild(new Text('Panel Footer'));
+
+        $container = new Tag('div',['class' => 'container'],[$compound]);
+
+        $resources = new ResourceManager(
+            new AliasRegistry([
+                'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
+            ]),
+            new AliasRegistry(),
+            new IncludedResourcesRegistry()
+        );
+
+        $styling = new BootstrapStyling($resources);
+        $styling->apply($container);
+
 
         return $this->renderMenu() . $container->render();
     }
