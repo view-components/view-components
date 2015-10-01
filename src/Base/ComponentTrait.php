@@ -39,9 +39,11 @@ trait ComponentTrait
 
     /**
      * @param string|null $componentName
+     * @return $this
      */
     public function setComponentName($componentName)
     {
         $this->componentName = $componentName;
+        return $this;
     }
 }
