@@ -27,7 +27,7 @@ class CompoundComponent implements ComponentInterface
      *
      * @var ComponentInterface[]|ObjectCollection $items
      */
-    protected $componentCollection;
+    protected $plainComponents;
 
     /**
      * @var bool
@@ -35,6 +35,8 @@ class CompoundComponent implements ComponentInterface
     protected $isTreeUpdateRequired = true;
 
     /**
+     * Constructor.
+     *
      * @param array $tree
      * @param ComponentInterface[]|Traversable $components
      */
@@ -44,7 +46,7 @@ class CompoundComponent implements ComponentInterface
             $this->setTreeConfig($tree);
         }
         if ($components !== null) {
-            $this->components()->set($components);
+            $this->getPlainComponents()->set($components);
         }
     }
 
@@ -79,30 +81,25 @@ class CompoundComponent implements ComponentInterface
     /**
      * @return ObjectCollection|ComponentInterface[]
      */
-    public function components()
+    public function getPlainComponents()
     {
-        if ($this->componentCollection === null) {
-            $this->componentCollection = $this->defaultComponentsCollection();
-            $this->componentCollection->onChange(function () {
+        if ($this->plainComponents === null) {
+            $this->plainComponents = $this->makePlainComponentCollection();
+            $this->plainComponents->onChange(function () {
                 $this->isTreeUpdateRequired = true;
             });
         }
-        return $this->componentCollection;
+        return $this->plainComponents;
     }
 
     /**
      * @param ComponentInterface[]|Traversable $components
      * @return $this
      */
-    public function setComponents($components)
+    public function setPlainComponents($components)
     {
-        $this->components()->set($components);
+        $this->getPlainComponents()->set($components);
         return $this;
-    }
-
-    public function getComponents()
-    {
-        return $this->components();
     }
 
     /**
@@ -112,29 +109,32 @@ class CompoundComponent implements ComponentInterface
      *
      * @return ChildNodeInterface[]
      */
-    protected function defaultChildren()
+    final protected function defaultChildren()
     {
         return $this->buildTree();
     }
 
+
     protected function buildTree()
     {
         $builder = new TreeBuilder();
+
+        // use component names as keys
         $plainItems = [];
         /** @var ComponentInterface $component */
-        foreach ($this->componentCollection as $component) {
+        foreach ($this->getPlainComponents() as $component) {
             $key = $component->getComponentName();
-            if (array_key_exists($key, $plainItems)) {
-                throw new \RuntimeException(
-                    "Can't build component tree, there is few components named '$key' in componentCollection"
-                );
-            }
             $plainItems[$key] = $component;
         }
         return $builder->build($this->treeConfig, $plainItems);
     }
 
-    protected function defaultComponentsCollection()
+    /**
+     * Creates collection instance for plain components.
+     *
+     * @return ObjectCollection
+     */
+    protected function makePlainComponentCollection()
     {
         return new ObjectCollection();
     }
@@ -142,7 +142,7 @@ class CompoundComponent implements ComponentInterface
     protected function updateTree()
     {
         if ($this->collection) {
-            $this->collection->set($this->defaultChildren());
+            $this->collection->set($this->buildTree());
         }
         $this->isTreeUpdateRequired = false;
     }
