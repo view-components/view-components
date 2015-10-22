@@ -3,6 +3,7 @@
 namespace Presentation\Framework\Base;
 
 use Nayjest\Collection\Extended\ObjectCollection;
+use Nayjest\Collection\Extended\Registry;
 use Nayjest\Tree\ChildNodeInterface;
 use Nayjest\Tree\ReadonlyNodeTrait;
 use Nayjest\Tree\TreeBuilder;
@@ -13,7 +14,7 @@ class CompoundComponent implements ComponentInterface
 {
     use ViewTrait;
     use ReadonlyNodeTrait {
-        ReadonlyNodeTrait::children as private readonlyChildren;
+        ReadonlyNodeTrait::children as protected readonlyChildren;
     }
     use ComponentTrait;
 
@@ -27,7 +28,7 @@ class CompoundComponent implements ComponentInterface
      *
      * @var ComponentInterface[]|ObjectCollection $items
      */
-    protected $plainComponents;
+    protected $componentRegistry;
 
     /**
      * @var bool
@@ -40,13 +41,11 @@ class CompoundComponent implements ComponentInterface
      * @param array $tree
      * @param ComponentInterface[]|Traversable $components
      */
-    public function __construct(array $tree = null, $components = null)
+    public function __construct(array $tree = null, $components = [])
     {
+        $this->initializeComponentRegistry($components);
         if ($tree !== null) {
             $this->setTreeConfig($tree);
-        }
-        if ($components !== null) {
-            $this->getPlainComponents()->set($components);
         }
     }
 
@@ -79,33 +78,28 @@ class CompoundComponent implements ComponentInterface
     }
 
     /**
-     * @return ObjectCollection|ComponentInterface[]
+     * @return Registry|ComponentInterface[]
      */
-    public function getPlainComponents()
+    public function components()
     {
-        if ($this->plainComponents === null) {
-            $this->plainComponents = $this->makePlainComponentCollection();
-            $this->plainComponents->onChange(function () {
-                $this->isTreeUpdateRequired = true;
-            });
-        }
-        return $this->plainComponents;
+        return $this->componentRegistry;
     }
 
-    /**
-     * @param ComponentInterface[]|Traversable $components
-     * @return $this
-     */
-    public function setPlainComponents($components)
+    protected function initializeComponentRegistry(array $components = [])
     {
-        $this->getPlainComponents()->set($components);
-        return $this;
+        $this->componentRegistry = new Registry($components);
+        $this->watchComponentChanges();
+    }
+
+    protected function watchComponentChanges()
+    {
+        $this->componentRegistry->onChange(function () {
+            $this->isTreeUpdateRequired = true;
+        });
     }
 
     /**
      * Returns default child components.
-     *
-     * To provide default components, override defaultComponentsCollection()
      *
      * @return ChildNodeInterface[]
      */
@@ -114,29 +108,10 @@ class CompoundComponent implements ComponentInterface
         return $this->buildTree();
     }
 
-
     protected function buildTree()
     {
         $builder = new TreeBuilder();
-
-        // use component names as keys
-        $plainItems = [];
-        /** @var ComponentInterface $component */
-        foreach ($this->getPlainComponents() as $component) {
-            $key = $component->getComponentName();
-            $plainItems[$key] = $component;
-        }
-        return $builder->build($this->treeConfig, $plainItems);
-    }
-
-    /**
-     * Creates collection instance for plain components.
-     *
-     * @return ObjectCollection
-     */
-    protected function makePlainComponentCollection()
-    {
-        return new ObjectCollection();
+        return $builder->build($this->treeConfig, $this->components()->toArray());
     }
 
     protected function updateTree()
