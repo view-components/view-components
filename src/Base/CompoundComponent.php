@@ -111,7 +111,7 @@ class CompoundComponent implements ComponentInterface
     protected function buildTree()
     {
         $builder = new TreeBuilder();
-        return $builder->build($this->treeConfig, $this->components()->toArray());
+        return $builder->build($this->getTreeConfig(), $this->components()->toArray());
     }
 
     protected function updateTree()
