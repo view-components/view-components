@@ -312,10 +312,10 @@ class Controller extends AbstractController
                 ]
             ],
             [
-                $panel = (new Tag('div', ['class' => 'panel panel-success']))->setComponentName('panel'),
-                $header = (new Tag('div', ['class' => 'panel-heading']))->setComponentName('header'),
-                $body = (new Tag('div', ['class' => 'panel-body']))->setComponentName('body'),
-                $footer = (new Tag('div', ['class' => 'panel-footer']))->setComponentName('footer'),
+                'panel' => $panel = new Tag('div', ['class' => 'panel panel-success']),
+                'header' => $header = new Tag('div', ['class' => 'panel-heading']),
+                'body' => $body = new Tag('div', ['class' => 'panel-body']),
+                'footer' => $footer = new Tag('div', ['class' => 'panel-footer']),
             ]
         );
         $header->addChild(new Text('<b>Panel Header</b>'));
