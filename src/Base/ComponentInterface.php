@@ -21,4 +21,31 @@ interface ComponentInterface extends NodeInterface, ViewInterface
      * @return string|null
      */
     public function getComponentName();
+
+    /**
+     * @param string|null $componentName
+     * @return $this
+     */
+    public function setComponentName($componentName);
+
+    /**
+     * @return bool
+     */
+    public function isSortable();
+
+    /**
+     * @param bool|true $value
+     */
+    public function setSortable($value = true);
+
+    /**
+     * @return int
+     */
+    public function getSortPosition();
+
+    /**
+     * @param int $sortPosition
+     * @return $this
+     */
+    public function setSortPosition($sortPosition);
 }
