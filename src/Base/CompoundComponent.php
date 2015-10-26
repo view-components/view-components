@@ -10,6 +10,11 @@ use Nayjest\Tree\TreeBuilder;
 use Presentation\Framework\Rendering\ViewTrait;
 use Traversable;
 
+/**
+ * CompoundComponent contains tree configuration and plain components list.
+ * The class builds components tree and provides readonly access to it via children() method.
+ *
+ */
 class CompoundComponent implements ComponentInterface
 {
     use ViewTrait;
