@@ -33,4 +33,10 @@ class CompoundContainer extends CompoundComponent
     {
         return $this->components()->get($this->terminalNodeName);
     }
+
+    protected function getChildrenForRendering()
+    {
+        $children = CompoundComponent::children();
+        return $this->isSortingEnabled ? $children->sortByProperty('sortPosition') : $children;
+    }
 }

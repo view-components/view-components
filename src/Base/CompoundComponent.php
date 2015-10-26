@@ -2,6 +2,7 @@
 
 namespace Presentation\Framework\Base;
 
+use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Collection\Extended\ObjectCollection;
 use Nayjest\Collection\Extended\Registry;
 use Nayjest\Tree\ChildNodeInterface;
@@ -54,6 +55,9 @@ class CompoundComponent implements ComponentInterface
         }
     }
 
+    /**
+     * @return ReadonlyObjectCollection
+     */
     public function children()
     {
         if ($this->isTreeUpdateRequired) {
