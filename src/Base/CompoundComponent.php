@@ -5,6 +5,7 @@ namespace Presentation\Framework\Base;
 use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Collection\Extended\ObjectCollection;
 use Nayjest\Collection\Extended\Registry;
+use Nayjest\Collection\Extended\RegistryInterface;
 use Nayjest\Tree\ChildNodeInterface;
 use Nayjest\Tree\ReadonlyNodeTrait;
 use Nayjest\Tree\TreeBuilder;
@@ -27,7 +28,12 @@ class CompoundComponent implements ComponentInterface
     /**
      * @var array
      */
-    protected $treeConfig = [];
+    protected $treeConfig;
+
+    /**
+     * @var TreeBuilder
+     */
+    protected $treeBuilder;
 
     /**
      * Plain collection of compound components listed in treeConfig
@@ -47,23 +53,24 @@ class CompoundComponent implements ComponentInterface
      * @param array $tree
      * @param ComponentInterface[]|Traversable $components
      */
-    public function __construct(array $tree = null, $components = [])
+    public function __construct(array $tree = [], $components = [])
     {
-        $this->initializeComponentRegistry($components);
-        if ($tree !== null) {
-            $this->setTreeConfig($tree);
-        }
+        $this->componentRegistry = $this->makeComponentRegistry($components);
+        $this->watchComponentChanges();
+        $this->setTreeConfig($tree);
     }
 
     /**
+     * Returns child components.
+     *
+     * This method is overriden to provide hierarchy update if components registry was changed.
+     * Children collection is read-only to avoid adding components to tree that can be removed on tree update.
+     *
      * @return ReadonlyObjectCollection
      */
     public function children()
     {
-        if ($this->isTreeUpdateRequired) {
-            $this->updateTree();
-            $this->isTreeUpdateRequired = false;
-        }
+        $this->updateTreeIfRequired();
         return $this->readonlyChildren();
     }
 
@@ -76,7 +83,12 @@ class CompoundComponent implements ComponentInterface
     }
 
     /**
-     * @param $treeConfig
+     * Sets tree configuration.
+     *
+     * Tree config keys corresponds to keys in components registry (@see CompoundComponent::components()).
+     * Values are arrays in same format.
+     *
+     * @param array $treeConfig
      * @return $this
      */
     public function setTreeConfig(array $treeConfig)
@@ -94,10 +106,15 @@ class CompoundComponent implements ComponentInterface
         return $this->componentRegistry;
     }
 
-    protected function initializeComponentRegistry(array $components = [])
+    /**
+     * Returns new instance of component registry and initializes it with components.
+     *
+     * @param array $components
+     * @return RegistryInterface
+     */
+    protected function makeComponentRegistry(array $components = [])
     {
-        $this->componentRegistry = new Registry($components);
-        $this->watchComponentChanges();
+        return new Registry($components);
     }
 
     protected function watchComponentChanges()
@@ -117,17 +134,29 @@ class CompoundComponent implements ComponentInterface
         return $this->buildTree();
     }
 
+    /**
+     * Builds component tree and returns it.
+     *
+     * @return ComponentInterface[]
+     */
     protected function buildTree()
     {
-        $builder = new TreeBuilder();
-        return $builder->build($this->getTreeConfig(), $this->components()->toArray());
+        if (!$this->treeBuilder) {
+            $this->treeBuilder = new TreeBuilder();
+        }
+        return $this->treeBuilder->build($this->getTreeConfig(), $this->components()->toArray());
     }
 
-    protected function updateTree()
+    /**
+     * Updates components hierarchy if required.
+     */
+    protected function updateTreeIfRequired()
     {
-        if ($this->collection) {
-            $this->collection->set($this->buildTree());
+        if (!$this->collection || !$this->isTreeUpdateRequired) {
+            return;
         }
+        $this->collection->set($this->buildTree());
+
         $this->isTreeUpdateRequired = false;
     }
 }
