@@ -126,6 +126,16 @@ class CompoundComponent implements ComponentInterface
         });
     }
 
+    public function insertElement($parentName, $componentName, ComponentInterface $component)
+    {
+        self::removeTreeChildIfExists($this->treeConfig, $componentName);
+        if (!self::addTreeChild($this->treeConfig, $parentName, $componentName)) {
+            return false;
+        }
+        $this->components()->set($componentName, $component);
+        return true;
+    }
+
     /**
      * Returns default child components.
      *
@@ -160,5 +170,39 @@ class CompoundComponent implements ComponentInterface
         $this->collection->set($this->buildTree());
 
         $this->isTreeUpdateRequired = false;
+    }
+
+    final protected static function addTreeChild(array &$config, $parent, $node)
+    {
+        if ($parent === null) {
+            $config[$node] = [];
+            return true;
+        }
+        foreach($config as $key => &$value) {
+            if ($key === $parent) {
+                $value[$node] = [];
+                return true;
+            } else {
+                if (self::addTreeChild($value, $parent, $node)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    final protected static function removeTreeChildIfExists(array &$config, $node)
+    {
+        foreach($config as $key => &$value) {
+            if ($key === $node) {
+                unset($config[$node]);
+                return true;
+            } else {
+                if (self::removeTreeChildIfExists($value, $node)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
