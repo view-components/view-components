@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Base;
+namespace Presentation\Framework\Component;
 
 use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Collection\Extended\ObjectCollection;
@@ -9,6 +9,8 @@ use Nayjest\Collection\Extended\RegistryInterface;
 use Nayjest\Tree\ChildNodeInterface;
 use Nayjest\Tree\ReadonlyNodeTrait;
 use Nayjest\Tree\TreeBuilder;
+use Presentation\Framework\Base\ComponentInterface;
+use Presentation\Framework\Base\ComponentTrait;
 use Presentation\Framework\Rendering\ViewTrait;
 use Traversable;
 

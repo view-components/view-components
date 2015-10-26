@@ -1,9 +1,10 @@
 <?php
 
-namespace Presentation\Framework\Base;
+namespace Presentation\Framework\Component;
 
 use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Tree\NodeCollection;
+use Presentation\Framework\Base\ComponentInterface;
 
 /**
  * CompoundContainer extends CompoundComponent and provides access
