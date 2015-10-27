@@ -1,14 +1,15 @@
 <?php
 
 namespace Presentation\Framework\Component;
+
 use Nayjest\Tree\NodeTrait;
 use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Base\ComponentTrait;
 use Presentation\Framework\Rendering\ViewTrait;
 
 /**
- * CompoundComponent contains tree configuration and plain components list.
- * The class builds components tree and provides readonly access to it via children() method.
+ * HideIfNoChildren component hides it's children tree if there are no children on next hierarchy level.
+ * This component may be useful to hide containers if they are empty.
  *
  */
 class HideIfNoChildren implements ComponentInterface
@@ -19,16 +20,27 @@ class HideIfNoChildren implements ComponentInterface
         ComponentTrait::render as private renderInternal;
     }
 
+    /**
+     * @param array|ComponentInterface[] $components
+     */
     public function __construct($components = [])
     {
         $this->children()->set($components);
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         return $this->isRenderingRequired() ? $this->renderInternal() : '';
     }
 
+    /**
+     * Returns true if component will be rendered.
+     *
+     * @return bool
+     */
     public function isRenderingRequired()
     {
         /** @var ComponentInterface $child */
