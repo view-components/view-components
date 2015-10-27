@@ -1,7 +1,7 @@
 <?php
 namespace Presentation\Framework\Demo;
 
-use Presentation\Framework\Base\CompoundComponent;
+use Presentation\Framework\Component\CompoundComponent;
 use Presentation\Framework\Component\ControlView\PaginationView;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Input\InputSource;
@@ -25,9 +25,17 @@ use Presentation\Framework\Resource\AliasRegistry;
 use Presentation\Framework\Resource\IncludedResourcesRegistry;
 use Presentation\Framework\Resource\ResourceManager;
 use Presentation\Framework\Customization\Bootstrap\BootstrapStyling;
+use Presentation\Framework\Service\SimpleContainer;
 
 class Controller extends AbstractController
 {
+    protected $container;
+
+    public function __construct()
+    {
+        $this->container = new SimpleContainer();
+    }
+
     protected function getUsersData()
     {
         return include(dirname(__DIR__) . '/fixtures/users.php');
@@ -289,7 +297,7 @@ class Controller extends AbstractController
 
         $resources = new ResourceManager(
             new AliasRegistry([
-            'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
+                'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
             ]),
             new AliasRegistry(),
             new IncludedResourcesRegistry()
@@ -322,7 +330,7 @@ class Controller extends AbstractController
         $body->addChild(new Text('Panel Body'));
         $footer->addChild(new Text('Panel Footer'));
 
-        $container = new Tag('div',['class' => 'container'],[$compound]);
+        $container = new Tag('div', ['class' => 'container'], [$compound]);
 
         $resources = new ResourceManager(
             new AliasRegistry([
@@ -334,7 +342,6 @@ class Controller extends AbstractController
 
         $styling = new BootstrapStyling($resources);
         $styling->apply($container);
-
 
         return $this->renderMenu() . $container->render();
     }
