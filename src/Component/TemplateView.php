@@ -5,10 +5,11 @@ namespace Presentation\Framework\Component;
 use Nayjest\Tree\NodeTrait;
 use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Base\ComponentTrait;
+use Presentation\Framework\Data\DataAcceptorInterface;
 use Presentation\Framework\Rendering\RendererInterface;
 use Presentation\Framework\Rendering\ViewTrait;
 
-class TemplateView implements ComponentInterface
+class TemplateView implements ComponentInterface, DataAcceptorInterface
 {
     use NodeTrait;
     use ComponentTrait {
@@ -27,20 +28,20 @@ class TemplateView implements ComponentInterface
     /**
      * @var
      */
-    protected $viewData;
+    protected $data;
 
     public function __construct(RendererInterface $renderer = null, $templateName = '', $viewData = [])
     {
 
         $this->renderer = $renderer;
         $this->templateName = $templateName;
-        $this->viewData = $viewData;
+        $this->data = $viewData;
     }
 
     public function render()
     {
         return $this->beforeRender()->notify()
-        . $this->renderer->render($this->templateName, array_merge($this->viewData, ['this' => $this]));
+        . $this->renderer->render($this->templateName, array_merge($this->data, ['this' => $this]));
     }
 
     /**
@@ -78,16 +79,16 @@ class TemplateView implements ComponentInterface
     /**
      * @return mixed
      */
-    public function getViewData()
+    public function getData()
     {
-        return $this->viewData;
+        return $this->data;
     }
 
     /**
-     * @param mixed $viewData
+     * @param mixed $data
      */
-    public function setViewData($viewData)
+    public function setData($data)
     {
-        $this->viewData = $viewData;
+        $this->data = $data;
     }
 }
