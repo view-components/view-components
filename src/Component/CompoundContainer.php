@@ -30,6 +30,7 @@ class CompoundContainer extends CompoundComponent
     /**
      * Returns child components.
      *
+     * @overrides CompoundComponent::children()
      * This method is overriden to provide access to writable children of terminal node
      * instead of it's own readonly components.
      *
@@ -50,6 +51,11 @@ class CompoundContainer extends CompoundComponent
     }
 
     /**
+     * @overrides ComponentTrait::getChildrenForRendering()
+     * because wee need CompoundComponent::children() -- real children collection
+     * instead of CompoundContainer::children() which actually
+     * points to $this->getTerminalNode()->children()
+     *
      * @return ReadonlyObjectCollection|NodeCollection
      */
     protected function getChildrenForRendering()
