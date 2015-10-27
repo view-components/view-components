@@ -7,7 +7,6 @@ use Presentation\Framework\Rendering\ViewTrait;
 
 class ViewAggregate implements ComponentInterface
 {
-
     use ComponentTrait;
     use ReadonlyNodeTrait;
     use ViewTrait;
