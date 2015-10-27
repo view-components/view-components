@@ -164,11 +164,10 @@ class CompoundComponent implements ComponentInterface
      */
     protected function updateTreeIfRequired()
     {
-        if (!$this->collection || !$this->isTreeUpdateRequired) {
+        if (!$this->isTreeUpdateRequired) {
             return;
         }
-        $this->collection->set($this->buildTree());
-
+        $this->writableChildren()->set($this->buildTree());
         $this->isTreeUpdateRequired = false;
     }
 
