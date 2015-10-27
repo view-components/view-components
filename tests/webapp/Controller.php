@@ -3,6 +3,7 @@ namespace Presentation\Framework\Demo;
 
 use Presentation\Framework\Component\CompoundComponent;
 use Presentation\Framework\Component\ControlView\PaginationView;
+use Presentation\Framework\Component\TemplateView;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Input\InputSource;
 use Presentation\Framework\Common\ListManager;
@@ -21,21 +22,16 @@ use Presentation\Framework\HtmlBuilder;
 use Presentation\Framework\Component\Repeater;
 use Presentation\Framework\Component\Text;
 use Presentation\Framework\Demo\Components\PersonView;
+use Presentation\Framework\Rendering\SimpleRenderer;
 use Presentation\Framework\Resource\AliasRegistry;
 use Presentation\Framework\Resource\IncludedResourcesRegistry;
 use Presentation\Framework\Resource\ResourceManager;
 use Presentation\Framework\Customization\Bootstrap\BootstrapStyling;
+use Presentation\Framework\Service\PF;
 use Presentation\Framework\Service\SimpleContainer;
 
 class Controller extends AbstractController
 {
-    protected $container;
-
-    public function __construct()
-    {
-        $this->container = new SimpleContainer();
-    }
-
     protected function getUsersData()
     {
         return include(dirname(__DIR__) . '/fixtures/users.php');
@@ -53,6 +49,11 @@ class Controller extends AbstractController
                 $this->getUsersData(),
                 $operations
             );
+    }
+
+    protected function getRenderer()
+    {
+        return new SimpleRenderer([__DIR__ . '/resources/views']);
     }
 
     public function index()
@@ -344,5 +345,29 @@ class Controller extends AbstractController
         $styling->apply($container);
 
         return $this->renderMenu() . $container->render();
+    }
+
+    /**
+     * Renderer
+     *
+     * @return string
+     */
+    public function demo6()
+    {
+        $renderer = $this->getRenderer();
+        return $this->renderMenu()
+        . $renderer->render('demo/template1')
+        . $renderer->render('demo/template_with_var', ['var'=>'ok']);
+    }
+
+    /**
+     * Template view
+     * @return string
+     */
+    public function demo7()
+    {
+        $renderer = $this->getRenderer();
+        $c = new TemplateView($renderer, 'demo/template_view');
+        return $this->renderMenu() . $c->render();
     }
 }

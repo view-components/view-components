@@ -10,5 +10,5 @@ interface RendererInterface
      * @param array $viewData
      * @return string
      */
-    public function render($template, array $viewData = null);
+    public function render($template, array $viewData = []);
 }
