@@ -2,6 +2,7 @@
 
 namespace Presentation\Framework\Component;
 
+use InvalidArgumentException;
 use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Collection\Extended\ObjectCollection;
 use Nayjest\Collection\Extended\Registry;
@@ -126,11 +127,19 @@ class CompoundComponent implements ComponentInterface
         });
     }
 
-    public function insertElement($parentName, $componentName, ComponentInterface $component)
+    /**
+     * @param string $parentName
+     * @param string $componentName
+     * @param ComponentInterface|null $component
+     * @return bool
+     */
+    public function compose($parentName, $componentName, ComponentInterface $component = null)
     {
         self::removeTreeChildIfExists($this->treeConfig, $componentName);
         if (!self::addTreeChild($this->treeConfig, $parentName, $componentName)) {
-            return false;
+            throw new InvalidArgumentException(
+                "Can't insert '$componentName' node into tree config: parent node '$parentName' not found"
+            );
         }
         $this->components()->set($componentName, $component);
         return true;
@@ -171,6 +180,12 @@ class CompoundComponent implements ComponentInterface
         $this->isTreeUpdateRequired = false;
     }
 
+    /**
+     * @param array $config
+     * @param string $parent node name or null for inserting into root node
+     * @param $node
+     * @return bool false if no parent found
+     */
     final protected static function addTreeChild(array &$config, $parent, $node)
     {
         if ($parent === null) {
@@ -190,6 +205,11 @@ class CompoundComponent implements ComponentInterface
         return false;
     }
 
+    /**
+     * @param array $config
+     * @param $node
+     * @return bool
+     */
     final protected static function removeTreeChildIfExists(array &$config, $node)
     {
         foreach($config as $key => &$value) {
