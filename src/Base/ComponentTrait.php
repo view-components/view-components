@@ -2,11 +2,11 @@
 namespace Presentation\Framework\Base;
 
 use Nayjest\Collection\Extended\ObjectCollectionInterface;
-use Presentation\Framework\Event\BeforeRenderTrait;
 
 trait ComponentTrait
 {
-    use BeforeRenderTrait;
+    abstract public function on($event, callable $listener);
+    abstract public function emit($event, array $arguments = []);
 
     protected $componentName;
 
@@ -29,8 +29,8 @@ trait ComponentTrait
 
     public function render()
     {
-        return $this->beforeRender()->notify()
-        . $this->renderChildren();
+        $this->emit('render', [$this]);
+        return $this->renderChildren();
     }
 
     /**
@@ -89,5 +89,11 @@ trait ComponentTrait
     protected function getChildrenForRendering()
     {
         return $this->isSortingEnabled ? $this->children()->sortByProperty('sortPosition') : $this->children();
+    }
+
+    public function onRender(callable $callback)
+    {
+        $this->on('render', $callback);
+        return $this;
     }
 }

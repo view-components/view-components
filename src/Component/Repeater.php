@@ -67,6 +67,7 @@ class Repeater implements ComponentInterface, RepeaterInterface
 
     public function render()
     {
+        $this->emit('render', [$this]);
         $output = '';
         if ($this->iterator) {
             foreach ($this->iterator as $dataRow) {

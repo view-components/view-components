@@ -78,8 +78,8 @@ abstract class AbstractTemplateView implements
     public function render()
     {
         $this->wasChildrenRendered = false;
-        return $this->beforeRender()->notify()
-        . $this->renderTemplate()
+        $this->emit('render', [$this]);
+        return $this->renderTemplate()
         . ($this->wasChildrenRendered ? '' : $this->renderChildren());
     }
 

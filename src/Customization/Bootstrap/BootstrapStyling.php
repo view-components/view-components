@@ -8,7 +8,6 @@ use Presentation\Framework\Base\Html\AbstractTag;
 use Presentation\Framework\Base\Html\TagInterface;
 use Presentation\Framework\Component\ControlView\FilterControlView;
 use Presentation\Framework\Component\Html\Tag;
-use Presentation\Framework\Event\CallbackObserver;
 use Presentation\Framework\Resource\ResourceManager;
 use Presentation\Framework\Customization\ConfigurableCustomization;
 
@@ -95,7 +94,7 @@ class BootstrapStyling extends ConfigurableCustomization
         }
 
         if ($tag->getAttribute('data-control') === 'pagination') {
-            $tag->beforeRender()->attach(new CallbackObserver(function(ComponentInterface $component) {
+            $tag->onRender(function(ComponentInterface $component) {
                 if ($component->children()->isEmpty()) {
                     return null;
                 }
@@ -110,7 +109,7 @@ class BootstrapStyling extends ConfigurableCustomization
                         $item->setAttribute('class', 'disabled');
                     }
                 }
-            }));
+            });
         }
     }
 

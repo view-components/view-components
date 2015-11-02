@@ -2,7 +2,6 @@
 namespace Presentation\Framework\Base;
 
 use Nayjest\Tree\NodeInterface;
-use Presentation\Framework\Event\Observable;
 use Presentation\Framework\Rendering\ViewInterface;
 
 interface ComponentInterface extends NodeInterface, ViewInterface
@@ -11,11 +10,6 @@ interface ComponentInterface extends NodeInterface, ViewInterface
      * @return string
      */
     public function renderChildren();
-
-    /**
-     * @return Observable
-     */
-    public function beforeRender();
 
     /**
      * @return string|null
@@ -48,4 +42,6 @@ interface ComponentInterface extends NodeInterface, ViewInterface
      * @return $this
      */
     public function setSortPosition($sortPosition);
+
+    public function onRender(callable $callback);
 }

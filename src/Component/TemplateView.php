@@ -40,8 +40,8 @@ class TemplateView implements ComponentInterface, DataAcceptorInterface
 
     public function render()
     {
-        return $this->beforeRender()->notify()
-        . $this->renderer->render($this->templateName, array_merge($this->data, ['this' => $this]));
+        $this->emit('render', [$this]);
+        return $this->renderer->render($this->templateName, array_merge($this->data, ['this' => $this]));
     }
 
     /**

@@ -51,8 +51,8 @@ abstract class AbstractDataView implements ComponentInterface, DataAcceptorInter
     public function render()
     {
 
-        return $this->beforeRender()->notify()
-        . $this->renderData()
+        $this->emit('render', [$this]);
+        return $this->renderData()
         . $this->renderChildren();
     }
 }
