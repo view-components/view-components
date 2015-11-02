@@ -26,7 +26,7 @@ class Text implements ComponentInterface
     public function render()
     {
         $this->emit('render', [$this]);
-        $text = $this->value instanceof Closure ?
+        $text = ($this->value instanceof Closure || !is_string($this->value) && is_callable($this->value)) ?
             call_user_func($this->value, $this)
             : (string)$this->value;
         return $text . $this->renderChildren();
@@ -41,7 +41,8 @@ class Text implements ComponentInterface
     }
 
     /**
-     * @param $value
+     *
+     * @param $value string|Closure|callable note: string values will not be interpreted as callable
      * @return $this
      */
     public function setValue($value)
