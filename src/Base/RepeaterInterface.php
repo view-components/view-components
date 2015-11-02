@@ -13,6 +13,7 @@ interface RepeaterInterface extends ComponentInterface
      * Sets data source to iterate over.
      *
      * @param array|Traversable $iterator
+     * @return $this
      */
     public function setIterator($iterator);
 
@@ -31,7 +32,7 @@ interface RepeaterInterface extends ComponentInterface
      * passed to second argument.
      *
      * @param callable $callback arguments: repeater, iterated element
-     * @return mixed
+     * @return $this
      */
     public function setCallback($callback);
 }
