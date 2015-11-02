@@ -135,6 +135,8 @@ class CompoundComponent implements ComponentInterface
      */
     public function compose($parentName, $componentName, ComponentInterface $component = null)
     {
+        // @todo check that it's required, becouse components registry already have event handler
+        $this->isTreeUpdateRequired = true;
         self::removeTreeChildIfExists($this->treeConfig, $componentName);
         if (!self::addTreeChild($this->treeConfig, $parentName, $componentName)) {
             throw new InvalidArgumentException(
