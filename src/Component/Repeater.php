@@ -30,7 +30,7 @@ class Repeater implements ComponentInterface, RepeaterInterface
     use NodeTrait;
     use ViewTrait;
     use ComponentTrait;
-    use \Presentation\Framework\Base\RepeaterTrait;
+    use RepeaterTrait;
 
     /**
      * @param array|Traversable $iterator
