@@ -59,17 +59,26 @@ class Registry extends BaseRegistry
         return $this->get('form');
     }
 
+    protected function changeControlsContainer($containerName, ComponentInterface $component)
+    {
+        $controls = null;
+        if ($this->has($containerName)) {
+            $controls = $this->getControls()->toArray();
+        }
+        $this->set($containerName, $component);
+        if ($controls) {
+            $this->setControls($controls);
+        }
+    }
+
     /**
-     * @param ComponentInterface|null $component
+     * @param ComponentInterface $component
      * @return $this
      */
-    public function setForm(ComponentInterface $component = null)
+    public function setForm(ComponentInterface $component)
     {
-        if ($this->has('form')) {
-            $controls = $this->getControls();
-            $component->addChildren($controls);
-        }
-        return $this->set('form', $component);
+        $this->changeControlsContainer('form', $component);
+        return $this;
     }
 
 
@@ -111,18 +120,18 @@ class Registry extends BaseRegistry
     /**
      * @return ComponentInterface|null
      */
-    public function getDataView()
+    public function getRecordView()
     {
-        return $this->get('data_view');
+        return $this->get('record_view');
     }
 
     /**
      * @param ComponentInterface|null $component
      * @return $this
      */
-    public function setDataView(ComponentInterface $component = null)
+    public function setRecordView(ComponentInterface $component = null)
     {
-        return $this->set('data_view', $component);
+        return $this->set('record_view', $component);
     }
 
 
@@ -134,6 +143,15 @@ class Registry extends BaseRegistry
         /** @var ObjectCollectionReadInterface $formChildren */
         $components =  $this->root->getChildrenRecursive();
         return $components->filterByType(ControlInterface::class);
+    }
+
+    public function setControls($controls)
+    {
+        $old = $this->getControls();
+        foreach($old as $control) {
+            $control->detach();
+        }
+        $this->getForm()->addChildren($controls);
     }
 
 
