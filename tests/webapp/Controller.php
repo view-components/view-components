@@ -2,16 +2,14 @@
 namespace Presentation\Framework\Demo;
 
 use Presentation\Framework\Component\CompoundComponent;
-use Presentation\Framework\Component\ControlView\PaginationView;
 use Presentation\Framework\Component\TemplateView;
+use Presentation\Framework\Component\ManagedList\Control\ControlInterface;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Input\InputSource;
-use Presentation\Framework\Common\ListManager;
 use Presentation\Framework\Component\Container;
-use Presentation\Framework\Control\FilterControl;
-use Presentation\Framework\Control\PaginationControl;
-use Presentation\Framework\Control\SortingSelectControl;
-use Presentation\Framework\Component\ManagedList;
+use Presentation\Framework\Component\ManagedList\Control\FilterControl;
+use Presentation\Framework\Component\ManagedList\Control\PaginationControl;
+use Presentation\Framework\Component\ManagedList\ManagedList;
 use Presentation\Framework\Component\Debug\SymfonyVarDump;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Data\ArrayDataProvider;
@@ -27,8 +25,6 @@ use Presentation\Framework\Resource\AliasRegistry;
 use Presentation\Framework\Resource\IncludedResourcesRegistry;
 use Presentation\Framework\Resource\ResourceManager;
 use Presentation\Framework\Customization\Bootstrap\BootstrapStyling;
-use Presentation\Framework\Service\PF;
-use Presentation\Framework\Service\SimpleContainer;
 
 class Controller extends AbstractController
 {
@@ -186,13 +182,15 @@ class Controller extends AbstractController
             $provider
         );
 
-        $manager = new ListManager();
-        $manager->manage($provider, [$filter1, $filter2, $pagination]);
+        /** @var ControlInterface $control */
+        foreach([$filter1, $filter2, $pagination] as $control) {
+            $provider->operations()->add($control->getOperation());
+        }
 
         $view = new Container([
             new Tag('form', null, [
-                $filter1->getView(),
-                $filter2->getView(),
+                $filter1,
+                $filter2,
                 new Tag('button', ['type' => 'submit'], [
                     new Text('Filter')
                 ]),
@@ -202,7 +200,7 @@ class Controller extends AbstractController
                 $provider,
                 [new PersonView]
             ),
-            $pagination->getView()
+            $pagination
         ]);
 
         return $this->renderMenu() . $view->render();
@@ -217,10 +215,8 @@ class Controller extends AbstractController
     {
         $provider = $this->getDataProvider();
         $list = new ManagedList(
-            new Repeater(
-                $provider,
-                [new SymfonyVarDump]
-            ),
+            $provider,
+            new SymfonyVarDump,
             [
                 new FilterControl(
                     'name',
@@ -232,17 +228,17 @@ class Controller extends AbstractController
                     FilterOperation::OPERATOR_EQ,
                     new InputOption('role_filter', $_GET)
                 ),
-                new SortingSelectControl(
-                    [
-                        null => 'None',
-                        'id' => 'ID',
-                        'name' => 'Name',
-                        'role' => 'Role',
-                        'birthday' => 'Birthday',
-                    ],
-                    new InputOption('sort_field', $_GET),
-                    new InputOption('sort_direction', $_GET)
-                )
+//                new SortingSelectControl(
+//                    [
+//                        null => 'None',
+//                        'id' => 'ID',
+//                        'name' => 'Name',
+//                        'role' => 'Role',
+//                        'birthday' => 'Birthday',
+//                    ],
+//                    new InputOption('sort_field', $_GET),
+//                    new InputOption('sort_direction', $_GET)
+//                )
             ]
         );
         return $this->renderMenu() . $list->render();
@@ -258,10 +254,10 @@ class Controller extends AbstractController
         $provider = $this->getDataProvider();
         $input = new InputSource($_GET);
         $list = new ManagedList(
-            new Repeater(
-                $provider,
-                [new SymfonyVarDump]
-            ),
+
+            $provider,
+            new SymfonyVarDump,
+
             [
                 new FilterControl(
                     'name',
@@ -273,17 +269,17 @@ class Controller extends AbstractController
                     FilterOperation::OPERATOR_EQ,
                     $input('role_filter')
                 ),
-                new SortingSelectControl(
-                    [
-                        null => 'None',
-                        'id' => 'ID',
-                        'name' => 'Name',
-                        'role' => 'Role',
-                        'birthday' => 'Birthday',
-                    ],
-                    $input('sort_field'),
-                    $input('sort_dir')
-                ),
+//                new SortingSelectControl(
+//                    [
+//                        null => 'None',
+//                        'id' => 'ID',
+//                        'name' => 'Name',
+//                        'role' => 'Role',
+//                        'birthday' => 'Birthday',
+//                    ],
+//                    $input('sort_field'),
+//                    $input('sort_dir')
+//                ),
                 new PaginationControl(
                     $input('page', 1),
                     10,
@@ -293,8 +289,12 @@ class Controller extends AbstractController
         );
 
         // move pagination to container bottom
-        $paginationView = $list->getChildrenRecursive()->find('is_a', [PaginationView::class]);
-        $container = new Container([$list, $paginationView]);
+        $pagination = $list->getChildrenRecursive()->find('is_a', [PaginationControl::class]);
+        $list->applyOperations();
+        $container = new Container([
+            $list,
+            $pagination
+        ]);
 
         $resources = new ResourceManager(
             new AliasRegistry([
@@ -357,7 +357,7 @@ class Controller extends AbstractController
         $renderer = $this->getRenderer();
         return $this->renderMenu()
         . $renderer->render('demo/template1')
-        . $renderer->render('demo/template_with_var', ['var'=>'ok']);
+        . $renderer->render('demo/template_with_var', ['var' => 'ok']);
     }
 
     /**

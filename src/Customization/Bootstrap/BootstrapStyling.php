@@ -6,8 +6,9 @@ use LogicException;
 use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Base\Html\AbstractTag;
 use Presentation\Framework\Base\Html\TagInterface;
-use Presentation\Framework\Component\ControlView\FilterControlView;
+use Presentation\Framework\Component\ManagedList\Control\View\FilterControlView;
 use Presentation\Framework\Component\Html\Tag;
+use Presentation\Framework\Component\ManagedList\Control\FilterControl;
 use Presentation\Framework\Resource\ResourceManager;
 use Presentation\Framework\Customization\ConfigurableCustomization;
 
@@ -49,7 +50,7 @@ class BootstrapStyling extends ConfigurableCustomization
     protected function initializeCallbacks()
     {
         $this->register(TagInterface::class, [$this, 'tagCallback']);
-        $this->register(FilterControlView::class, [$this, 'filterControlCallback']);
+        $this->register(FilterControl::class, [$this, 'filterControlCallback']);
     }
 
     /**
@@ -113,16 +114,16 @@ class BootstrapStyling extends ConfigurableCustomization
         }
     }
 
-    protected function filterControlCallback(FilterControlView $view)
+    protected function filterControlCallback(FilterControl $filter)
     {
-
+        $view = $filter->getView();
         if ($view instanceof TagInterface) {
             $view->setTagName('div');
             $view->setAttribute('class', 'form-group');
-            if ($view->parent() instanceof TagInterface) {
-                $view->parent()->setAttribute('class', 'form-inline');
+            $parent = $filter->parent();
+            if ($parent instanceof TagInterface && $parent->getTagName() === 'form') {
+                $parent->setAttribute('class', 'form-inline');
             }
-
         }
     }
 

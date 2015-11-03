@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Component\ControlView;
+namespace Presentation\Framework\Component\ManagedList\Control\View;
 
 use Closure;
 use League\Url\Query;

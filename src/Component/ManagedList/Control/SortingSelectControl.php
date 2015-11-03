@@ -1,15 +1,15 @@
 <?php
 
-namespace Presentation\Framework\Control;
+namespace Presentation\Framework\Component\ManagedList\Control;
 
+use Presentation\Framework\Base\ViewAggregate;
 use Presentation\Framework\Input\InputOption;
-use Presentation\Framework\Component\ControlView\SortingSelectView;
+use Presentation\Framework\Component\ManagedList\Control\View\SortingSelectView;
 use Presentation\Framework\Data\Operation\DummyOperation;
 use Presentation\Framework\Data\Operation\SortOperation;
 
-class SortingSelectControl implements ControlInterface
+class SortingSelectControl  extends ViewAggregate implements ControlInterface
 {
-    use ControlTrait;
     /**
      * @var string[]
      */
@@ -38,6 +38,7 @@ class SortingSelectControl implements ControlInterface
         $this->fields = $fields;
         $this->fieldOption = $fieldOption;
         $this->directionOption = $directionOption;
+        parent::__construct(new SortingSelectView($this));
     }
 
     public function getOperation()
@@ -73,11 +74,6 @@ class SortingSelectControl implements ControlInterface
     public function getFields()
     {
         return $this->fields;
-    }
-
-    protected function makeDefaultView()
-    {
-        return new SortingSelectView($this);
     }
 
     private function validateInput()

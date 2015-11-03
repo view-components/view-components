@@ -1,17 +1,16 @@
 <?php
 
-namespace Presentation\Framework\Control;
+namespace Presentation\Framework\Component\ManagedList\Control;
 
+use Presentation\Framework\Base\ViewAggregate;
 use Presentation\Framework\Input\InputOption;
-use Presentation\Framework\Component\ControlView\PaginationView;
+use Presentation\Framework\Component\ManagedList\Control\View\PaginationView;
 use Presentation\Framework\Data\DataProviderInterface;
 use Presentation\Framework\Data\Operation\PaginateOperation;
 use RuntimeException;
 
-class PaginationControl implements ControlInterface
+class PaginationControl extends ViewAggregate implements ControlInterface
 {
-    use ControlTrait;
-
     /**
      * @var \Presentation\Framework\Input\InputOption
      */
@@ -40,6 +39,13 @@ class PaginationControl implements ControlInterface
         $this->pageInputOption = $page;
         $this->recordsPerPage = $recordsPerPage;
         $this->dataProvider = $dataProvider;
+        parent::__construct(new PaginationView(
+            (int)$this->pageInputOption->getValue(),
+            function() {
+                return (int)$this->getPageCount();
+            },
+            $this->pageInputOption->getKey()
+        ));
     }
 
     public function getOperation()
@@ -71,14 +77,4 @@ class PaginationControl implements ControlInterface
     {
         return ceil($this->getTotalRecordsCount() / $this->recordsPerPage);
     }
-
-    protected function makeDefaultView()
-    {
-        return new PaginationView(
-            (int)$this->pageInputOption->getValue(),
-            (int)$this->getPageCount(),
-            $this->pageInputOption->getKey()
-        );
-    }
-
 }

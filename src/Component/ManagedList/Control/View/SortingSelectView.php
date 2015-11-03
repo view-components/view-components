@@ -1,11 +1,11 @@
 <?php
 
-namespace Presentation\Framework\Component\ControlView;
+namespace Presentation\Framework\Component\ManagedList\Control\View;
 
 use Presentation\Framework\Component\Html\Select;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Component\Text;
-use Presentation\Framework\Control\SortingSelectControl;
+use Presentation\Framework\Component\ManagedList\Control\SortingSelectControl;
 
 /**
  * Class SortingSelectView

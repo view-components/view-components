@@ -22,14 +22,14 @@
         "php": ">=5.5.0",
         "symfony/property-access" : "^2.5",
         "nayjest/manipulator": "^1.2.1",
-        "nayjest/tree": "^1.4.1",
+        "nayjest/tree": "^1.5.1",
         "nayjest/collection": "^1.7.2",
         "danielstjules/stringy": "^1.9",
         "league/url": "^4.0"
     },
     "require-dev": {
         "phpunit/phpunit": "4.6.*",
-        "filp/whoops": "~1",
+        "filp/whoops": "^1.1.7",
         "codeception/codeception": "2.0.*",
         "vlucas/phpdotenv" : "~1",
         "symfony/var-dumper": "~2",

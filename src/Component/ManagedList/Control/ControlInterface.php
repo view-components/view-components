@@ -1,10 +1,10 @@
 <?php
-namespace Presentation\Framework\Control;
+namespace Presentation\Framework\Component\ManagedList\Control;
 
 use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Data\Operation\OperationInterface;
 
-interface ControlInterface
+interface ControlInterface extends ComponentInterface
 {
     /**
      * Creates operation.
@@ -12,9 +12,4 @@ interface ControlInterface
      * @return OperationInterface
      */
     public function getOperation();
-
-    /**
-     * @return ComponentInterface
-     */
-    public function getView();
 }

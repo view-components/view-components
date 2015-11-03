@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Component\ControlView;
+namespace Presentation\Framework\Component\ManagedList\Control\View;
 
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Component\Text;
