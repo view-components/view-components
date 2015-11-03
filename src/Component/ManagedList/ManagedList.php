@@ -31,7 +31,7 @@ class ManagedList extends CompoundComponent
             ],
             'container' => [
                 'repeater' => [
-                    'list_item' => []
+                    'data_view' => []
                 ]
             ]
         ];
@@ -58,12 +58,12 @@ class ManagedList extends CompoundComponent
 
     /**
      * @param array|Traversable|DataProviderInterface|null $dataSrc
-     * @param ComponentInterface|null $listItem
+     * @param ComponentInterface|null $dataView
      * @param ControlInterface[]|null $controls
      */
     public function __construct(
         $dataSrc = null,
-        ComponentInterface $listItem = null,
+        ComponentInterface $dataView = null,
         $controls = null
     )
     {
@@ -74,7 +74,10 @@ class ManagedList extends CompoundComponent
         if (!empty($controls)) {
             $this->components()->getForm()->addChildren($controls);
         }
-        $this->components()->setListItem($listItem);
+        if ($dataView) {
+            $this->components()->setDataView($dataView);
+        }
+
     }
 
     public function applyOperations()

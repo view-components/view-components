@@ -111,18 +111,18 @@ class Registry extends BaseRegistry
     /**
      * @return ComponentInterface|null
      */
-    public function getListItem()
+    public function getDataView()
     {
-        return $this->get('list_item');
+        return $this->get('data_view');
     }
 
     /**
      * @param ComponentInterface|null $component
      * @return $this
      */
-    public function setListItem(ComponentInterface $component = null)
+    public function setDataView(ComponentInterface $component = null)
     {
-        return $this->set('list_item', $component);
+        return $this->set('data_view', $component);
     }
 
 
