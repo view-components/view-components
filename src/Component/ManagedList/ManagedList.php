@@ -105,7 +105,7 @@ class ManagedList extends CompoundComponent
      */
     protected function makeComponentRegistry(array $components = [])
     {
-        return new Registry($components);
+        return new Registry($components, $this);
     }
 
     /**

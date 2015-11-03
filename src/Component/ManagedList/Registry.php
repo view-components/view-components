@@ -14,12 +14,30 @@ class Registry extends BaseRegistry
 {
     const SUBMIT_BUTTON_POSITION = 100;
 
-    protected function useDefaults()
+    protected $root;
+
+    public function __construct(array $items = [], ComponentInterface $root)
     {
-        $this->setForm(new Tag('form'));
-        $this->setRepeater(new Repeater());
-        $this->setContainer(new Tag('div'));
-        $this->setSubmitButton(new Tag('input', ['type' => 'submit']));
+        parent::__construct($items);
+        $this->root = $root;
+    }
+
+    public function useDefaults()
+    {
+        $this->has('form') || $this->setForm(new Tag('form'));
+        $this->has('repeater') || $this->setRepeater(new Repeater());
+        $this->has('container') || $this->setContainer(new Tag('div'));
+        $this->has('submit_button') || $this->setSubmitButton(
+            new Tag('input', ['type' => 'submit'])
+        );
+    }
+
+    /**
+     * @return ComponentInterface
+     */
+    public function getRoot()
+    {
+        return $this->root;
     }
 
     /**
@@ -28,7 +46,7 @@ class Registry extends BaseRegistry
      */
     public function get($itemName)
     {
-        if ($this->isEmpty()) {
+        if (!$this->has($itemName)) {
             $this->useDefaults();
         }
         return parent::get($itemName);
@@ -114,8 +132,8 @@ class Registry extends BaseRegistry
     public function getControls()
     {
         /** @var ObjectCollectionReadInterface $formChildren */
-        $formChildren =  $this->getForm()->children();
-        return $formChildren->filterByType(ControlInterface::class);
+        $components =  $this->root->getChildrenRecursive();
+        return $components->filterByType(ControlInterface::class);
     }
 
 
