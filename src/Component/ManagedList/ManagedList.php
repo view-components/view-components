@@ -39,6 +39,7 @@ class ManagedList extends CompoundComponent
 
     /**
      * @param array|null|DataProviderInterface|Traversable $dataSource
+     * @return $this
      */
     public function setDataSource($dataSource)
     {
@@ -46,6 +47,7 @@ class ManagedList extends CompoundComponent
             $dataSource = new ArrayDataProvider($dataSource);
         }
         $this->dataSource = $dataSource;
+        return $this;
     }
 
     protected function buildTree()
