@@ -72,11 +72,13 @@ class FilterControlView extends Tag
     }
 
     /**
-     * @param string $name
+     * @param $name
+     * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
@@ -88,11 +90,13 @@ class FilterControlView extends Tag
     }
 
     /**
-     * @param null|string $value
+     * @param $value
+     * @return $this
      */
     public function setValue($value)
     {
         $this->value = $value;
+        return $this;
     }
 
     /**
@@ -104,10 +108,12 @@ class FilterControlView extends Tag
     }
 
     /**
-     * @param null|string $label
+     * @param $label
+     * @return $this
      */
     public function setLabel($label)
     {
         $this->label = $label;
+        return $this;
     }
 }
