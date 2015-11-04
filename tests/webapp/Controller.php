@@ -2,6 +2,7 @@
 namespace Presentation\Framework\Demo;
 
 use Presentation\Framework\Component\CompoundComponent;
+use Presentation\Framework\Component\ManagedList\Control\SortingSelectControl;
 use Presentation\Framework\Component\TemplateView;
 use Presentation\Framework\Component\ManagedList\Control\ControlInterface;
 use Presentation\Framework\Input\InputOption;
@@ -45,6 +46,17 @@ class Controller extends AbstractController
                 $this->getUsersData(),
                 $operations
             );
+    }
+
+    protected function getResourceManager()
+    {
+        return new ResourceManager(
+            new AliasRegistry([
+                'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
+            ]),
+            new AliasRegistry(),
+            new IncludedResourcesRegistry()
+        );
     }
 
     protected function getRenderer()
@@ -138,8 +150,8 @@ class Controller extends AbstractController
 
         $view = new Container([
             new Tag('form', null, [
-                $filter1->getView(),
-                $filter2->getView(),
+                $filter1,
+                $filter2,
                 new Tag('button', ['type' => 'submit'], [
                     new Text('Filter')
                 ]),
@@ -228,17 +240,17 @@ class Controller extends AbstractController
                     FilterOperation::OPERATOR_EQ,
                     new InputOption('role_filter', $_GET)
                 ),
-//                new SortingSelectControl(
-//                    [
-//                        null => 'None',
-//                        'id' => 'ID',
-//                        'name' => 'Name',
-//                        'role' => 'Role',
-//                        'birthday' => 'Birthday',
-//                    ],
-//                    new InputOption('sort_field', $_GET),
-//                    new InputOption('sort_direction', $_GET)
-//                )
+                new SortingSelectControl(
+                    [
+                        null => 'None',
+                        'id' => 'ID',
+                        'name' => 'Name',
+                        'role' => 'Role',
+                        'birthday' => 'Birthday',
+                    ],
+                    new InputOption('sort_field', $_GET),
+                    new InputOption('sort_direction', $_GET)
+                )
             ]
         );
         return $this->renderMenu() . $list->render();
@@ -254,7 +266,6 @@ class Controller extends AbstractController
         $provider = $this->getDataProvider();
         $input = new InputSource($_GET);
         $list = new ManagedList(
-
             $provider,
             new SymfonyVarDump,
 
@@ -269,17 +280,17 @@ class Controller extends AbstractController
                     FilterOperation::OPERATOR_EQ,
                     $input('role_filter')
                 ),
-//                new SortingSelectControl(
-//                    [
-//                        null => 'None',
-//                        'id' => 'ID',
-//                        'name' => 'Name',
-//                        'role' => 'Role',
-//                        'birthday' => 'Birthday',
-//                    ],
-//                    $input('sort_field'),
-//                    $input('sort_dir')
-//                ),
+                new SortingSelectControl(
+                    [
+                        null => 'None',
+                        'id' => 'ID',
+                        'name' => 'Name',
+                        'role' => 'Role',
+                        'birthday' => 'Birthday',
+                    ],
+                    $input('sort_field'),
+                    $input('sort_dir')
+                ),
                 new PaginationControl(
                     $input('page', 1),
                     10,
@@ -290,21 +301,14 @@ class Controller extends AbstractController
 
         // move pagination to container bottom
         $pagination = $list->getChildrenRecursive()->find('is_a', [PaginationControl::class]);
+        // @todo avoid this
         $list->applyOperations();
         $container = new Container([
             $list,
             $pagination
         ]);
 
-        $resources = new ResourceManager(
-            new AliasRegistry([
-                'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
-            ]),
-            new AliasRegistry(),
-            new IncludedResourcesRegistry()
-        );
-
-        $styling = new BootstrapStyling($resources);
+        $styling = new BootstrapStyling($this->getResourceManager());
         $styling->apply($container);
 
         return $this->renderMenu() . $container->render();
@@ -333,15 +337,7 @@ class Controller extends AbstractController
 
         $container = new Tag('div', ['class' => 'container'], [$compound]);
 
-        $resources = new ResourceManager(
-            new AliasRegistry([
-                'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
-            ]),
-            new AliasRegistry(),
-            new IncludedResourcesRegistry()
-        );
-
-        $styling = new BootstrapStyling($resources);
+        $styling = new BootstrapStyling($this->getResourceManager());
         $styling->apply($container);
 
         return $this->renderMenu() . $container->render();

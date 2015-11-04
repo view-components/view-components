@@ -79,6 +79,9 @@ abstract class AbstractTemplateView implements
     {
         $this->wasChildrenRendered = false;
         $this->emit('render', [$this]);
+        if (!$this->isVisible()) {
+            return '';
+        }
         return $this->renderTemplate()
         . ($this->wasChildrenRendered ? '' : $this->renderChildren());
     }

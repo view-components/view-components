@@ -19,6 +19,9 @@ trait DecoratedContainerTrait
     public function render()
     {
         $this->emit('render', [$this]);
+        if (!$this->isVisible()) {
+            return '';
+        }
         return $this->renderOpening()
         . $this->renderChildren()
         . $this->renderClosing();

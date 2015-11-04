@@ -3,6 +3,7 @@
 namespace Presentation\Framework\Component;
 
 use Presentation\Framework\Base\AbstractComponent;
+use Presentation\Framework\Base\ComponentInterface;
 
 class RenderIf extends AbstractComponent
 {
@@ -11,21 +12,14 @@ class RenderIf extends AbstractComponent
 
     /**
      * RenderIf constructor.
-     * @param array $children
      * @param callable|null $condition
+     * @param array|ComponentInterface[] $children
      */
-    public function __construct(array $children = [], callable $condition = null)
+    public function __construct(callable $condition = null, array $children = [])
     {
         $this->setChildren($children);
         $this->setCondition($condition);
-    }
 
-    /**
-     * @return string
-     */
-    public function render()
-    {
-        return $this->isRenderingRequired() ? parent::render() : '';
     }
 
     /**
@@ -33,12 +27,12 @@ class RenderIf extends AbstractComponent
      *
      * @return bool
      */
-    public function isRenderingRequired()
+    public function isVisible()
     {
         if (is_callable($this->getCondition())) {
-            return call_user_func($this->getCondition(), $this);
+            return call_user_func($this->getCondition(), $this) && parent::isVisible();
         }
-        return true;
+        return parent::isVisible();
     }
 
     /**

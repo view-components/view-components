@@ -14,6 +14,8 @@ trait ComponentTrait
 
     protected $isSortingEnabled = true;
 
+    protected $visible = true;
+
     /** @return ObjectCollectionInterface */
     abstract public function children();
 
@@ -30,6 +32,9 @@ trait ComponentTrait
     public function render()
     {
         $this->emit('render', [$this]);
+        if (!$this->isVisible()) {
+            return '';
+        }
         return $this->renderChildren();
     }
 
@@ -95,5 +100,28 @@ trait ComponentTrait
     {
         $this->on('render', $callback);
         return $this;
+    }
+
+    public function hide()
+    {
+        $this->visible = false;
+        return $this;
+    }
+
+    public function show()
+    {
+        $this->visible = true;
+        return $this;
+    }
+
+    public function setVisible($value)
+    {
+        $this->visible = $value;
+        return $this;
+    }
+
+    public function isVisible()
+    {
+        return $this->visible;
     }
 }
