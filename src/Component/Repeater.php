@@ -11,7 +11,7 @@ use Presentation\Framework\Base\RepeaterTrait;
 use Presentation\Framework\Rendering\ViewTrait;
 use Traversable;
 
-function defaultRepeaterCallback(Repeater $repeater, $dataRow)
+function defaultRepeaterCallback($dataRow, Repeater $repeater)
 {
     foreach($repeater->children() as $component)
     {

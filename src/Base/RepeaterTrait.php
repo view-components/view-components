@@ -37,10 +37,10 @@ trait RepeaterTrait
      * Sets iteration callback.
      *
      * Callback will be executed on each iteration
-     * with repeater instance passed to first argument and iterated data element
+     * with iterated data element passed to first argument and repeater instance
      * passed to second argument.
      *
-     * @param callable $callback arguments: repeater, iterated element
+     * @param callable $callback arguments: iterated element, repeater
      * @return mixed
      */
     public function setCallback($callback)
@@ -49,6 +49,11 @@ trait RepeaterTrait
         return $this;
     }
 
+    /**
+     * Returns iteration callback.
+     *
+     * @return callable arguments: iterated element, repeater
+     */
     public function getCallback()
     {
         return $this->callback;
