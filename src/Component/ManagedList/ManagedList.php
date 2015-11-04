@@ -4,9 +4,7 @@ namespace Presentation\Framework\Component\ManagedList;
 use Presentation\Framework\Component\CompoundComponent;
 use Presentation\Framework\Component\ManagedList\Control\ControlInterface;
 use Presentation\Framework\Base\ComponentInterface;
-use Presentation\Framework\Data\ArrayDataProvider;
 use Presentation\Framework\Data\DataProviderInterface;
-use Traversable;
 
 /**
  * Class ManagedList
@@ -15,13 +13,86 @@ use Traversable;
  */
 class ManagedList extends CompoundComponent
 {
-
     protected $isOperationsApplied = false;
 
     /**
-     * @var array|null|DataProviderInterface|Traversable
+     * @var DataProviderInterface|null
      */
-    protected $dataSource;
+    protected $dataProvider;
+
+    /**
+     * @param DataProviderInterface|null $dataSrc
+     * @param ComponentInterface|null $recordView
+     * @param ControlInterface[]|null $controls
+     */
+    public function __construct(
+        $dataSrc = null,
+        ComponentInterface $recordView = null,
+        $controls = null
+    )
+    {
+        parent::__construct(
+            $this->getDefaultTreeConfig()
+        );
+        $this->setDataProvider($dataSrc);
+        if ($recordView) {
+            $this->components()->setRecordView($recordView);
+        }
+        if (!empty($controls)) {
+            $this->components()->getForm()->addChildren($controls);
+        }
+    }
+
+    /**
+     * @return Registry|ComponentInterface[]
+     */
+    public function components()
+    {
+        return parent::components();
+    }
+
+    /**
+     * @param DataProviderInterface|null $dataProvider
+     * @return $this
+     */
+    public function setDataProvider(DataProviderInterface $dataProvider = null)
+    {
+        $this->dataProvider = $dataProvider;
+        $this->isOperationsApplied = false;
+        return $this;
+    }
+
+
+    /**
+     * @return null|DataProviderInterface
+     */
+    public function getDataProvider()
+    {
+        return $this->dataProvider;
+    }
+
+    public function render()
+    {
+        $this->updateTreeIfRequired();
+        $this->applyOperations();
+        return parent::render();
+    }
+
+    /**
+     * @todo why not protected?
+     */
+    public function applyOperations()
+    {
+        $controls = $this->components()->getControls();
+        /** @var DataProviderInterface $dataProvider */
+        $dataProvider = $this->components()->getRepeater()->getIterator();
+        if (!$this->isOperationsApplied) {
+            foreach($controls as $control) {
+                $dataProvider->operations()->add($control->getOperation());
+            }
+            $this->isOperationsApplied = true;
+        }
+    }
 
     protected function getDefaultTreeConfig()
     {
@@ -37,69 +108,12 @@ class ManagedList extends CompoundComponent
         ];
     }
 
-    /**
-     * @param array|null|DataProviderInterface|Traversable $dataSource
-     * @return $this
-     */
-    public function setDataSource($dataSource)
-    {
-        if (!$dataSource instanceof DataProviderInterface && (is_array($dataSource) || $dataSource instanceof Traversable)) {
-            $dataSource = new ArrayDataProvider($dataSource);
-        }
-        $this->dataSource = $dataSource;
-        return $this;
-    }
-
     protected function buildTree()
     {
-        if ($this->dataSource !== null) {
-            $this->components()->getRepeater()->setIterator($this->dataSource);
+        if ($this->dataProvider !== null) {
+            $this->components()->getRepeater()->setIterator($this->dataProvider);
         }
         return parent::buildTree();
-    }
-
-    /**
-     * @param array|Traversable|DataProviderInterface|null $dataSrc
-     * @param ComponentInterface|null $recordView
-     * @param ControlInterface[]|null $controls
-     */
-    public function __construct(
-        $dataSrc = null,
-        ComponentInterface $recordView = null,
-        $controls = null
-    )
-    {
-        parent::__construct(
-            $this->getDefaultTreeConfig()
-        );
-        $this->setDataSource($dataSrc);
-        if ($recordView) {
-            $this->components()->setRecordView($recordView);
-        }
-        if (!empty($controls)) {
-            $this->components()->getForm()->addChildren($controls);
-        }
-
-    }
-
-    public function applyOperations()
-    {
-        $controls = $this->components()->getControls();
-        /** @var DataProviderInterface $dataProvider */
-        $dataProvider = $this->components()->getRepeater()->getIterator();
-        if (!$this->isOperationsApplied) {
-            foreach($controls as $control) {
-                $dataProvider->operations()->add($control->getOperation());
-            }
-            $this->isOperationsApplied = true;
-        }
-    }
-
-    public function render()
-    {
-        $this->updateTreeIfRequired();
-        $this->applyOperations();
-        return parent::render();
     }
 
     /**
@@ -111,13 +125,5 @@ class ManagedList extends CompoundComponent
     protected function makeComponentRegistry(array $components = [])
     {
         return new Registry($components, $this);
-    }
-
-    /**
-     * @return Registry|ComponentInterface[]
-     */
-    public function components()
-    {
-        return parent::components();
     }
 }
