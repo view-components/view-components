@@ -23,7 +23,7 @@ class ManagedList extends CompoundComponent
      */
     protected $dataSource;
 
-    protected function getDefaultStructure()
+    protected function getDefaultTreeConfig()
     {
         return [
             'form' => [
@@ -68,7 +68,7 @@ class ManagedList extends CompoundComponent
     )
     {
         parent::__construct(
-            $this->getDefaultStructure()
+            $this->getDefaultTreeConfig()
         );
         $this->setDataSource($dataSrc);
         if ($recordView) {
