@@ -58,8 +58,8 @@ class Repeater implements ComponentInterface, RepeaterInterface
         if ($this->getCallback() !== null) {
             call_user_func(
                 $this->getCallback(),
-                $this,
-                $dataRow
+                $dataRow,
+                $this
             );
         }
         return $this->renderChildren();
