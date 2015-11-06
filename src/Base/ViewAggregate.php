@@ -7,7 +7,9 @@ use Presentation\Framework\Rendering\ViewTrait;
 
 class ViewAggregate implements ComponentInterface
 {
-    use ComponentTrait;
+    use ComponentTrait {
+        ComponentTrait::render as private renderInternal;
+    }
     use ReadonlyNodeTrait;
     use ViewTrait;
 
@@ -19,18 +21,48 @@ class ViewAggregate implements ComponentInterface
     }
 
     /**
-     * @return ComponentInterface
+     * Override this method to specify default view
+     *
+     * @return ComponentInterface|null
+     */
+    protected function makeDefaultView()
+    {
+        return null;
+    }
+
+    /**
+     * @return ComponentInterface|null
      */
     public function getView()
     {
         return $this->writableChildren()->first();
     }
 
+
     /**
-     * @param mixed $viewComponent
+     * @param ComponentInterface|null $viewComponent
+     * @return $this
      */
-    public function setView(ComponentInterface $viewComponent)
+    public function setView(ComponentInterface $viewComponent = null)
     {
-        $this->writableChildren()->set([$viewComponent]);
+        if ($viewComponent === null) {
+            $this->writableChildren()->clear();
+        } else {
+            $this->writableChildren()->set([$viewComponent]);
+        }
+        return $this;
+    }
+
+    final public function useDefaultView()
+    {
+        $this->setView($this->makeDefaultView());
+    }
+
+    public function render()
+    {
+        if (!$this->getView()) {
+            $this->useDefaultView();
+        }
+        return $this->renderInternal();
     }
 }
