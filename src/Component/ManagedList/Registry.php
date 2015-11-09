@@ -169,7 +169,9 @@ class Registry extends BaseRegistry
      */
     public function setSubmitButton(ComponentInterface $component = null)
     {
-        $component->setSortPosition(static::SUBMIT_BUTTON_POSITION);
+        if ($component) {
+            $component->setSortPosition(static::SUBMIT_BUTTON_POSITION);
+        }
         return $this->set('submit_button', $component);
     }
 }
