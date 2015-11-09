@@ -46,6 +46,8 @@ Each component implements [Nayjest\Tree\ChildNodeInterface](https://github.com/N
 
 Renders component.
 
+
+
 ###### `ComponentInterface::__toString() : string`
 
 Returns rendering result  when object is treated like a string, i.e. components can be used as variables containing strings:
@@ -68,30 +70,42 @@ echo "Component output: $text";
 
 See [PHP Magic Methods: __toString()](http://www.php.net/manual/en/language.oop5.magic.php#object.tostring)
 
-###### `$component->renderChildren() : string`
 
-Renders child components
+
+##### `$component->renderChildren() : string`
+
+Renders child components.
+
+
 
 ##### 3. Sorting
 
 If root component has sorting enabled, child components will be rendered in specified order.
 By default it's enabled, but can be turned of in performance reasons or specific business logic requirements.
 
-Sotring mechanism provides stable sort, i. e. components with equal values returned by getSortPosition() method will be rendered in same order as it placed to components collection. Therefore rendering order of components  can be controlled by two ways: it's natural order in collection and specifying concrete positions (this way has higher priority).
+Sorting mechanism provides stable sort, i. e. components with equal values returned by getSortPosition() method will be rendered in same order as it placed to components collection. Therefore rendering order of components  can be controlled by two ways: it's natural order in collection and specifying concrete positions (this way has higher priority).
 
-###### `$component->isSortable() : bool`
+##### `$component->isSortable() : bool`
 Returns true if component has sorting enabled.
 
-###### `$component->setSortable(bool $value) : $this`
-Enables or disables children sorting
 
-###### `$component->setSortPosition(int $position) : $this`
+
+##### `$component->setSortable(bool $value) : $this`
+Enables or disables children sorting.
+
+
+
+##### `$component->setSortPosition(int $position) : $this`
 
 Specifies position for sorting. 
 If sorting is enabled in parent component, children will be sorted by $sortPosition ascending on rendering.
 
+
+
 ##### `$component->getSortPosition() : int`
-Returns position for sorting. Default value is 1
+Returns position for sorting. Default value is 1.
+
+
 
 ##### 4. Visibility
 
@@ -99,27 +113,49 @@ Each component has property responsive for visibility. If component isn't visibl
 
 This does not matters when calling renderChildren() manually.
 
+
+
 ##### `$component->setVisible(bool $value) : $this`
 
-Sets component visibility
+Sets component visibility.
+
+
 
 ##### `$component->hide() : $this`
+
+Hides component.
+
 Method acts same way like calling  `$component->setVisible(false);`
 
+
+
 ##### `$component->show() : $this`
+
+Shows component (if hidden).
+
 Method acts same way like calling  `$component->setVisible(true);`
 
+
+
 ##### `$component->isVisible() : bool`
-Returns `true` if component is visible and `false` otherwise
+
+Returns `true` if component is visible and `false` otherwise.
+
+
 
 ##### 5. Events
+
 Presentation Framework uses [Événement](https://github.com/igorw/evenement) package for event dispatching.
 Components implements (Evenement\EventEmitterInterface)[https://github.com/igorw/evenement/blob/master/src/Evenement/EventEmitterInterface.php].
 
 In addition to EventEmitterInterface, components of Presentation Framework provides methods for working with it's concrete events.
 
+
+
 ##### `$component->onRender(callable $callback) : $this`
 Attaches handler for 'render' event.
+
+
 
 ##### 6. Miscellaneous
 
@@ -128,16 +164,24 @@ Components has setter & getter for `componentName` property used for identifying
 ##### `$component->getComponentName() : string|null`
 Sets component name
 
+
+
 ##### `$component->setComponentName(string|null $name) : $this`
 Gets component name
+
+
 
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
+
+
 ## Security
 
 If you discover any security related issues, please email mail@vitaliy.in instead of using the issue tracker.
+
+
 
 ## Testing
 
@@ -177,6 +221,8 @@ php vendor/bin/codecept build
 ```bash
 php vendor/bin/codecept run acceptance
 ```
+
+
 
 ## License
 
