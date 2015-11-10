@@ -196,7 +196,7 @@ Just execute phpunit from package folder.
 ```bash
 phpunit
 ```
-Package dependencies must be installed via composer (just run composer install).
+Package dependencies must be installed via composer (just run `composer install`).
 
 #### Running Acceptance Tests
 
