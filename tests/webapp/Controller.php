@@ -228,7 +228,9 @@ class Controller extends AbstractController
         $provider = $this->getDataProvider();
         $list = new ManagedList(
             $provider,
-            new SymfonyVarDump,
+            new SymfonyVarDump
+        );
+        $list->addChildren(
             [
                 new FilterControl(
                     'name',
@@ -268,7 +270,6 @@ class Controller extends AbstractController
         $list = new ManagedList(
             $provider,
             new SymfonyVarDump,
-
             [
                 new FilterControl(
                     'name',
@@ -299,19 +300,10 @@ class Controller extends AbstractController
             ]
         );
 
-        // move pagination to container bottom
-        $pagination = $list->getChildrenRecursive()->find('is_a', [PaginationControl::class]);
-        // @todo avoid this
-        $list->applyOperations();
-        $container = new Container([
-            $list,
-            $pagination
-        ]);
-
         $styling = new BootstrapStyling($this->getResourceManager());
-        $styling->apply($container);
+        $styling->apply($list);
 
-        return $this->renderMenu() . $container->render();
+        return $this->renderMenu() . $list->render();
     }
 
     public function demo5()
