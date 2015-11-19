@@ -1,9 +1,14 @@
 <?php
 namespace Presentation\Framework\Component\ManagedList;
 
+use Presentation\Framework\Base\RepeaterInterface;
 use Presentation\Framework\Component\CompoundComponent;
+use Presentation\Framework\Component\Dummy;
+use Presentation\Framework\Component\Html\Tag;
+use Presentation\Framework\Component\Json;
 use Presentation\Framework\Component\ManagedList\Control\ControlInterface;
 use Presentation\Framework\Base\ComponentInterface;
+use Presentation\Framework\Component\Repeater;
 use Presentation\Framework\Data\DataProviderInterface;
 
 /**
@@ -21,35 +26,126 @@ class ManagedList extends CompoundComponent
     protected $dataProvider;
 
     /**
-     * @param DataProviderInterface|null $dataSrc
+     * @param DataProviderInterface|null $dataProvider
      * @param ComponentInterface|null $recordView
-     * @param ControlInterface[]|null $controls
+     * @param ComponentInterface[] l $components
      */
     public function __construct(
-        $dataSrc = null,
+        $dataProvider = null,
         ComponentInterface $recordView = null,
-        $controls = null
+        array $components = []
     )
     {
+        $defaultComponents = $this->makeDefaultComponents();
         parent::__construct(
-            $this->getDefaultTreeConfig()
+            $this->makeDefaultHierarchy(),
+            $recordView
+                ? array_merge($defaultComponents, ['record_view' => $recordView])
+                : $defaultComponents
         );
-        $this->setDataProvider($dataSrc);
-        if ($recordView) {
-            $this->components()->setRecordView($recordView);
-        }
-        if (!empty($controls)) {
-            $this->components()->getForm()->addChildren($controls);
+        $this->setDataProvider($dataProvider);
+        if (count($components)) {
+            $this->children()->addMany($components);
         }
     }
 
+    //
+    //  BEGIN: SETTERS/GETTERS FOR COMPOUND COMPONENTS
+    //
     /**
-     * @return Registry|ComponentInterface[]
+     * @return ControlInterface[]
      */
-    public function components()
+    public function getControls()
     {
-        return parent::components();
+        return $this->getChildrenRecursive()->filterByType(ControlInterface::class);
     }
+
+    /**
+     * @return Repeater|null
+     */
+    public function getRepeater()
+    {
+        return $this->getComponent('repeater');
+    }
+
+    /**
+     * @param RepeaterInterface $component
+     * @return $this
+     */
+    public function setRepeater(RepeaterInterface $component)
+    {
+        return $this->setComponent('repeater', $component);
+    }
+
+    /**
+     * @return ComponentInterface|null
+     */
+    public function getForm()
+    {
+        return $this->getComponent('form');
+    }
+
+    public function setForm(ComponentInterface $form)
+    {
+        return $this->setComponent('form', $form);
+    }
+
+
+    /**
+     * @return ComponentInterface|null
+     */
+    public function getContainer()
+    {
+        return $this->getComponent('container');
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return $this
+     */
+    public function setContainer(ComponentInterface $component)
+    {
+        return $this->setComponent('container', $component);
+    }
+
+
+    /**
+     * @return ComponentInterface|null
+     */
+    public function getRecordView()
+    {
+
+        return $this->getComponent('record_view');
+    }
+
+    /**
+     * @param ComponentInterface|null $component
+     * @return $this
+     */
+    public function setRecordView(ComponentInterface $component)
+    {
+        return $this->setComponent('record_view', $component);
+    }
+
+    /**
+     * @return ComponentInterface|null
+     */
+    public function getSubmitButton()
+    {
+        return $this->tree->get('submit_button');
+    }
+
+    /**
+     * @param ComponentInterface|null $component
+     * @return $this
+     */
+    public function setSubmitButton(ComponentInterface $component)
+    {
+        return $this->setComponent('submit_button', $component);
+    }
+    //
+    //  END: SETTERS/GETTERS FOR COMPOUND COMPONENTS
+    //
 
     /**
      * @param DataProviderInterface|null $dataProvider
@@ -62,7 +158,6 @@ class ManagedList extends CompoundComponent
         return $this;
     }
 
-
     /**
      * @return null|DataProviderInterface
      */
@@ -73,8 +168,9 @@ class ManagedList extends CompoundComponent
 
     public function render()
     {
-        $this->updateTreeIfRequired();
+        $this->tree->build();
         $this->applyOperations();
+        $this->getRepeater()->setIterator($this->getDataProvider());
         return parent::render();
     }
 
@@ -83,47 +179,44 @@ class ManagedList extends CompoundComponent
      */
     public function applyOperations()
     {
-        $controls = $this->components()->getControls();
-        /** @var DataProviderInterface $dataProvider */
-        $dataProvider = $this->components()->getRepeater()->getIterator();
         if (!$this->isOperationsApplied) {
-            foreach($controls as $control) {
-                $dataProvider->operations()->add($control->getOperation());
+            foreach ($this->getControls() as $control) {
+                $this->getDataProvider()->operations()->add($control->getOperation());
             }
             $this->isOperationsApplied = true;
         }
     }
 
-    protected function getDefaultTreeConfig()
+    protected function makeDefaultHierarchy()
     {
         return [
-            'form' => [
-                'submit_button'
-            ],
             'container' => [
-                'repeater' => [
-                    'record_view' => []
-                ]
-            ]
+                'title' => [],
+                'form' => [
+                    'control_container' => [],
+                    'submit_button' => [],
+                ],
+                'list_container' =>
+                    [
+                        'repeater' => [
+                            'record_view' => []
+                        ]
+                    ],
+            ],
         ];
     }
 
-    protected function buildTree()
+    protected function makeDefaultComponents()
     {
-        if ($this->dataProvider !== null) {
-            $this->components()->getRepeater()->setIterator($this->dataProvider);
-        }
-        return parent::buildTree();
-    }
-
-    /**
-     * Returns new instance of component registry and initializes it with components.
-     *
-     * @param array $components
-     * @return Registry
-     */
-    protected function makeComponentRegistry(array $components = [])
-    {
-        return new Registry($components, $this);
+        return [
+            'container' => new Tag('div', ['data-role' => 'container']),
+            'title' => new Dummy,
+            'form' => new Tag('form'),
+            'control_container' => new Tag('span', ['data-role' => 'control_container']),
+            'submit_button' => (new Tag('input', ['type' => 'submit'])),
+            'list_container' => new Dummy,
+            'repeater' => new Repeater(),
+            'record_view' => new Json(),
+        ];
     }
 }

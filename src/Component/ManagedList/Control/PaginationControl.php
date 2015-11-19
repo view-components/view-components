@@ -2,15 +2,20 @@
 
 namespace Presentation\Framework\Component\ManagedList\Control;
 
+use Presentation\Framework\Base\CompoundPartInterface;
+use Presentation\Framework\Base\CompoundPartTrait;
 use Presentation\Framework\Base\ViewAggregate;
+use Presentation\Framework\Component\CompoundComponent;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Component\ManagedList\Control\View\PaginationView;
 use Presentation\Framework\Data\DataProviderInterface;
 use Presentation\Framework\Data\Operation\PaginateOperation;
 use RuntimeException;
 
-class PaginationControl extends ViewAggregate implements ControlInterface
+class PaginationControl extends ViewAggregate implements ControlInterface, CompoundPartInterface
 {
+    use CompoundPartTrait;
+
     /**
      * @var \Presentation\Framework\Input\InputOption
      */
@@ -23,7 +28,6 @@ class PaginationControl extends ViewAggregate implements ControlInterface
     protected $operation;
 
     protected $dataProvider;
-
 
     /**
      * @param \Presentation\Framework\Input\InputOption $page
@@ -46,6 +50,20 @@ class PaginationControl extends ViewAggregate implements ControlInterface
             },
             $this->pageInputOption->getKey()
         ));
+    }
+
+    public function getComponentName()
+    {
+        return $this->componentName ?: 'pagination_' . rand();
+    }
+
+    /**
+     * @param CompoundComponent $root
+     * @return string|null
+     */
+    public function resolveParentName(CompoundComponent $root)
+    {
+        return 'container';
     }
 
     public function getOperation()

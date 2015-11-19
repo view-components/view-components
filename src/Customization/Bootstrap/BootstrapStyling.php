@@ -6,6 +6,7 @@ use LogicException;
 use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Base\Html\AbstractTag;
 use Presentation\Framework\Base\Html\TagInterface;
+use Presentation\Framework\Component\CompoundComponent;
 use Presentation\Framework\Component\ManagedList\Control\View\FilterControlView;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Component\ManagedList\Control\FilterControl;
@@ -70,7 +71,7 @@ class BootstrapStyling extends ConfigurableCustomization
                 $this->customizeInput($tag);
                 break;
             case 'input':
-                switch($type) {
+                switch ($type) {
                     case 'button':
                         $this->customizeButton($tag);
                         break;
@@ -95,17 +96,17 @@ class BootstrapStyling extends ConfigurableCustomization
         }
 
         if ($tag->getAttribute('data-control') === 'pagination') {
-            $tag->onRender(function(ComponentInterface $component) {
+            $tag->onRender(function (ComponentInterface $component) {
                 if ($component->children()->isEmpty()) {
                     return null;
                 }
-                $component->children()->first()->setAttribute('class','pagination');
+                $component->children()->first()->setAttribute('class', 'pagination');
                 /** @var Tag $item */
-                foreach($component->getChildrenRecursive() as $item) {
+                foreach ($component->getChildrenRecursive() as $item) {
 
                     if ($item instanceof TagInterface
-                        &&  $item->getTagName() === 'li'
-                        &&  $item->getAttribute('data-disabled')
+                        && $item->getTagName() === 'li'
+                        && $item->getAttribute('data-disabled')
                     ) {
                         $item->setAttribute('class', 'disabled');
                     }
@@ -117,14 +118,20 @@ class BootstrapStyling extends ConfigurableCustomization
     protected function filterControlCallback(FilterControl $filter)
     {
         $view = $filter->getView();
-        if ($view instanceof TagInterface) {
-            $view->setTagName('div');
-            $view->setAttribute('class', 'form-group');
-            $parent = $filter->parent();
-            if ($parent instanceof TagInterface && $parent->getTagName() === 'form') {
-                $parent->setAttribute('class', 'form-inline');
-            }
+        $root = $filter->getRoot();
+        if (
+            !$view instanceof CompoundComponent
+            || !$root
+            || !($form = $root->getComponent('form'))
+            || !$form instanceof TagInterface
+        ) {
+            return;
         }
+        $form->setAttribute('class', 'form-inline');
+        $view->getComponent('container')
+            ->setTagName('div')
+            ->setAttribute('class', 'form-group');
+
     }
 
     protected function customizeInput(TagInterface $tag)
@@ -136,7 +143,7 @@ class BootstrapStyling extends ConfigurableCustomization
                 'from-control',
                 '',
                 $tag->getAttribute('class')
-            ). 'form-control'
+            ) . 'form-control'
         );
     }
 
@@ -147,7 +154,7 @@ class BootstrapStyling extends ConfigurableCustomization
      */
     protected function customizeButton(TagInterface $tag, $buttonStyle = null)
     {
-        $buttonStyle = $buttonStyle?:$this->options->buttonStyle;
+        $buttonStyle = $buttonStyle ?: $this->options->buttonStyle;
         /** @var Tag|AbstractTag $tag */
         $tag->setAttribute(
             'class',

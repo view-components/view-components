@@ -2,14 +2,19 @@
 
 namespace Presentation\Framework\Component\ManagedList\Control;
 
+use Presentation\Framework\Base\CompoundPartInterface;
+use Presentation\Framework\Base\CompoundPartTrait;
 use Presentation\Framework\Base\ViewAggregate;
+use Presentation\Framework\Component\CompoundComponent;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Component\ManagedList\Control\View\SortingSelectView;
 use Presentation\Framework\Data\Operation\DummyOperation;
 use Presentation\Framework\Data\Operation\SortOperation;
 
-class SortingSelectControl  extends ViewAggregate implements ControlInterface
+class SortingSelectControl  extends ViewAggregate implements ControlInterface, CompoundPartInterface
 {
+    use CompoundPartTrait;
+
     /**
      * @var string[]
      */
@@ -22,6 +27,21 @@ class SortingSelectControl  extends ViewAggregate implements ControlInterface
      * @var InputOption
      */
     private $directionOption;
+
+
+    /**
+     * @param CompoundComponent $root
+     * @return string|null
+     */
+    public function resolveParentName(CompoundComponent $root)
+    {
+        return 'control_container';
+    }
+
+    public function getComponentName()
+    {
+        return $this->componentName ?: 'sorting_select_' . rand();
+    }
 
     /**
      * @param array $fields list of fields allowed to sort (<name> => <Label>)
