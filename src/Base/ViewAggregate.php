@@ -2,7 +2,7 @@
 
 namespace Presentation\Framework\Base;
 
-use Nayjest\Tree\ReadonlyNodeTrait;
+use Nayjest\Tree\NodeTrait;
 use Presentation\Framework\Rendering\ViewTrait;
 
 class ViewAggregate implements ComponentInterface
@@ -10,8 +10,13 @@ class ViewAggregate implements ComponentInterface
     use ComponentTrait {
         ComponentTrait::render as private renderInternal;
     }
-    use ReadonlyNodeTrait;
+    use NodeTrait;
     use ViewTrait;
+
+    /**
+     * @var ComponentInterface
+     */
+    protected $view;
 
     public function __construct(ComponentInterface $view = null)
     {
@@ -35,21 +40,21 @@ class ViewAggregate implements ComponentInterface
      */
     public function getView()
     {
-        return $this->writableChildren()->first();
+        return $this->view;
     }
 
 
     /**
-     * @param ComponentInterface|null $viewComponent
+     * @param ComponentInterface|null $view
      * @return $this
      */
-    public function setView(ComponentInterface $viewComponent = null)
+    public function setView(ComponentInterface $view = null)
     {
-        if ($viewComponent === null) {
-            $this->writableChildren()->clear();
-        } else {
-            $this->writableChildren()->set([$viewComponent]);
+        if ($this->view) {
+            $this->view->unlock()->detach();
         }
+        $this->view = $view;
+        $view->attachTo($this)->lock();
         return $this;
     }
 
