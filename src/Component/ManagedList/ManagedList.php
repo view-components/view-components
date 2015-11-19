@@ -36,22 +36,19 @@ class ManagedList extends CompoundComponent
         array $components = []
     )
     {
-        $defaultComponents = $this->makeDefaultComponents();
         parent::__construct(
             $this->makeDefaultHierarchy(),
-            $recordView
-                ? array_merge($defaultComponents, ['record_view' => $recordView])
-                : $defaultComponents
+            $this->makeDefaultComponents()
         );
         $this->setDataProvider($dataProvider);
         if (count($components)) {
             $this->children()->addMany($components);
         }
+        if ($recordView) {
+            $this->setRecordView($recordView);
+        }
     }
 
-    //
-    //  BEGIN: SETTERS/GETTERS FOR COMPOUND COMPONENTS
-    //
     /**
      * @return ControlInterface[]
      */
@@ -60,6 +57,9 @@ class ManagedList extends CompoundComponent
         return $this->getChildrenRecursive()->filterByType(ControlInterface::class);
     }
 
+    //
+    //  BEGIN: SETTERS/GETTERS FOR COMPOUND COMPONENTS
+    //
     /**
      * @return Repeater|null
      */
@@ -89,7 +89,6 @@ class ManagedList extends CompoundComponent
     {
         return $this->setComponent('form', $form);
     }
-
 
     /**
      * @return ComponentInterface|null
