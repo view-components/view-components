@@ -17,14 +17,14 @@ class CompoundContainer extends CompoundComponent
     protected $terminalNodeName;
 
     /**
-     * @param array|null $tree
+     * @param array|null $hierarchy
      * @param array $components
      * @param $terminalNodeName
      */
-    public function __construct(array $tree = [], $components = [], $terminalNodeName)
+    public function __construct(array $hierarchy = [], $components = [], $terminalNodeName)
     {
         $this->terminalNodeName = $terminalNodeName;
-        parent::__construct($tree, $components);
+        parent::__construct($hierarchy, $components);
     }
 
     /**
@@ -38,7 +38,7 @@ class CompoundContainer extends CompoundComponent
      */
     public function children()
     {
-        $this->updateTreeIfRequired();
+        $this->tree->build();
         return $this->getTerminalNode()->children();
     }
 
@@ -47,7 +47,7 @@ class CompoundContainer extends CompoundComponent
      */
     protected function getTerminalNode()
     {
-        return $this->components()->get($this->terminalNodeName);
+        return $this->getComponent($this->terminalNodeName);
     }
 
     /**
