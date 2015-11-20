@@ -145,6 +145,25 @@ class ManagedList extends CompoundComponent
         return $this->setComponent('title', $component);
     }
 
+    /**
+     * @return ComponentInterface|null
+     */
+    public function getControlContainer()
+    {
+
+        return $this->getComponent('control_container');
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return $this
+     */
+    public function setControlContainer(ComponentInterface $component)
+    {
+        return $this->setComponent('control_container', $component);
+    }
+
+
 
     /**
      * @return ComponentInterface|null
