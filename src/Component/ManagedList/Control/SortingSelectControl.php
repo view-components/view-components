@@ -61,6 +61,11 @@ class SortingSelectControl  extends ViewAggregate implements ControlInterface, C
         parent::__construct(new SortingSelectView($this));
     }
 
+    public function isManualFormSubmitRequired()
+    {
+        return true;
+    }
+
     public function getOperation()
     {
         if (!$this->validateInput()) {

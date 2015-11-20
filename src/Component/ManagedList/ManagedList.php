@@ -126,6 +126,26 @@ class ManagedList extends CompoundComponent
         return $this->setComponent('record_view', $component);
     }
 
+
+    /**
+     * @return ComponentInterface|null
+     */
+    public function getTitle()
+    {
+
+        return $this->getComponent('title');
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return $this
+     */
+    public function setTitle(ComponentInterface $component)
+    {
+        return $this->setComponent('title', $component);
+    }
+
+
     /**
      * @return ComponentInterface|null
      */
@@ -165,11 +185,29 @@ class ManagedList extends CompoundComponent
         return $this->dataProvider;
     }
 
+    protected function hideSubmitButtonIfNotUsed()
+    {
+        $submit = $this->getSubmitButton();
+
+        if (
+            $submit
+            && $this
+                ->getChildrenRecursive()
+                ->filterByProperty('manual_form_submit_required', true, true)
+                ->isEmpty()
+        )
+        {
+            $submit->hide();
+        }
+
+    }
+
     public function render()
     {
         $this->tree->build();
         $this->applyOperations();
         $this->getRepeater()->setIterator($this->getDataProvider());
+        $this->hideSubmitButtonIfNotUsed();
         return parent::render();
     }
 

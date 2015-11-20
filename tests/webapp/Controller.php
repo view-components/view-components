@@ -306,6 +306,30 @@ class Controller extends AbstractController
         return $this->renderMenu() . $list->render();
     }
 
+    /**
+     * @return string
+     */
+    public function demo4_4()
+    {
+        $provider = $this->getDataProvider();
+        $input = new InputSource($_GET);
+        $list = new ManagedList(
+            $provider,
+            new SymfonyVarDump,
+            [
+                new PaginationControl(
+                    $input('page', 1),
+                    10,
+                    $provider
+                )
+            ]
+        );
+        $list->setTitle(new Text('<h2>List with title & without submit button</h2>'));
+        $styling = new BootstrapStyling($this->getResourceManager());
+        $styling->apply($list);
+        return $this->renderMenu() . $list->render();
+    }
+
     public function demo5()
     {
         $compound = new CompoundComponent(

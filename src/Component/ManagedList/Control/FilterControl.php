@@ -48,6 +48,11 @@ class FilterControl extends ViewAggregate implements ControlInterface, CompoundP
         );
     }
 
+    public function isManualFormSubmitRequired()
+    {
+        return true;
+    }
+
     /**
      * @param CompoundComponent $root
      * @return string|null

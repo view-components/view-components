@@ -52,6 +52,11 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
         ));
     }
 
+    public function isManualFormSubmitRequired()
+    {
+        return false;
+    }
+
     public function getComponentName()
     {
         return $this->componentName ?: 'pagination_' . rand();
