@@ -200,6 +200,7 @@ class Controller extends AbstractController
         }
 
         $view = new Container([
+            new Text('<h1>Users List</h1>'),
             new Tag('form', null, [
                 $filter1,
                 $filter2,
@@ -207,7 +208,6 @@ class Controller extends AbstractController
                     new Text('Filter')
                 ]),
             ]),
-            new Text('<h1>Users List</h1>'),
             $repeater = new Repeater(
                 $provider,
                 [new PersonView]
