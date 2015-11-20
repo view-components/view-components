@@ -10,7 +10,7 @@ trait TreeAggregate
     /**
      * @var Tree
      */
-    protected $tree;
+    private $tree;
 
     /**
      * @return Tree
@@ -26,7 +26,7 @@ trait TreeAggregate
             $component = $componentName;
             $componentName = $component->getComponentName();
         }
-        $this->tree->append($parentName, $componentName, $component);
+        $this->getTree()->append($parentName, $componentName, $component);
         return $this;
     }
 
@@ -36,25 +36,25 @@ trait TreeAggregate
             $component = $componentName;
             $componentName = $component->getComponentName();
         }
-        $this->tree->prepend($parentName, $componentName, $component);
+        $this->getTree()->prepend($parentName, $componentName, $component);
         return $this;
     }
 
     public function setComponent($name, ComponentInterface $component = null)
     {
-        $this->tree->replace($name, $component);
+        $this->getTree()->replace($name, $component);
         return $this;
     }
 
     public function hasComponent($componentName)
     {
-        return $this->tree->has($componentName);
+        return $this->getTree()->has($componentName);
     }
 
 
     public function getComponent($componentName)
     {
-        return $this->tree->get($componentName);
+        return $this->getTree()->get($componentName);
     }
 
     /**
@@ -69,13 +69,13 @@ trait TreeAggregate
         foreach ($namedComponents as $key => $value) {
             $prepared[is_int($key) ? $value->getComponentName() : $key] = $value;
         }
-        $this->tree->addMany($parentName, $prepared, $prepend);
+        $this->getTree()->addMany($parentName, $prepared, $prepend);
         return $this;
     }
 
     public function removeComponent($componentName)
     {
-        $this->tree->remove($componentName);
+        $this->getTree()->remove($componentName);
     }
 
 }

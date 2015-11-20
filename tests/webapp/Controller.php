@@ -2,6 +2,7 @@
 namespace Presentation\Framework\Demo;
 
 use Presentation\Framework\Component\CompoundComponent;
+use Presentation\Framework\Component\CompoundContainer;
 use Presentation\Framework\Component\ManagedList\Control\SortingSelectControl;
 use Presentation\Framework\Component\TemplateView;
 use Presentation\Framework\Component\ManagedList\Control\ControlInterface;
@@ -149,6 +150,7 @@ class Controller extends AbstractController
         );
 
         $view = new Container([
+            new Text('<h1>Users List</h1>'),
             new Tag('form', null, [
                 $filter1,
                 $filter2,
@@ -156,7 +158,6 @@ class Controller extends AbstractController
                     new Text('Filter')
                 ]),
             ]),
-            new Text('<h1>Users List</h1>'),
             new Repeater(
                 $provider,
                 [new PersonView])
@@ -352,11 +353,40 @@ class Controller extends AbstractController
         $footer->addChild(new Text('Panel Footer'));
 
         $container = new Tag('div', ['class' => 'container'], [$compound]);
-
         $styling = new BootstrapStyling($this->getResourceManager());
         $styling->apply($container);
 
         return $this->renderMenu() . $container->render();
+    }
+
+    public function demo6()
+    {
+        $compound = new CompoundContainer(
+            [
+                'panel' => [
+                    'header',
+                    'body',
+                    'footer'
+                ]
+            ],
+            [
+                'panel' => $panel = new Tag('div', ['class' => 'panel panel-success']),
+                'header' => $header = new Tag('div', ['class' => 'panel-heading']),
+                'body' => $body = new Tag('div', ['class' => 'panel-body']),
+                'footer' => $footer = new Tag('div', ['class' => 'panel-footer']),
+            ],
+            'body'
+        );
+        $header->addChild(new Text('<b>Panel Header</b>'));
+        $body->addChild(new Text('Panel Body'));
+        $footer->addChild(new Text('Panel Footer'));
+        $styling = new BootstrapStyling($this->getResourceManager());
+        $styling->apply($compound);
+
+        $compound->addChild(new Text('<br>Text 1 added as child of compound container'));
+        (new Text('<br>Text 2 added as child of compound container'))->attachTo($compound);
+
+        return $this->renderMenu() . $compound->render();
     }
 
     /**
@@ -364,7 +394,7 @@ class Controller extends AbstractController
      *
      * @return string
      */
-    public function demo6()
+    public function demo7()
     {
         $renderer = $this->getRenderer();
         return $this->renderMenu()
@@ -376,7 +406,7 @@ class Controller extends AbstractController
      * Template view
      * @return string
      */
-    public function demo7()
+    public function demo8()
     {
         $renderer = $this->getRenderer();
         $c = new TemplateView($renderer, 'demo/template_view');

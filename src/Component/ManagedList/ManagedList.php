@@ -151,7 +151,7 @@ class ManagedList extends CompoundComponent
      */
     public function getSubmitButton()
     {
-        return $this->tree->get('submit_button');
+        return $this->getComponent('submit_button');
     }
 
     /**
@@ -204,7 +204,7 @@ class ManagedList extends CompoundComponent
 
     public function render()
     {
-        $this->tree->build();
+        $this->getTree()->build();
         $this->applyOperations();
         $this->getRepeater()->setIterator($this->getDataProvider());
         $this->hideSubmitButtonIfNotUsed();
