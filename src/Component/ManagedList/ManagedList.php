@@ -223,10 +223,7 @@ class ManagedList extends CompoundComponent
 
     public function render()
     {
-        $this->getTree()->build();
-        $this->applyOperations();
-        $this->getRepeater()->setIterator($this->getDataProvider());
-        $this->hideSubmitButtonIfNotUsed();
+        $this->prepare();
         return parent::render();
     }
 
@@ -274,5 +271,16 @@ class ManagedList extends CompoundComponent
             'repeater' => new Repeater(),
             'record_view' => new Json(),
         ];
+    }
+
+    /**
+     * Prepare component for rendering.
+     */
+    protected function prepare()
+    {
+        $this->getTree()->build();
+        $this->applyOperations();
+        $this->getRepeater()->setIterator($this->getDataProvider());
+        $this->hideSubmitButtonIfNotUsed();
     }
 }
