@@ -78,4 +78,9 @@ trait TreeAggregate
         $this->getTree()->remove($componentName);
     }
 
+    public function moveComponent($componentName, $newParentName, $prepend = false)
+    {
+        $this->getTree()->move($componentName, $newParentName, $prepend);
+    }
+
 }
