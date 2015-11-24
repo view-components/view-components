@@ -38,11 +38,6 @@ class SortingSelectControl  extends ViewAggregate implements ControlInterface, C
         return 'control_container';
     }
 
-    public function getComponentName()
-    {
-        return $this->componentName ?: 'sorting_select_' . rand();
-    }
-
     /**
      * @param array $fields list of fields allowed to sort (<name> => <Label>)
      * @param InputOption $fieldOption

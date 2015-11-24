@@ -62,11 +62,6 @@ class FilterControl extends ViewAggregate implements ControlInterface, CompoundP
         return 'control_container';
     }
 
-    public function getComponentName()
-    {
-        return $this->componentName ?: 'filter_' . $this->field . '_' . rand();
-    }
-
     public function getOperation()
     {
         if (!$this->valueOption->hasValue()) {
