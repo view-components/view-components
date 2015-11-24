@@ -23,7 +23,7 @@
         "symfony/property-access" : "^2.5",
         "nayjest/manipulator": "^3",
         "nayjest/tree": "dev-dev",
-        "nayjest/collection": "^2.1.1",
+        "nayjest/collection": "^2.1.2",
         "danielstjules/stringy": "^1.9",
         "league/url": "^4.0"
     },
