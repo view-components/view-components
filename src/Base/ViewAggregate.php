@@ -54,7 +54,7 @@ class ViewAggregate implements ComponentInterface
             $this->view->unlock()->detach();
         }
         $this->view = $view;
-        $view->attachTo($this)->lock();
+        $view && $view->attachTo($this)->lock();
         return $this;
     }
 
