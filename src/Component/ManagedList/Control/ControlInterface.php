@@ -12,4 +12,9 @@ interface ControlInterface extends ComponentInterface
      * @return OperationInterface
      */
     public function getOperation();
+
+    /**
+     * @return bool
+     */
+    public function isManualFormSubmitRequired();
 }

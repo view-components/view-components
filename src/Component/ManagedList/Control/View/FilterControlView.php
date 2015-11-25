@@ -2,6 +2,7 @@
 
 namespace Presentation\Framework\Component\ManagedList\Control\View;
 
+use Presentation\Framework\Component\CompoundComponent;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Component\Text;
 
@@ -10,7 +11,7 @@ use Presentation\Framework\Component\Text;
  *
  * @internal
  */
-class FilterControlView extends Tag
+class FilterControlView extends CompoundComponent
 {
     /**
      * @var string
@@ -38,29 +39,48 @@ class FilterControlView extends Tag
         $this->value = $value;
         $this->label = $label;
         parent::__construct(
-            'span',
             [
-                'data-role' => 'control-container'
+                'container' => [
+                    'label' => [
+                        'label_text' => []
+                    ],
+                    'space1' => [],
+                    'input' => [],
+                    'space2' => [],
+                ]
+            ],
+            [
+                'container' => new Tag('span'),
+                'label' => new Tag('label'),
+                'label_text' => new Text(),
+                'space1' => new Text('&nbsp;'),
+                'input' => new Tag('input', ['type' => 'text',]),
+                'space2' => new Text('&nbsp;'),
             ]
         );
-        $this->onRender(function() {
-            $id = $this->name;
-            $this->addChildren([
-                new Tag('label', [
-                    'for' => $id
-                ], [
-                    new Text($this->label)
-                ]),
-                new Text('&nbsp;'),
-                new Tag('input', [
-                    'value' => $this->value,
-                    'type' => 'text',
-                    'name' => $this->name,
-                    'id' => $id
-                ]),
-                new Text('&nbsp;')
-            ]);
-        });
+        $this->updateAttributes();
+    }
+
+    protected function updateAttributes()
+    {
+        /** @var Tag $input */
+        $input = $this->getComponent('input');
+        $input->addAttributes([
+            'value' => $this->value,
+            'name' => $this->name
+        ]);
+        /** @var Tag $label */
+        $label = $this->getComponent('label');
+        $label->addAttributes([
+            'for' => $this->name
+        ]);
+        $this->getComponent('label_text')->setValue($this->label);
+    }
+
+    public function render()
+    {
+        $this->updateAttributes();
+        return parent::render();
     }
 
     /**

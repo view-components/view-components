@@ -2,15 +2,20 @@
 
 namespace Presentation\Framework\Component\ManagedList\Control;
 
+use Presentation\Framework\Base\CompoundPartInterface;
+use Presentation\Framework\Base\CompoundPartTrait;
 use Presentation\Framework\Base\ViewAggregate;
+use Presentation\Framework\Component\CompoundComponent;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Component\ManagedList\Control\View\FilterControlView;
 use Presentation\Framework\Data\Operation\DummyOperation;
 use Presentation\Framework\Data\Operation\FilterOperation;
 use Stringy\StaticStringy;
 
-class FilterControl extends ViewAggregate implements ControlInterface
+class FilterControl extends ViewAggregate implements ControlInterface, CompoundPartInterface
 {
+    use CompoundPartTrait;
+
     /** @var string */
     protected $field;
 
@@ -41,6 +46,20 @@ class FilterControl extends ViewAggregate implements ControlInterface
                 StaticStringy::humanize($this->field)
             )
         );
+    }
+
+    public function isManualFormSubmitRequired()
+    {
+        return true;
+    }
+
+    /**
+     * @param CompoundComponent $root
+     * @return string|null
+     */
+    public function resolveParentName(CompoundComponent $root)
+    {
+        return 'control_container';
     }
 
     public function getOperation()

@@ -1,7 +1,7 @@
 <?php
 namespace Presentation\Framework\Component;
 
-use Nayjest\Manipulator\Manipulator;
+use mp;
 use Nayjest\Tree\NodeTrait;
 use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Base\ComponentTrait;
@@ -18,9 +18,10 @@ function defaultRepeaterCallback($dataRow, Repeater $repeater)
         if ($component instanceof DataAcceptorInterface) {
             $component->setData($dataRow);
         } else {
-            $writable = Manipulator::getWritable($component);
-            $fields = Manipulator::getValues($dataRow, $writable);
-            Manipulator::assign($component, $fields);
+            mp\setValues(
+                $component,
+                mp\getValues($dataRow, mp\getWritable($component))
+            );
         }
     }
 }

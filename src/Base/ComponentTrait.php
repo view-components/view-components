@@ -43,6 +43,11 @@ trait ComponentTrait
      */
     public function getComponentName()
     {
+        if (!$this->componentName) {
+            $parts = explode('\\', static::class);
+            $baseName = array_pop($parts);
+            $this->componentName = $baseName . '_' . rand();
+        }
         return $this->componentName;
     }
 

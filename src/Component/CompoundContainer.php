@@ -3,8 +3,11 @@
 namespace Presentation\Framework\Component;
 
 use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
+use Nayjest\Collection\Extended\ObjectCollection;
 use Nayjest\Tree\NodeCollection;
+use Presentation\Framework\Base\AbstractComponent;
 use Presentation\Framework\Base\ComponentInterface;
+use Presentation\Framework\Common\TreeAggregate;
 
 /**
  * CompoundContainer extends CompoundComponent and provides access
@@ -12,19 +15,29 @@ use Presentation\Framework\Base\ComponentInterface;
  * i.e. it hides it's real children from components tree.
  *
  */
-class CompoundContainer extends CompoundComponent
+class CompoundContainer  extends AbstractComponent
 {
+    use TreeAggregate
+    {
+        TreeAggregate::getTree as private getTreeInternal;
+    }
     protected $terminalNodeName;
+    protected $compound;
 
     /**
-     * @param array|null $tree
+     * @param array|null $hierarchy
      * @param array $components
      * @param $terminalNodeName
      */
-    public function __construct(array $tree = [], $components = [], $terminalNodeName)
+    public function __construct(array $hierarchy = [], $components = [], $terminalNodeName)
     {
+        $this->compound = new CompoundComponent($hierarchy, $components);
         $this->terminalNodeName = $terminalNodeName;
-        parent::__construct($tree, $components);
+    }
+
+    public function getTree()
+    {
+        return $this->compound->getTree();
     }
 
     /**
@@ -38,7 +51,7 @@ class CompoundContainer extends CompoundComponent
      */
     public function children()
     {
-        $this->updateTreeIfRequired();
+
         return $this->getTerminalNode()->children();
     }
 
@@ -47,7 +60,7 @@ class CompoundContainer extends CompoundComponent
      */
     protected function getTerminalNode()
     {
-        return $this->components()->get($this->terminalNodeName);
+        return $this->getComponent($this->terminalNodeName);
     }
 
     /**
@@ -60,7 +73,6 @@ class CompoundContainer extends CompoundComponent
      */
     protected function getChildrenForRendering()
     {
-        $children = CompoundComponent::children();
-        return $this->isSortingEnabled ? $children->sortByProperty('sortPosition') : $children;
+        return new ObjectCollection([$this->compound]);
     }
 }
