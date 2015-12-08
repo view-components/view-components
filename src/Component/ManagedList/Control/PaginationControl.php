@@ -6,15 +6,18 @@ use Presentation\Framework\Base\CompoundPartInterface;
 use Presentation\Framework\Base\CompoundPartTrait;
 use Presentation\Framework\Base\ViewAggregate;
 use Presentation\Framework\Component\CompoundComponent;
+use Presentation\Framework\Component\ManagedList\ManagedList;
+use Presentation\Framework\Initialization\InitializableInterface;
+use Presentation\Framework\Initialization\InitializableTrait;
 use Presentation\Framework\Input\InputOption;
 use Presentation\Framework\Component\ManagedList\Control\View\PaginationView;
-use Presentation\Framework\Data\DataProviderInterface;
 use Presentation\Framework\Data\Operation\PaginateOperation;
 use RuntimeException;
 
-class PaginationControl extends ViewAggregate implements ControlInterface, CompoundPartInterface
+class PaginationControl extends ViewAggregate implements ControlInterface, CompoundPartInterface, InitializableInterface
 {
     use CompoundPartTrait;
+    use InitializableTrait;
 
     /**
      * @var \Presentation\Framework\Input\InputOption
@@ -27,22 +30,17 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
 
     protected $operation;
 
-    protected $dataProvider;
-
     /**
      * @param \Presentation\Framework\Input\InputOption $page
      * @param $recordsPerPage
-     * @param DataProviderInterface $dataProvider
      */
     public function __construct(
         InputOption $page,
-        $recordsPerPage,
-        DataProviderInterface $dataProvider
+        $recordsPerPage
     )
     {
         $this->pageInputOption = $page;
         $this->recordsPerPage = $recordsPerPage;
-        $this->dataProvider = $dataProvider;
         parent::__construct(new PaginationView(
             (int)$this->pageInputOption->getValue(),
             function() {
@@ -77,7 +75,7 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
 
     protected function getTotalRecordsCount()
     {
-        $operations = $this->dataProvider->operations();
+        $operations = $this->getDataProvider()->operations();
 
         if ($this->operation === null || !$operations->contains($this->operation)) {
             throw new RuntimeException(
@@ -86,7 +84,7 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
             );
         }
         $operations->remove($this->operation);
-        $count = $this->dataProvider->count();
+        $count = $this->getDataProvider()->count();
         $operations->add($this->operation);
         return $count;
     }
@@ -94,5 +92,12 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
     protected function getPageCount()
     {
         return ceil($this->getTotalRecordsCount() / $this->recordsPerPage);
+    }
+
+    protected function getDataProvider()
+    {
+        /** @var ManagedList $ml */
+        $ml =  $this->requireInitializer();
+        return $ml->getDataProvider();
     }
 }

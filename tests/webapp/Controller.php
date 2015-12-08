@@ -189,14 +189,9 @@ class Controller extends AbstractController
             FilterOperation::OPERATOR_EQ,
             new InputOption('role_filter', $_GET)
         );
-        $pagination = new PaginationControl(
-            new InputOption('page', $_GET, 1),
-            5,
-            $provider
-        );
 
         /** @var ControlInterface $control */
-        foreach([$filter1, $filter2, $pagination] as $control) {
+        foreach([$filter1, $filter2] as $control) {
             $provider->operations()->add($control->getOperation());
         }
 
@@ -212,8 +207,7 @@ class Controller extends AbstractController
             $repeater = new Repeater(
                 $provider,
                 [new PersonView]
-            ),
-            $pagination
+            )
         ]);
 
         return $this->renderMenu() . $view->render();
@@ -242,6 +236,11 @@ class Controller extends AbstractController
                     'role',
                     FilterOperation::OPERATOR_EQ,
                     new InputOption('role_filter', $_GET)
+                ),
+                new PaginationControl(
+                    new InputOption('p', $_GET, 1),
+                    5,
+                    $provider
                 ),
                 new SortingSelectControl(
                     [

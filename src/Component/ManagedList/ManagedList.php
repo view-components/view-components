@@ -10,6 +10,7 @@ use Presentation\Framework\Component\ManagedList\Control\ControlInterface;
 use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Component\Repeater;
 use Presentation\Framework\Data\DataProviderInterface;
+use Presentation\Framework\Initialization\InitializerTrait;
 
 /**
  * Class ManagedList
@@ -18,6 +19,8 @@ use Presentation\Framework\Data\DataProviderInterface;
  */
 class ManagedList extends CompoundComponent
 {
+    use InitializerTrait;
+
     protected $isOperationsApplied = false;
 
     /**
