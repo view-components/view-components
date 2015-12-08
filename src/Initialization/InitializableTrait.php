@@ -22,6 +22,9 @@ trait InitializableTrait
         return $this->initializer;
     }
 
+    /**
+     * @return ComponentInterface
+     */
     protected function requireInitializer()
     {
         if ($this->initializer == null) {
