@@ -39,13 +39,7 @@ class FilterControl extends ViewAggregate implements ControlInterface, CompoundP
         $this->field = $field;
         $this->operator = $operator;
         $this->valueOption = $input;
-        parent::__construct(
-            new FilterControlView(
-                $this->valueOption->getKey(),
-                $this->valueOption->getValue(),
-                StaticStringy::humanize($this->field)
-            )
-        );
+        parent::__construct();
     }
 
     public function isManualFormSubmitRequired()
@@ -88,5 +82,14 @@ class FilterControl extends ViewAggregate implements ControlInterface, CompoundP
     public function getOperator()
     {
         return $this->operator;
+    }
+
+    protected function makeDefaultView()
+    {
+        return new FilterControlView(
+            $this->valueOption->getKey(),
+            $this->valueOption->getValue(),
+            StaticStringy::humanize($this->field)
+        );
     }
 }

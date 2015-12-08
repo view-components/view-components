@@ -26,28 +26,22 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
     /**
      * @var int
      */
-    protected $recordsPerPage;
+    protected $pageSize;
 
     protected $operation;
 
     /**
      * @param \Presentation\Framework\Input\InputOption $page
-     * @param $recordsPerPage
+     * @param int $pageSize
      */
     public function __construct(
         InputOption $page,
-        $recordsPerPage
+        $pageSize
     )
     {
         $this->pageInputOption = $page;
-        $this->recordsPerPage = $recordsPerPage;
-        parent::__construct(new PaginationView(
-            (int)$this->pageInputOption->getValue(),
-            function() {
-                return (int)$this->getPageCount();
-            },
-            $this->pageInputOption->getKey()
-        ));
+        $this->pageSize = $pageSize;
+        parent::__construct();
     }
 
     public function isManualFormSubmitRequired()
@@ -68,7 +62,7 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
     {
         if ($this->operation === null) {
             $page = $this->pageInputOption->getValue();
-            $this->operation = new PaginateOperation($page, $this->recordsPerPage);
+            $this->operation = new PaginateOperation($page, $this->pageSize);
         }
         return $this->operation;
     }
@@ -91,7 +85,7 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
 
     protected function getPageCount()
     {
-        return ceil($this->getTotalRecordsCount() / $this->recordsPerPage);
+        return ceil($this->getTotalRecordsCount() / $this->pageSize);
     }
 
     protected function getDataProvider()
@@ -99,5 +93,34 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
         /** @var ManagedList $ml */
         $ml =  $this->requireInitializer();
         return $ml->getDataProvider();
+    }
+
+    /**
+     * @return int
+     */
+    public function getPageSize()
+    {
+        return $this->pageSize;
+    }
+
+    /**
+     * @param int $pageSize
+     * @return PaginationControl
+     */
+    public function setPageSize($pageSize)
+    {
+        $this->pageSize = $pageSize;
+        return $this;
+    }
+
+    protected function makeDefaultView()
+    {
+        return new PaginationView(
+            (int)$this->pageInputOption->getValue(),
+            function() {
+                return (int)$this->getPageCount();
+            },
+            $this->pageInputOption->getKey()
+        );
     }
 }

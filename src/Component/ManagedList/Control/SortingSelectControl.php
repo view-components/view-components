@@ -53,7 +53,7 @@ class SortingSelectControl  extends ViewAggregate implements ControlInterface, C
         $this->fields = $fields;
         $this->fieldOption = $fieldOption;
         $this->directionOption = $directionOption;
-        parent::__construct(new SortingSelectView($this));
+        parent::__construct();
     }
 
     public function isManualFormSubmitRequired()
@@ -108,5 +108,10 @@ class SortingSelectControl  extends ViewAggregate implements ControlInterface, C
             [SortOperation::ASC, SortOperation::DESC],
             true
         );
+    }
+
+    protected function makeDefaultView()
+    {
+        return new SortingSelectView($this);
     }
 }

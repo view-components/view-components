@@ -7,10 +7,10 @@ use Presentation\Framework\Rendering\ViewTrait;
 
 class ViewAggregate implements ComponentInterface
 {
-    use ComponentTrait {
-        ComponentTrait::render as private renderInternal;
+    use ComponentTrait;
+    use NodeTrait {
+        NodeTrait::children as private childrenInternal;
     }
-    use NodeTrait;
     use ViewTrait;
 
     /**
@@ -23,6 +23,15 @@ class ViewAggregate implements ComponentInterface
         // don't sort children, becouse it always has only one child
         $this->setSortable(false);
         $this->setView($view);
+    }
+
+    public function children()
+    {
+        $children = $this->childrenInternal();
+        if (!$this->getView()) {
+            $this->useDefaultView();
+        }
+        return $children;
     }
 
     /**
@@ -43,13 +52,15 @@ class ViewAggregate implements ComponentInterface
         return $this->view;
     }
 
-
     /**
      * @param ComponentInterface|null $view
      * @return $this
      */
     public function setView(ComponentInterface $view = null)
     {
+        if ($view === $this->view) {
+            return $this;
+        }
         if ($this->view) {
             $this->view->unlock()->detach();
         }
@@ -60,14 +71,9 @@ class ViewAggregate implements ComponentInterface
 
     final public function useDefaultView()
     {
-        $this->setView($this->makeDefaultView());
-    }
-
-    public function render()
-    {
-        if (!$this->getView()) {
-            $this->useDefaultView();
+        $view = $this->makeDefaultView();
+        if ($view) {
+            $this->setView($view);
         }
-        return $this->renderInternal();
     }
 }

@@ -3,6 +3,7 @@ namespace Presentation\Framework\Demo;
 
 use Presentation\Framework\Component\CompoundComponent;
 use Presentation\Framework\Component\CompoundContainer;
+use Presentation\Framework\Component\ManagedList\Control\PageSizeSelectControl;
 use Presentation\Framework\Component\ManagedList\Control\SortingSelectControl;
 use Presentation\Framework\Component\TemplateView;
 use Presentation\Framework\Component\ManagedList\Control\ControlInterface;
@@ -242,6 +243,7 @@ class Controller extends AbstractController
                     5,
                     $provider
                 ),
+                new PageSizeSelectControl(new InputOption('page_size', $_GET, 5), [2,5,10]),
                 new SortingSelectControl(
                     [
                         null => 'None',
@@ -296,7 +298,8 @@ class Controller extends AbstractController
                     $input('page', 1),
                     10,
                     $provider
-                )
+                ),
+                new PageSizeSelectControl($input('page_size', 5), [2,5,10]),
             ]
         );
 
