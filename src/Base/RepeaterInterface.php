@@ -34,5 +34,5 @@ interface RepeaterInterface extends ComponentInterface
      * @param callable $callback arguments: repeater, iterated element
      * @return $this
      */
-    public function setCallback($callback);
+    public function setCallback(callable $callback = null);
 }

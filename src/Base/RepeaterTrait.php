@@ -43,7 +43,7 @@ trait RepeaterTrait
      * @param callable $callback arguments: iterated element, repeater
      * @return mixed
      */
-    public function setCallback($callback)
+    public function setCallback(callable $callback = null)
     {
         $this->callback = $callback;
         return $this;
