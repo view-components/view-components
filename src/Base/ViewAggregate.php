@@ -45,14 +45,22 @@ class ViewAggregate implements ComponentInterface
     }
 
     /**
+     * Returns view component.
+     *
+     * @param bool $useDefault optional, false by default; pass true to use default view
      * @return ComponentInterface|null
      */
-    public function getView()
+    public function getView($useDefault = false)
     {
+        if ($useDefault && $this->view === null) {
+            $this->useDefaultView();
+        }
         return $this->view;
     }
 
     /**
+     * Sets view component.
+     *
      * @param ComponentInterface|null $view
      * @return $this
      */
