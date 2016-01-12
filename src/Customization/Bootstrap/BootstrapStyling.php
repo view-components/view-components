@@ -7,7 +7,6 @@ use Presentation\Framework\Base\ComponentInterface;
 use Presentation\Framework\Base\Html\AbstractTag;
 use Presentation\Framework\Base\Html\TagInterface;
 use Presentation\Framework\Component\CompoundComponent;
-use Presentation\Framework\Component\ManagedList\Control\View\FilterControlView;
 use Presentation\Framework\Component\Html\Tag;
 use Presentation\Framework\Component\ManagedList\Control\FilterControl;
 use Presentation\Framework\Resource\ResourceManager;
@@ -29,6 +28,7 @@ class BootstrapStyling extends ConfigurableCustomization
     /**
      * @param ComponentInterface $component
      * @param ComponentInterface $resourceRoot root component for JS & CSS
+     * @return void
      */
     public function apply(ComponentInterface $component, ComponentInterface $resourceRoot = null)
     {
@@ -169,7 +169,7 @@ class BootstrapStyling extends ConfigurableCustomization
         $tag->setAttribute(
             'class',
             $tag->getAttribute('class') .
-            "btn {$this->options->tableStyle}"
+            "{$this->options->tableStyle}"
         );
     }
 }
