@@ -20,9 +20,10 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
     use InitializableTrait;
 
     /**
-     * @var \Presentation\Framework\Input\InputOption
+     * @var InputOption
      */
-    private $pageInputOption;
+    protected $pageInputOption;
+
     /**
      * @var int
      */
@@ -31,7 +32,7 @@ class PaginationControl extends ViewAggregate implements ControlInterface, Compo
     protected $operation;
 
     /**
-     * @param \Presentation\Framework\Input\InputOption $page
+     * @param InputOption $page
      * @param int $pageSize
      */
     public function __construct(
