@@ -63,7 +63,7 @@ trait HasTemplateTrait
         return $this;
     }
 
-    protected function getTemplate()
+    public function getTemplate()
     {
         return $this->template;
     }
