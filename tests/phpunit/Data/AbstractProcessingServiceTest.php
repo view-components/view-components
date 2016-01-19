@@ -28,7 +28,8 @@ abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase
     {
         self::assertEquals(
             $this->totalCount,
-            $this->service->count()
+            $this->service->count(),
+            'Test ' . get_class($this->service) . '::count()'
         );
     }
 
@@ -36,8 +37,8 @@ abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase
     {
         $op = new FilterOperation('id','<=', 3);
         $this->operations->add($op);
-        self::assertEquals(3, $this->service->count());
+        self::assertEquals(3, $this->service->count(), 'Test filtering');
         $this->operations->remove($op);
-        self::assertEquals($this->totalCount, $this->service->count());
+        self::assertEquals($this->totalCount, $this->service->count(), 'Test recalc. after removing operation');
     }
 }
