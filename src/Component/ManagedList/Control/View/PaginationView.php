@@ -157,11 +157,12 @@ class PaginationView extends Tag
     {
 
         $url = Url::createFromServer($_SERVER);
-        // league/url v4
+        // league/url v4.X
         if (method_exists($url, 'mergeQuery')) {
             return (string)$url->mergeQuery(
                 Query::createFromArray([$this->inputKey => $page])
             );
+        // league/url v3.X
         } else {
             $url->getQuery()->modify([$this->inputKey => $page]);
             return (string)$url;
