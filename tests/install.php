@@ -6,7 +6,7 @@ function create_env_file()
 {
     echo PHP_EOL, 'Creating .env file... ';
     $dir = __DIR__;
-    `cp "$dir/.env.example" "$dir"`;
+    copy("$dir/.env.example", "$dir/.env");
     echo 'Done.', PHP_EOL;
 }
 
