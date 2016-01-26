@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Test\Component\ManagedList;
+namespace Presentation\Framework\Test\Component\ManagedList\Control;
 
 use PHPUnit_Framework_TestCase;
 use Presentation\Framework\Component\ManagedList\Control\FilterControl;
