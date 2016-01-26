@@ -26,7 +26,7 @@ class Select extends AbstractTag
     {
         parent::__construct(
             $attributes,
-            self::makeOptionComponents($options, $selectedValue)
+            self::makeOptionComponents($options)
         );
         if ($selectedValue !== null) {
             $this->setOptionSelected($selectedValue);
