@@ -25,7 +25,7 @@
         "nayjest/tree": "^2",
         "nayjest/collection": "^2.1.2",
         "danielstjules/stringy": "^1.9|^2.2",
-        "league/url": "^4.0"
+        "league/url": "^4|^3.3.5"
     },
     "require-dev": {
         "phpunit/phpunit": "4.6.*",
@@ -55,5 +55,5 @@
         "source": "https://github.com/presentation-framework/presentation-framework",
         "issues": "https://github.com/presentation-framework/presentation-framework/issues"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }

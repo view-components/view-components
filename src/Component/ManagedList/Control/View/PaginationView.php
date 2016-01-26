@@ -155,9 +155,16 @@ class PaginationView extends Tag
 
     protected function makeUrl($page)
     {
-        return Url::createFromServer($_SERVER)->mergeQuery(
-            Query::createFromArray([$this->inputKey => $page])
-        )->__toString();
 
+        $url = Url::createFromServer($_SERVER);
+        // league/url v4
+        if (method_exists($url, 'mergeQuery')) {
+            return (string)$url->mergeQuery(
+                Query::createFromArray([$this->inputKey => $page])
+            );
+        } else {
+            $url->getQuery()->modify([$this->inputKey => $page]);
+            return (string)$url;
+        }
     }
 }
