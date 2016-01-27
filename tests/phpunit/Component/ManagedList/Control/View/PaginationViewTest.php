@@ -11,6 +11,6 @@ class PaginationViewTest extends PHPUnit_Framework_TestCase
     {
         $_SERVER['HTTP_HOST'] = 'http://localhost';
         $view = new PaginationView(1, 10, 'page');
-        echo $view->render();
+        $view->render();
     }
 }
