@@ -226,7 +226,7 @@ php vendor/bin/codecept run acceptance
 
 ## License
 
-© 2014 &mdash; 2015 Vitalii Stepanenko
+© 2014&mdash;2016 Vitalii Stepanenko
 
 Licensed under the MIT License. 
 
