@@ -2,6 +2,7 @@
 namespace Presentation\Framework\Base;
 
 use Nayjest\Collection\Extended\ObjectCollectionInterface;
+use Presentation\Framework\Rendering\ViewInterface;
 
 trait ComponentTrait
 {
@@ -98,7 +99,8 @@ trait ComponentTrait
 
     protected function getChildrenForRendering()
     {
-        return $this->isSortingEnabled ? $this->children()->sortByProperty('sortPosition') : $this->children();
+        $views = $this->children()->filterByType(ViewInterface::class);
+        return $this->isSortingEnabled ? $views->sortByProperty('sortPosition') : $views;
     }
 
     public function onRender(callable $callback)
