@@ -18,31 +18,39 @@ class CompoundPartCollection extends NodeCollection
         return $this->parentNode;
     }
 
+
     /**
-     * @param $component
-     * @param bool|false $prepend
+     * @param CompoundPartInterface $component
+     * @param bool $prepend
+     * @return bool
      */
     protected function addCompoundPart(CompoundPartInterface $component, $prepend = false)
     {
-        $this->placeInTree($component, $prepend);
+        $isPlaced = $this->placeInTree($component, $prepend);
         $component->setRootInternal($this->getCompoundRoot());
+        return $isPlaced;
     }
 
     /**
      * @param CompoundPartInterface $component
      * @param bool $prepend
+     * @return bool
      */
     private function placeInTree(CompoundPartInterface $component, $prepend = false)
     {
         $root = $this->getCompoundRoot();
         $parentName = $component->resolveParentName($root);
-        if ($parentName !== null && !$root->hasComponent($parentName)) {
+        if ($parentName === false) {
+            return false;
+        }
+        if ($parentName!== null && !$root->hasComponent($parentName)) {
             throw new NodeNotFoundException;
         }
         $this->provideNameIfEmpty($component);
         $prepend
             ? $root->prependComponent($parentName, $component->getComponentName(), $component)
             : $root->appendComponent($parentName, $component->getComponentName(), $component);
+        return true;
     }
 
     /**
@@ -70,9 +78,10 @@ class CompoundPartCollection extends NodeCollection
      */
     public function add($component, $prepend = false)
     {
-        if ($component instanceof CompoundPartInterface) {
-            $this->addCompoundPart($component, $prepend);
-        } else {
+        if (
+            !$component instanceof CompoundPartInterface
+            || !$this->addCompoundPart($component, $prepend)
+        ) {
             parent::add($component, $prepend);
         }
         return $this;
