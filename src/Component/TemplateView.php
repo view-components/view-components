@@ -8,6 +8,7 @@ use Presentation\Framework\Base\ComponentTrait;
 use Presentation\Framework\Data\DataAcceptorInterface;
 use Presentation\Framework\Rendering\RendererInterface;
 use Presentation\Framework\Rendering\ViewTrait;
+use Presentation\Framework\Service\Services;
 
 class TemplateView implements ComponentInterface, DataAcceptorInterface
 {
@@ -30,9 +31,15 @@ class TemplateView implements ComponentInterface, DataAcceptorInterface
      */
     protected $data;
 
-    public function __construct(RendererInterface $renderer = null, $templateName = '', $viewData = [])
+    /**
+     * TemplateView constructor.
+     *
+     * @param string $templateName
+     * @param array $viewData
+     * @param RendererInterface|null $renderer
+     */
+    public function __construct($templateName = '', $viewData = [], RendererInterface $renderer = null)
     {
-
         $this->renderer = $renderer;
         $this->templateName = $templateName;
         $this->data = $viewData;
@@ -41,6 +48,9 @@ class TemplateView implements ComponentInterface, DataAcceptorInterface
     public function render()
     {
         $this->emit('render', [$this]);
+        if (!$this->renderer) {
+            $this->setRenderer(Services::renderer());
+        }
         return $this->renderer->render($this->templateName, array_merge($this->data, ['this' => $this]));
     }
 

@@ -411,7 +411,7 @@ class Controller extends AbstractController
     public function demo8()
     {
         $renderer = $this->getRenderer();
-        $c = new TemplateView($renderer, 'demo/template_view');
+        $c = new TemplateView('demo/template_view', [], $renderer);
         return $this->renderMenu() . $c->render();
     }
 }
