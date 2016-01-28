@@ -15,6 +15,7 @@ class TemplateView implements ComponentInterface, DataAcceptorInterface
     use NodeTrait;
     use ComponentTrait {
         ComponentTrait::render as private internalRender;
+        ComponentTrait::renderChildren as private renderChildrenInternal;
     }
     use ViewTrait;
 
@@ -30,6 +31,8 @@ class TemplateView implements ComponentInterface, DataAcceptorInterface
      * @var
      */
     protected $data;
+
+    private $wasChildrenRendered = false;
 
     /**
      * TemplateView constructor.
@@ -48,10 +51,21 @@ class TemplateView implements ComponentInterface, DataAcceptorInterface
     public function render()
     {
         $this->emit('render', [$this]);
+        if (!$this->isVisible()) {
+            return '';
+        }
+        $this->wasChildrenRendered = false;
         if (!$this->renderer) {
             $this->setRenderer(Services::renderer());
         }
-        return $this->renderer->render($this->templateName, array_merge($this->data, ['this' => $this]));
+        $output = $this->renderer->render(
+            $this->templateName,
+            array_merge($this->data, ['this' => $this])
+        );
+        if (!$this->wasChildrenRendered) {
+            $output .= $this->renderChildren();
+        }
+        return $output;
     }
 
     /**
@@ -100,5 +114,11 @@ class TemplateView implements ComponentInterface, DataAcceptorInterface
     public function setData($data)
     {
         $this->data = $data;
+    }
+
+    public function renderChildren()
+    {
+        $this->wasChildrenRendered = true;
+        return $this->renderChildrenInternal();
     }
 }
