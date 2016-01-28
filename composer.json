@@ -25,6 +25,7 @@
         "nayjest/tree": "^3",
         "nayjest/collection": "^2.1.2",
         "danielstjules/stringy": "^1.9|^2.2",
+        "container-interop/container-interop": "^1.1",
         "league/url": "^4|^3.3.5"
     },
     "require-dev": {
@@ -34,6 +35,9 @@
         "vlucas/phpdotenv" : "~1",
         "symfony/var-dumper": "~2",
         "ext-curl": "*"
+    },
+    "provide": {
+      "container-interop/container-interop-implementation": "^1.1"
     },
     "suggest": {
         "symfony/var-dumper": "Required for SymfonyVarDump component",
