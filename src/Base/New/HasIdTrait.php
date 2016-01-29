@@ -1,7 +1,8 @@
 <?php
 namespace Presentation\Framework\Base;
 
-trait ComponentIdTrait
+
+trait HasIdTrait
 {
     private $id;
 
