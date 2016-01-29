@@ -5,10 +5,22 @@ namespace Presentation\Framework\Rendering;
 
 use InvalidArgumentException;
 
+/**
+ * Renderer for native PHP templates.
+ */
 class SimpleRenderer implements RendererInterface
 {
+    /**
+     * Paths for locating templates.
+     * First paths has higher priority.
+     * @var string[]
+     * */
     protected $paths;
 
+    /**
+     * SimpleRenderer constructor.
+     * @param array $paths
+     */
     public function __construct(array $paths = [])
     {
         $this->paths = $paths;
@@ -40,6 +52,13 @@ class SimpleRenderer implements RendererInterface
         return false;
     }
 
+    /**
+     * Renders template and returns output.
+     *
+     * @param string $template template name
+     * @param array $viewData
+     * @return string
+     */
     public function render($template, array $viewData = [])
     {
         $filePath = $this->resolveTemplateFile($template);
