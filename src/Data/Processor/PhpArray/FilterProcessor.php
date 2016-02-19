@@ -6,7 +6,7 @@ use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
 use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
 use InvalidArgumentException;
 use ViewComponents\ViewComponents\Data\Processor\ProcessorInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
+use mp;
 
 class FilterProcessor implements ProcessorInterface
 {
@@ -19,10 +19,10 @@ class FilterProcessor implements ProcessorInterface
      */
     public function process($src, OperationInterface $operation)
     {
-        $accessor = PropertyAccess::createPropertyAccessor();
+
         $res = [];
         foreach ($src as $row) {
-            $value = $accessor->getValue($row, $operation->getField());
+            $value = mp\getValue($row, $operation->getField());
             $expected = $operation->getValue();
             $operator = $operation->getOperator();
             if ($this->checkValue($value, $expected, $operator)) {

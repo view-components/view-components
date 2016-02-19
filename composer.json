@@ -20,7 +20,6 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "symfony/property-access" : "^2.5",
         "nayjest/manipulator": "^3.0.1",
         "nayjest/tree": "^3",
         "nayjest/collection": "^2.2",
@@ -39,8 +38,7 @@
       "container-interop/container-interop-implementation": "^1.1"
     },
     "suggest": {
-        "symfony/var-dumper": "Required for SymfonyVarDump component",
-        "symfony/property-access" : "Probably will be used in future"
+        "symfony/var-dumper": "Required for SymfonyVarDump component"
     },
     "autoload": {
         "psr-4": {
