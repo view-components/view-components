@@ -10,6 +10,23 @@ use RuntimeException;
 class CompoundPart extends ViewAggregate implements CompoundPartInterface
 {
     /**
+     * @var string|null
+     */
+    protected $id;
+
+    /**
+     * @var string|null
+     */
+    protected $destinationParentId;
+
+    public function __construct(ViewComponentInterface $view = null, $id = null, $destinationParentId = Compound::ROOT_ID)
+    {
+        parent::__construct($view);
+        $this->id = $id;
+        $this->destinationParentId = $destinationParentId;
+    }
+
+    /**
      * @param string|null $id
      * @return $this
      */
@@ -20,30 +37,13 @@ class CompoundPart extends ViewAggregate implements CompoundPartInterface
     }
 
     /**
-     * @param string $destinationParentId
+     * @param string|null $destinationParentId
      * @return CompoundPart
      */
     public function setDestinationParentId($destinationParentId)
     {
         $this->destinationParentId = $destinationParentId;
         return $this;
-    }
-
-    /**
-     * @var null
-     */
-    protected $id;
-
-    /**
-     * @var string
-     */
-    protected $destinationParentId;
-
-    public function __construct(ViewComponentInterface $view = null, $id = null, $destinationParentId = Compound::ROOT_ID)
-    {
-        parent::__construct($view);
-        $this->id = $id;
-        $this->destinationParentId = $destinationParentId;
     }
 
     /**
@@ -57,7 +57,7 @@ class CompoundPart extends ViewAggregate implements CompoundPartInterface
 
     /**
      * @param Compound|null $root
-     * @return null|string
+     * @return string|null
      */
     public function getDestinationParentId(Compound $root = null)
     {
