@@ -2,10 +2,10 @@ PHP View Components
 =====
 ### `Flexible UI for Enterprise Web Applications`
 
-[![Release](https://img.shields.io/packagist/v/presentation/framework.svg)](https://packagist.org/packages/presentation/framework)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/?branch=master)
-[![Build Status](https://travis-ci.org/presentation-framework/presentation-framework.svg?branch=master)](https://travis-ci.org/presentation-framework/presentation-framework)
-[![Code Coverage](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/?branch=master)
+[![Release](https://img.shields.io/packagist/v/view-components/view-components.svg)](https://packagist.org/packages/view-components/view-components)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/view-components/view-components/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/presentation-framework/presentation-framework/?branch=master)
+[![Build Status](https://travis-ci.org/view-components/view-components.svg?branch=master)](https://travis-ci.org/view-components/view-components)
+[![Code Coverage](https://scrutinizer-ci.com/g/view-components/view-components/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/view-components/view-components/?branch=master)
 
 
 **Project status: pre-alpha**
@@ -100,8 +100,14 @@ Just execute phpunit from package folder.
 ```bash
 phpunit
 ```
-Package dependencies must be installed via composer (just run `composer install`).
+Package dependencies must be installed via composer (run `composer install`).
 
+#### Running demo application
+
+1. Install dependencies: run `composer install`
+2. Install web-app: run `php tests/install.php`, this will create environment configuration(tests/.env) and database (tests/db.sqlite)
+3. Run webapp: `php -S localhost:8000 tests\webapp\index.php`
+4. Open [http://localhost:8000](http://localhost:8000) URL in browser
 
 ## License
 
