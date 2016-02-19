@@ -17,14 +17,14 @@ before_script:
   - composer self-update
   - travis_retry composer install --prefer-source --no-interaction --dev
   - php tests/install.php
-  - php -S localhost:9000 tests/webapp/index.php &
-  - sleep 1  # give server some time to start
-  - vendor/bin/codecept build
+  # Codeception removed (!), phpunit will be used to run acceptance tests
+  # - php -S localhost:9000 tests/webapp/index.php &
+  # - sleep 1  # give server some time to start
+  # - vendor/bin/codecept build
 
 script:
   - vendor/bin/phpunit
-  - vendor/bin/codecept run acceptance
-
-after_failure:
-  - cat app/storage/logs/laravel.log
-  - cat tests/codecept/_output/*
+  # - vendor/bin/codecept run acceptance
+# after_failure:
+  # - cat app/storage/logs/laravel.log
+  # - cat tests/codecept/_output/*
