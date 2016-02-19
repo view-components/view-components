@@ -5,11 +5,11 @@
  * @var PaginationControlView $component
  */
 
-isset($maxLinks) or $maxLinks = 10;
-isset($minNumLinksAroundCurrent) or $minNumLinksAroundCurrent = 2;
-isset($minNumLinksNearEnd) or $minNumLinksNearEnd = 1;
+isset($maxLinks) || $maxLinks = 10;
+isset($minNumLinksAroundCurrent) || $minNumLinksAroundCurrent = 2;
+isset($minNumLinksNearEnd) || $minNumLinksNearEnd = 1;
 // without prev & next links
-isset($maxNumLinks) or $maxNumLinks = $maxLinks - 2;
+isset($maxNumLinks) || $maxNumLinks = $maxLinks - 2;
 ?>
 <nav data-role="control-container" data-control="pagination">
     <ul class="pagination">
