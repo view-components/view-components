@@ -1,11 +1,11 @@
 <?php
 
-namespace Presentation\Framework\Service;
+namespace ViewComponents\ViewComponents\Service;
 
 use Interop\Container\ContainerInterface;
-use Presentation\Framework\HtmlBuilder;
-use Presentation\Framework\Rendering\RendererInterface;
-use Presentation\Framework\Resource\ResourceManager;
+use ViewComponents\ViewComponents\HtmlBuilder;
+use ViewComponents\ViewComponents\Rendering\RendererInterface;
+use ViewComponents\ViewComponents\Resource\ResourceManager;
 
 /**
  * Facade for accessing services.

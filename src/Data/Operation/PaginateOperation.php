@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Data\Operation;
+namespace ViewComponents\ViewComponents\Data\Operation;
 
 
 class PaginateOperation implements OperationInterface

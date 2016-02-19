@@ -1,7 +1,7 @@
 <?php
-namespace Presentation\Framework\Data\Processor;
+namespace ViewComponents\ViewComponents\Data\Processor;
 
-use Presentation\Framework\Data\Operation\OperationInterface;
+use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
 
 class DummyProcessor implements ProcessorInterface
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessingService;
+namespace ViewComponents\ViewComponents\Data\ProcessingService;
 
-use Presentation\Framework\Data\DbTable\Query;
+use ViewComponents\ViewComponents\Data\DbTable\Query;
 use Traversable;
 
 /**
  * Class DbTableProcessingManager
  *
- * @package Presentation\Framework\Data
+ * @package ViewComponents\ViewComponents\Data
  */
 class DbTableProcessingService extends AbstractProcessingService
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessorResolver;
+namespace ViewComponents\ViewComponents\Data\ProcessorResolver;
 
-use Presentation\Framework\Data\Operation\FilterOperation;
-use Presentation\Framework\Data\Operation\SortOperation;
-use Presentation\Framework\Data\Processor\DbTable\FilterProcessor;
-use Presentation\Framework\Data\Processor\DbTable\SortProcessor;
+use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
+use ViewComponents\ViewComponents\Data\Operation\SortOperation;
+use ViewComponents\ViewComponents\Data\Processor\DbTable\FilterProcessor;
+use ViewComponents\ViewComponents\Data\Processor\DbTable\SortProcessor;
 
 class DbTableProcessorResolver extends ProcessorResolver
 {

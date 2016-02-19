@@ -1,12 +1,12 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessorResolver;
+namespace ViewComponents\ViewComponents\Data\ProcessorResolver;
 
-use Presentation\Framework\Data\Operation\DummyOperation;
-use Presentation\Framework\Data\Operation\OperationInterface;
-use Presentation\Framework\Data\Processor\DummyProcessor;
-use Presentation\Framework\Data\Processor\ProcessorInterface;
-use Presentation\Framework\Exceptions\ProcessorNotFoundException;
+use ViewComponents\ViewComponents\Data\Operation\DummyOperation;
+use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
+use ViewComponents\ViewComponents\Data\Processor\DummyProcessor;
+use ViewComponents\ViewComponents\Data\Processor\ProcessorInterface;
+use ViewComponents\ViewComponents\Exceptions\ProcessorNotFoundException;
 
 /**
  * Class ProcessorResolver

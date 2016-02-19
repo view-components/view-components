@@ -1,10 +1,10 @@
 <?php
 
-namespace Presentation\Framework\Service\Container;
+namespace ViewComponents\ViewComponents\Service\Container;
 
 
-use Presentation\Framework\Service\Container\Exception\AlreadyExistsException;
-use Presentation\Framework\Service\Container\Exception\NotFoundException;
+use ViewComponents\ViewComponents\Service\Container\Exception\AlreadyExistsException;
+use ViewComponents\ViewComponents\Service\Container\Exception\NotFoundException;
 
 /**
  * Simple service container implementation.

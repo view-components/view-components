@@ -1,11 +1,11 @@
 <?php
 
-namespace Presentation\Framework\Test\Data;
+namespace ViewComponents\ViewComponents\Test\Data;
 
 use LogicException;
-use Presentation\Framework\Data\Operation\FilterOperation;
-use Presentation\Framework\Data\OperationsCollection;
-use Presentation\Framework\Data\ProcessingService\ArrayProcessingService;
+use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
+use ViewComponents\ViewComponents\Data\OperationCollection;
+use ViewComponents\ViewComponents\Data\ProcessingService\ArrayProcessingService;
 use PHPUnit_Framework_TestCase;
 
 abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase
@@ -14,7 +14,7 @@ abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase
     protected $service;
 
     protected $data;
-    /** @var  OperationsCollection */
+    /** @var  OperationCollection */
     protected $operations;
 
     protected $totalCount;

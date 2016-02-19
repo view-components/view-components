@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Input;
+namespace ViewComponents\ViewComponents\Input;
 
 /**
  * Class InputSource.

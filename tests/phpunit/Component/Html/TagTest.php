@@ -1,9 +1,10 @@
 <?php
 
-namespace Presentation\Framework\Test\Component\Html;
+namespace ViewComponents\ViewComponents\Test\Component\Html;
 
-use Presentation\Framework\Component\Html\Tag;
-use Presentation\Framework\Component\Text;
+use ViewComponents\ViewComponents\Component\DataView;
+use ViewComponents\ViewComponents\Component\Html\Tag;
+use ViewComponents\ViewComponents\Component\Text;
 use PHPUnit_Framework_TestCase;
 
 class TagTest extends PHPUnit_Framework_TestCase
@@ -25,8 +26,8 @@ class TagTest extends PHPUnit_Framework_TestCase
         $first
             ->setTagName('i')
             ->setAttributes(['class' => 'icon']);
-        $first->children()->add(new Text('&nbsp;'));
-        $second = new Text('Hi!');
+        $first->children()->add(new DataView('&nbsp;'));
+        $second = new DataView('Hi!');
         $tag->children()->set([$first, $second]);
         $this->assertEquals(
             '<a class="btn"><i class="icon">&nbsp;</i>Hi!</a>',

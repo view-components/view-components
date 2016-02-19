@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Common;
+namespace ViewComponents\ViewComponents\Common;
 
 trait ChangesWatcherTrait
 {

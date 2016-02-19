@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessingService;
+namespace ViewComponents\ViewComponents\Data\ProcessingService;
 
 use ArrayIterator;
 use Traversable;

@@ -1,23 +1,22 @@
 <?php
 
-namespace Presentation\Framework\Test\Data;
+namespace ViewComponents\ViewComponents\Test\Data;
 
-use Presentation\Framework\Data\DbTable\Query;
-use Presentation\Framework\Data\OperationsCollection;
-use Presentation\Framework\Data\ProcessingService\DbTableProcessingService;
-use Presentation\Framework\Data\ProcessorResolver\DbTableProcessorResolver;
+use ViewComponents\ViewComponents\Data\DbTable\Query;
+use ViewComponents\ViewComponents\Data\OperationCollection;
+use ViewComponents\ViewComponents\Data\ProcessingService\DbTableProcessingService;
+use ViewComponents\ViewComponents\Data\ProcessorResolver\DbTableProcessorResolver;
 use PDO;
-use PHPUnit_Framework_TestCase;
 
 class DbTableProcessingServiceTest extends AbstractProcessingServiceTest
 {
     public function setUp()
     {
         $this->data = new Query(
-            \Presentation\Framework\Demo\db_connection(),
+            \ViewComponents\ViewComponents\Demo\db_connection(),
             'users'
         );
-        $this->operations = new OperationsCollection();
+        $this->operations = new OperationCollection();
         $this->service = new DbTableProcessingService(
             new DbTableProcessorResolver(),
             $this->operations,

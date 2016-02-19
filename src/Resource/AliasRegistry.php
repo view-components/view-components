@@ -1,12 +1,12 @@
 <?php
-namespace Presentation\Framework\Resource;
+namespace ViewComponents\ViewComponents\Resource;
 
 /**
  * Class AliasRegistry.
  *
  * The class implements registry of aliases.
  *
- * @package Presentation\Framework\Resources
+ * @package ViewComponents\ViewComponents\Resources
  */
 class AliasRegistry
 {

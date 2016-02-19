@@ -1,11 +1,11 @@
 <?php
-namespace Presentation\Framework\Base\Html;
+namespace ViewComponents\ViewComponents\Base\Html;
 
 /**
  * Class TagTrait
  *
  * TagTrait implements abstract methods
- * from \Presentation\Framework\Base\DecoratedContainerTrait
+ * from \ViewComponents\ViewComponents\Base\DecoratedContainerTrait
  * and common functionality of html tags.
  */
 trait TagTrait

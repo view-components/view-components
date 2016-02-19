@@ -1,8 +1,8 @@
 <?php
 
-namespace Presentation\Framework\Data;
+namespace ViewComponents\ViewComponents\Data;
 
-use Presentation\Framework\Data\ProcessingService\ProcessingServiceInterface;
+use ViewComponents\ViewComponents\Data\ProcessingService\ProcessingServiceInterface;
 use Traversable;
 
 abstract class AbstractDataProvider implements DataProviderInterface
@@ -19,12 +19,12 @@ abstract class AbstractDataProvider implements DataProviderInterface
     }
 
     /**
-     * @return OperationsCollection
+     * @return OperationCollection
      */
     public function operations()
     {
         if (null === $this->operationsCollection) {
-            $this->operationsCollection = new OperationsCollection();
+            $this->operationsCollection = new OperationCollection();
         }
         return $this->operationsCollection;
     }

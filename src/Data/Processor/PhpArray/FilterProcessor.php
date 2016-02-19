@@ -1,11 +1,11 @@
 <?php
 
-namespace Presentation\Framework\Data\Processor\PhpArray;
+namespace ViewComponents\ViewComponents\Data\Processor\PhpArray;
 
-use Presentation\Framework\Data\Operation\FilterOperation;
-use Presentation\Framework\Data\Operation\OperationInterface;
+use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
+use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
 use InvalidArgumentException;
-use Presentation\Framework\Data\Processor\ProcessorInterface;
+use ViewComponents\ViewComponents\Data\Processor\ProcessorInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class FilterProcessor implements ProcessorInterface

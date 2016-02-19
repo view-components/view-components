@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Rendering;
+namespace ViewComponents\ViewComponents\Rendering;
 
 /**
  * Interface ViewInterface

@@ -1,6 +1,6 @@
 {
-    "name": "presentation/framework",
-    "description": "PHP Presentation Framework",
+    "name": "view-components/view-components",
+    "description": "PHP View Components",
     "keywords": [
         "html",
         "view",
@@ -23,15 +23,14 @@
         "symfony/property-access" : "^2.5",
         "nayjest/manipulator": "^3.0.1",
         "nayjest/tree": "^3",
-        "nayjest/collection": "^2.1.2",
+        "nayjest/collection": "^2.2",
         "danielstjules/stringy": "^1.9|^2.2",
         "container-interop/container-interop": "^1.1",
-        "league/url": "^4|^3.3.5"
+        "league/url": "^4||^3.3.5"
     },
     "require-dev": {
         "phpunit/phpunit": "4.6.*",
         "filp/whoops": "^1.1.7",
-        "codeception/codeception": "2.0.*",
         "vlucas/phpdotenv" : "~1",
         "symfony/var-dumper": "~2",
         "ext-curl": "*"
@@ -45,13 +44,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Presentation\\Framework\\": "src/"
+            "ViewComponents\\ViewComponents\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Presentation\\Framework\\Test\\": "tests/phpunit",
-            "Presentation\\Framework\\Demo\\": "tests/webapp"
+            "ViewComponents\\ViewComponents\\Test\\": "tests/phpunit",
+            "ViewComponents\\ViewComponents\\Demo\\": "tests/webapp"
         }
     },
     "support": {

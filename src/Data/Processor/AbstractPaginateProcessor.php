@@ -1,7 +1,7 @@
 <?php
-namespace Presentation\Framework\Data\Processor;
+namespace ViewComponents\ViewComponents\Data\Processor;
 
-use Presentation\Framework\Data\Operation\PaginateOperation;
+use ViewComponents\ViewComponents\Data\Operation\PaginateOperation;
 
 abstract class AbstractPaginateProcessor implements ProcessorInterface
 {

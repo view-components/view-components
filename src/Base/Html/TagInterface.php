@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Base\Html;
+namespace ViewComponents\ViewComponents\Base\Html;
 
 interface TagInterface
 {

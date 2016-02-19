@@ -1,7 +1,8 @@
 <?php
-namespace Presentation\Framework\Customization;
+namespace ViewComponents\ViewComponents\Customization;
 
-use Presentation\Framework\Base\ComponentInterface;
+use ViewComponents\ViewComponents\Base\ComponentInterface;
+use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 
 abstract class AbstractRecursiveCustomization implements CustomizationInterface
 {
@@ -15,6 +16,9 @@ abstract class AbstractRecursiveCustomization implements CustomizationInterface
     protected function applyRecursive(ComponentInterface $component)
     {
         $this->applyInternal($component);
+        if (!$component instanceof ContainerComponentInterface) {
+            return;
+        }
         foreach ($component->children() as $child) {
             if ($child instanceof ComponentInterface) {
                 $this->applyRecursive($child);

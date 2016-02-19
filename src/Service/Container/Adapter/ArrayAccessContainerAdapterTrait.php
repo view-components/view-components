@@ -1,9 +1,9 @@
 <?php
 
-namespace Presentation\Framework\Service\Container\Adapter;
+namespace ViewComponents\ViewComponents\Service\Container\Adapter;
 
 use ArrayAccess;
-use Presentation\Framework\Service\Container\Exception\NotFoundException;
+use ViewComponents\ViewComponents\Service\Container\Exception\NotFoundException;
 
 /**
  * Trait ArrayAccessContainerTrait

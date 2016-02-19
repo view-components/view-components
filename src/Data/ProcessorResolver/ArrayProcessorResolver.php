@@ -1,13 +1,13 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessorResolver;
+namespace ViewComponents\ViewComponents\Data\ProcessorResolver;
 
-use Presentation\Framework\Data\Operation\FilterOperation;
-use Presentation\Framework\Data\Operation\PaginateOperation;
-use Presentation\Framework\Data\Operation\SortOperation;
-use Presentation\Framework\Data\Processor\PhpArray\FilterProcessor;
-use Presentation\Framework\Data\Processor\PhpArray\PaginateProcessor;
-use Presentation\Framework\Data\Processor\PhpArray\SortProcessor;
+use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
+use ViewComponents\ViewComponents\Data\Operation\PaginateOperation;
+use ViewComponents\ViewComponents\Data\Operation\SortOperation;
+use ViewComponents\ViewComponents\Data\Processor\PhpArray\FilterProcessor;
+use ViewComponents\ViewComponents\Data\Processor\PhpArray\PaginateProcessor;
+use ViewComponents\ViewComponents\Data\Processor\PhpArray\SortProcessor;
 
 class ArrayProcessorResolver extends ProcessorResolver
 {

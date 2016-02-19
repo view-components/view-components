@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Common;
+namespace ViewComponents\ViewComponents\Common;
 
 interface StateHashInterface
 {

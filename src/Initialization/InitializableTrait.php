@@ -1,8 +1,8 @@
 <?php
 
-namespace Presentation\Framework\Initialization;
+namespace ViewComponents\ViewComponents\Initialization;
 
-use Presentation\Framework\Base\ComponentInterface;
+use ViewComponents\ViewComponents\Base\ComponentInterface;
 use RuntimeException;
 
 trait InitializableTrait
@@ -29,7 +29,7 @@ trait InitializableTrait
     {
         if ($this->initializer == null) {
             throw new RuntimeException(
-                static::class . ' expects root component that can perform initialization.'
+                static::class . ' expects root component able perform initialization.'
             );
         }
         return $this->initializer;

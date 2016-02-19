@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Data\DbTable;
+namespace ViewComponents\ViewComponents\Data\DbTable;
 
 use PDO;
 use PDOStatement;

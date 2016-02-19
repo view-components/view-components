@@ -1,32 +1,19 @@
 <?php
-namespace Presentation\Framework\Test\Component;
+namespace ViewComponents\ViewComponents\Test\Component;
 
-use Presentation\Framework\Component\Container;
-use Presentation\Framework\Component\Text;
-use Presentation\Framework\Rendering\ViewInterface;
-use Presentation\Framework\Test\Mock\ChildClass;
-use Presentation\Framework\Test\Mock\HierarchyItem;
-use Presentation\Framework\Test\Mock\ParentClass;
+use ViewComponents\ViewComponents\Component\Container;
+
 use PHPUnit_Framework_TestCase;
+use ViewComponents\ViewComponents\Component\DataView;
 
 class ContainerTest extends PHPUnit_Framework_TestCase
 {
     public function test()
     {
-        $c = new Container();
-        $c->setOpeningText('[')
-            ->setClosingText(']');
-        self::assertEquals('[]', $c->render());
-
-        $t = new Text('inner');
-        $c->children()->set([$t]);
-        self::assertEquals('[inner]', $c->render());
-
-        $c2 = new Container();
-        $c2->setOpeningText('{')
-            ->setClosingText('}');
-        $c->children()->add($c2);
-        $c2->children()->set([$t, $t]);
-        self::assertEquals('[{inner}]', $c->render());
+        $container = new Container();
+        $c1 = new DataView('1');
+        $c2 = new DataView('2');
+        $container->children()->set([$c1,$c2]);
+        self::assertEquals('12', $container->render());
     }
 }

@@ -1,7 +1,7 @@
 <?php
-namespace Presentation\Framework\Test\Resource;
+namespace ViewComponents\ViewComponents\Test\Resource;
 
-use Presentation\Framework\Resource\AliasRegistry;
+use ViewComponents\ViewComponents\Resource\AliasRegistry;
 use PHPUnit_Framework_TestCase;
 
 class AliasRegistryTest extends PHPUnit_Framework_TestCase

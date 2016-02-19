@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Exceptions;
+namespace ViewComponents\ViewComponents\Exceptions;
 
 use Exception;
 use RuntimeException;

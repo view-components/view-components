@@ -1,10 +1,10 @@
 <?php
 
-namespace Presentation\Framework\Data;
+namespace ViewComponents\ViewComponents\Data;
 
-use Presentation\Framework\Data\ProcessingService\ArrayProcessingService;
-use Presentation\Framework\Data\ProcessorResolver\ArrayProcessorResolver;
-use Presentation\Framework\Data\ProcessorResolver\ProcessorResolverInterface;
+use ViewComponents\ViewComponents\Data\ProcessingService\ArrayProcessingService;
+use ViewComponents\ViewComponents\Data\ProcessorResolver\ArrayProcessorResolver;
+use ViewComponents\ViewComponents\Data\ProcessorResolver\ProcessorResolverInterface;
 
 class ArrayDataProvider extends AbstractDataProvider
 {
