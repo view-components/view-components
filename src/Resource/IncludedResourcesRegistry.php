@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Resource;
+namespace ViewComponents\ViewComponents\Resource;
 
 class IncludedResourcesRegistry
 {

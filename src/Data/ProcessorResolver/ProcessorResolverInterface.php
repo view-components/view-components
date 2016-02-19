@@ -1,8 +1,8 @@
 <?php
-namespace Presentation\Framework\Data\ProcessorResolver;
+namespace ViewComponents\ViewComponents\Data\ProcessorResolver;
 
-use Presentation\Framework\Data\Operation\OperationInterface;
-use Presentation\Framework\Data\Processor\ProcessorInterface;
+use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
+use ViewComponents\ViewComponents\Data\Processor\ProcessorInterface;
 
 interface ProcessorResolverInterface
 {

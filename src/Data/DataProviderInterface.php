@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Data;
+namespace ViewComponents\ViewComponents\Data;
 
 use Countable;
 use IteratorAggregate;

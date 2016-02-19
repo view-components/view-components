@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Customization\Bootstrap;
+namespace ViewComponents\ViewComponents\Customization\Bootstrap;
 
 
 class BootstrapStylingOptions

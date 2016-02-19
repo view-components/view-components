@@ -1,9 +1,9 @@
 <?php
-namespace Presentation\Framework\Data\Processor\PhpArray;
+namespace ViewComponents\ViewComponents\Data\Processor\PhpArray;
 
-use Presentation\Framework\Data\Operation\OperationInterface;
-use Presentation\Framework\Data\Operation\SortOperation;
-use Presentation\Framework\Data\Processor\ProcessorInterface;
+use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
+use ViewComponents\ViewComponents\Data\Operation\SortOperation;
+use ViewComponents\ViewComponents\Data\Processor\ProcessorInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class SortProcessor implements ProcessorInterface

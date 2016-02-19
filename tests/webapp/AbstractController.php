@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Demo;
+namespace ViewComponents\ViewComponents\Demo;
 
 use ReflectionClass;
 use ReflectionMethod;

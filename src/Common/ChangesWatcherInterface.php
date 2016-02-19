@@ -1,13 +1,13 @@
 <?php
 
-namespace Presentation\Framework\Common;
+namespace ViewComponents\ViewComponents\Common;
 
 /**
  * Interface ChangesWatcherInterface
  *
  * The interface describes objects that can track it's state changes.
  *
- * @package Presentation\Framework\Common
+ * @package ViewComponents\ViewComponents\Common
  */
 interface ChangesWatcherInterface
 {

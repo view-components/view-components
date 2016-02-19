@@ -1,8 +1,8 @@
 <?php
 
-namespace Presentation\Framework\Initialization;
+namespace ViewComponents\ViewComponents\Initialization;
 
-use Presentation\Framework\Base\ComponentInterface;
+use ViewComponents\ViewComponents\Base\ComponentInterface;
 
 interface InitializableInterface
 {

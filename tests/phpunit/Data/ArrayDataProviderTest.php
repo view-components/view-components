@@ -1,10 +1,9 @@
 <?php
-namespace Presentation\Framework\Test\Data;
+namespace ViewComponents\ViewComponents\Test\Data;
 
-use Presentation\Framework\Data\ArrayDataProvider;
-use Presentation\Framework\Data\Operation\FilterOperation;
-use Presentation\Framework\Data\Operation\SortOperation;
-use Presentation\Framework\Data\ArrayProcessingService;
+use ViewComponents\ViewComponents\Data\ArrayDataProvider;
+use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
+use ViewComponents\ViewComponents\Data\Operation\SortOperation;
 use PHPUnit_Framework_TestCase;
 
 class ArrayDataProviderTest extends PHPUnit_Framework_TestCase

@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Data\Operation;
+namespace ViewComponents\ViewComponents\Data\Operation;
 
 interface OperationInterface
 {

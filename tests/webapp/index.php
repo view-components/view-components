@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Demo;
+namespace ViewComponents\ViewComponents\Demo;
 
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;

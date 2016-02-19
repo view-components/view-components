@@ -1,12 +1,12 @@
 <?php
 
-namespace Presentation\Framework\Service;
+namespace ViewComponents\ViewComponents\Service;
 
-use Presentation\Framework\Service\Container\Adapter\Pimple3ContainerAdapter;
-use Presentation\Framework\Service\Container\Adapter\PimpleContainerAdapter;
-use Presentation\Framework\Service\Container\Container;
-use Presentation\Framework\Service\Container\WritableContainerInterface;
-use Presentation\Framework\Service\Exception\BootstrapException;
+use ViewComponents\ViewComponents\Service\Container\Adapter\Pimple3ContainerAdapter;
+use ViewComponents\ViewComponents\Service\Container\Adapter\PimpleContainerAdapter;
+use ViewComponents\ViewComponents\Service\Container\Container;
+use ViewComponents\ViewComponents\Service\Container\WritableContainerInterface;
+use ViewComponents\ViewComponents\Service\Exception\BootstrapException;
 
 /**
  * Bootstrapping of presentation framework DI.

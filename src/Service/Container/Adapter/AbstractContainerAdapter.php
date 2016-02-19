@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Service\Container\Adapter;
+namespace ViewComponents\ViewComponents\Service\Container\Adapter;
 
 
 abstract class AbstractContainerAdapter implements ContainerAdapterInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Service\Container\Exception;
+namespace ViewComponents\ViewComponents\Service\Container\Exception;
 
 use Interop\Container\Exception\ContainerException;
 use RuntimeException;

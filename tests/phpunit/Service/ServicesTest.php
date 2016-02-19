@@ -1,13 +1,13 @@
 <?php
 
-namespace Presentation\Framework\Test\Resource;
+namespace ViewComponents\ViewComponents\Test\Resource;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use Presentation\Framework\Rendering\RendererInterface;
-use Presentation\Framework\Resource\ResourceManager;
-use Presentation\Framework\Service\ServiceName;
-use Presentation\Framework\Service\Services;
+use ViewComponents\ViewComponents\Rendering\RendererInterface;
+use ViewComponents\ViewComponents\Resource\ResourceManager;
+use ViewComponents\ViewComponents\Service\ServiceName;
+use ViewComponents\ViewComponents\Service\Services;
 
 class ServicesTest extends PHPUnit_Framework_TestCase
 {

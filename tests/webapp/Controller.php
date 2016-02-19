@@ -1,33 +1,32 @@
 <?php
-namespace Presentation\Framework\Demo;
+namespace ViewComponents\ViewComponents\Demo;
 
-use Presentation\Framework\Component\CompoundComponent;
-use Presentation\Framework\Component\CompoundContainer;
-use Presentation\Framework\Component\ManagedList\Control\PageSizeSelectControl;
-use Presentation\Framework\Component\ManagedList\Control\SortingSelectControl;
-use Presentation\Framework\Component\TemplateView;
-use Presentation\Framework\Component\ManagedList\Control\ControlInterface;
-use Presentation\Framework\Input\InputOption;
-use Presentation\Framework\Input\InputSource;
-use Presentation\Framework\Component\Container;
-use Presentation\Framework\Component\ManagedList\Control\FilterControl;
-use Presentation\Framework\Component\ManagedList\Control\PaginationControl;
-use Presentation\Framework\Component\ManagedList\ManagedList;
-use Presentation\Framework\Component\Debug\SymfonyVarDump;
-use Presentation\Framework\Component\Html\Tag;
-use Presentation\Framework\Data\ArrayDataProvider;
-use Presentation\Framework\Data\DbTableDataProvider;
-use Presentation\Framework\Data\Operation\FilterOperation;
-use Presentation\Framework\Data\Operation\SortOperation;
-use Presentation\Framework\HtmlBuilder;
-use Presentation\Framework\Component\Repeater;
-use Presentation\Framework\Component\Text;
-use Presentation\Framework\Demo\Components\PersonView;
-use Presentation\Framework\Rendering\SimpleRenderer;
-use Presentation\Framework\Resource\AliasRegistry;
-use Presentation\Framework\Resource\IncludedResourcesRegistry;
-use Presentation\Framework\Resource\ResourceManager;
-use Presentation\Framework\Customization\Bootstrap\BootstrapStyling;
+use ViewComponents\ViewComponents\Component\CollectionView;
+use ViewComponents\ViewComponents\Component\Compound;
+use ViewComponents\ViewComponents\Component\CompoundPart;
+use ViewComponents\ViewComponents\Component\Control\FilterControl;
+use ViewComponents\ViewComponents\Component\Control\PageSizeSelectControl;
+use ViewComponents\ViewComponents\Component\Control\SortingSelectControl;
+use ViewComponents\ViewComponents\Component\DataView;
+use ViewComponents\ViewComponents\Component\Control\PaginationControl;
+use ViewComponents\ViewComponents\Component\TemplateView;
+use ViewComponents\ViewComponents\Input\InputOption;
+use ViewComponents\ViewComponents\Input\InputSource;
+use ViewComponents\ViewComponents\Component\Container;
+use ViewComponents\ViewComponents\Component\ManagedList;
+use ViewComponents\ViewComponents\Component\Debug\SymfonyVarDump;
+use ViewComponents\ViewComponents\Component\Html\Tag;
+use ViewComponents\ViewComponents\Data\ArrayDataProvider;
+use ViewComponents\ViewComponents\Data\DbTableDataProvider;
+use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
+use ViewComponents\ViewComponents\Data\Operation\SortOperation;
+use ViewComponents\ViewComponents\Demo\Components\PersonView;
+use ViewComponents\ViewComponents\Rendering\SimpleRenderer;
+use ViewComponents\ViewComponents\Resource\AliasRegistry;
+use ViewComponents\ViewComponents\Resource\IncludedResourcesRegistry;
+use ViewComponents\ViewComponents\Resource\ResourceManager;
+use ViewComponents\ViewComponents\Customization\Bootstrap\BootstrapStyling;
+use ViewComponents\ViewComponents\Service\Services;
 
 class Controller extends AbstractController
 {
@@ -76,7 +75,7 @@ class Controller extends AbstractController
     }
 
     /**
-     * Basic usage of Repeater component.
+     * Basic usage of CollectionView component.
      *
      * @return string
      */
@@ -84,8 +83,8 @@ class Controller extends AbstractController
     {
         $data = $this->getUsersData();
         $view = new Container([
-            new Text('<h1>Users List</h1>'),
-            new Repeater($data, [new PersonView])
+            new DataView('<h1>Users List</h1>'),
+            new CollectionView($data, [new PersonView])
         ]);
         return $this->renderMenu() . $view->render();
     }
@@ -97,12 +96,12 @@ class Controller extends AbstractController
      */
     public function demo2()
     {
-        $html = new HtmlBuilder(new ResourceManager(new AliasRegistry(), new AliasRegistry(), new IncludedResourcesRegistry()));
+        $html = Services::htmlBuilder();
         $data = $this->getUsersData();
         $view = new Container([
             $html->h1('Users List'),
             $html->hr(),
-            new Repeater($data, [new PersonView]),
+            new CollectionView($data, [new PersonView]),
             $html->hr(),
             $html->div('Footer')
         ]);
@@ -119,8 +118,8 @@ class Controller extends AbstractController
         $data = $this->getUsersData();
 
         $view = new Container([
-            new Text('<h1>Users List</h1>'),
-            new Repeater(
+            new DataView('<h1>Users List</h1>'),
+            new CollectionView(
                 new ArrayDataProvider(
                     $data,
                     [new SortOperation('name')]
@@ -151,68 +150,24 @@ class Controller extends AbstractController
         );
 
         $view = new Container([
-            new Text('<h1>Users List</h1>'),
-            new Tag('form', null, [
+            new DataView('<h1>Users List</h1>'),
+            new Tag('form', [], [
                 $filter1,
                 $filter2,
                 new Tag('button', ['type' => 'submit'], [
-                    new Text('Filter')
+                    new DataView('Filter')
                 ]),
             ]),
-            new Repeater(
-                $provider,
-                [new PersonView])
-        ]);
-
-        $provider->operations()->add($filter1->getOperation());
-        $provider->operations()->add($filter2->getOperation());
-
-        return $this->renderMenu() . $view->render();
-    }
-
-
-    /**
-     * Filtering controls + ListManager
-     *
-     * @return string
-     */
-    public function demo4_1()
-    {
-        $provider = $this->getDataProvider([SortOperation::asc('name')]);
-
-        $filter1 = new FilterControl(
-            'name',
-            FilterOperation::OPERATOR_EQ,
-            new InputOption('name_filter', $_GET)
-        );
-        $filter2 = new FilterControl(
-            'role',
-            FilterOperation::OPERATOR_EQ,
-            new InputOption('role_filter', $_GET)
-        );
-
-        /** @var ControlInterface $control */
-        foreach([$filter1, $filter2] as $control) {
-            $provider->operations()->add($control->getOperation());
-        }
-
-        $view = new Container([
-            new Text('<h1>Users List</h1>'),
-            new Tag('form', null, [
-                $filter1,
-                $filter2,
-                new Tag('button', ['type' => 'submit'], [
-                    new Text('Filter')
-                ]),
-            ]),
-            $repeater = new Repeater(
+            new CollectionView(
                 $provider,
                 [new PersonView]
             )
         ]);
-
+        $provider->operations()->add($filter1->getOperation());
+        $provider->operations()->add($filter2->getOperation());
         return $this->renderMenu() . $view->render();
     }
+
 
     /**
      * Filtering controls in managed list
@@ -222,41 +177,19 @@ class Controller extends AbstractController
     public function demo4_2()
     {
         $provider = $this->getDataProvider();
-        $list = new ManagedList(
-            $provider,
-            new SymfonyVarDump
-        );
-        $list->addChildren(
-            [
-                new FilterControl(
-                    'name',
-                    FilterOperation::OPERATOR_EQ,
-                    new InputOption('name_filter', $_GET)
-                ),
-                new FilterControl(
-                    'role',
-                    FilterOperation::OPERATOR_EQ,
-                    new InputOption('role_filter', $_GET)
-                ),
-                new PaginationControl(
-                    new InputOption('p', $_GET, 1),
-                    5,
-                    $provider
-                ),
-                new PageSizeSelectControl(new InputOption('page_size', $_GET, 5), [2,5,10]),
-                new SortingSelectControl(
-                    [
-                        null => 'None',
-                        'id' => 'ID',
-                        'name' => 'Name',
-                        'role' => 'Role',
-                        'birthday' => 'Birthday',
-                    ],
-                    new InputOption('sort_field', $_GET),
-                    new InputOption('sort_direction', $_GET)
-                )
-            ]
-        );
+        $list = new ManagedList($provider, [
+            new ManagedList\RecordView(new SymfonyVarDump()),
+            new FilterControl(
+                'name',
+                FilterOperation::OPERATOR_EQ,
+                new InputOption('name_filter', $_GET)
+            ),
+            new FilterControl(
+                'role',
+                FilterOperation::OPERATOR_EQ,
+                new InputOption('role_filter', $_GET)
+            ),
+        ]);
         return $this->renderMenu() . $list->render();
     }
 
@@ -271,8 +204,8 @@ class Controller extends AbstractController
         $input = new InputSource($_GET);
         $list = new ManagedList(
             $provider,
-            new SymfonyVarDump,
             [
+                new ManagedList\RecordView(new SymfonyVarDump()),
                 new FilterControl(
                     'name',
                     FilterOperation::OPERATOR_EQ,
@@ -294,12 +227,8 @@ class Controller extends AbstractController
                     $input('sort_field'),
                     $input('sort_dir')
                 ),
-                new PaginationControl(
-                    $input('page', 1),
-                    10,
-                    $provider
-                ),
-                new PageSizeSelectControl($input('page_size', 5), [2,5,10]),
+                new PaginationControl($input('page', 1), 5),
+                new PageSizeSelectControl($input('page_size', 5), [2, 5, 10]),
             ]
         );
 
@@ -327,68 +256,34 @@ class Controller extends AbstractController
                 )
             ]
         );
-        $list->setTitle(new Text('<h2>List with title & without submit button</h2>'));
         $styling = new BootstrapStyling($this->getResourceManager());
-        $styling->apply($list);
+        $styling->apply($list, $list->getComponent('container'));
         return $this->renderMenu() . $list->render();
     }
 
     public function demo5()
     {
-        $compound = new CompoundComponent(
-            [
-                'panel' => [
-                    'header',
-                    'body',
-                    'footer'
-                ]
-            ],
-            [
-                'panel' => $panel = new Tag('div', ['class' => 'panel panel-success']),
-                'header' => $header = new Tag('div', ['class' => 'panel-heading']),
-                'body' => $body = new Tag('div', ['class' => 'panel-body']),
-                'footer' => $footer = new Tag('div', ['class' => 'panel-footer']),
-            ]
-        );
-        $header->addChild(new Text('<b>Panel Header</b>'));
-        $body->addChild(new Text('Panel Body'));
-        $footer->addChild(new Text('Panel Footer'));
+        $panel = new Tag('div', ['class' => 'panel panel-success']);
+        $header = new Tag('div', ['class' => 'panel-heading']);
+        $body = new Tag('div', ['class' => 'panel-body']);
+        $footer = new Tag('div', ['class' => 'panel-footer']);
+        $compound = new Compound([
+            (new CompoundPart($panel))->setId('panel'),
+            (new CompoundPart($header))->setId('header')->setDestinationParentId('panel'),
+            (new CompoundPart($body))->setId('body')->setDestinationParentId('panel'),
+            (new CompoundPart($footer))->setId('footer')->setDestinationParentId('panel'),
+        ]);
+
+        $header->addChild(new DataView('<b>Panel Header</b>'));
+        $body->addChild(new DataView('Panel Body'));
+        $footer->addChild(new DataView('Panel Footer'));
 
         $container = new Tag('div', ['class' => 'container'], [$compound]);
         $styling = new BootstrapStyling($this->getResourceManager());
         $styling->apply($container);
+        $compound->addChild(new DataView('Text added after footer'));
 
         return $this->renderMenu() . $container->render();
-    }
-
-    public function demo6()
-    {
-        $compound = new CompoundContainer(
-            [
-                'panel' => [
-                    'header',
-                    'body',
-                    'footer'
-                ]
-            ],
-            [
-                'panel' => $panel = new Tag('div', ['class' => 'panel panel-success']),
-                'header' => $header = new Tag('div', ['class' => 'panel-heading']),
-                'body' => $body = new Tag('div', ['class' => 'panel-body']),
-                'footer' => $footer = new Tag('div', ['class' => 'panel-footer']),
-            ],
-            'body'
-        );
-        $header->addChild(new Text('<b>Panel Header</b>'));
-        $body->addChild(new Text('Panel Body'));
-        $footer->addChild(new Text('Panel Footer'));
-        $styling = new BootstrapStyling($this->getResourceManager());
-        $styling->apply($compound);
-
-        $compound->addChild(new Text('<br>Text 1 added as child of compound container'));
-        (new Text('<br>Text 2 added as child of compound container'))->attachTo($compound);
-
-        return $this->renderMenu() . $compound->render();
     }
 
     /**

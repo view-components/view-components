@@ -1,7 +1,10 @@
 <?php
-namespace Presentation\Framework\Component\Debug;
+namespace ViewComponents\ViewComponents\Component\Debug;
 
-use Presentation\Framework\Base\AbstractDataView;
+use Nayjest\Tree\ChildNodeTrait;
+use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
+use ViewComponents\ViewComponents\Common\HasDataTrait;
+use ViewComponents\ViewComponents\Rendering\ViewTrait;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\HtmlDumper;
@@ -12,14 +15,18 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
  * The component displays custom data using Symfony VarDumper.
  *
  */
-class SymfonyVarDump extends AbstractDataView
+class SymfonyVarDump implements DataViewComponentInterface
 {
-    public function renderData()
+    use ChildNodeTrait;
+    use ViewTrait;
+    use HasDataTrait;
+
+    public function render()
     {
         $cloner = new VarCloner();
         $dumper = ('cli' === PHP_SAPI ? new CliDumper : new HtmlDumper);
         $output = fopen('php://memory', 'r+b');
-        $dumper->dump($cloner->cloneVar($this->data), $output);
+        $dumper->dump($cloner->cloneVar($this->getData()), $output);
         return stream_get_contents($output, -1, 0);
     }
 }

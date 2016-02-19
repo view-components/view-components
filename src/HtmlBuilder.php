@@ -1,11 +1,10 @@
 <?php
-namespace Presentation\Framework;
+namespace ViewComponents\ViewComponents;
 
-use Presentation\Framework\Base\ComponentInterface;
-use Presentation\Framework\Component\Html\A;
-use Presentation\Framework\Component\Html\Tag;
-use Presentation\Framework\Component\Text;
-use Presentation\Framework\Resource\ResourceManager;
+use ViewComponents\ViewComponents\Base\ComponentInterface;
+use ViewComponents\ViewComponents\Component\DataView;
+use ViewComponents\ViewComponents\Component\Html\Tag;
+use ViewComponents\ViewComponents\Resource\ResourceManager;
 
 class HtmlBuilder
 {
@@ -18,7 +17,7 @@ class HtmlBuilder
 
     public function a($href = '#', $text = '')
     {
-        return new A(compact('href'), [new Text($text)]);
+        return new Tag('a', compact('href'), [new DataView($text)]);
     }
 
     public function js($src)
@@ -40,7 +39,7 @@ class HtmlBuilder
     public function tag($name, $content = [], $attributes = [])
     {
         if (is_string($content)) {
-            $content = [new Text($content)];
+            $content = [new DataView($content)];
         }
         return new Tag($name, $attributes, $content);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Demo;
+namespace ViewComponents\ViewComponents\Demo;
 
 function create_env_file()
 {

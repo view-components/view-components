@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Service;
+namespace ViewComponents\ViewComponents\Service;
 
 /**
  * Class ServiceName contains names(IDs) of presentation framework services inside service container.
@@ -9,7 +9,7 @@ namespace Presentation\Framework\Service;
  *
  * Note that further changing of service names(IDs) is possible in case of conflicts with another services inside
  * 3rd-party service container shared to presentation framework
- * (@see \Presentation\Framework\Service\Bootstrap::useContainer())
+ * (@see \ViewComponents\ViewComponents\Service\Bootstrap::useContainer())
  */
 class ServiceName
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Presentation\Framework\Service;
+namespace ViewComponents\ViewComponents\Service;
 
-use Presentation\Framework\Service\Container\WritableContainerInterface;
+use ViewComponents\ViewComponents\Service\Container\WritableContainerInterface;
 
 /**
  * Service provider interface.

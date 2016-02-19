@@ -1,32 +1,39 @@
 <?php
-namespace Presentation\Framework\Component;
 
-use Presentation\Framework\Base\AbstractDataView;
+namespace ViewComponents\ViewComponents\Component;
 
-class Json extends AbstractDataView
+use Nayjest\Tree\ChildNodeTrait;
+use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
+use ViewComponents\ViewComponents\Common\HasDataTrait;
+use ViewComponents\ViewComponents\Rendering\ViewTrait;
+
+class Json implements DataViewComponentInterface
 {
-    protected $options = JSON_PRETTY_PRINT;
+    use ChildNodeTrait;
+    use ViewTrait;
+    use HasDataTrait;
+    protected $options;
 
     /**
-     * @param mixed $data
-     * @param int $options
+     * @param $data
+     * @param int|null $options
      */
     public function __construct(
         $data = null,
         $options = JSON_PRETTY_PRINT
     )
     {
+        $this->setData($data);
         $this->options = $options;
-        parent::__construct($data);
     }
 
-    public function renderData()
+    public function render()
     {
-        return json_encode($this->data, $this->options);
+        return json_encode($this->getData(), $this->options);
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getOptions()
     {
@@ -34,7 +41,7 @@ class Json extends AbstractDataView
     }
 
     /**
-     * @param $options
+     * @param int $options
      * @return $this
      */
     public function setOptions($options)

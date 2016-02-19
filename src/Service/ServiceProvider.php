@@ -1,14 +1,14 @@
 <?php
 
-namespace Presentation\Framework\Service;
+namespace ViewComponents\ViewComponents\Service;
 
 use Interop\Container\ContainerInterface;
-use Presentation\Framework\HtmlBuilder;
-use Presentation\Framework\Rendering\SimpleRenderer;
-use Presentation\Framework\Resource\AliasRegistry;
-use Presentation\Framework\Resource\IncludedResourcesRegistry;
-use Presentation\Framework\Resource\ResourceManager;
-use Presentation\Framework\Service\Container\WritableContainerInterface;
+use ViewComponents\ViewComponents\HtmlBuilder;
+use ViewComponents\ViewComponents\Rendering\SimpleRenderer;
+use ViewComponents\ViewComponents\Resource\AliasRegistry;
+use ViewComponents\ViewComponents\Resource\IncludedResourcesRegistry;
+use ViewComponents\ViewComponents\Resource\ResourceManager;
+use ViewComponents\ViewComponents\Service\Container\WritableContainerInterface;
 use Symfony\Component\Yaml\Exception\RuntimeException;
 
 /**

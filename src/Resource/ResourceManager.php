@@ -1,10 +1,9 @@
 <?php
-namespace Presentation\Framework\Resource;
+namespace ViewComponents\ViewComponents\Resource;
 
 use InvalidArgumentException;
-use Presentation\Framework\Component\Dummy;
-use Presentation\Framework\Component\Html\Script;
-use Presentation\Framework\Component\Html\Tag;
+use ViewComponents\ViewComponents\Component\DataView;
+use ViewComponents\ViewComponents\Component\Html\Tag;
 
 class ResourceManager
 {
@@ -51,7 +50,7 @@ class ResourceManager
 
     /**
      * @param string $name script URL or alias
-     * @return Dummy|Tag
+     * @return Tag
      */
     public function js($name)
     {
@@ -68,16 +67,16 @@ class ResourceManager
         if (!$this->included->isIncluded($url)) {
             $this->included->markAsIncluded($url);
             $type = 'text/javascript';
-            return new Script(['src' => $url, 'type' => $type]);
+            return new Tag('script', ['src' => $url, 'type' => $type]);
         } else {
-            return Dummy::getInstance();
+            return new DataView();
         }
     }
 
     /**
      * @param string $name CSS URL or alias
      * @param array $attributes
-     * @return Dummy|Tag
+     * @return Tag
      */
     public function css($name, array $attributes = [])
     {
@@ -100,7 +99,7 @@ class ResourceManager
                 'media' => 'all'
             ], $attributes));
         } else {
-            return Dummy::getInstance();
+            return new DataView();
         }
     }
 }

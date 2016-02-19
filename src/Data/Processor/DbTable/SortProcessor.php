@@ -1,11 +1,11 @@
 <?php
 
-namespace Presentation\Framework\Data\Processor\DbTable;
+namespace ViewComponents\ViewComponents\Data\Processor\DbTable;
 
-use Presentation\Framework\Data\DbTable\Query;
-use Presentation\Framework\Data\Operation\OperationInterface;
-use Presentation\Framework\Data\Operation\SortOperation;
-use Presentation\Framework\Data\Processor\ProcessorInterface;
+use ViewComponents\ViewComponents\Data\DbTable\Query;
+use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
+use ViewComponents\ViewComponents\Data\Operation\SortOperation;
+use ViewComponents\ViewComponents\Data\Processor\ProcessorInterface;
 
 class SortProcessor implements ProcessorInterface
 {

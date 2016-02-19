@@ -1,71 +1,36 @@
 <?php
 
-namespace Presentation\Framework\Component;
+namespace ViewComponents\ViewComponents\Component;
 
-use Nayjest\Tree\NodeTrait;
-use Presentation\Framework\Base\ComponentInterface;
-use Presentation\Framework\Base\ComponentTrait;
-use Presentation\Framework\Data\DataAcceptorInterface;
-use Presentation\Framework\Rendering\RendererInterface;
-use Presentation\Framework\Rendering\ViewTrait;
-use Presentation\Framework\Service\Services;
+use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
+use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
+use ViewComponents\ViewComponents\Base\ViewComponentInterface;
+use ViewComponents\ViewComponents\Common\HasDataTrait;
+use ViewComponents\ViewComponents\Rendering\RendererInterface;
+use ViewComponents\ViewComponents\Service\Services;
+use RuntimeException;
 
-class TemplateView implements ComponentInterface, DataAcceptorInterface
+class TemplateView implements ViewComponentInterface, DataViewComponentInterface
 {
-    use NodeTrait;
-    use ComponentTrait {
-        ComponentTrait::render as private internalRender;
-        ComponentTrait::renderChildren as private renderChildrenInternal;
-    }
-    use ViewTrait;
+    use HasDataTrait;
+    use ContainerComponentTrait;
 
-    /**
-     * @var RendererInterface
-     */
-    protected $renderer;
-    /**
-     * @var
-     */
-    protected $templateName;
-    /**
-     * @var
-     */
-    protected $data;
+    /** @var  string */
+    private $templateName;
 
-    private $wasChildrenRendered = false;
+    /** @var  RendererInterface */
+    private $renderer;
 
-    /**
-     * TemplateView constructor.
-     *
-     * @param string $templateName
-     * @param array $viewData
-     * @param RendererInterface|null $renderer
-     */
-    public function __construct($templateName = '', $viewData = [], RendererInterface $renderer = null)
+    public function __construct($templateName, array $data = null, RendererInterface $renderer = null)
     {
-        $this->renderer = $renderer;
+        $this->setData($data ?: []);
         $this->templateName = $templateName;
-        $this->data = $viewData;
+        $this->setRenderer($renderer);
     }
 
     public function render()
     {
-        $this->emit('render', [$this]);
-        if (!$this->isVisible()) {
-            return '';
-        }
-        $this->wasChildrenRendered = false;
-        if (!$this->renderer) {
-            $this->setRenderer(Services::renderer());
-        }
-        $output = $this->renderer->render(
-            $this->templateName,
-            array_merge($this->data, ['this' => $this])
-        );
-        if (!$this->wasChildrenRendered) {
-            $output .= $this->renderChildren();
-        }
-        return $output;
+        return $this->getRenderer()->render($this->templateName, $this->getPreparedData());
     }
 
     /**
@@ -73,52 +38,49 @@ class TemplateView implements ComponentInterface, DataAcceptorInterface
      */
     public function getRenderer()
     {
+        if ($this->renderer === null) {
+            $this->renderer = Services::renderer();
+        }
         return $this->renderer;
     }
 
     /**
      * @param RendererInterface $renderer
+     * @return $this
      */
-    public function setRenderer($renderer)
+    public function setRenderer(RendererInterface $renderer = null)
     {
         $this->renderer = $renderer;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTemplateName()
     {
         return $this->templateName;
     }
 
+
     /**
-     * @param mixed $templateName
+     * @param string $templateName
+     * @return $this
      */
     public function setTemplateName($templateName)
     {
         $this->templateName = $templateName;
+        return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
 
-    /**
-     * @param mixed $data
-     */
-    public function setData($data)
+    private function getPreparedData()
     {
-        $this->data = $data;
-    }
-
-    public function renderChildren()
-    {
-        $this->wasChildrenRendered = true;
-        return $this->renderChildrenInternal();
+        $data = $this->getData();
+        if (array_key_exists('component', $data)) {
+            throw new RuntimeException('Usage of reserved \'component\' key in view data');
+        }
+        $data['component'] = $this;
+        return $data;
     }
 }

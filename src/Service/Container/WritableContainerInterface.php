@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Service\Container;
+namespace ViewComponents\ViewComponents\Service\Container;
 
 use Interop\Container\ContainerInterface;
 

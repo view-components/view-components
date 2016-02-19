@@ -1,9 +1,9 @@
 <?php
 
-namespace Presentation\Framework\Data\ProcessingService;
+namespace ViewComponents\ViewComponents\Data\ProcessingService;
 
-use Presentation\Framework\Data\OperationsCollection;
-use Presentation\Framework\Data\ProcessorResolver\ProcessorResolverInterface;
+use ViewComponents\ViewComponents\Data\OperationCollection;
+use ViewComponents\ViewComponents\Data\ProcessorResolver\ProcessorResolverInterface;
 use Traversable;
 
 abstract class AbstractProcessingService implements ProcessingServiceInterface
@@ -41,7 +41,7 @@ abstract class AbstractProcessingService implements ProcessingServiceInterface
      */
     public function __construct(
         ProcessorResolverInterface $processorResolver,
-        OperationsCollection $operations,
+        OperationCollection $operations,
         $dataSource
     )
     {

@@ -1,9 +1,9 @@
 <?php
-namespace Presentation\Framework\Test\Input;
+namespace ViewComponents\ViewComponents\Test\Input;
 
 
 use PHPUnit_Framework_TestCase;
-use Presentation\Framework\Input\InputOption;
+use ViewComponents\ViewComponents\Input\InputOption;
 
 class InputOptionTest extends PHPUnit_Framework_TestCase
 {

@@ -1,9 +1,9 @@
 <?php
-namespace Presentation\Framework\Data\Processor\PhpArray;
+namespace ViewComponents\ViewComponents\Data\Processor\PhpArray;
 
-use Presentation\Framework\Data\Operation\OperationInterface;
-use Presentation\Framework\Data\Operation\PaginateOperation;
-use Presentation\Framework\Data\Processor\AbstractPaginateProcessor;
+use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
+use ViewComponents\ViewComponents\Data\Operation\PaginateOperation;
+use ViewComponents\ViewComponents\Data\Processor\AbstractPaginateProcessor;
 
 class PaginateProcessor extends AbstractPaginateProcessor
 {

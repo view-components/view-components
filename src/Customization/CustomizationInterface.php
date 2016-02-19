@@ -1,8 +1,8 @@
 <?php
 
-namespace Presentation\Framework\Customization;
+namespace ViewComponents\ViewComponents\Customization;
 
-use Presentation\Framework\Base\ComponentInterface;
+use ViewComponents\ViewComponents\Base\ComponentInterface;
 
 /**
  * Interface CustomizationInterface.

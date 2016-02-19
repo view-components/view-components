@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Data;
+namespace ViewComponents\ViewComponents\Data;
 
 interface DataAcceptorInterface
 {

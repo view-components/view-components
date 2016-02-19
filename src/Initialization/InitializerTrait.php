@@ -1,6 +1,6 @@
 <?php
 
-namespace Presentation\Framework\Initialization;
+namespace ViewComponents\ViewComponents\Initialization;
 
 use Nayjest\Tree\Utils;
 

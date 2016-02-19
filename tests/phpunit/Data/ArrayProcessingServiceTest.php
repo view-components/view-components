@@ -1,18 +1,17 @@
 <?php
 
-namespace Presentation\Framework\Test\Data;
+namespace ViewComponents\ViewComponents\Test\Data;
 
-use Presentation\Framework\Data\OperationsCollection;
-use Presentation\Framework\Data\ProcessingService\ArrayProcessingService;
-use Presentation\Framework\Data\ProcessorResolver\ArrayProcessorResolver;
-use PHPUnit_Framework_TestCase;
+use ViewComponents\ViewComponents\Data\OperationCollection;
+use ViewComponents\ViewComponents\Data\ProcessingService\ArrayProcessingService;
+use ViewComponents\ViewComponents\Data\ProcessorResolver\ArrayProcessorResolver;
 
 class ArrayProcessingServiceTest extends AbstractProcessingServiceTest
 {
     public function setUp()
     {
         $this->data = include FIXTURES_DIR . '/users.php';
-        $this->operations = new OperationsCollection();
+        $this->operations = new OperationCollection();
         $this->service = new ArrayProcessingService(
             new ArrayProcessorResolver(),
             $this->operations,

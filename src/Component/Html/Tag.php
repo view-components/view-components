@@ -1,24 +1,19 @@
 <?php
-namespace Presentation\Framework\Component\Html;
+namespace ViewComponents\ViewComponents\Component\Html;
 
-use Nayjest\Tree\NodeTrait;
-use Presentation\Framework\Base\ComponentInterface;
-use Presentation\Framework\Base\DecoratedContainerTrait;
-use Presentation\Framework\Base\Html\TagInterface;
-use Presentation\Framework\Base\Html\TagTrait;
-use Presentation\Framework\Rendering\ViewTrait;
+
+use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
+use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
+use ViewComponents\ViewComponents\Base\Html\TagInterface;
+use ViewComponents\ViewComponents\Base\Html\TagTrait;
 use Traversable;
 
-class Tag implements ComponentInterface, TagInterface
+class Tag implements ContainerComponentInterface, TagInterface
 {
-    use ViewTrait;
-    use NodeTrait;
-    use DecoratedContainerTrait;
+    use ContainerComponentTrait;
     use TagTrait;
 
-    const DEFAULT_TAG_NAME = 'div';
-
-    protected $tagName;
+    private $tagName;
 
     /**
      * @param string|null $tagName
@@ -26,20 +21,14 @@ class Tag implements ComponentInterface, TagInterface
      * @param array|Traversable|null $components
      */
     public function __construct(
-        $tagName = null,
-        array $attributes = null,
-        $components = null
+        $tagName = 'div',
+        array $attributes = [],
+        $components = []
     )
     {
-        if ($tagName !== null) {
-            $this->setTagName($tagName);
-        }
-        if ($attributes !== null) {
-            $this->setAttributes($attributes);
-        }
-        if ($components !== null) {
-            $this->children()->set($components);
-        }
+        $this->setTagName($tagName);
+        $this->setAttributes($attributes);
+        $this->children()->set($components);
     }
 
     /**
@@ -61,6 +50,11 @@ class Tag implements ComponentInterface, TagInterface
      */
     public function getTagName()
     {
-        return $this->tagName ?: static::DEFAULT_TAG_NAME;
+        return $this->tagName;
+    }
+
+    public function render()
+    {
+        return $this->renderOpening() . $this->renderChildren() . $this->renderClosing();
     }
 }

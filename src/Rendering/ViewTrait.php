@@ -1,12 +1,12 @@
 <?php
-namespace Presentation\Framework\Rendering;
+namespace ViewComponents\ViewComponents\Rendering;
 
 
 trait ViewTrait
 {
     abstract public function render();
 
-    public function __toString()
+    final public function __toString()
     {
         return $this->render();
     }

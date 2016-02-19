@@ -1,5 +1,5 @@
 <?php
-namespace Presentation\Framework\Service\Exception;
+namespace ViewComponents\ViewComponents\Service\Exception;
 
 use RuntimeException;
 
