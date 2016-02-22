@@ -8,7 +8,7 @@ use IteratorAggregate;
 interface DataProviderInterface extends IteratorAggregate, Countable
 {
     /**
-     * @return OperationsCollection
+     * @return OperationCollection
      */
     public function operations();
 }
