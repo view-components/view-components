@@ -2,7 +2,7 @@
 
 namespace ViewComponents\ViewComponents\Component\Control;
 
-use ViewComponents\ViewComponents\Component\CompoundPart;
+use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Component\Compound;
 use ViewComponents\ViewComponents\Component\Control\View\PaginationControlView;
@@ -16,7 +16,7 @@ use RuntimeException;
 /**
  * Class PaginationControl
  */
-class PaginationControl extends CompoundPart implements ControlInterface
+class PaginationControl extends Part implements ControlInterface
 {
     /**
      * @var InputOption

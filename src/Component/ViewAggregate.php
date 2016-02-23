@@ -41,8 +41,8 @@ class ViewAggregate implements ContainerComponentInterface
         if ($view === $this->view) {
             return $this;
         }
-        $this->view && $this->view->unlock()->detach();
-        $view && $view->attachTo($this)->lock();
+        $this->view && $this->view->detach();
+        $view && $view->attachTo($this);
         $this->view = $view;
         return $this;
     }

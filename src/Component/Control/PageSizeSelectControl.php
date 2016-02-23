@@ -3,7 +3,7 @@
 namespace ViewComponents\ViewComponents\Component\Control;
 
 use Nayjest\Tree\Utils;
-use ViewComponents\ViewComponents\Component\CompoundPart;
+use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Component\Compound;
 use ViewComponents\ViewComponents\Component\TemplateView;
@@ -13,7 +13,7 @@ use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
 use ViewComponents\ViewComponents\Input\InputOption;
 
 
-class PageSizeSelectControl extends CompoundPart implements ControlInterface
+class PageSizeSelectControl extends Part implements ControlInterface
 {
 
     /** @var int[] */

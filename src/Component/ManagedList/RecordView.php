@@ -2,10 +2,10 @@
 
 namespace ViewComponents\ViewComponents\Component\ManagedList;
 
-use ViewComponents\ViewComponents\Component\CompoundPart;
 use ViewComponents\ViewComponents\Base\ViewComponentInterface;
+use ViewComponents\ViewComponents\Component\Part;
 
-class RecordView extends CompoundPart
+class RecordView extends Part
 {
     const ID = 'record_view';
     public function __construct(ViewComponentInterface $view)

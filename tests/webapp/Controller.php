@@ -3,12 +3,14 @@ namespace ViewComponents\ViewComponents\Demo;
 
 use ViewComponents\ViewComponents\Component\CollectionView;
 use ViewComponents\ViewComponents\Component\Compound;
-use ViewComponents\ViewComponents\Component\CompoundPart;
+use ViewComponents\ViewComponents\Component\AbstractPart;
 use ViewComponents\ViewComponents\Component\Control\FilterControl;
 use ViewComponents\ViewComponents\Component\Control\PageSizeSelectControl;
 use ViewComponents\ViewComponents\Component\Control\SortingSelectControl;
 use ViewComponents\ViewComponents\Component\DataView;
 use ViewComponents\ViewComponents\Component\Control\PaginationControl;
+use ViewComponents\ViewComponents\Component\ManagedList\RecordView;
+use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Component\TemplateView;
 use ViewComponents\ViewComponents\Input\InputOption;
 use ViewComponents\ViewComponents\Input\InputSource;
@@ -69,7 +71,7 @@ class Controller extends AbstractController
     {
         $out = '';
         $out .= $this->renderMenu();
-        $out .= '<h1>Presentation/Framework Test Application</h1><h2>Index Page</h2>';
+        $out .= '<h1>ViewComponents Test Application</h1><h2>Index Page</h2>';
 
         return $out;
     }
@@ -134,7 +136,7 @@ class Controller extends AbstractController
      *
      * @return string
      */
-    public function demo4()
+    public function demo4_1()
     {
         $provider = $this->getDataProvider([SortOperation::asc('name')]);
 
@@ -178,7 +180,7 @@ class Controller extends AbstractController
     {
         $provider = $this->getDataProvider();
         $list = new ManagedList($provider, [
-            new ManagedList\RecordView(new SymfonyVarDump()),
+            new RecordView(new SymfonyVarDump()),
             new FilterControl(
                 'name',
                 FilterOperation::OPERATOR_EQ,
@@ -205,7 +207,7 @@ class Controller extends AbstractController
         $list = new ManagedList(
             $provider,
             [
-                new ManagedList\RecordView(new SymfonyVarDump()),
+                new RecordView(new SymfonyVarDump()),
                 new FilterControl(
                     'name',
                     FilterOperation::OPERATOR_EQ,
@@ -239,6 +241,7 @@ class Controller extends AbstractController
     }
 
     /**
+     * Hiding submit button automatically
      * @return string
      */
     public function demo4_4()
@@ -247,8 +250,8 @@ class Controller extends AbstractController
         $input = new InputSource($_GET);
         $list = new ManagedList(
             $provider,
-            new SymfonyVarDump,
             [
+                new RecordView(new SymfonyVarDump),
                 new PaginationControl(
                     $input('page', 1),
                     10,
@@ -268,10 +271,10 @@ class Controller extends AbstractController
         $body = new Tag('div', ['class' => 'panel-body']);
         $footer = new Tag('div', ['class' => 'panel-footer']);
         $compound = new Compound([
-            (new CompoundPart($panel))->setId('panel'),
-            (new CompoundPart($header))->setId('header')->setDestinationParentId('panel'),
-            (new CompoundPart($body))->setId('body')->setDestinationParentId('panel'),
-            (new CompoundPart($footer))->setId('footer')->setDestinationParentId('panel'),
+            (new Part($panel))->setId('panel'),
+            (new Part($header))->setId('header')->setDestinationParentId('panel'),
+            (new Part($body))->setId('body')->setDestinationParentId('panel'),
+            (new Part($footer))->setId('footer')->setDestinationParentId('panel'),
         ]);
 
         $header->addChild(new DataView('<b>Panel Header</b>'));

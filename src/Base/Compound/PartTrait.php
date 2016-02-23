@@ -1,30 +1,22 @@
 <?php
 
-namespace ViewComponents\ViewComponents\Component;
+namespace ViewComponents\ViewComponents\Base\Compound;
 
-use ViewComponents\ViewComponents\Base\Compound\CompoundPartInterface;
-use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
-use ViewComponents\ViewComponents\Base\ViewComponentInterface;
+
 use RuntimeException;
+use ViewComponents\ViewComponents\Component\Compound;
 
-class CompoundPart extends ViewAggregate implements CompoundPartInterface
+trait PartTrait
 {
     /**
      * @var string|null
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string|null
      */
-    protected $destinationParentId;
-
-    public function __construct(ViewComponentInterface $view = null, $id = null, $destinationParentId = Compound::ROOT_ID)
-    {
-        parent::__construct($view);
-        $this->id = $id;
-        $this->destinationParentId = $destinationParentId;
-    }
+    private $destinationParentId;
 
     /**
      * @param string|null $id
@@ -38,7 +30,7 @@ class CompoundPart extends ViewAggregate implements CompoundPartInterface
 
     /**
      * @param string|null $destinationParentId
-     * @return CompoundPart
+     * @return $this
      */
     public function setDestinationParentId($destinationParentId)
     {
@@ -64,33 +56,36 @@ class CompoundPart extends ViewAggregate implements CompoundPartInterface
         return $this->destinationParentId;
     }
 
-    /**
-     * @return $this|ViewComponentInterface
-     */
-    public function getInnerContainer()
-    {
-        return $this->getView() instanceof ContainerComponentInterface ? $this->getView() : $this;
-    }
-
     public function attachToCompound(Compound $root)
     {
+        /** @var PartInterface $this */
         $parentId = $this->getDestinationParentId();
         if ($parentId === Compound::ROOT_ID) {
-            $root->addChild($this);
+            if ($this->parent() !== $root) {
+                $root->addChild($this);
+                return true;
+            }
         } else {
-            $components = $root->getComponents();
-            /** @var CompoundPartInterface $parent */
-            $parent = $components->findByProperty('id', $parentId, true);
+            $parts = $root->getComponents();
+            /** @var ContainerPartInterface $parent */
+            $parent = $parts->findByProperty('id', $parentId, true);
             if (!$parent) {
                 $id = $this->getId();
                 throw new RuntimeException(
                     "Trying to attach compound part '$id' to not existing '$parentId'."
                 );
             }
-            if ($this->parent() !== $parent->getInnerContainer()) {
-                $parent->getInnerContainer()->addChild($this);
+            if (!$parent instanceof ContainerPartInterface) {
+                $id = $this->getId();
+                throw new RuntimeException(
+                    "Trying to attach compound part '$id' to invalid container '$parentId'."
+                );
+            }
+            if ($this->parent() !== $parent->getContainer()) {
+                $parent->getContainer()->addChild($this);
+                return true;
             }
         }
-        return $this;
+        return false;
     }
 }

@@ -2,14 +2,16 @@
 
 namespace ViewComponents\ViewComponents\Base\Compound;
 
+use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
-use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 use ViewComponents\ViewComponents\Component\Compound;
 
 /**
- * Interface for compound parts that knows where it must be placed inside compound.
+ * Interface for compound parts.
+ * Compound parts are components that knows
+ * where they must be placed inside compound.
  */
-interface CompoundPartInterface extends ContainerComponentInterface
+interface PartInterface extends ComponentInterface
 {
     /**
      * Method must return name of tree node that should be chosen as parent.
@@ -31,13 +33,24 @@ interface CompoundPartInterface extends ContainerComponentInterface
      */
     public function getId();
 
+    public function setId($id);
+
+    /**
+     * @param $id
+     * @return string
+     */
+    public function setDestinationParentId($id);
+
     /**
      * @return ContainerComponentInterface
      */
-    public function getInnerContainer();
+    //public function getInnerContainer();
 
-    /** @return ViewComponentInterface */
-    public function getView();
+//    /** @return ComponentInterface */
+//    public function getComponent();
 
+    /**
+     * @param Compound $root
+     */
     public function attachToCompound(Compound $root);
 }

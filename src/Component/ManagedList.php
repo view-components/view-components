@@ -3,7 +3,8 @@ namespace ViewComponents\ViewComponents\Component;
 
 
 use Nayjest\Collection\Extended\ObjectCollection;
-use ViewComponents\ViewComponents\Base\Compound\CompoundPartInterface;
+use ViewComponents\ViewComponents\Base\ComponentInterface;
+use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
 use ViewComponents\ViewComponents\Common\HasDataTrait;
@@ -26,7 +27,7 @@ class ManagedList extends Compound implements DataViewComponentInterface
     /**
      * ManagedList constructor.
      * @param null $dataProvider
-     * @param CompoundPartInterface[] $components
+     * @param PartInterface[] $components
      */
     public function __construct($dataProvider = null, $components = [])
     {
@@ -35,7 +36,7 @@ class ManagedList extends Compound implements DataViewComponentInterface
     }
 
     /**
-     * @param CompoundPartInterface[] $components
+     * @param PartInterface[] $components
      * @return array
      */
     protected function mergeWithDefaultComponents($components)
@@ -48,12 +49,12 @@ class ManagedList extends Compound implements DataViewComponentInterface
     protected function makeDefaultComponents()
     {
         return [
-            new CompoundPart(new Tag('div'), 'container', 'root'),
-            new CompoundPart(new Tag('form'), 'form', 'container'),
-            new CompoundPart(new Tag('span'), 'control_container', 'form'),
-            new CompoundPart(new Tag('input', ['type' => 'submit']), 'submit_button', 'form'),
-            new CompoundPart(new Container(), 'list_container', 'container'),
-            new CompoundPart(new CollectionView(), 'collection_view', 'list_container'),
+            new Part(new Tag('div'), 'container', 'root'),
+            new Part(new Tag('form'), 'form', 'container'),
+            new Part(new Tag('span'), 'control_container', 'form'),
+            new Part(new Tag('input', ['type' => 'submit']), 'submit_button', 'form'),
+            new Part(new Container(), 'list_container', 'container'),
+            new Part(new CollectionView(), 'collection_view', 'list_container'),
             new RecordView(new Json()),
         ];
     }
@@ -89,51 +90,60 @@ class ManagedList extends Compound implements DataViewComponentInterface
 //    /**
 //     * @return ComponentInterface|null
 //     */
-//    public function getForm()
-//    {
-//        return $this->getComponent('form');
-//    }
+    public function getForm()
+    {
+        return $this->getComponent('form');
+    }
 //
-//    public function setForm(BasicComponentInterface $form)
-//    {
-//        return $this->setComponent('form', $form);
-//    }
+    public function setForm(ComponentInterface $form)
+    {
+        return $this->setComponent($form, 'form', 'container');
+    }
+    protected function setComponent($component, $id = null, $defaultParent = null)
+    {
+        $part = $component instanceof PartInterface ? $component : new Part($component);
+
+        $id && $part->setId($id);
+        !$part->getDestinationParentId() && $defaultParent && $part->setDestinationParentId($defaultParent);
+        $this->getComponents()->add($part);
+        return $this;
+    }
+
 //
 //    /**
 //     * @return ComponentInterface|null
 //     */
-//    public function getContainer()
-//    {
-//        return $this->getComponent('container');
-//    }
+    public function getContainer()
+    {
+        return $this->getComponent('container');
+    }
 //
 //    /**
 //     * @param ComponentInterface $component
 //     * @return $this
 //     */
-//    public function setContainer(BasicComponentInterface $component)
-//    {
-//        return $this->setComponent('container', $component);
-//    }
+    public function setContainer(ComponentInterface $component)
+    {
+        return $this->setComponent($component, 'container', Compound::ROOT_ID);
+    }
 //
 //
 //    /**
 //     * @return ComponentInterface|null
 //     */
-//    public function getRecordView()
-//    {
-//
-//        return $this->getComponent('record_view');
-//    }
+    public function getRecordView()
+    {
+        return $this->getComponent('record_view');
+    }
 //
 //    /**
 //     * @param ComponentInterface|null $component
 //     * @return $this
 //     */
-//    public function setRecordView(BasicComponentInterface $component)
-//    {
-//        return $this->setComponent('record_view', $component);
-//    }
+    public function setRecordView(ComponentInterface $component)
+    {
+        return $this->setComponent($component, 'record_view', 'collection_view');
+    }
 //
 //
 //    /**
@@ -157,43 +167,33 @@ class ManagedList extends Compound implements DataViewComponentInterface
 //    /**
 //     * @return ComponentInterface|null
 //     */
-//    public function getControlContainer()
-//    {
-//
-//        return $this->getComponent('control_container');
-//    }
+    public function getControlContainer()
+    {
+        return $this->getComponent('control_container');
+    }
 //
 //    /**
 //     * @param ComponentInterface $component
 //     * @return $this
 //     */
-//    public function setControlContainer(BasicComponentInterface $component)
-//    {
-//        return $this->setComponent('control_container', $component);
-//    }
-//
-//
-//
-//    /**
-//     * @return ComponentInterface|null
-//     */
-//    public function getSubmitButton()
-//    {
-//        return $this->getComponent('submit_button');
-//    }
-//
-//    /**
-//     * @param ComponentInterface|null $component
-//     * @return $this
-//     */
-//    public function setSubmitButton(BasicComponentInterface $component)
-//    {
-//        return $this->setComponent('submit_button', $component);
-//    }
-//    //
-//    //  END: SETTERS/GETTERS FOR COMPOUND COMPONENTS
-//    //
-//
+    public function setControlContainer(ComponentInterface $component)
+    {
+        return $this->setComponent($component, 'control_container', 'form');
+    }
+
+    public function getSubmitButton()
+    {
+        return $this->getComponent('submit_button');
+    }
+
+    public function setSubmitButton(ComponentInterface $component)
+    {
+        return $this->setComponent($component, 'submit_button', 'form');
+    }
+    //
+    //  END: SETTERS/GETTERS FOR COMPOUND COMPONENTS
+    //
+
     /**
      * @param DataProviderInterface|null $dataProvider
      * @return $this
@@ -293,17 +293,22 @@ class ManagedList extends Compound implements DataViewComponentInterface
 //        $this->hideSubmitButtonIfNotUsed();
 //    }
 
+    protected function makeDataInjector()
+    {
+        $record = $this->getComponent('record_view');
+        return function($row) use ($record) {
+            $record->setData($row);
+        };
+    }
+
     public function render()
     {
+
         /** @var CollectionView $collection */
         $collection = $this->getComponent('collection_view');
         $collection->setData($this->getDataProvider());
         if ($collection->getDataInjector() === null) {
-            /** @var DataViewComponentInterface $record */
-            $record = $this->getComponent('record_view');
-            $collection->setDataInjector(function($row) use ($record) {
-                $record->setData($row);
-            });
+            $collection->setDataInjector($this->makeDataInjector());
         }
         $this->applyOperations();
         $this->hideSubmitButtonIfNotUsed();

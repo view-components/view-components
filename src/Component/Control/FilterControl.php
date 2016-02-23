@@ -4,7 +4,7 @@ namespace ViewComponents\ViewComponents\Component\Control;
 
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Component\TemplateView;
-use ViewComponents\ViewComponents\Component\CompoundPart;
+use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Data\DataAcceptorInterface;
 use ViewComponents\ViewComponents\Data\Operation\DummyOperation;
 use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
@@ -12,7 +12,7 @@ use ViewComponents\ViewComponents\Input\InputOption;
 use Stringy\StaticStringy;
 
 
-class FilterControl extends CompoundPart implements ControlInterface
+class FilterControl extends Part implements ControlInterface
 {
     /** @var string */
     private $field;
@@ -80,11 +80,6 @@ class FilterControl extends CompoundPart implements ControlInterface
     public function getOperator()
     {
         return $this->operator;
-    }
-
-    public function getInnerContainer()
-    {
-        return $this->getView();
     }
 
     protected function makeDefaultView()

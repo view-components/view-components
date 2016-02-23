@@ -1,10 +1,10 @@
 <?php
 namespace ViewComponents\ViewComponents\Base\Control;
 
-use ViewComponents\ViewComponents\Base\Compound\CompoundPartInterface;
+use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
 
-interface ControlInterface extends CompoundPartInterface
+interface ControlInterface extends PartInterface
 {
     /**
      * Creates operation.
