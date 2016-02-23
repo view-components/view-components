@@ -2,11 +2,10 @@
 
 namespace ViewComponents\ViewComponents\Component\Control\View;
 
-use League\Url\Components\Query;
-use League\Url\Url;
 use ViewComponents\ViewComponents\Component\Control\PaginationControl;
 use ViewComponents\ViewComponents\Component\TemplateView;
 use ViewComponents\ViewComponents\Rendering\RendererInterface;
+use League\Uri\Schemes\Http as HttpUri;
 
 class PaginationControlView extends TemplateView
 {
@@ -61,17 +60,9 @@ class PaginationControlView extends TemplateView
 
     protected function makeUrl($page)
     {
-        $url = Url::createFromServer($_SERVER);
+        $url = HttpUri::createFromServer($_SERVER);
         $urlKey = $this->getControl()->getPageInputOption()->getKey();
-        // league/url v4.X
-        if (method_exists($url, 'mergeQuery')) {
-            return (string)$url->mergeQuery(
-                Query::createFromArray([$urlKey => $page])
-            );
-            // league/url v3.X
-        } else {
-            $url->getQuery()->modify([$urlKey => $page]);
-            return (string)$url;
-        }
+        $query = $url->query->merge(http_build_query([$urlKey => $page]));
+        return (string)$url->withQuery((string)$query);
     }
 }
