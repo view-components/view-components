@@ -26,7 +26,7 @@ class SymfonyVarDump implements DataViewComponentInterface
      *
      * @param mixed $data data to render
      */
-    public function __construct($data)
+    public function __construct($data = null)
     {
         $this->setData($data);
     }
