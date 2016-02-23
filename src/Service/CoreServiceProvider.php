@@ -30,9 +30,9 @@ class CoreServiceProvider implements ServiceProviderInterface
     /**
      * Registers presentation framework core services on the given container.
      *
-     * @param Container $container container instance
+     * @param ServiceContainer $container container instance
      */
-    public function register(Container $container)
+    public function register(ServiceContainer $container)
     {
         $container->set(ServiceName::CONFIG_FILE, function () {
             return $this->packageFolder . '/resources/config.php';

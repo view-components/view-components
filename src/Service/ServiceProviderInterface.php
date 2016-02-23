@@ -10,7 +10,7 @@ interface ServiceProviderInterface
     /**
      * Registers services on the given container.
      *
-     * @param Container $container container instance
+     * @param ServiceContainer $container container instance
      */
-    public function register(Container $container);
+    public function register(ServiceContainer $container);
 }

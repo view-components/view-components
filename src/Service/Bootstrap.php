@@ -14,7 +14,7 @@ use ViewComponents\ViewComponents\Service\Exception\BootstrapException;
  */
 final class Bootstrap
 {
-    /** @var  null|Container */
+    /** @var  null|ServiceContainer */
     private static $container;
 
     /** @var string[] */
@@ -25,12 +25,12 @@ final class Bootstrap
     /**
      * Returns service container used with presentation framework.
      *
-     * @return Container
+     * @return ServiceContainer
      */
     public static function getContainer()
     {
         if (!self::$container) {
-            self::$container = new Container();
+            self::$container = new ServiceContainer();
             self::provideServices();
         }
         return self::$container;

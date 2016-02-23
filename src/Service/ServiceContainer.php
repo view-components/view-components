@@ -9,7 +9,7 @@ use Interop\Container\ContainerInterface;
  *
  * This class is used by presentation framework as default service container.
  */
-class Container implements ContainerInterface
+class ServiceContainer implements ContainerInterface
 {
     protected $callbacks = [];
     protected $instances = [];
