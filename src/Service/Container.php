@@ -1,17 +1,15 @@
 <?php
 
-namespace ViewComponents\ViewComponents\Service\Container;
+namespace ViewComponents\ViewComponents\Service;
 
-
-use ViewComponents\ViewComponents\Service\Container\Exception\AlreadyExistsException;
-use ViewComponents\ViewComponents\Service\Container\Exception\NotFoundException;
+use Interop\Container\ContainerInterface;
 
 /**
  * Simple service container implementation.
  *
  * This class is used by presentation framework as default service container.
  */
-class Container implements WritableContainerInterface
+class Container implements ContainerInterface
 {
     protected $callbacks = [];
     protected $instances = [];
@@ -19,7 +17,7 @@ class Container implements WritableContainerInterface
     public function set($id, callable $callback)
     {
         if ($this->has($id)) {
-            throw new AlreadyExistsException;
+            throw new Exception\AlreadyExistsException;
         }
         $this->callbacks[$id] = $callback;
     }
@@ -32,7 +30,7 @@ class Container implements WritableContainerInterface
     public function get($id)
     {
         if(!$this->has($id)) {
-            throw new NotFoundException;
+            throw new Exception\NotFoundException;
         }
         if (!$this->isReady($id)) {
             $this->instantiate($id);
@@ -43,7 +41,7 @@ class Container implements WritableContainerInterface
     public function extend($id, callable $callback)
     {
         if (!$this->has($id)) {
-            throw new NotFoundException;
+            throw new Exception\NotFoundException;
         }
         if (!$this->isReady($id)) {
             $this->instantiate($id);

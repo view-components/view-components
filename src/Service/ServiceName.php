@@ -7,17 +7,14 @@ namespace ViewComponents\ViewComponents\Service;
  *
  * Usage of this constants instead of raw strings will help to change service names(IDs) easily.
  *
- * Note that further changing of service names(IDs) is possible in case of conflicts with another services inside
- * 3rd-party service container shared to presentation framework
- * (@see \ViewComponents\ViewComponents\Service\Bootstrap::useContainer())
  */
 class ServiceName
 {
-    const RENDERER = 'pf_renderer';
-    const RESOURCE_MANAGER = 'pf_resource_manager';
-    const HTML_BUILDER = 'pf_html_builder';
-    const CONFIG = 'pf_config';
-    const CONFIG_FILE = 'pf_config_file';
+    const RENDERER = 'renderer';
+    const RESOURCE_MANAGER = 'resource_manager';
+    const HTML_BUILDER = 'html_builder';
+    const CONFIG = 'config';
+    const CONFIG_FILE = 'config_file';
 
     private function __construct()
     {

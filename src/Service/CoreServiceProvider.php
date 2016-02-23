@@ -8,15 +8,14 @@ use ViewComponents\ViewComponents\Rendering\SimpleRenderer;
 use ViewComponents\ViewComponents\Resource\AliasRegistry;
 use ViewComponents\ViewComponents\Resource\IncludedResourcesRegistry;
 use ViewComponents\ViewComponents\Resource\ResourceManager;
-use ViewComponents\ViewComponents\Service\Container\WritableContainerInterface;
-use Symfony\Component\Yaml\Exception\RuntimeException;
+use RuntimeException;
 
 /**
  * Service provider of presentation framework.
  *
  * This class registers presentation framework core services on the given container.
  */
-class ServiceProvider implements ServiceProviderInterface
+class CoreServiceProvider implements ServiceProviderInterface
 {
     protected $packageFolder;
 
@@ -31,12 +30,12 @@ class ServiceProvider implements ServiceProviderInterface
     /**
      * Registers presentation framework core services on the given container.
      *
-     * @param WritableContainerInterface $container container instance
+     * @param Container $container container instance
      */
-    public function register(WritableContainerInterface $container)
+    public function register(Container $container)
     {
         $container->set(ServiceName::CONFIG_FILE, function () {
-            return $this->packageFolder . '/resources/config/config.php';
+            return $this->packageFolder . '/resources/config.php';
         });
 
         $container->set(ServiceName::CONFIG, function (ContainerInterface $container) {

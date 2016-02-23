@@ -1,11 +1,6 @@
 <?php
 
 namespace ViewComponents\ViewComponents\Service;
-
-use ViewComponents\ViewComponents\Service\Container\Adapter\Pimple3ContainerAdapter;
-use ViewComponents\ViewComponents\Service\Container\Adapter\PimpleContainerAdapter;
-use ViewComponents\ViewComponents\Service\Container\Container;
-use ViewComponents\ViewComponents\Service\Container\WritableContainerInterface;
 use ViewComponents\ViewComponents\Service\Exception\BootstrapException;
 
 /**
@@ -19,49 +14,26 @@ use ViewComponents\ViewComponents\Service\Exception\BootstrapException;
  */
 final class Bootstrap
 {
-    /** @var  null|WritableContainerInterface */
+    /** @var  null|Container */
     private static $container;
-
-    /**
-     * Keys are container class names and values are container adapter class names.
-     *
-     * @var string[]
-     */
-    private static $supportedAdapters = [
-        '\Pimple\Container' => Pimple3ContainerAdapter::class,
-        '\Pimple\Pimple'    => PimpleContainerAdapter::class,
-    ];
 
     /** @var string[] */
     private static $serviceProviders = [
-        ServiceProvider::class
+        CoreServiceProvider::class
     ];
-
-    /** @var  object|string */
-    private static $preferredContainer = Container::class;
 
     /**
      * Returns service container used with presentation framework.
      *
-     * @return WritableContainerInterface
+     * @return Container
      */
     public static function getContainer()
     {
         if (!self::$container) {
-            self::initializeContainer();
+            self::$container = new Container();
+            self::provideServices();
         }
         return self::$container;
-    }
-
-    /**
-     * Registers adapter class for 3rd-party service container class.
-     *
-     * @param string $containerClass
-     * @param string $adapterClass
-     */
-    public static function registerContainerAdapter($containerClass, $adapterClass)
-    {
-        self::$supportedAdapters[$containerClass] = $adapterClass;
     }
 
     /**
@@ -87,67 +59,12 @@ final class Bootstrap
         }
     }
 
-    /**
-     * Specifies service container to use.
-     *
-     * It's possible to use service container of application that uses presentation framework.
-     * In this case services of presentation framework will be shared to application using its own service container.
-     *
-     *
-     * @param string|object $container container instance or class name (do not use adapter class names here).
-     */
-    public static function useContainer($container)
-    {
-        self::checkNoContainer();
-        self::$preferredContainer = $container;
-    }
-
-    /**
-     * Initializes service container.
-     *
-     * @return WritableContainerInterface
-     */
-    private static function initializeContainer()
-    {
-        $isInstance = !is_string(self::$preferredContainer);
-        $origClass = $isInstance ? get_class(self::$preferredContainer) : self::$preferredContainer;
-        $containerInstance = $isInstance ? self::$preferredContainer : new $origClass;
-
-        // Try create service container adapter
-        if (!$containerInstance instanceof WritableContainerInterface) {
-            if (!array_key_exists($origClass, self::$supportedAdapters)) {
-                throw new BootstrapException(
-                    "Can't use '$origClass' container, there is no supported adapters for this container."
-                );
-            }
-            $adapterClass = self::$supportedAdapters[$origClass];
-            $containerInstance = new $adapterClass($containerInstance);
-        }
-
-        self::$container = $containerInstance;
-        self::provideServices();
-    }
-
     private static function provideServices()
     {
         foreach(self::$serviceProviders as $serviceProviderClass) {
             /** @var  ServiceProviderInterface $serviceProvider */
             $serviceProvider = new $serviceProviderClass;
             $serviceProvider->register(self::$container);
-        }
-    }
-
-    /**
-     * Checks that service container is not initialized. Throws exception otherwise.
-     *
-     * @throws BootstrapException
-     */
-    private static function checkNoContainer()
-    {
-        if (self::$container !== null) {
-            throw new BootstrapException(
-                'Trying to configure service container when it\'s already created.'
-            );
         }
     }
 }
