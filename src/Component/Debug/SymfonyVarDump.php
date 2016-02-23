@@ -21,6 +21,21 @@ class SymfonyVarDump implements DataViewComponentInterface
     use ViewTrait;
     use HasDataTrait;
 
+    /**
+     * Constructor.
+     *
+     * @param mixed $data data to render
+     */
+    public function __construct($data)
+    {
+        $this->setData($data);
+    }
+
+    /**
+     * Renders data.
+     *
+     * @return string
+     */
     public function render()
     {
         $cloner = new VarCloner();
