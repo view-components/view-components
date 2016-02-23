@@ -294,7 +294,7 @@ class Controller extends AbstractController
      *
      * @return string
      */
-    public function demo7()
+    public function demo6()
     {
         $renderer = $this->getRenderer();
         return $this->renderMenu()
@@ -306,7 +306,7 @@ class Controller extends AbstractController
      * Template view
      * @return string
      */
-    public function demo8()
+    public function demo7()
     {
         $renderer = $this->getRenderer();
         $c = new TemplateView('demo/template_view', [], $renderer);
