@@ -1,7 +1,6 @@
 <?php
 namespace ViewComponents\ViewComponents\Component;
 
-
 use Nayjest\Collection\Extended\ObjectCollection;
 use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
@@ -11,7 +10,6 @@ use ViewComponents\ViewComponents\Common\HasDataTrait;
 use ViewComponents\ViewComponents\Component\Html\Tag;
 use ViewComponents\ViewComponents\Component\ManagedList\RecordView;
 use ViewComponents\ViewComponents\Data\DataProviderInterface;
-
 
 /**
  * Class ManagedList
@@ -33,30 +31,6 @@ class ManagedList extends Compound implements DataViewComponentInterface
     {
         $this->setDataProvider($dataProvider);
         parent::__construct($this->mergeWithDefaultComponents($components));
-    }
-
-    /**
-     * @param PartInterface[] $components
-     * @return array
-     */
-    protected function mergeWithDefaultComponents($components)
-    {
-        return (new ObjectCollection($this->makeDefaultComponents()))
-            ->addMany($components)
-            ->indexByProperty('id');
-    }
-
-    protected function makeDefaultComponents()
-    {
-        return [
-            new Part(new Tag('div'), 'container', 'root'),
-            new Part(new Tag('form'), 'form', 'container'),
-            new Part(new Tag('span'), 'control_container', 'form'),
-            new Part(new Tag('input', ['type' => 'submit']), 'submit_button', 'form'),
-            new Part(new Container(), 'list_container', 'container'),
-            new Part(new CollectionView(), 'collection_view', 'list_container'),
-            new RecordView(new Json()),
-        ];
     }
 
     /**
@@ -136,10 +110,6 @@ class ManagedList extends Compound implements DataViewComponentInterface
     {
         return $this->setComponent($component, 'record_view', 'collection_view');
     }
-
-    //
-    //  END: SETTERS/GETTERS FOR COMPOUND COMPONENTS
-    //
 
     /**
      * @param DataProviderInterface|null $dataProvider
@@ -222,5 +192,30 @@ class ManagedList extends Compound implements DataViewComponentInterface
         !$part->getDestinationParentId() && $defaultParent && $part->setDestinationParentId($defaultParent);
         $this->getComponents()->add($part);
         return $this;
+    }
+
+
+    /**
+     * @param PartInterface[] $components
+     * @return array
+     */
+    protected function mergeWithDefaultComponents($components)
+    {
+        return (new ObjectCollection($this->makeDefaultComponents()))
+            ->addMany($components)
+            ->indexByProperty('id');
+    }
+
+    protected function makeDefaultComponents()
+    {
+        return [
+            new Part(new Tag('div'), 'container', 'root'),
+            new Part(new Tag('form'), 'form', 'container'),
+            new Part(new Tag('span'), 'control_container', 'form'),
+            new Part(new Tag('input', ['type' => 'submit']), 'submit_button', 'form'),
+            new Part(new Container(), 'list_container', 'container'),
+            new Part(new CollectionView(), 'collection_view', 'list_container'),
+            new RecordView(new Json()),
+        ];
     }
 }
