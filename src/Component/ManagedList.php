@@ -67,115 +67,31 @@ class ManagedList extends Compound implements DataViewComponentInterface
         return $this->getChildrenRecursive()->filterByType(ControlInterface::class);
     }
 
-//    //
-//    //  BEGIN: SETTERS/GETTERS FOR COMPOUND COMPONENTS
-//    //
-//    /**
-//     * @return Repeater|null
-//     */
-//    public function getRepeater()
-//    {
-//        return $this->getComponent('repeater');
-//    }
-//
-//    /**
-//     * @param RepeaterInterfaceBasic $component
-//     * @return $this
-//     */
-//    public function setRepeater(RepeaterInterfaceBasic $component)
-//    {
-//        return $this->setComponent('repeater', $component);
-//    }
-//
-//    /**
-//     * @return ComponentInterface|null
-//     */
-    public function getForm()
-    {
-        return $this->getComponent('form');
-    }
-//
-    public function setForm(ComponentInterface $form)
-    {
-        return $this->setComponent($form, 'form', 'container');
-    }
-    protected function setComponent($component, $id = null, $defaultParent = null)
-    {
-        $part = $component instanceof PartInterface ? $component : new Part($component);
-
-        $id && $part->setId($id);
-        !$part->getDestinationParentId() && $defaultParent && $part->setDestinationParentId($defaultParent);
-        $this->getComponents()->add($part);
-        return $this;
-    }
-
-//
-//    /**
-//     * @return ComponentInterface|null
-//     */
     public function getContainer()
     {
         return $this->getComponent('container');
     }
-//
-//    /**
-//     * @param ComponentInterface $component
-//     * @return $this
-//     */
+
     public function setContainer(ComponentInterface $component)
     {
         return $this->setComponent($component, 'container', Compound::ROOT_ID);
     }
-//
-//
-//    /**
-//     * @return ComponentInterface|null
-//     */
-    public function getRecordView()
+
+    public function getForm()
     {
-        return $this->getComponent('record_view');
+        return $this->getComponent('form');
     }
-//
-//    /**
-//     * @param ComponentInterface|null $component
-//     * @return $this
-//     */
-    public function setRecordView(ComponentInterface $component)
+
+    public function setForm(ComponentInterface $form)
     {
-        return $this->setComponent($component, 'record_view', 'collection_view');
+        return $this->setComponent($form, 'form', 'container');
     }
-//
-//
-//    /**
-//     * @return ComponentInterface|null
-//     */
-//    public function getTitle()
-//    {
-//
-//        return $this->getComponent('title');
-//    }
-//
-//    /**
-//     * @param ComponentInterface $component
-//     * @return $this
-//     */
-//    public function setTitle(BasicComponentInterface $component)
-//    {
-//        return $this->setComponent('title', $component);
-//    }
-//
-//    /**
-//     * @return ComponentInterface|null
-//     */
+
     public function getControlContainer()
     {
         return $this->getComponent('control_container');
     }
-//
-//    /**
-//     * @param ComponentInterface $component
-//     * @return $this
-//     */
+
     public function setControlContainer(ComponentInterface $component)
     {
         return $this->setComponent($component, 'control_container', 'form');
@@ -190,6 +106,37 @@ class ManagedList extends Compound implements DataViewComponentInterface
     {
         return $this->setComponent($component, 'submit_button', 'form');
     }
+
+    public function getListContainer()
+    {
+        return $this->getComponent('list_container');
+    }
+
+    public function setListContainer(ComponentInterface $component)
+    {
+        return $this->setComponent($component, 'list_container', 'container');
+    }
+
+    public function getCollectionView()
+    {
+        return $this->getComponent('collection_view');
+    }
+
+    public function setCollectionView(ComponentInterface $component)
+    {
+        return $this->setComponent($component, 'collection_view', 'list_container');
+    }
+
+    public function getRecordView()
+    {
+        return $this->getComponent('record_view');
+    }
+
+    public function setRecordView(ComponentInterface $component)
+    {
+        return $this->setComponent($component, 'record_view', 'collection_view');
+    }
+
     //
     //  END: SETTERS/GETTERS FOR COMPOUND COMPONENTS
     //
@@ -212,7 +159,28 @@ class ManagedList extends Compound implements DataViewComponentInterface
     {
         return $this->getData();
     }
-//
+
+    public function render()
+    {
+        $this->prepare();
+        return parent::render();
+    }
+
+    /**
+     * Prepares component for rendering.
+     */
+    protected function prepare()
+    {
+        /** @var CollectionView $collection */
+        $collection = $this->getComponent('collection_view');
+        $collection->setData($this->getDataProvider());
+        if ($collection->getDataInjector() === null) {
+            $collection->setDataInjector($this->makeDataInjector());
+        }
+        $this->applyOperations();
+        $this->hideSubmitButtonIfNotUsed();
+    }
+
     protected function hideSubmitButtonIfNotUsed()
     {
         $submit = $this->getComponent('submit_button');
@@ -227,16 +195,7 @@ class ManagedList extends Compound implements DataViewComponentInterface
         }
         $submit->parent()->setView(null);
     }
-//
-//    public function render()
-//    {
-//        $this->prepare();
-//        return parent::render();
-//    }
-//
-//    /**
-//     * @todo why not protected?
-//     */
+
     protected function applyOperations()
     {
         if (!$this->isOperationsApplied) {
@@ -247,52 +206,6 @@ class ManagedList extends Compound implements DataViewComponentInterface
         }
     }
 
-
-//
-//    protected function makeDefaultHierarchy()
-//    {
-//        return [
-//            'container' => [
-//                'title' => [],
-//                'form' => [
-//                    'control_container' => [],
-//                    'submit_button' => [],
-//                ],
-//                'list_container' =>
-//                    [
-//                        'repeater' => [
-//                            'record_view' => []
-//                        ]
-//                    ],
-//            ],
-//        ];
-//    }
-//
-//    protected function makeDefaultComponents()
-//    {
-//        return [
-//            'container' => new Tag('div', ['data-role' => 'container']),
-//            'title' => new Dummy,
-//            'form' => new Tag('form'),
-//            'control_container' => new Tag('span', ['data-role' => 'control_container']),
-//            'submit_button' => (new Tag('input', ['type' => 'submit'])),
-//            'list_container' => new Dummy,
-//            'repeater' => new Repeater(),
-//            'record_view' => new Json(),
-//        ];
-//    }
-//
-//    /**
-//     * Prepare component for rendering.
-//     */
-//    protected function prepare()
-//    {
-//        $this->getTree()->build();
-//        $this->applyOperations();
-//        $this->getRepeater()->setIterator($this->getDataProvider());
-//        $this->hideSubmitButtonIfNotUsed();
-//    }
-
     protected function makeDataInjector()
     {
         $record = $this->getComponent('record_view');
@@ -301,17 +214,13 @@ class ManagedList extends Compound implements DataViewComponentInterface
         };
     }
 
-    public function render()
+    protected function setComponent($component, $id = null, $defaultParent = null)
     {
+        $part = $component instanceof PartInterface ? $component : new Part($component);
 
-        /** @var CollectionView $collection */
-        $collection = $this->getComponent('collection_view');
-        $collection->setData($this->getDataProvider());
-        if ($collection->getDataInjector() === null) {
-            $collection->setDataInjector($this->makeDataInjector());
-        }
-        $this->applyOperations();
-        $this->hideSubmitButtonIfNotUsed();
-        return parent::render();
+        $id && $part->setId($id);
+        !$part->getDestinationParentId() && $defaultParent && $part->setDestinationParentId($defaultParent);
+        $this->getComponents()->add($part);
+        return $this;
     }
 }
