@@ -158,7 +158,7 @@ class PaginationControl extends Part implements ControlInterface
             return;
         }
         $view->setData([
-            'total' => $this->getTotalRecordsCount(),
+            'total' => $this->getPageCount(),
             'current' => $this->getCurrentPage(),
         ]);
     }
