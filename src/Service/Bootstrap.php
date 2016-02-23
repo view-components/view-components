@@ -45,7 +45,7 @@ final class Bootstrap
      */
     public static function registerServiceProvider($serviceProviderClass)
     {
-        if (!is_a($serviceProviderClass, ServiceProviderInterface::class)) {
+        if (!is_a($serviceProviderClass, ServiceProviderInterface::class, true)) {
             throw new BootstrapException(
                 "Error registering service provider: $serviceProviderClass is not valid service provider."
             );
