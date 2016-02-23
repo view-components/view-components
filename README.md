@@ -73,7 +73,9 @@ See [PHP Magic Methods: __toString()](http://www.php.net/manual/en/language.oop5
 
 Renders child components.
 
+##### 3. Compound components
 
+Compound components are composed from smaller components that implements PartInterface or wrapped into Part instance.
 
 ## Contributing
 
