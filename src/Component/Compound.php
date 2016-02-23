@@ -46,7 +46,7 @@ class Compound implements ContainerComponentInterface
             }
         });
         $this->initializeCollection([]);
-        $this->collection->onItemAdd(function($item) {
+        $this->childrenInternal()->onItemAdd(function($item) {
             if ($item instanceof PartInterface && !$this->componentCollection->contains($item)) {
                 $this->componentCollection->add($item);
             }

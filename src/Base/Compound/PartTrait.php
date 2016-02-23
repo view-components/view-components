@@ -63,7 +63,7 @@ trait PartTrait
         if ($parentId === Compound::ROOT_ID) {
             if ($this->parent() !== $root) {
                 $root->addChild($this);
-                return true;
+                return;
             }
         } else {
             $parts = $root->getComponents();
@@ -83,9 +83,9 @@ trait PartTrait
             }
             if ($this->parent() !== $parent->getContainer()) {
                 $parent->getContainer()->addChild($this);
-                return true;
+                return;
             }
         }
-        return false;
+        return;
     }
 }
