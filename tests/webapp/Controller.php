@@ -3,7 +3,6 @@ namespace ViewComponents\ViewComponents\Demo;
 
 use ViewComponents\ViewComponents\Component\CollectionView;
 use ViewComponents\ViewComponents\Component\Compound;
-use ViewComponents\ViewComponents\Component\AbstractPart;
 use ViewComponents\ViewComponents\Component\Control\FilterControl;
 use ViewComponents\ViewComponents\Component\Control\PageSizeSelectControl;
 use ViewComponents\ViewComponents\Component\Control\SortingSelectControl;
@@ -234,7 +233,7 @@ class Controller extends AbstractController
             ]
         );
 
-        $styling = new BootstrapStyling($this->getResourceManager());
+        $styling = new BootstrapStyling(null, $this->getResourceManager());
         $styling->apply($list);
 
         return $this->renderMenu() . $list->render();
@@ -259,7 +258,7 @@ class Controller extends AbstractController
                 )
             ]
         );
-        $styling = new BootstrapStyling($this->getResourceManager());
+        $styling = new BootstrapStyling(null, $this->getResourceManager());
         $styling->apply($list, $list->getComponent('container'));
         return $this->renderMenu() . $list->render();
     }
@@ -282,7 +281,7 @@ class Controller extends AbstractController
         $footer->addChild(new DataView('Panel Footer'));
 
         $container = new Tag('div', ['class' => 'container'], [$compound]);
-        $styling = new BootstrapStyling($this->getResourceManager());
+        $styling = new BootstrapStyling(null, $this->getResourceManager());
         $styling->apply($container);
         $compound->addChild(new DataView('Text added after footer'));
 

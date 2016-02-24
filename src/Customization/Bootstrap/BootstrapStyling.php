@@ -14,6 +14,7 @@ use ViewComponents\ViewComponents\Component\ManagedList\Control\FilterControl;
 use ViewComponents\ViewComponents\Component\TemplateView;
 use ViewComponents\ViewComponents\Resource\ResourceManager;
 use ViewComponents\ViewComponents\Customization\ExtendableCustomization;
+use ViewComponents\ViewComponents\Service\Services;
 
 class BootstrapStyling extends ExtendableCustomization
 {
@@ -21,10 +22,10 @@ class BootstrapStyling extends ExtendableCustomization
     protected $resourceManager;
     protected $options;
 
-    public function __construct(ResourceManager $resources, BootstrapStylingOptions $options = null)
+    public function __construct(BootstrapStylingOptions $options = null, ResourceManager $resources)
     {
         $this->options = $options ?: new BootstrapStylingOptions();
-        $this->resourceManager = $resources;
+        $this->resourceManager = $resources ?: Services::resourceManager();
         $this->initializeCallbacks();
     }
 
