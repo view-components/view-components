@@ -50,18 +50,7 @@ class Controller extends AbstractController
             );
     }
 
-    protected function getResourceManager()
-    {
-        return new ResourceManager(
-            new AliasRegistry([
-                'jquery' => '//code.jquery.com/jquery-2.1.4.min.js'
-            ]),
-            new AliasRegistry(),
-            new IncludedResourcesRegistry()
-        );
-    }
-
-    protected function getRenderer()
+       protected function getRenderer()
     {
         return new SimpleRenderer([__DIR__ . '/resources/views']);
     }
@@ -233,7 +222,7 @@ class Controller extends AbstractController
             ]
         );
 
-        $styling = new BootstrapStyling(null, $this->getResourceManager());
+        $styling = new BootstrapStyling();
         $styling->apply($list);
 
         return $this->renderMenu() . $list->render();
@@ -258,7 +247,7 @@ class Controller extends AbstractController
                 )
             ]
         );
-        $styling = new BootstrapStyling(null, $this->getResourceManager());
+        $styling = new BootstrapStyling();
         $styling->apply($list, $list->getComponent('container'));
         return $this->renderMenu() . $list->render();
     }
@@ -281,7 +270,7 @@ class Controller extends AbstractController
         $footer->addChild(new DataView('Panel Footer'));
 
         $container = new Tag('div', ['class' => 'container'], [$compound]);
-        $styling = new BootstrapStyling(null, $this->getResourceManager());
+        $styling = new BootstrapStyling();
         $styling->apply($container);
         $compound->addChild(new DataView('Text added after footer'));
 

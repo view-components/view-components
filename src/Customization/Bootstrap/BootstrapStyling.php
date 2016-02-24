@@ -22,7 +22,7 @@ class BootstrapStyling extends ExtendableCustomization
     protected $resourceManager;
     protected $options;
 
-    public function __construct(BootstrapStylingOptions $options = null, ResourceManager $resources)
+    public function __construct(BootstrapStylingOptions $options = null, ResourceManager $resources = null)
     {
         $this->options = $options ?: new BootstrapStylingOptions();
         $this->resourceManager = $resources ?: Services::resourceManager();
