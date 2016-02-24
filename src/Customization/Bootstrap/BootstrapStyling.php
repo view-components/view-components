@@ -65,12 +65,22 @@ class BootstrapStyling extends ExtendableCustomization
             $classes = [
                 'form' => 'form-inline',
                 'submit_button' => "btn btn-primary {$this->options->buttonSize}",
-                // for grid
-                // 'table' => $this->options->tableStyle
+                'table' => $this->options->tableStyle
             ];
             foreach($classes as $componentId => $class) {
                 $this->tryAddClass($list->getComponent($componentId), $class);
             }
+        });
+
+        $this->extend(Tag::class, function (Tag $tag) {
+            $classes = [
+                'button' => "btn {$this->options->buttonStyle} {$this->options->buttonSize}",
+                'table' => $this->options->tableStyle
+            ];
+            if (!array_key_exists($tag->getTagName(), $classes)) {
+                return;
+            }
+            $this->tryAddClass($tag, $classes[$tag->getTagName()]);
         });
     }
 
@@ -81,117 +91,6 @@ class BootstrapStyling extends ExtendableCustomization
     {
         return $this->options;
     }
-
-//    protected function tagCallback(TagInterface $tag)
-//    {
-//        /** @var Tag $tag */
-//        $type = $tag->getAttribute('type');
-//        switch ($tag->getTagName()) {
-//            case 'select':
-//                $this->customizeInput($tag);
-//                break;
-//            case 'input':
-//                switch ($type) {
-//                    case 'button':
-//                        $this->customizeButton($tag);
-//                        break;
-//                    case 'submit':
-//                        $this->customizeButton($tag, 'btn-primary');
-//                        break;
-//                    default:
-//                        $this->customizeInput($tag);
-//                }
-//                break;
-//            case 'button':
-//                $this->customizeButton($tag);
-//                break;
-//            case 'a':
-//                if ($tag->getAttribute('role') === 'button') {
-//                    $this->customizeButton($tag);
-//                }
-//                break;
-//            case 'table':
-//                $this->customizeTable($tag);
-//                break;
-//        }
-//
-//        if ($tag->getAttribute('data-control') === 'pagination') {
-//            $tag->onRender(function (ComponentInterface $component) {
-//                if ($component->children()->isEmpty()) {
-//                    return null;
-//                }
-//                $component->children()->first()->setAttribute('class', 'pagination');
-//                /** @var Tag $item */
-//                foreach ($component->getChildrenRecursive() as $item) {
-//
-//                    if ($item instanceof TagInterface
-//                        && $item->getTagName() === 'li'
-//                        && $item->getAttribute('data-disabled')
-//                    ) {
-//                        $item->setAttribute('class', 'disabled');
-//                    }
-//                }
-//            });
-//        }
-//    }
-//
-//    protected function filterControlCallback(FilterControl $filter)
-//    {
-//        $view = $filter->getView();
-//        $root = $filter->getRoot();
-//        if (
-//            !$view instanceof CompoundBasicComponent
-//            || !$root
-//            || !($form = $root->getComponent('form'))
-//            || !$form instanceof TagInterface
-//        ) {
-//            return;
-//        }
-//        $form->setAttribute('class', 'form-inline');
-//        $view->getComponent('container')
-//            ->setTagName('div')
-//            ->setAttribute('class', 'form-group');
-//
-//    }
-//
-//    protected function customizeInput(TagInterface $tag)
-//    {
-//        /** @var Tag|AbstractTag $tag */
-//        $tag->setAttribute(
-//            'class',
-//            str_replace(
-//                'from-control',
-//                '',
-//                $tag->getAttribute('class')
-//            ) . 'form-control'
-//        );
-//    }
-//
-//
-//    /**
-//     * @param TagInterface $tag
-//     * @param null|string $buttonStyle optional ('btn-default', 'btn-primary', etc)
-//     */
-//    protected function customizeButton(TagInterface $tag, $buttonStyle = null)
-//    {
-//        $buttonStyle = $buttonStyle ?: $this->options->buttonStyle;
-//        /** @var Tag|AbstractTag $tag */
-//        $tag->setAttribute(
-//            'class',
-//            $tag->getAttribute('class') .
-//            "btn {$buttonStyle} {$this->options->buttonSize}"
-//        );
-//    }
-//
-//    protected function customizeTable(TagInterface $tag)
-//    {
-//        /** @var Tag|AbstractTag $tag */
-//        $tag->setAttribute(
-//            'class',
-//            $tag->getAttribute('class') .
-//            "{$this->options->tableStyle}"
-//        );
-//    }
 
     /**
      * @param TagInterface|ComponentInterface $tag
