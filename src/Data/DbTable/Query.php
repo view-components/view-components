@@ -22,6 +22,8 @@ class Query
     public $bindings = [];
     public $order = '';
     public $select = '*';
+    public $limit = '';
+    public $offset = '';
 
     /**
      * @param PDO $connection
@@ -33,12 +35,12 @@ class Query
         $this->table = $table;
     }
 
-    protected function getSql()
+    public function getSql()
     {
         $where = (count($this->conditions) === 0)
             ? ''
             : 'WHERE ' . implode(' and ', $this->conditions);
-        $sql = "SELECT $this->select FROM $this->table $where $this->order";
+        $sql = "SELECT $this->select FROM $this->table $where $this->order $this->limit $this->offset";
         return $sql;
     }
 
