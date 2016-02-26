@@ -12,7 +12,7 @@ class SortProcessor implements ProcessorInterface
     /**
      * @param Query $src
      * @param OperationInterface|SortOperation $operation
-     * @return mixed
+     * @return Query
      */
     public function process($src, OperationInterface $operation)
     {

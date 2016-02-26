@@ -12,7 +12,7 @@ class FilterProcessor implements ProcessorInterface
     /**
      * @param Query $src
      * @param OperationInterface|FilterOperation $operation
-     * @return mixed
+     * @return Query
      */
     public function process($src, OperationInterface $operation)
     {
