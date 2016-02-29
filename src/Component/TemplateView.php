@@ -2,15 +2,15 @@
 
 namespace ViewComponents\ViewComponents\Component;
 
+use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 use ViewComponents\ViewComponents\Common\HasDataTrait;
 use ViewComponents\ViewComponents\Rendering\RendererInterface;
 use ViewComponents\ViewComponents\Service\Services;
 use RuntimeException;
 
-class TemplateView implements ViewComponentInterface, DataViewComponentInterface
+class TemplateView implements DataViewComponentInterface, ContainerComponentInterface
 {
     use HasDataTrait;
     use ContainerComponentTrait;
@@ -21,7 +21,7 @@ class TemplateView implements ViewComponentInterface, DataViewComponentInterface
     /** @var  RendererInterface */
     private $renderer;
 
-    public function __construct($templateName, array $data = null, RendererInterface $renderer = null)
+    public function __construct($templateName = null, array $data = null, RendererInterface $renderer = null)
     {
         $this->setData($data ?: []);
         $this->templateName = $templateName;
