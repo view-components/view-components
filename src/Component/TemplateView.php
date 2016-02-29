@@ -2,6 +2,7 @@
 
 namespace ViewComponents\ViewComponents\Component;
 
+use Exception;
 use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
@@ -70,6 +71,19 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
     public function setTemplateName($templateName)
     {
         $this->templateName = $templateName;
+        return $this;
+    }
+
+    public function mergeData(array $data)
+    {
+        $oldData = $this->getData();
+        if ($oldData === null) {
+            $this->setData($data);
+        }
+        if (!is_array($oldData)) {
+            throw new Exception('Can\'t merge non-array data');
+        }
+        $this->setData(array_merge($oldData, $data));
         return $this;
     }
 
