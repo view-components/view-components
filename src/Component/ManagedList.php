@@ -194,7 +194,6 @@ class ManagedList extends Compound implements DataViewComponentInterface
         return $this;
     }
 
-
     /**
      * @param PartInterface[] $components
      * @return array
