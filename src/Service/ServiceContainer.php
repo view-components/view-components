@@ -78,12 +78,13 @@ class ServiceContainer implements ContainerInterface
                 $this->callbacks[$id] = $thisFunction;
             }
             $instance = $this->instances[$id];
-            return call_user_func($callback, $instance, $this);
+            $newInstance = call_user_func($callback, $instance, $this);
+            return $newInstance ?: $instance;
         };
         if ($this->isReady($id)) {
             $instance = $this->instances[$id];
             $newInstance = call_user_func($callback, $instance, $this);
-            $this->instances[$id] = $newInstance;
+            $this->instances[$id] = $newInstance ?: $instance;
         }
         return $this;
     }
