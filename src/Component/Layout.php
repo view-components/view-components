@@ -81,6 +81,16 @@ class Layout extends Compound implements DataAcceptorInterface
     }
 
     /**
+     * Returns main section.
+     *
+     * @return ContainerComponentInterface
+     */
+    public function mainSection()
+    {
+        return $this->section(self::SECTION_MAIN);
+    }
+
+    /**
      * Places components to layout sections.
      *
      * @param array<string, ComponentInterface[]> $componentsBySections
@@ -112,7 +122,6 @@ class Layout extends Compound implements DataAcceptorInterface
             ->mergeData(['layout' => $this]);
         return parent::render();
     }
-
 
     /**
      * Moves children attached directly to layout into main section.
