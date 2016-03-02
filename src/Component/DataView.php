@@ -38,6 +38,13 @@ class DataView implements DataViewComponentInterface
         $this->renderer = $renderer ?: null;
     }
 
+    public function render()
+    {
+        return $this->renderer === null
+            ? $this->defaultRender()
+            : call_user_func($this->renderer, $this->getData());
+    }
+
     private function canBeString($value)
     {
         return is_scalar($value)
@@ -54,12 +61,5 @@ class DataView implements DataViewComponentInterface
             );
         }
         return (string)$data;
-    }
-
-    public function render()
-    {
-        return $this->renderer === null
-            ? $this->defaultRender()
-            : call_user_func($this->renderer, $this->getData());
     }
 }
