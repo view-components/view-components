@@ -1,6 +1,7 @@
 <?php
 
 namespace ViewComponents\ViewComponents\Service;
+
 use ViewComponents\ViewComponents\Service\Exception\BootstrapException;
 
 /**
@@ -17,7 +18,7 @@ final class Bootstrap
     /** @var  null|ServiceContainer */
     private static $container;
 
-    /** @var string[] */
+    /** @var string[]|ServiceProviderInterface[] */
     private static $serviceProviders = [
         CoreServiceProvider::class
     ];
@@ -41,29 +42,33 @@ final class Bootstrap
      *
      * This method can be used before or after service container initialization.
      *
-     * @param string $serviceProviderClass
+     * @param string|callable $serviceProvider service provider class or callable
      */
-    public static function registerServiceProvider($serviceProviderClass)
+    public static function registerServiceProvider($serviceProvider)
     {
-        if (!is_a($serviceProviderClass, ServiceProviderInterface::class, true)) {
+        if (is_callable($serviceProvider)) {
+            $serviceProvider = new CustomServiceProvider($serviceProvider);
+        } elseif (!is_a($serviceProvider, ServiceProviderInterface::class, true)) {
             throw new BootstrapException(
-                "Error registering service provider: $serviceProviderClass is not valid service provider."
+                "Error registering service provider: $serviceProvider is not valid service provider."
             );
         }
         if (self::$container === null) {
-            self::$serviceProviders[] = $serviceProviderClass;
+            self::$serviceProviders[] = $serviceProvider;
         } else {
             /** @var ServiceProviderInterface $provider */
-            $provider = new $serviceProviderClass;
+            $provider = new $serviceProvider;
             $provider->register(self::$container);
         }
     }
 
     private static function provideServices()
     {
-        foreach(self::$serviceProviders as $serviceProviderClass) {
+        foreach (self::$serviceProviders as $serviceProviderSrc) {
             /** @var  ServiceProviderInterface $serviceProvider */
-            $serviceProvider = new $serviceProviderClass;
+            $serviceProvider = $serviceProviderSrc instanceof ServiceProviderInterface
+                ? $serviceProviderSrc
+                : new $serviceProviderSrc;
             $serviceProvider->register(self::$container);
         }
     }
