@@ -2,13 +2,8 @@
 
 namespace ViewComponents\ViewComponents\Test\Service;
 
-use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
-use ViewComponents\ViewComponents\Rendering\RendererInterface;
-use ViewComponents\ViewComponents\Resource\ResourceManager;
 use ViewComponents\ViewComponents\Service\ServiceContainer;
-use ViewComponents\ViewComponents\Service\ServiceName;
-use ViewComponents\ViewComponents\Service\Services;
 
 class ServiceContainerTest extends PHPUnit_Framework_TestCase
 {
