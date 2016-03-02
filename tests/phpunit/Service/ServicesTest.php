@@ -1,6 +1,6 @@
 <?php
 
-namespace ViewComponents\ViewComponents\Test\Resource;
+namespace ViewComponents\ViewComponents\Test\Service;
 
 use Interop\Container\ContainerInterface;
 use PHPUnit_Framework_TestCase;
