@@ -1,6 +1,7 @@
 language: php
 
 php:
+  - 5.4
   - 5.5
   - 5.6
   - 7.0
@@ -8,22 +9,19 @@ php:
   - nightly
 matrix:
   allow_failures:
-    - php: 7.0
-    - php: hhvm
-    - php: hhvm-nightly
     - php: nightly
 
+# This triggers builds to run on the new TravisCI infrastructure.
+# See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+sudo: false
+
 before_script:
-  - composer self-update
-  - travis_retry composer install --prefer-source --no-interaction --dev
-  - php tests/install.php
-  # Codeception removed (!), phpunit will be used to run acceptance tests
-  # - php -S localhost:9000 tests/webapp/index.php &
-  # - sleep 1  # give server some time to start
-  # - vendor/bin/codecept build
+  - travis_retry composer self-update
+  - travis_retry composer install --prefer-source --no-interaction
 
 script:
   - vendor/bin/phpunit
+  - vendor/bin/phpcs --standard=psr2 src/
   # - vendor/bin/codecept run acceptance
 # after_failure:
   # - cat app/storage/logs/laravel.log
