@@ -15,6 +15,7 @@ class Container implements ContainerComponentInterface
 
     /**
      * Container constructor.
+     *
      * @param array|null $components
      */
     public function __construct(array $components = null)

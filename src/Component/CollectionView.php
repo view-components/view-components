@@ -8,6 +8,9 @@ use ViewComponents\ViewComponents\Common\HasDataTrait;
 use ViewComponents\ViewComponents\Data\DataAcceptorInterface;
 use Traversable;
 
+/**
+ * View component for collection of items.
+ */
 class CollectionView extends Container implements DataViewComponentInterface
 {
     use HasDataTrait;
