@@ -30,9 +30,6 @@ class PaginationControl extends Part implements ControlInterface
 
     protected $operation;
 
-    /** @var  ManagedList|null */
-    private $root;
-
     /** @var  DataProviderInterface|null */
     private $dataProvider;
 
@@ -51,12 +48,6 @@ class PaginationControl extends Part implements ControlInterface
         $this->pageSize = $pageSize;
         parent::__construct($this->makeDefaultView(), 'pagination', 'container');
         $this->dataProvider = $dataProvider;
-    }
-
-    public function attachToCompound(Compound $root)
-    {
-        $this->root = $root;
-        return parent::attachToCompound($root);
     }
 
     public function isManualFormSubmitRequired()

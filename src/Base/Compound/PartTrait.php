@@ -18,6 +18,9 @@ trait PartTrait
      */
     private $destinationParentId;
 
+    /** @var  Compound|null */
+    protected $root;
+
     /**
      * @param string|null $id
      * @return $this
@@ -58,6 +61,10 @@ trait PartTrait
 
     public function attachToCompound(Compound $root)
     {
+        $this->root = $root;
+        if (!$root->getComponents()->contains($this)) {
+            $root->getComponents()->add($this);
+        }
         /** @var PartInterface $this */
         $parentId = $this->getDestinationParentId();
         if ($parentId === Compound::ROOT_ID) {
