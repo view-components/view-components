@@ -49,6 +49,9 @@ class ResourceManager
     }
 
     /**
+     * Returns component that renders html script tag for including specified javascript resource.
+     * Returns component that renders empty string if resource was already included.
+     *
      * @param string $name script URL or alias
      * @return Tag
      */
@@ -74,6 +77,9 @@ class ResourceManager
     }
 
     /**
+     * Returns component that includes CSS resource to html page.
+     * Returns component that renders empty string if resource was already included.
+     *
      * @param string $name CSS URL or alias
      * @param array $attributes
      * @return Tag
