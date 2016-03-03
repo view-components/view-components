@@ -19,7 +19,7 @@
     }
   ],
   "require": {
-    "php": "^5.4||^7",
+    "php": "^5.5||^7",
     "nayjest/manipulator": "^3.0.1",
     "nayjest/tree": "^3",
     "nayjest/collection": "^2.2",
