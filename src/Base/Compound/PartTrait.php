@@ -58,7 +58,7 @@ trait PartTrait
         return $this->destinationParentId;
     }
 
-    public function attachToCompound(Compound $root)
+    public function attachToCompound(Compound $root, $prepend = false)
     {
         $this->root = $root;
         if (!$root->getComponents()->contains($this)) {
@@ -68,7 +68,7 @@ trait PartTrait
         $parentId = $this->getDestinationParentId();
         if ($parentId === Compound::ROOT_ID) {
             if ($this->parent() !== $root) {
-                $root->addChild($this);
+                $root->children()->add($this, $prepend);
                 return;
             }
         } else {
@@ -88,7 +88,7 @@ trait PartTrait
                 );
             }
             if ($this->parent() !== $parent->getContainer()) {
-                $parent->getContainer()->addChild($this);
+                $parent->getContainer()->children()->add($this, $prepend);
                 return;
             }
         }
