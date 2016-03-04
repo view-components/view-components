@@ -2,7 +2,6 @@
 
 namespace ViewComponents\ViewComponents\Base\Compound;
 
-
 use RuntimeException;
 use ViewComponents\ViewComponents\Component\Compound;
 

@@ -44,10 +44,6 @@ interface PartInterface extends ComponentInterface
     /**
      * @return ContainerComponentInterface
      */
-    //public function getInnerContainer();
-
-//    /** @return ComponentInterface */
-//    public function getComponent();
 
     /**
      * @param Compound $root
