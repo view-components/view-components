@@ -87,7 +87,8 @@ class SortingSelectControl extends Part implements ControlInterface
     {
         return $this->fieldOption->hasValue()
         && array_key_exists(
-            $this->fieldOption->getValue(), $this->fields
+            $this->fieldOption->getValue(),
+            $this->fields
         )
         && $this->directionOption->hasValue()
         && in_array(
@@ -104,7 +105,7 @@ class SortingSelectControl extends Part implements ControlInterface
 
     protected function setViewData()
     {
-        $view  = $this->getView();
+        $view = $this->getView();
         if (!$view instanceof DataAcceptorInterface) {
             return;
         }

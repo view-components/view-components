@@ -2,7 +2,6 @@
 
 namespace ViewComponents\ViewComponents\Component;
 
-use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Collection\Extended\ObjectCollection;
 use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
@@ -34,19 +33,19 @@ class Compound implements ContainerComponentInterface
     public function __construct(array $components)
     {
         $this->componentCollection = new ObjectCollection($components);
-        $this->componentCollection->onChange(function(){
+        $this->componentCollection->onChange(function () {
             $this->isTreeReady = false;
         });
-        $this->componentCollection->onItemRemove(function(PartInterface $item) {
+        $this->componentCollection->onItemRemove(function (PartInterface $item) {
             $item->detach();
         });
-        $this->componentCollection->onItemAdd(function(PartInterface $part) {
+        $this->componentCollection->onItemAdd(function (PartInterface $part) {
             if ($this->hasComponent($part->getId())) {
                 $this->removeComponent($part->getId());
             }
         });
         $this->initializeCollection([]);
-        $this->childrenInternal()->onItemAdd(function($item) {
+        $this->childrenInternal()->onItemAdd(function ($item) {
             if ($item instanceof PartInterface && !$this->componentCollection->contains($item)) {
                 $this->componentCollection->add($item);
             }
@@ -129,7 +128,7 @@ class Compound implements ContainerComponentInterface
      */
     public function addComponents($components, $defaultParent = null)
     {
-        foreach($components as $component) {
+        foreach ($components as $component) {
             $this->setComponent($component, null, $defaultParent);
         }
         return $this;

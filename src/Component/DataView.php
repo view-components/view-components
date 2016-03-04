@@ -2,7 +2,6 @@
 
 namespace ViewComponents\ViewComponents\Component;
 
-
 use Nayjest\Tree\ChildNodeTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
 use ViewComponents\ViewComponents\Common\HasDataTrait;

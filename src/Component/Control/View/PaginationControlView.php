@@ -18,8 +18,7 @@ class PaginationControlView extends TemplateView
         $templateName = 'controls/pagination',
         $linkTemplateName = 'controls/pagination/link',
         RendererInterface $renderer = null
-    )
-    {
+    ) {
         parent::__construct($templateName, [], $renderer);
         $this->linkTemplateName = $linkTemplateName;
     }

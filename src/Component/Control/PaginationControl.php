@@ -42,8 +42,7 @@ class PaginationControl extends Part implements ControlInterface
         InputOption $page,
         $pageSize,
         DataProviderInterface $dataProvider = null
-    )
-    {
+    ) {
         $this->pageInputOption = $page;
         $this->pageSize = $pageSize;
         parent::__construct($this->makeDefaultView(), 'pagination', 'container');
@@ -144,7 +143,7 @@ class PaginationControl extends Part implements ControlInterface
 
     protected function setViewData()
     {
-        $view  = $this->getView();
+        $view = $this->getView();
         if (!$view instanceof DataAcceptorInterface) {
             return;
         }

@@ -29,13 +29,17 @@ class CollectionView extends Container implements DataViewComponentInterface
         $dataCollection = null,
         $components = [],
         callable $dataInjector = null
-    )
-    {
+    ) {
         parent::__construct($components);
         $this->setData($dataCollection ?: []);
         $this->dataInjector = $dataInjector;
     }
 
+    /**
+     * Renders component and returns output.
+     *
+     * @return string
+     */
     public function render()
     {
         $out = '';

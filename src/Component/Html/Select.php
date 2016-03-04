@@ -17,8 +17,7 @@ class Select extends Tag
         array $attributes = [],
         array $options = [],
         $selectedValue = null
-    )
-    {
+    ) {
         parent::__construct(
             'select',
             $attributes,
@@ -32,8 +31,7 @@ class Select extends Tag
     private function setOptionSelected($selectedValue)
     {
         /** @var TagInterface $option */
-        foreach($this->children() as $option)
-        {
+        foreach ($this->children() as $option) {
             if (!$option instanceof TagInterface) {
                 continue;
             }
@@ -47,8 +45,7 @@ class Select extends Tag
     private static function makeOptionComponents($options)
     {
         $components = [];
-        foreach($options as $value => $label)
-        {
+        foreach ($options as $value => $label) {
             if ($label instanceof ChildNodeInterface) {
                 $components[] = $label;
             } else {

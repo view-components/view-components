@@ -1,7 +1,6 @@
 <?php
 namespace ViewComponents\ViewComponents\Component\Html;
 
-
 use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 use ViewComponents\ViewComponents\Base\Html\TagInterface;
@@ -24,8 +23,7 @@ class Tag implements ContainerComponentInterface, TagInterface
         $tagName = 'div',
         array $attributes = [],
         $components = []
-    )
-    {
+    ) {
         $this->setTagName($tagName);
         $this->setAttributes($attributes);
         $this->children()->set($components);

@@ -21,8 +21,7 @@ class Json implements DataViewComponentInterface
     public function __construct(
         $data = null,
         $options = JSON_PRETTY_PRINT
-    )
-    {
+    ) {
         $this->setData($data);
         $this->options = $options;
     }

@@ -37,8 +37,7 @@ class Layout extends Compound implements DataAcceptorInterface
         $template,
         array $data = [],
         ResourceManager $resourceManager = null
-    )
-    {
+    ) {
         parent::__construct([]);
         $this->setData($data);
         $this->setTemplate($template);

@@ -1,6 +1,7 @@
 <?php
 
 namespace ViewComponents\ViewComponents\Component\Layout;
+
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartTrait;
 use ViewComponents\ViewComponents\Component\Container;

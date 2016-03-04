@@ -12,7 +12,6 @@ use ViewComponents\ViewComponents\Data\Operation\DummyOperation;
 use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
 use ViewComponents\ViewComponents\Input\InputOption;
 
-
 class PageSizeSelectControl extends Part implements ControlInterface
 {
 
@@ -31,8 +30,7 @@ class PageSizeSelectControl extends Part implements ControlInterface
         InputOption $inputOption = null,
         array $variants = [50, 100, 300, 1000],
         PaginationControl $pagination = null
-    )
-    {
+    ) {
         $this->inputOption = $inputOption;
         $this->variants = $variants;
         parent::__construct($this->makeDefaultView(), 'page_size_select', 'control_container');

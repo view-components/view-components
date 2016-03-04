@@ -11,7 +11,6 @@ use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
 use ViewComponents\ViewComponents\Input\InputOption;
 use Stringy\StaticStringy;
 
-
 class FilterControl extends Part implements ControlInterface
 {
     /** @var string */
@@ -32,8 +31,7 @@ class FilterControl extends Part implements ControlInterface
         $field,
         $operator = FilterOperation::OPERATOR_EQ,
         InputOption $input
-    )
-    {
+    ) {
         $this->field = $field;
         $this->operator = $operator;
         $this->valueOption = $input;
@@ -89,7 +87,7 @@ class FilterControl extends Part implements ControlInterface
 
     protected function setViewData()
     {
-        $view  = $this->getView();
+        $view = $this->getView();
         if (!$view instanceof DataAcceptorInterface) {
             return;
         }
