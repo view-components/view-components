@@ -99,12 +99,16 @@ class Compound implements ContainerComponentInterface
      */
     public function setComponent(ComponentInterface $component, $id = null, $defaultParent = null)
     {
-        $part = $component instanceof PartInterface ? $component : new Part($component);
-        if ($id !== null) {
-            $part->setId($id);
-        }
-        if (!$part->getDestinationParentId() && $defaultParent !== null) {
-            $part->setDestinationParentId($defaultParent);
+        if ($component instanceof PartInterface) {
+            $part = $component;
+            if ($id !== null) {
+                $part->setId($id);
+            }
+            if (!$part->getDestinationParentId() && $defaultParent !== null) {
+                $part->setDestinationParentId($defaultParent);
+            }
+        } else {
+            $part = new Part($component, $id, $defaultParent ?: Compound::ROOT_ID);
         }
         $this->getComponents()->add($part);
         return $this;
@@ -118,6 +122,7 @@ class Compound implements ContainerComponentInterface
      */
     public function removeComponent($id)
     {
+        /** @var PartInterface $component */
         $component = $this->getComponents()->findByProperty('id', $id, true);
         if ($component) {
             $this->getComponents()->remove($component);
@@ -139,6 +144,8 @@ class Compound implements ContainerComponentInterface
     }
 
     /**
+     * Returns true if compound contains component with specified ID.
+     *
      * @param string $id
      * @return bool
      */
