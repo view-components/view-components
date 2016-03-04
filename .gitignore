@@ -4,6 +4,6 @@ composer.lock
 apigen.phar
 phpunit.phar
 build
-tests/.env
-tests/db.sqlite
 phpunit.xml
+.env
+*.sqlite

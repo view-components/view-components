@@ -48,10 +48,13 @@
   "autoload-dev": {
     "psr-4": {
       "ViewComponents\\ViewComponents\\Test\\": "tests/phpunit",
-      "ViewComponents\\ViewComponents\\Demo\\": "tests/webapp"
+      "ViewComponents\\ViewComponents\\WebApp\\": "tests/webapp"
     }
   },
   "scripts": {
+    "post-install-cmd": [
+      "ViewComponents\\ViewComponents\\Installer::postComposerInstall"
+    ],
     "serve": "serve",
     "test": "phpunit"
   },

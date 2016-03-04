@@ -1,6 +1,7 @@
 <?php
-namespace ViewComponents\ViewComponents\Demo;
+namespace ViewComponents\ViewComponents\WebApp;
 
+use ViewComponents\TestingHelpers\Application\Http\DefaultLayoutTrait;
 use ViewComponents\ViewComponents\Component\CollectionView;
 use ViewComponents\ViewComponents\Component\Compound;
 use ViewComponents\ViewComponents\Component\Control\FilterControl;
@@ -21,27 +22,26 @@ use ViewComponents\ViewComponents\Data\ArrayDataProvider;
 use ViewComponents\ViewComponents\Data\DbTableDataProvider;
 use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
 use ViewComponents\ViewComponents\Data\Operation\SortOperation;
-use ViewComponents\ViewComponents\Demo\Components\PersonView;
+use ViewComponents\ViewComponents\WebApp\Components\PersonView;
 use ViewComponents\ViewComponents\Rendering\SimpleRenderer;
-use ViewComponents\ViewComponents\Resource\AliasRegistry;
-use ViewComponents\ViewComponents\Resource\IncludedResourcesRegistry;
-use ViewComponents\ViewComponents\Resource\ResourceManager;
 use ViewComponents\ViewComponents\Customization\Bootstrap\BootstrapStyling;
 use ViewComponents\ViewComponents\Service\Services;
 
-class Controller extends AbstractController
+class Controller
 {
+    use DefaultLayoutTrait;
+
     protected function getUsersData()
     {
-        return include(dirname(__DIR__) . '/fixtures/users.php');
+        return include(TESTING_HELPERS_DIR . '/resources/fixtures/users.php');
     }
 
     protected function getDataProvider($operations = [])
     {
         return (isset($_GET['use-db']) && $_GET['use-db'])
             ? new DbTableDataProvider(
-                db_connection(),
-                'users',
+                \ViewComponents\TestingHelpers\dbConnection(),
+                'test_users',
                 $operations
             )
             : new ArrayDataProvider(
@@ -50,18 +50,15 @@ class Controller extends AbstractController
             );
     }
 
-       protected function getRenderer()
-    {
-        return new SimpleRenderer([__DIR__ . '/resources/views']);
-    }
-
     public function index()
     {
-        $out = '';
-        $out .= $this->renderMenu();
-        $out .= '<h1>ViewComponents Test Application</h1><h2>Index Page</h2>';
+        return $this->page('index', 'Index page');
+    }
 
-        return $out;
+    public function demo0()
+    {
+        $this->layout()->addChild(new DataView("[I'm component attached directly to layout]"));
+        return $this->page(null, 'Attaching components directly to layout');
     }
 
     /**
@@ -71,12 +68,8 @@ class Controller extends AbstractController
      */
     public function demo1()
     {
-        $data = $this->getUsersData();
-        $view = new Container([
-            new DataView('<h1>Users List</h1>'),
-            new CollectionView($data, [new PersonView])
-        ]);
-        return $this->renderMenu() . $view->render();
+        $view = new CollectionView($this->getUsersData(), [new PersonView]);
+        return $this->page($view, 'Basic usage of CollectionView component');
     }
 
     /**
@@ -95,7 +88,7 @@ class Controller extends AbstractController
             $html->hr(),
             $html->div('Footer')
         ]);
-        return $this->renderMenu() . $view->render();
+        return $this->page($view, 'HtmlBuilder');
     }
 
     /**
@@ -116,7 +109,7 @@ class Controller extends AbstractController
                 ),
                 [new PersonView])
         ]);
-        return $this->renderMenu() . $view->render();
+        return $this->page($view, 'Array Data Provider with sorting');
     }
 
     /**
@@ -155,7 +148,7 @@ class Controller extends AbstractController
         ]);
         $provider->operations()->add($filter1->getOperation());
         $provider->operations()->add($filter2->getOperation());
-        return $this->renderMenu() . $view->render();
+        return $this->page($view, 'Filtering controls');
     }
 
 
@@ -180,7 +173,7 @@ class Controller extends AbstractController
                 new InputOption('role_filter', $_GET)
             ),
         ]);
-        return $this->renderMenu() . $list->render();
+        return $this->page($list, 'Filtering controls in managed list');
     }
 
     /**
@@ -225,7 +218,7 @@ class Controller extends AbstractController
         $styling = new BootstrapStyling();
         $styling->apply($list);
 
-        return $this->renderMenu() . $list->render();
+        return $this->page($list, 'Filtering controls in managed list + styling + pagination + InputSource');
     }
 
     /**
@@ -249,9 +242,12 @@ class Controller extends AbstractController
         );
         $styling = new BootstrapStyling();
         $styling->apply($list, $list->getComponent('container'));
-        return $this->renderMenu() . $list->render();
+        return $this->page($list, 'Hiding submit button automatically');
     }
 
+    /**
+     * @return string
+     */
     public function demo5()
     {
         $panel = new Tag('div', ['class' => 'panel panel-success']);
@@ -274,7 +270,7 @@ class Controller extends AbstractController
         $styling->apply($container);
         $compound->addChild(new DataView('Text added after footer'));
 
-        return $this->renderMenu() . $container->render();
+        return $this->page($compound, 'Usage of Compounds');
     }
 
     /**
@@ -284,10 +280,15 @@ class Controller extends AbstractController
      */
     public function demo6()
     {
-        $renderer = $this->getRenderer();
-        return $this->renderMenu()
-        . $renderer->render('demo/template1')
-        . $renderer->render('demo/template_with_var', ['var' => 'ok']);
+        $renderer = new SimpleRenderer([
+            __DIR__ . '/resources/views'
+        ]);
+        return $this->page(
+            $renderer->render('demo/template1')
+            . $renderer->render('demo/template_with_var', ['var' => 'ok']),
+            'Renderer Usage'
+        );
+
     }
 
     /**
@@ -296,8 +297,10 @@ class Controller extends AbstractController
      */
     public function demo7()
     {
-        $renderer = $this->getRenderer();
-        $c = new TemplateView('demo/template_view', [], $renderer);
-        return $this->renderMenu() . $c->render();
+        $renderer = new SimpleRenderer([
+            __DIR__ . '/resources/views'
+        ]);
+        $view = new TemplateView('demo/template_view', [], $renderer);
+        return $this->page($view, 'Template view');
     }
 }

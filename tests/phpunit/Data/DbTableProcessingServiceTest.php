@@ -13,8 +13,8 @@ class DbTableProcessingServiceTest extends AbstractProcessingServiceTest
     public function setUp()
     {
         $this->data = new Query(
-            \ViewComponents\ViewComponents\Demo\db_connection(),
-            'users'
+            \ViewComponents\TestingHelpers\dbConnection(),
+            'test_users'
         );
         $this->operations = new OperationCollection();
         $this->service = new DbTableProcessingService(

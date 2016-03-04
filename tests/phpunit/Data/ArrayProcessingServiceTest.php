@@ -10,7 +10,7 @@ class ArrayProcessingServiceTest extends AbstractProcessingServiceTest
 {
     public function setUp()
     {
-        $this->data = include FIXTURES_DIR . '/users.php';
+        $this->data = include TESTING_HELPERS_DIR . '/resources/fixtures/users.php';
         $this->operations = new OperationCollection();
         $this->service = new ArrayProcessingService(
             new ArrayProcessorResolver(),

@@ -1,5 +1,5 @@
 <?php
-namespace ViewComponents\ViewComponents\Demo\Components;
+namespace ViewComponents\ViewComponents\WebApp\Components;
 
 class Person
 {
