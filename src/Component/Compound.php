@@ -4,11 +4,11 @@ namespace ViewComponents\ViewComponents\Component;
 
 use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Collection\Extended\ObjectCollection;
+use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 use ViewComponents\ViewComponents\Base\ViewComponentInterface;
-use ViewComponents\ViewComponents\Component\Debug\SymfonyVarDump;
 
 /**
  * Compound contains hierarchy configuration and plain components list.
@@ -92,6 +92,27 @@ class Compound implements ContainerComponentInterface
         return ($extractView && $part instanceof Part) ? $part->getView() : $part;
     }
 
+    /**
+     * @param ComponentInterface|PartInterface $component
+     * @param string|null $id
+     * @param string|null $defaultParent
+     * @return $this
+     */
+    public function setComponent(ComponentInterface $component, $id = null, $defaultParent = null)
+    {
+        $part = $component instanceof PartInterface ? $component : new Part($component);
+        $id && $part->setId($id);
+        !$part->getDestinationParentId() && $defaultParent && $part->setDestinationParentId($defaultParent);
+        $this->getComponents()->add($part);
+        return $this;
+    }
+
+    /**
+     * Removes component from compound.
+     *
+     * @param string $id
+     * @return $this
+     */
     public function removeComponent($id)
     {
         $component = $this->getComponents()->findByProperty('id', $id, true);
@@ -101,18 +122,23 @@ class Compound implements ContainerComponentInterface
         return $this;
     }
 
-    public function addComponent(PartInterface $component)
+    /**
+     * @param ComponentInterface[] $components
+     * @param string|null $defaultParent
+     * @return $this
+     */
+    public function addComponents($components, $defaultParent = null)
     {
-        $this->getComponents()->add($component);
+        foreach($components as $component) {
+            $this->setComponent($component, null, $defaultParent);
+        }
         return $this;
     }
 
-    public function addComponents($components)
-    {
-        $this->getComponents()->addMany($components);
-        return $this;
-    }
-
+    /**
+     * @param string $id
+     * @return bool
+     */
     public function hasComponent($id)
     {
         return (bool)$this->getComponents()->findByProperty('id', $id, true);

@@ -1,6 +1,7 @@
 <?php
 namespace ViewComponents\ViewComponents\Component;
 
+use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Collection\Extended\ObjectCollection;
 use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
@@ -20,10 +21,19 @@ class ManagedList extends Compound implements DataViewComponentInterface
 {
     use HasDataTrait;
 
+    const CONTAINER_ID = 'container';
+    const FORM_ID = 'form';
+    const CONTROL_CONTAINER_ID = 'control_container';
+    const SUBMIT_BUTTON_ID = 'submit_button';
+    const LIST_CONTAINER_ID = 'list_container';
+    const COLLECTION_VIEW_ID = 'collection_view';
+    const RECORD_VIEW_ID = 'record_view';
+
     private $isOperationsApplied = false;
 
     /**
      * ManagedList constructor.
+     *
      * @param null $dataProvider
      * @param PartInterface[] $components
      */
@@ -34,7 +44,9 @@ class ManagedList extends Compound implements DataViewComponentInterface
     }
 
     /**
-     * @return ControlInterface[]
+     * Returns collection of controls (readonly).
+     *
+     * @return ControlInterface[]|ReadonlyObjectCollection
      */
     public function getControls()
     {
@@ -43,75 +55,77 @@ class ManagedList extends Compound implements DataViewComponentInterface
 
     public function getContainer()
     {
-        return $this->getComponent('container');
+        return $this->getComponent(static::CONTAINER_ID);
     }
 
     public function setContainer(ComponentInterface $component)
     {
-        return $this->setComponent($component, 'container', Compound::ROOT_ID);
+        return $this->setComponent($component, static::CONTAINER_ID, static::ROOT_ID);
     }
 
     public function getForm()
     {
-        return $this->getComponent('form');
+        return $this->getComponent(static::FORM_ID);
     }
 
     public function setForm(ComponentInterface $form)
     {
-        return $this->setComponent($form, 'form', 'container');
+        return $this->setComponent($form, static::FORM_ID, static::CONTAINER_ID);
     }
 
     public function getControlContainer()
     {
-        return $this->getComponent('control_container');
+        return $this->getComponent(static::CONTROL_CONTAINER_ID);
     }
 
     public function setControlContainer(ComponentInterface $component)
     {
-        return $this->setComponent($component, 'control_container', 'form');
+        return $this->setComponent($component, static::CONTROL_CONTAINER_ID, static::FORM_ID);
     }
 
     public function getSubmitButton()
     {
-        return $this->getComponent('submit_button');
+        return $this->getComponent(static::SUBMIT_BUTTON_ID);
     }
 
     public function setSubmitButton(ComponentInterface $component)
     {
-        return $this->setComponent($component, 'submit_button', 'form');
+        return $this->setComponent($component, static::SUBMIT_BUTTON_ID, static::FORM_ID);
     }
 
     public function getListContainer()
     {
-        return $this->getComponent('list_container');
+        return $this->getComponent(static::LIST_CONTAINER_ID);
     }
 
     public function setListContainer(ComponentInterface $component)
     {
-        return $this->setComponent($component, 'list_container', 'container');
+        return $this->setComponent($component, static::LIST_CONTAINER_ID, static::CONTAINER_ID);
     }
 
     public function getCollectionView()
     {
-        return $this->getComponent('collection_view');
+        return $this->getComponent(static::COLLECTION_VIEW_ID);
     }
 
     public function setCollectionView(ComponentInterface $component)
     {
-        return $this->setComponent($component, 'collection_view', 'list_container');
+        return $this->setComponent($component, static::COLLECTION_VIEW_ID, static::LIST_CONTAINER_ID);
     }
 
     public function getRecordView()
     {
-        return $this->getComponent('record_view');
+        return $this->getComponent(static::RECORD_VIEW_ID);
     }
 
     public function setRecordView(ComponentInterface $component)
     {
-        return $this->setComponent($component, 'record_view', 'collection_view');
+        return $this->setComponent($component, static::RECORD_VIEW_ID, static::COLLECTION_VIEW_ID);
     }
 
     /**
+     * Sets data provider.
+     *
      * @param DataProviderInterface|null $dataProvider
      * @return $this
      */
@@ -123,13 +137,20 @@ class ManagedList extends Compound implements DataViewComponentInterface
     }
 
     /**
-     * @return null|DataProviderInterface
+     * Returns data provider.
+     *
+     * @return DataProviderInterface|null
      */
     public function getDataProvider()
     {
         return $this->getData();
     }
 
+    /**
+     * Renders component and returns output.
+     *
+     * @return string
+     */
     public function render()
     {
         $this->prepare();
@@ -151,9 +172,12 @@ class ManagedList extends Compound implements DataViewComponentInterface
         $this->hideSubmitButtonIfNotUsed();
     }
 
+    /**
+     * Hides 'submit_button' component if it's not required by another components.
+     */
     protected function hideSubmitButtonIfNotUsed()
     {
-        $submit = $this->getComponent('submit_button');
+        $submit = $this->getComponent(static::SUBMIT_BUTTON_ID);
         if (!$submit) {
             return;
         }
@@ -184,16 +208,6 @@ class ManagedList extends Compound implements DataViewComponentInterface
         };
     }
 
-    protected function setComponent($component, $id = null, $defaultParent = null)
-    {
-        $part = $component instanceof PartInterface ? $component : new Part($component);
-
-        $id && $part->setId($id);
-        !$part->getDestinationParentId() && $defaultParent && $part->setDestinationParentId($defaultParent);
-        $this->getComponents()->add($part);
-        return $this;
-    }
-
     /**
      * @param PartInterface[] $components
      * @return array
@@ -205,15 +219,20 @@ class ManagedList extends Compound implements DataViewComponentInterface
             ->indexByProperty('id');
     }
 
+    /**
+     * Creates and returns default compound components.
+     *
+     * @return PartInterface[]
+     */
     protected function makeDefaultComponents()
     {
         return [
-            new Part(new Tag('div'), 'container', 'root'),
-            new Part(new Tag('form'), 'form', 'container'),
-            new Part(new Tag('span'), 'control_container', 'form'),
-            new Part(new Tag('input', ['type' => 'submit']), 'submit_button', 'form'),
-            new Part(new Container(), 'list_container', 'container'),
-            new Part(new CollectionView(), 'collection_view', 'list_container'),
+            new Part(new Tag('div'), static::CONTAINER_ID, static::ROOT_ID),
+            new Part(new Tag('form'), static::FORM_ID, static::CONTAINER_ID),
+            new Part(new Tag('span'), static::CONTROL_CONTAINER_ID, static::FORM_ID),
+            new Part(new Tag('input', ['type' => 'submit']), static::SUBMIT_BUTTON_ID, static::FORM_ID),
+            new Part(new Container(), static::LIST_CONTAINER_ID, static::CONTAINER_ID),
+            new Part(new CollectionView(), static::COLLECTION_VIEW_ID, static::LIST_CONTAINER_ID),
             new RecordView(new Json()),
         ];
     }
