@@ -56,10 +56,7 @@ abstract class AbstractProcessingService implements ProcessingServiceInterface
      */
     public function getProcessedData()
     {
-        if (
-            $this->processedData === null
-            || $this->operations->isChanged()
-        ) {
+        if ($this->processedData === null || $this->operations->isChanged()) {
             $this->processedData = $this->process($this->dataSource);
         }
         return $this->processedData;

@@ -23,6 +23,10 @@ class FilterControl extends Part implements ControlInterface
     private $valueOption;
 
     /**
+     * Constructor.
+     *
+     * @todo make inputOption second argument or provide default option based on field name
+     *
      * @param string $field
      * @param string $operator
      * @param InputOption $input
@@ -30,7 +34,7 @@ class FilterControl extends Part implements ControlInterface
     public function __construct(
         $field,
         $operator = FilterOperation::OPERATOR_EQ,
-        InputOption $input
+        InputOption $input = null
     ) {
         $this->field = $field;
         $this->operator = $operator;

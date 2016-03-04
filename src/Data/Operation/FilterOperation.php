@@ -26,8 +26,7 @@ class FilterOperation implements OperationInterface
         $field = null,
         $operator = self::OPERATOR_EQ,
         $value = null
-    )
-    {
+    ) {
         $this->setField($field);
         $this->setValue($value);
         $this->setOperator($operator);

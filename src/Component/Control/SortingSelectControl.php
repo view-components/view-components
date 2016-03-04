@@ -29,8 +29,7 @@ class SortingSelectControl extends Part implements ControlInterface
         array $fields,
         InputOption $fieldOption,
         InputOption $directionOption
-    )
-    {
+    ) {
         $this->fields = $fields;
         $this->fieldOption = $fieldOption;
         $this->directionOption = $directionOption;
