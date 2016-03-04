@@ -8,7 +8,7 @@ use Traversable;
 
 abstract class AbstractProcessingService implements ProcessingServiceInterface
 {
-    /** @var OperationsCollection  */
+    /** @var OperationCollection  */
     protected $operations;
 
     /** @var ProcessorResolverInterface  */
@@ -36,15 +36,14 @@ abstract class AbstractProcessingService implements ProcessingServiceInterface
 
     /**
      * @param ProcessorResolverInterface $processorResolver
-     * @param OperationsCollection $operations
+     * @param OperationCollection $operations
      * @param $dataSource
      */
     public function __construct(
         ProcessorResolverInterface $processorResolver,
         OperationCollection $operations,
         $dataSource
-    )
-    {
+    ) {
         $this->operations = $operations;
         $this->processorResolver = $processorResolver;
         $this->dataSource = $dataSource;

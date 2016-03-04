@@ -10,7 +10,7 @@ abstract class AbstractDataProvider implements DataProviderInterface
     /** @var ProcessingServiceInterface */
     protected $processingService;
 
-    /** @var OperationsCollection */
+    /** @var OperationCollection */
     private $operationsCollection;
 
     public function count()

@@ -33,26 +33,6 @@ trait HasTemplateTrait
         return $this->theme;
     }
 
-//    private function isTemplatedView($object)
-//    {
-//        return $object instanceof HasTemplateInterface;
-//    }
-
-//    protected function resolveTheme()
-//    {
-//        if ($this->getTheme() !== null) {
-//            return $this->getTheme();
-//        }
-//        /**
-//         * @var HasTemplateInterface|null $parent
-//         */
-//        $parent = $this->findClosestParent([$this, 'isTemplatedView']);
-//        if ($parent !== null) {
-//            return $parent->getTheme();
-//        }
-//        return null;
-//    }
-
     /**
      * @param string $template
      * @return $this
@@ -80,9 +60,4 @@ trait HasTemplateTrait
         }
         return $this->template;
     }
-//
-//    protected function getViewData()
-//    {
-//        return ['component' => $this];
-//    }
 }

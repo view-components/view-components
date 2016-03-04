@@ -9,7 +9,7 @@ use ViewComponents\ViewComponents\Data\Processor\AbstractPaginateProcessor;
 class PaginateProcessor extends AbstractPaginateProcessor
 {
     /**
-     * @param Query  $src
+     * @param Query $src
      * @param OperationInterface|PaginateOperation $operation
      * @return Query
      */

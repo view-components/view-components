@@ -4,7 +4,6 @@ namespace ViewComponents\ViewComponents\Component\Control;
 
 use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
-use ViewComponents\ViewComponents\Component\Compound;
 use ViewComponents\ViewComponents\Component\Control\View\PaginationControlView;
 use ViewComponents\ViewComponents\Component\ManagedList;
 use ViewComponents\ViewComponents\Data\DataAcceptorInterface;
