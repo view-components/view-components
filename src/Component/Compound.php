@@ -53,7 +53,7 @@ class Compound implements ContainerComponentInterface
     }
 
     /**
-     * @return ObjectCollection
+     * @return ObjectCollection|PartInterface[]
      */
     public function getComponents()
     {
@@ -100,8 +100,12 @@ class Compound implements ContainerComponentInterface
     public function setComponent(ComponentInterface $component, $id = null, $defaultParent = null)
     {
         $part = $component instanceof PartInterface ? $component : new Part($component);
-        $id && $part->setId($id);
-        !$part->getDestinationParentId() && $defaultParent && $part->setDestinationParentId($defaultParent);
+        if ($id !== null) {
+            $part->setId($id);
+        }
+        if (!$part->getDestinationParentId() && $defaultParent !== null) {
+            $part->setDestinationParentId($defaultParent);
+        }
         $this->getComponents()->add($part);
         return $this;
     }
