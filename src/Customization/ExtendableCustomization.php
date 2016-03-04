@@ -18,10 +18,9 @@ class ExtendableCustomization extends AbstractRecursiveCustomization
 
     protected function applyInternal(ComponentInterface $component)
     {
-        foreach($this->callbacks as $class => $callbacks)
-        {
+        foreach ($this->callbacks as $class => $callbacks) {
             if ($component instanceof $class) {
-                foreach($callbacks as $cb) {
+                foreach ($callbacks as $cb) {
                     call_user_func($cb, $component);
                 }
             }

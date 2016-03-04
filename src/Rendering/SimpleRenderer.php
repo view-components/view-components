@@ -2,7 +2,6 @@
 
 namespace ViewComponents\ViewComponents\Rendering;
 
-
 use InvalidArgumentException;
 
 /**

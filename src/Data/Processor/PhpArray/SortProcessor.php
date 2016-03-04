@@ -9,6 +9,8 @@ use mp;
 class SortProcessor implements ProcessorInterface
 {
     /**
+     * Applies operation to source and returns modified source.
+     *
      * @param $src
      * @param OperationInterface|SortOperation $operation
      * @return mixed

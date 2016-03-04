@@ -2,11 +2,12 @@
 
 namespace ViewComponents\ViewComponents\Rendering;
 
-
 interface RendererInterface
 {
     /**
-     * @param string $template
+     * Renders template and returns output.
+     *
+     * @param string $template template name
      * @param array $viewData
      * @return string
      */

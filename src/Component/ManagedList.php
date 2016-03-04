@@ -184,9 +184,11 @@ class ManagedList extends Compound implements DataViewComponentInterface
         if (!$this
             ->getChildrenRecursive()
             ->filterByProperty('manual_form_submit_required', true, true)
-            ->isEmpty()) {
+            ->isEmpty()
+        ) {
             return;
         }
+        // @todo use correct way hide/detach component
         $submit->parent()->setView(null);
     }
 
@@ -203,7 +205,7 @@ class ManagedList extends Compound implements DataViewComponentInterface
     protected function makeDataInjector()
     {
         $record = $this->getComponent('record_view');
-        return function($row) use ($record) {
+        return function ($row) use ($record) {
             $record->setData($row);
         };
     }

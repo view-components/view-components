@@ -9,5 +9,4 @@ abstract class AbstractPaginateProcessor implements ProcessorInterface
     {
         return ($operation->getPageNumber() - 1) * $operation->getPageSize();
     }
-
 }

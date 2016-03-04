@@ -9,6 +9,8 @@ use ViewComponents\ViewComponents\Data\Processor\AbstractPaginateProcessor;
 class PaginateProcessor extends AbstractPaginateProcessor
 {
     /**
+     * Applies operation to source and returns modified source.
+     *
      * @param Query $src
      * @param OperationInterface|PaginateOperation $operation
      * @return Query

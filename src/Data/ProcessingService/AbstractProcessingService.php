@@ -8,10 +8,10 @@ use Traversable;
 
 abstract class AbstractProcessingService implements ProcessingServiceInterface
 {
-    /** @var OperationCollection  */
+    /** @var OperationCollection */
     protected $operations;
 
-    /** @var ProcessorResolverInterface  */
+    /** @var ProcessorResolverInterface */
     protected $processorResolver;
 
     /** @var  mixed */
@@ -35,6 +35,8 @@ abstract class AbstractProcessingService implements ProcessingServiceInterface
     abstract protected function afterOperations($data);
 
     /**
+     * Constructor.
+     *
      * @param ProcessorResolverInterface $processorResolver
      * @param OperationCollection $operations
      * @param $dataSource

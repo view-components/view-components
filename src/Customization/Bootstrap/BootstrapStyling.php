@@ -65,7 +65,7 @@ class BootstrapStyling extends ExtendableCustomization
                 'submit_button' => "btn btn-primary {$this->options->buttonSize}",
                 'table' => $this->options->tableStyle
             ];
-            foreach($classes as $componentId => $class) {
+            foreach ($classes as $componentId => $class) {
                 $this->tryAddClass($list->getComponent($componentId), $class);
             }
         });

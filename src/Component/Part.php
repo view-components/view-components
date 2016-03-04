@@ -18,8 +18,7 @@ class Part extends ViewAggregate implements ContainerPartInterface
         ViewComponentInterface $view = null,
         $id = null,
         $destinationParentId = Compound::ROOT_ID
-    )
-    {
+    ) {
         $this->id = $id;
         $this->destinationParentId = $destinationParentId;
         parent::__construct($view);

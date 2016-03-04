@@ -48,7 +48,7 @@ class ServiceContainer implements ContainerInterface
      */
     public function get($id)
     {
-        if(!$this->has($id)) {
+        if (!$this->has($id)) {
             throw new Exception\NotFoundException;
         }
         if (!$this->isReady($id)) {
@@ -70,7 +70,7 @@ class ServiceContainer implements ContainerInterface
             throw new Exception\NotFoundException;
         }
         $oldCallback = $this->callbacks[$id];
-        $this->callbacks[$id] = function() use ($oldCallback, $callback, $id) {
+        $this->callbacks[$id] = function () use ($oldCallback, $callback, $id) {
             if (!$this->isReady($id)) {
                 $thisFunction = $this->callbacks[$id];
                 $this->callbacks[$id] = $oldCallback;

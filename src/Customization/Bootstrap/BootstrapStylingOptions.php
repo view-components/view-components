@@ -2,7 +2,6 @@
 
 namespace ViewComponents\ViewComponents\Customization\Bootstrap;
 
-
 class BootstrapStylingOptions
 {
     public $buttonSize = '';

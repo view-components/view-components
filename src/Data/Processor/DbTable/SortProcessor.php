@@ -10,6 +10,8 @@ use ViewComponents\ViewComponents\Data\Processor\ProcessorInterface;
 class SortProcessor implements ProcessorInterface
 {
     /**
+     * Applies operation to source and returns modified source.
+     *
      * @param Query $src
      * @param OperationInterface|SortOperation $operation
      * @return Query

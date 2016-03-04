@@ -10,6 +10,8 @@ use ViewComponents\ViewComponents\Data\Processor\ProcessorInterface;
 class FilterProcessor implements ProcessorInterface
 {
     /**
+     * Applies operation to source and returns modified source.
+     *
      * @param Query $src
      * @param OperationInterface|FilterOperation $operation
      * @return Query
@@ -23,5 +25,4 @@ class FilterProcessor implements ProcessorInterface
         $src->bindings[':' . $field] = $expected;
         return $src;
     }
-
 }

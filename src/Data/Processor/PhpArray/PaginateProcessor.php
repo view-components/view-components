@@ -8,7 +8,9 @@ use ViewComponents\ViewComponents\Data\Processor\AbstractPaginateProcessor;
 class PaginateProcessor extends AbstractPaginateProcessor
 {
     /**
-     * @param array $src
+     * Applies operation to source and returns modified source.
+     *
+     * @param $src
      * @param OperationInterface|PaginateOperation $operation
      * @return mixed
      */

@@ -1,7 +1,6 @@
 <?php
 namespace ViewComponents\ViewComponents\Data\Operation;
 
-
 class SortOperation implements OperationInterface
 {
     const ASC = 'asc';

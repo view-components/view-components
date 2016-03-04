@@ -1,7 +1,6 @@
 <?php
 namespace ViewComponents\ViewComponents\Rendering;
 
-
 trait ViewTrait
 {
     abstract public function render();

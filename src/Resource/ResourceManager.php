@@ -23,8 +23,7 @@ class ResourceManager
         AliasRegistry $js,
         AliasRegistry $css,
         IncludedResourcesRegistry $included
-    )
-    {
+    ) {
         $this->jsRegistry = $js;
         $this->cssRegistry = $css;
         $this->included = $included;
@@ -45,7 +44,7 @@ class ResourceManager
      */
     protected static function isCssUrl($name)
     {
-        return strpos($name, '.css') !== false  || strpos($name, '//') !== false;
+        return strpos($name, '.css') !== false || strpos($name, '//') !== false;
     }
 
     /**

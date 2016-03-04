@@ -1,7 +1,6 @@
 <?php
 namespace ViewComponents\ViewComponents\Data\Operation;
 
-
 class PaginateOperation implements OperationInterface
 {
     protected $pageNumber;

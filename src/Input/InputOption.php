@@ -27,8 +27,7 @@ class InputOption
         $key,
         array $inputSource,
         $default = null
-    )
-    {
+    ) {
 
         $this->inputValue = array_key_exists($key, $inputSource) ? $inputSource[$key] : null;
         $this->default = $default;

@@ -3,7 +3,6 @@ namespace ViewComponents\ViewComponents\Data\Operation;
 
 class FilterOperation implements OperationInterface
 {
-
     const OPERATOR_LIKE = 'like';
     const OPERATOR_EQ = '=';
     const OPERATOR_NOT_EQ = '<>';

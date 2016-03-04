@@ -32,7 +32,7 @@ class InputSource
      * @param null $default optional default value
      * @return InputOption
      */
-    public final function option($name, $default = null)
+    final public function option($name, $default = null)
     {
         return new InputOption($name, $this->input, $default);
     }

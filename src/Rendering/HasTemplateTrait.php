@@ -1,7 +1,6 @@
 <?php
 namespace ViewComponents\ViewComponents\Rendering;
 
-
 /**
  * Trait HasTemplateTrait
  *

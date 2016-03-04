@@ -11,15 +11,14 @@ use mp;
 class FilterProcessor implements ProcessorInterface
 {
     /**
+     * Applies operation to source and returns modified source.
+     *
      * @param $src
      * @param OperationInterface|FilterOperation $operation
      * @return mixed
-     *
-     * @todo Cache propertyAccessor
      */
     public function process($src, OperationInterface $operation)
     {
-
         $res = [];
         foreach ($src as $row) {
             $value = mp\getValue($row, $operation->getField());
