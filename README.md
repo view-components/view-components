@@ -96,12 +96,16 @@ If you discover any security related issues, please email mail@vitaliy.in instea
 The package bundled with phpunit tests and web-application for integration/acceptance tests.
 
 #### Running Tests
-1. Clone this repository and navigate to created folder
-2. Run composer installation
+
+1) Clone this repository and navigate to created folder
+
+2) Run composer installation
+
 ```
 composer install
 ```
-3. Run tests
+3) Run tests
+
 ```
 composer test
 ```
@@ -109,16 +113,21 @@ composer test
 
 #### Running demo application
 
-1. Clone this repository and navigate to created folder
-2. Run composer installation
+1) Clone this repository and navigate to created folder
+
+2) Run composer installation
+
 ```
 composer install
 ```
-3. Run web-server
+
+3) Run web-server
+
 ```
 composer serve
 ```
-4. Open [http://localhost:8000](http://localhost:8000) in browser
+
+4) Open [http://localhost:8000](http://localhost:8000) in browser
 
 ## License
 
