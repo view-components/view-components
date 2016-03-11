@@ -95,21 +95,30 @@ If you discover any security related issues, please email mail@vitaliy.in instea
 
 The package bundled with phpunit tests and web-application for integration/acceptance tests.
 
-#### Running Unit Tests
-
-Just execute phpunit from package folder.
-
-```bash
-phpunit
+#### Running Tests
+1. Clone this repository and navigate to created folder
+2. Run composer installation
 ```
-Package dependencies must be installed via composer (run `composer install`).
+composer install
+```
+3. Run tests
+```
+composer test
+```
+
 
 #### Running demo application
 
-1. Install dependencies: run `composer install`
-2. Install web-app: run `php tests/install.php`, this will create environment configuration(tests/.env) and database (tests/db.sqlite)
-3. Run webapp: `php -S localhost:8000 tests\webapp\index.php`
-4. Open [http://localhost:8000](http://localhost:8000) URL in browser
+1. Clone this repository and navigate to created folder
+2. Run composer installation
+```
+composer install
+```
+3. Run web-server
+```
+composer serve
+```
+4. Open [http://localhost:8000](http://localhost:8000) in browser
 
 ## License
 
