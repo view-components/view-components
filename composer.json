@@ -56,7 +56,8 @@
       "ViewComponents\\ViewComponents\\Installer::postComposerInstall"
     ],
     "serve": "serve",
-    "test": "phpunit"
+    "test": "php vendor/phpunit/phpunit/phpunit",
+    "cs": "php vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=psr2 src/"
   },
   "support": {
     "email": "mail@vitaliy.in",
