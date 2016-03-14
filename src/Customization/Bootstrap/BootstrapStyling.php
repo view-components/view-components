@@ -53,10 +53,14 @@ class BootstrapStyling extends ExtendableCustomization
 
     protected function initializeCallbacks()
     {
-        $this->extend(TemplateView::class, function (TemplateView $component) {
+        $options = $this->getOptions();
+        $this->extend(TemplateView::class, function (TemplateView $component) use ($options) {
             $template = $component->getTemplateName();
             if (strpos($template, 'controls/') === 0) {
                 $component->setTemplateName("twitter_bootstrap/$template");
+                $component->mergeData([
+                    'input_class' => "$options->inputStyle $options->buttonSize"
+                ]);
             }
         });
         $this->extend(ManagedList::class, function (ManagedList $list) {
