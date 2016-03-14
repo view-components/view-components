@@ -7,7 +7,7 @@ use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Component\Compound;
 use ViewComponents\ViewComponents\Component\TemplateView;
-use ViewComponents\ViewComponents\Data\DataAcceptorInterface;
+use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use ViewComponents\ViewComponents\Data\Operation\DummyOperation;
 use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
 use ViewComponents\ViewComponents\Input\InputOption;
@@ -73,9 +73,9 @@ class PageSizeSelectControl extends Part implements ControlInterface
         return array_combine(array_values($this->variants), array_values($this->variants));
     }
 
-    public function attachToCompound(Compound $root, $prepend = false)
+    public function attachToCompound(Compound $root)
     {
-        parent::attachToCompound($root, $prepend);
+        parent::attachToCompound($root);
         // try to update pagination immediately
         // because it can be rendered before this component.
         $this->paginationControl || Utils::applyCallback(function (PaginationControl $pagination) {
@@ -129,7 +129,7 @@ class PageSizeSelectControl extends Part implements ControlInterface
     protected function setViewData()
     {
         $view = $this->getView();
-        if (!$view instanceof DataAcceptorInterface) {
+        if (!$view instanceof DataAggregateInterface) {
             return;
         }
         $view->setData([

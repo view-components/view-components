@@ -4,14 +4,14 @@ namespace ViewComponents\ViewComponents\Component;
 
 use Nayjest\Tree\ChildNodeTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Common\HasDataTrait;
+use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Rendering\ViewTrait;
 
 class Json implements DataViewComponentInterface
 {
     use ChildNodeTrait;
     use ViewTrait;
-    use HasDataTrait;
+    use \ViewComponents\ViewComponents\Data\DataAggregateTrait;
     protected $options;
 
     /**

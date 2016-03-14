@@ -4,8 +4,8 @@ namespace ViewComponents\ViewComponents\Component;
 
 use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Common\HasDataTrait;
-use ViewComponents\ViewComponents\Data\DataAcceptorInterface;
+use ViewComponents\ViewComponents\Data\DataAggregateTrait;
+use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use Traversable;
 
 /**
@@ -13,7 +13,7 @@ use Traversable;
  */
 class CollectionView extends Container implements DataViewComponentInterface
 {
-    use HasDataTrait;
+    use DataAggregateTrait;
     /**
      * @var callable|null
      */
@@ -74,7 +74,7 @@ class CollectionView extends Container implements DataViewComponentInterface
             call_user_func($this->dataInjector, $dataRow, $this);
         } else {
             foreach ($this->children() as $component) {
-                if ($component instanceof DataAcceptorInterface) {
+                if ($component instanceof DataAggregateInterface) {
                     $component->setData($dataRow);
                 }
             }

@@ -1,26 +1,33 @@
 <?php
-namespace ViewComponents\ViewComponents\WebApp\Components;
+namespace ViewComponents\ViewComponents\Demo\Components;
 
 use Nayjest\Tree\ChildNodeTrait;
 use Nayjest\Tree\NodeTrait;
 use ViewComponents\ViewComponents\Base\ComponentInterface;
 
 use ViewComponents\ViewComponents\Base\ViewComponentInterface;
-use ViewComponents\ViewComponents\Data\DataAcceptorInterface;
+use ViewComponents\ViewComponents\Data\DataAggregateInterface;
+use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Rendering\ViewTrait;
 
-class PersonView extends Person implements ViewComponentInterface, DataAcceptorInterface
+class PersonView extends Person implements ViewComponentInterface, DataAggregateInterface
 {
     use ViewTrait;
     use ChildNodeTrait;
+    use DataAggregateTrait {
+        DataAggregateTrait::setData as setDataInternal;
+        DataAggregateTrait::getData as getDataInternal;
+    }
 
     public function setData($data)
     {
-        foreach($data as $key => $value) {
-            if (property_exists($this, $key)) {
-                $this->{$key} = $value;
-            }
-        }
+        \mp\setValues($this, $data);
+        return $this;
+    }
+
+    public function getData()
+    {
+        return get_object_vars($this);
     }
 
     public function render()

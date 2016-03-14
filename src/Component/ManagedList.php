@@ -7,7 +7,7 @@ use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Common\HasDataTrait;
+use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Component\Html\Tag;
 use ViewComponents\ViewComponents\Component\ManagedList\RecordView;
 use ViewComponents\ViewComponents\Data\DataProviderInterface;
@@ -19,7 +19,7 @@ use ViewComponents\ViewComponents\Data\DataProviderInterface;
  */
 class ManagedList extends Compound implements DataViewComponentInterface
 {
-    use HasDataTrait;
+    use DataAggregateTrait;
 
     const CONTAINER_ID = 'container';
     const FORM_ID = 'form';
@@ -206,7 +206,7 @@ class ManagedList extends Compound implements DataViewComponentInterface
     {
         $record = $this->getComponent('record_view');
         return function ($row) use ($record) {
-            $record->setData($row);
+            $record->mergeData($row);
         };
     }
 

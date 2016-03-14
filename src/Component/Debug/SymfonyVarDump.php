@@ -3,7 +3,7 @@ namespace ViewComponents\ViewComponents\Component\Debug;
 
 use Nayjest\Tree\ChildNodeTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Common\HasDataTrait;
+use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Rendering\ViewTrait;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
@@ -19,7 +19,7 @@ class SymfonyVarDump implements DataViewComponentInterface
 {
     use ChildNodeTrait;
     use ViewTrait;
-    use HasDataTrait;
+    use DataAggregateTrait;
 
     /**
      * Constructor.

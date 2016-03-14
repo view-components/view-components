@@ -5,7 +5,7 @@ namespace ViewComponents\ViewComponents\Component\Control;
 use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Component\TemplateView;
-use ViewComponents\ViewComponents\Data\DataAcceptorInterface;
+use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use ViewComponents\ViewComponents\Input\InputOption;
 use ViewComponents\ViewComponents\Data\Operation\DummyOperation;
 use ViewComponents\ViewComponents\Data\Operation\SortOperation;
@@ -105,7 +105,7 @@ class SortingSelectControl extends Part implements ControlInterface
     protected function setViewData()
     {
         $view = $this->getView();
-        if (!$view instanceof DataAcceptorInterface) {
+        if (!$view instanceof DataAggregateInterface) {
             return;
         }
         $view->setData([

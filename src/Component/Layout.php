@@ -6,9 +6,9 @@ use InvalidArgumentException;
 use ViewComponents\ViewComponents\Component\Layout\Section;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
-use ViewComponents\ViewComponents\Common\HasDataTrait;
+use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Component\Html\Tag;
-use ViewComponents\ViewComponents\Data\DataAcceptorInterface;
+use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use ViewComponents\ViewComponents\Resource\ResourceManager;
 use ViewComponents\ViewComponents\Service\Services;
 
@@ -17,9 +17,9 @@ use ViewComponents\ViewComponents\Service\Services;
  * with possibility to group children view components by sections.
  *
  */
-class Layout extends Compound implements DataAcceptorInterface
+class Layout extends Compound implements DataAggregateInterface
 {
-    use HasDataTrait;
+    use DataAggregateTrait;
 
     const SECTION_MAIN = 'main';
 
@@ -55,7 +55,7 @@ class Layout extends Compound implements DataAcceptorInterface
         if (is_string($template)) {
             $template = new TemplateView($template);
         }
-        $template->setData([
+        $template->mergeData([
             'layout' => $this
         ]);
         $this->addChild(new Part($template, 'template'));

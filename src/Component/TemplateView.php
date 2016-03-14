@@ -2,18 +2,17 @@
 
 namespace ViewComponents\ViewComponents\Component;
 
-use Exception;
 use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Common\HasDataTrait;
+use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Rendering\RendererInterface;
 use ViewComponents\ViewComponents\Service\Services;
 use RuntimeException;
 
 class TemplateView implements DataViewComponentInterface, ContainerComponentInterface
 {
-    use HasDataTrait;
+    use DataAggregateTrait;
     use ContainerComponentTrait;
 
     /** @var  string */
@@ -63,7 +62,6 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
         return $this->templateName;
     }
 
-
     /**
      * @param string $templateName
      * @return $this
@@ -73,20 +71,6 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
         $this->templateName = $templateName;
         return $this;
     }
-
-    public function mergeData(array $data)
-    {
-        $oldData = $this->getData();
-        if ($oldData === null) {
-            $this->setData($data);
-        }
-        if (!is_array($oldData)) {
-            throw new Exception('Can\'t merge non-array data');
-        }
-        $this->setData(array_merge($oldData, $data));
-        return $this;
-    }
-
 
     private function getPreparedData()
     {

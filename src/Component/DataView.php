@@ -4,7 +4,7 @@ namespace ViewComponents\ViewComponents\Component;
 
 use Nayjest\Tree\ChildNodeTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Common\HasDataTrait;
+use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Rendering\ViewTrait;
 use RuntimeException;
 
@@ -12,7 +12,7 @@ class DataView implements DataViewComponentInterface
 {
     use ChildNodeTrait;
     use ViewTrait;
-    use HasDataTrait;
+    use DataAggregateTrait;
 
     /**
      * @var callable
