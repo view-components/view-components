@@ -21,8 +21,8 @@ interface DataAggregateInterface
     /**
      * Merges new data if possible.
      *
-     * @param array $data
+     * @param array|object $data
      * @return $this
      */
-    public function mergeData(array $data);
+    public function mergeData($data);
 }

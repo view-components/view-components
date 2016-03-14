@@ -35,12 +35,15 @@ trait DataAggregateTrait
      * @param array $data
      * @return $this
      */
-    public function mergeData(array $data)
+    public function mergeData($data)
     {
         $oldData = $this->getData();
         if ($oldData === null) {
             $this->setData($data);
             return $this;
+        }
+        if (is_object($data)) {
+            $data = get_object_vars($data);
         }
         if (is_object($oldData)) {
             \mp\setValues($oldData, $data, MP_USE_SETTERS | MP_CREATE_PROPERTIES);
