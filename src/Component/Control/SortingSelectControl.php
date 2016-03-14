@@ -108,7 +108,7 @@ class SortingSelectControl extends Part implements ControlInterface
         if (!$view instanceof DataAggregateInterface) {
             return;
         }
-        $view->setData([
+        $view->mergeData([
             'fields' => $this->fields,
             'fieldSelectName' => $this->getFieldOption()->getKey(),
             'directionSelectName' => $this->getDirectionOption()->getKey(),

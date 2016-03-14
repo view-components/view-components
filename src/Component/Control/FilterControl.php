@@ -95,7 +95,7 @@ class FilterControl extends Part implements ControlInterface
         if (!$view instanceof DataAggregateInterface) {
             return;
         }
-        $view->setData([
+        $view->mergeData([
             'name' => $this->valueOption->getKey(),
             'label' => StaticStringy::humanize($this->field),
             'value' => $this->valueOption->getValue()

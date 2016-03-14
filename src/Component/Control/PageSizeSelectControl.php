@@ -132,7 +132,7 @@ class PageSizeSelectControl extends Part implements ControlInterface
         if (!$view instanceof DataAggregateInterface) {
             return;
         }
-        $view->setData([
+        $view->mergeData([
             'inputName' => $this->inputOption->getKey(),
             'selected' => $this->inputOption->getValue(),
             'variants' => $this->getVariants(),

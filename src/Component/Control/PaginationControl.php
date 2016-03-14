@@ -146,7 +146,7 @@ class PaginationControl extends Part implements ControlInterface
         if (!$view instanceof DataAggregateInterface) {
             return;
         }
-        $view->setData([
+        $view->mergeData([
             'total' => $this->getPageCount(),
             'current' => $this->getCurrentPage(),
         ]);
