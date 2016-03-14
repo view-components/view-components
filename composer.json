@@ -30,7 +30,7 @@
     "league/uri": "^4",
     "symfony/var-dumper": "~2",
     "ext-curl": "*",
-    "view-components/testing-helpers": "^1.1.2",
+    "view-components/testing-helpers": "^1.2.2",
     "squizlabs/php_codesniffer": "~2.3"
   },
   "provide": {

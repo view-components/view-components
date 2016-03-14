@@ -1,9 +1,7 @@
 <?php
-namespace ViewComponents\ViewComponents\Demo\Components;
+namespace ViewComponents\ViewComponents\WebApp\Components;
 
 use Nayjest\Tree\ChildNodeTrait;
-use Nayjest\Tree\NodeTrait;
-use ViewComponents\ViewComponents\Base\ComponentInterface;
 
 use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 use ViewComponents\ViewComponents\Data\DataAggregateInterface;
