@@ -24,6 +24,24 @@ class PaginationControlView extends TemplateView
     }
 
     /**
+     * @return string
+     */
+    public function getLinkTemplateName()
+    {
+        return $this->linkTemplateName;
+    }
+
+    /**
+     * @param $linkTemplateName
+     * @return $this
+     */
+    public function setLinkTemplateName($linkTemplateName)
+    {
+        $this->linkTemplateName = $linkTemplateName;
+        return $this;
+    }
+
+    /**
      * @return PaginationControl
      */
     protected function getControl()
