@@ -41,4 +41,12 @@ abstract class AbstractProcessingServiceTest extends PHPUnit_Framework_TestCase
         $this->operations->remove($op);
         self::assertEquals($this->totalCount, $this->service->count(), 'Test recalc. after removing operation');
     }
+
+    public function testGetField()
+    {
+        $data  = $this->service->getProcessedData();
+        foreach($data as $item) {
+            $this->assertTrue(!empty($item->id));
+        }
+    }
 }

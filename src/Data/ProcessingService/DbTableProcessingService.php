@@ -6,13 +6,14 @@ use ViewComponents\ViewComponents\Data\DbTable\Query;
 use Traversable;
 
 /**
- * Class DbTableProcessingManager
- *
- * @package ViewComponents\ViewComponents\Data
+ * Class DbTableProcessingService
  */
 class DbTableProcessingService extends AbstractProcessingService
 {
-
+    /**
+     * @param Query $data
+     * @return mixed
+     */
     protected function beforeOperations($data)
     {
         # Clone query to not modify data source
@@ -21,7 +22,7 @@ class DbTableProcessingService extends AbstractProcessingService
 
     /**
      * @param Query $data
-     * @return Traversable
+     * @return Traversable|\PDOStatement
      */
     protected function afterOperations($data)
     {

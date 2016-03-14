@@ -16,6 +16,8 @@ class Query
     /** @var string  */
     protected $table;
 
+    protected $dataRowClass;
+
     /** @var PDO  */
     public $connection;
     public $conditions = [];
@@ -26,10 +28,13 @@ class Query
     public $offset = '';
 
     /**
+     * Constructor.
+     *
      * @param PDO $connection
      * @param string $table
+     * @param string $dataRowClass specify class if you need to fetch data to specific class instances
      */
-    public function __construct(PDO $connection, $table)
+    public function __construct(PDO $connection, $table, $dataRowClass = null)
     {
         $this->connection = $connection;
         $this->table = $table;
@@ -44,9 +49,18 @@ class Query
         return $sql;
     }
 
+    /**
+     * @return PDOStatement
+     */
     protected function getPdoStatement()
     {
-        return $this->connection->prepare($this->getSql());
+        $statement = $this->connection->prepare($this->getSql());
+        if ($this->dataRowClass !== null) {
+            $statement->setFetchMode(PDO::FETCH_CLASS, $this->dataRowClass);
+        } else {
+            $statement->setFetchMode(PDO::FETCH_OBJ);
+        }
+        return $statement;
     }
 
     /**
