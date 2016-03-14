@@ -59,7 +59,7 @@ class BootstrapStyling extends ExtendableCustomization
             if (strpos($template, 'controls/') === 0) {
                 $component->setTemplateName("twitter_bootstrap/$template");
                 $component->mergeData([
-                    'input_class' => "$options->inputStyle $options->buttonSize"
+                    'input_class' => "$options->inputStyle $options->inputSize"
                 ]);
             }
         });
