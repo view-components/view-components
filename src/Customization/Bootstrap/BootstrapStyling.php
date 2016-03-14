@@ -72,6 +72,11 @@ class BootstrapStyling extends ExtendableCustomization
             foreach ($classes as $componentId => $class) {
                 $this->tryAddClass($list->getComponent($componentId), $class);
             }
+            $submitButton = $list->getComponent(ManagedList::SUBMIT_BUTTON_ID);
+            if ($submitButton instanceof TagInterface) {
+                $style = $submitButton->getAttribute('style');
+                $submitButton->setAttribute('style', ' margin-left: 5px; ' . $style);
+            }
         });
 
         $this->extend(Tag::class, function (Tag $tag) {
