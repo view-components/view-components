@@ -73,9 +73,9 @@ class PageSizeSelectControl extends Part implements ControlInterface
         return array_combine(array_values($this->variants), array_values($this->variants));
     }
 
-    public function attachToCompound(Compound $root)
+    public function attachToCompound(Compound $root, $prepend = false)
     {
-        parent::attachToCompound($root);
+        parent::attachToCompound($root, $prepend);
         // try to update pagination immediately
         // because it can be rendered before this component.
         $this->paginationControl || Utils::applyCallback(function (PaginationControl $pagination) {
