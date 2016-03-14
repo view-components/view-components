@@ -19,7 +19,7 @@ class PersonView extends Person implements ViewComponentInterface, DataAggregate
 
     public function setData($data)
     {
-        \mp\setValues($this, $data);
+        \mp\setValues($this, is_object($data) ? get_object_vars($data) : $data);
         return $this;
     }
 
