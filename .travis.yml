@@ -17,6 +17,7 @@ script:
 - composer cs
 deploy:
   provider: heroku
+  buildpack: https://github.com/view-components/heroku-buildpack-php
   api_key:
     secure: ABXiZKDiqKCQADPGcdn4OV5jwiTDrTTWyBjQ7/GZmSjRtleh7nY15hKuqkvGWldrJNQhrWMWVIDPCJRTtZqQuYNIgEsL9xe6kQjpFfKBoB/wUfqGPwyhOUZgdvLwSnhZUz7TG5kiqN6D8gDXBYutLCP0NLvUwcs7kqX/BUFF4hQ=
   app: view-components
