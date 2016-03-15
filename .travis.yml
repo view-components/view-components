@@ -10,8 +10,8 @@ matrix:
   - php: nightly
 sudo: false
 before_script:
-- travis_retry composer self-update 1.0.0-beta1
-- travis_retry composer install --prefer-source --no-interaction
+- travis_retry composer self-update
+- travis_retry composer create-project --prefer-source --no-interaction
 script:
 - composer test
 - composer cs
