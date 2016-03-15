@@ -1,23 +1,24 @@
 language: php
-
 php:
-  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
-  - nightly
+- 5.5
+- 5.6
+- 7.0
+- hhvm
+- nightly
 matrix:
   allow_failures:
-    - php: nightly
-
-# This triggers builds to run on the new TravisCI infrastructure.
-# See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
+  - php: nightly
 sudo: false
-
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --prefer-source --no-interaction
-
+- travis_retry composer self-update
+- travis_retry composer install --prefer-source --no-interaction
 script:
-  - composer test
-  - composer cs
+- composer test
+- composer cs
+deploy:
+  provider: heroku
+  api_key:
+    secure: ABXiZKDiqKCQADPGcdn4OV5jwiTDrTTWyBjQ7/GZmSjRtleh7nY15hKuqkvGWldrJNQhrWMWVIDPCJRTtZqQuYNIgEsL9xe6kQjpFfKBoB/wUfqGPwyhOUZgdvLwSnhZUz7TG5kiqN6D8gDXBYutLCP0NLvUwcs7kqX/BUFF4hQ=
+  app: view-components
+  on:
+    repo: view-components/view-components
