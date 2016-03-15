@@ -97,14 +97,13 @@ The package bundled with phpunit tests and web-application for integration/accep
 
 #### Running Tests
 
-1) Clone this repository and navigate to created folder
-
-2) Run composer installation
-
+1) Install package as stand-alone project and navigate to project folder
+```bash
+composer create-project view-components/view-components
+cd view-components
 ```
-composer install
-```
-3) Run tests
+
+2) Run tests
 
 ```
 composer test
@@ -113,21 +112,15 @@ composer test
 
 #### Running demo application
 
-1) Clone this repository and navigate to created folder
-
-2) Run composer installation
-
-```
-composer install
+1) Install package as stand-alone project and navigate to project folder
+```bash
+composer create-project view-components/view-components
+cd view-components
 ```
 
-3) Run web-server
+2) Run web-server
 
-```
-composer serve
-```
-
-4) Open [http://localhost:8000](http://localhost:8000) in browser
+3) Open [http://localhost:8000](http://localhost:8000) in browser. For Windows users it will be opened automatically after starting web-server.
 
 ## License
 
