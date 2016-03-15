@@ -52,7 +52,7 @@
     }
   },
   "scripts": {
-    "post-install-cmd": [
+    "post-create-project-cmd": [
       "ViewComponents\\ViewComponents\\Installer::postComposerInstall"
     ],
     "serve": "php vendor/view-components/testing-helpers/serve",
