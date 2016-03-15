@@ -11,6 +11,7 @@ matrix:
 sudo: false
 before_script:
 - travis_retry composer self-update
+- travis_retry composer update --prefer-source --no-interaction
 - travis_retry composer install --prefer-source --no-interaction
 script:
 - composer test
