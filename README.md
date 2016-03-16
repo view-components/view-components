@@ -120,6 +120,10 @@ cd view-components
 
 2) Run web-server
 
+```
+composer serve
+```
+
 3) Open [http://localhost:8000](http://localhost:8000) in browser. For Windows users it will be opened automatically after starting web-server.
 
 ## License
