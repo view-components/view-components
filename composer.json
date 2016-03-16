@@ -20,6 +20,7 @@
   ],
   "require": {
     "php": "^5.5||^7",
+    "ext-intl": "*",
     "nayjest/manipulator": "^3.1.0",
     "nayjest/tree": "^3",
     "nayjest/collection": "^2.2",
