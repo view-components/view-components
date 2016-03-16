@@ -19,13 +19,32 @@ It provides interoperability via object-oriented API and foundation for UI archi
 
 ## Installation
 
+### Installing into Existing Project
+
 The recommended way of installing the component is through [Composer](https://getcomposer.org).
 
-Run following command:
+Run following command from your project folder:
 
 ```bash
 composer require view-components/view-components
 ```
+
+### Installing as Stand-alone Project
+
+For running tests and demo-application bundled with this package on your system you need to install it as stand-alone project.
+
+```
+composer create-project view-components/view-components
+```
+
+This is the equivalent of doing a git clone followed by a "composer install" of the vendors.
+Composer will automatically run 'post-create-project-cmd' command and that will call interactive installation.
+
+If you want to use default settings and run it silently, just add `--no-interaction` option.
+
+If you already cloned this repository, or you want to reinstall package, navigate to package folder and run `composer create-project` without specifying package name.
+
+If you are sure that you don't need to reinstall composer dependencies, you can execute only bundled installer: `composer run post-create-project-cmd`
 
 ## Overview
 
@@ -88,12 +107,14 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 If you discover any security related issues, please email mail@vitaliy.in instead of using the issue tracker.
 
 
-
 ## Testing
 
 #### Overview
 
-The package bundled with phpunit tests and web-application for integration/acceptance tests.
+This package bundled with unit tests and acceptance tests created with PhpUnit.
+
+To run tests, you must install this package as stand-alone project.
+
 
 #### Running Tests
 
