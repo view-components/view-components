@@ -15,7 +15,9 @@ It provides interoperability via object-oriented API and foundation for UI archi
 
 ## Requirements
 
-* php 5.5+
+* PHP 5.5+ (hhvm & php7 are supported)
+* [ext_intl](http://php.net/manual/en/book.intl.php) ([bundled with PHP](http://php.net/manual/en/intl.installation.php) as of PHP 5.3.0)
+* ext_curl required for running package tests
 
 ## Installation
 
@@ -96,56 +98,40 @@ Renders child components.
 
 Compound components are composed from smaller components that implements PartInterface or wrapped into Part instance.
 
-## Contributing
+## Demo Application
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+This package bundled with demo-application.
 
+Souce code of demos available [here](https://github.com/view-components/view-components/blob/master/tests/webapp/Controller.php)
 
+### Demo Application on Heroku
 
-## Security
+Travis CI automatically deploys web-application bundled with this package to Heroku.
 
-If you discover any security related issues, please email mail@vitaliy.in instead of using the issue tracker.
+Here you can see working demos: <http://view-components.herokuapp.com/>
 
+*First run may be slow becouse Heroku shutting down workers when there is no traffic and starts it again on first visit*
 
-## Testing
+### Running Demo Application Locally
 
-#### Overview
+To run it locally, you must install this package as stand-alone project with dev-dependencis.
 
-This package bundled with unit tests and acceptance tests created with PhpUnit.
-
-To run tests, you must install this package as stand-alone project.
-
-
-#### Running Tests
-
-1) Install package as stand-alone project and navigate to project folder
-```bash
-composer create-project view-components/view-components
-cd view-components
-```
-
-2) Run tests
-
-```
-composer test
-```
-
-
-#### Running demo application
-
-1) Install package as stand-alone project and navigate to project folder
-```bash
-composer create-project view-components/view-components
-cd view-components
-```
-
-2) Run web-server
+Then, run web-server from the package directory with the following command:
 
 ```
 composer serve
 ```
+This command uses web-server bundled with PHP.
 
-3) Open [http://localhost:8000](http://localhost:8000) in browser. For Windows users it will be opened automatically after starting web-server.
+Now, open [http://localhost:8000](http://localhost:8000) in browser (for Windows users it will be opened automatically after starting web-server).
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Security
+
+If you discover any security related issues, please email mail@vitaliy.in instead of using the issue tracker.
 
 ## License
 
