@@ -17,10 +17,10 @@ script:
 - composer cs
 deploy:
   provider: heroku
-  buildpack: https://github.com/Nayjest/heroku-buildpack
+  buildpack: https://github.com/Nayjest/heroku-buildpack-php.git
   api_key:
     secure: ABXiZKDiqKCQADPGcdn4OV5jwiTDrTTWyBjQ7/GZmSjRtleh7nY15hKuqkvGWldrJNQhrWMWVIDPCJRTtZqQuYNIgEsL9xe6kQjpFfKBoB/wUfqGPwyhOUZgdvLwSnhZUz7TG5kiqN6D8gDXBYutLCP0NLvUwcs7kqX/BUFF4hQ=
   app: view-components
   on:
     repo: view-components/view-components
-#  skip_cleanup: true
+  skip_cleanup: true
