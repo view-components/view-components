@@ -15,17 +15,38 @@ It provides interoperability via object-oriented API and foundation for UI archi
 
 ## Requirements
 
-* php 5.5+
+* PHP 5.5+ (hhvm & php7 are supported)
+* [ext_intl](http://php.net/manual/en/book.intl.php) ([bundled with PHP](http://php.net/manual/en/intl.installation.php) as of PHP 5.3.0)
+* ext_curl required for running package tests
 
 ## Installation
 
+### Installing into Existing Project
+
 The recommended way of installing the component is through [Composer](https://getcomposer.org).
 
-Run following command:
+Run following command from your project folder:
 
 ```bash
 composer require view-components/view-components
 ```
+
+### Installing as Stand-alone Project
+
+For running tests and demo-application bundled with this package on your system you need to install it as stand-alone project.
+
+```
+composer create-project view-components/view-components
+```
+
+This is the equivalent of doing a git clone followed by a "composer install" of the vendors.
+Composer will automatically run 'post-create-project-cmd' command and that will call interactive installation.
+
+If you want to use default settings and run it silently, just add `--no-interaction` option.
+
+If you already cloned this repository, or you want to reinstall package, navigate to package folder and run `composer create-project` without specifying package name.
+
+If you are sure that you don't need to reinstall composer dependencies, you can execute only bundled installer: `composer run post-create-project-cmd`
 
 ## Overview
 
@@ -77,54 +98,40 @@ Renders child components.
 
 Compound components are composed from smaller components that implements PartInterface or wrapped into Part instance.
 
-## Contributing
+## Demo Application
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+This package bundled with demo-application.
 
+Souce code of demos available [here](https://github.com/view-components/view-components/blob/master/tests/webapp/Controller.php)
 
+### Demo Application on Heroku
 
-## Security
+Travis CI automatically deploys web-application bundled with this package to Heroku.
 
-If you discover any security related issues, please email mail@vitaliy.in instead of using the issue tracker.
+Here you can see working demos: <http://view-components.herokuapp.com/>
 
+*First run may be slow becouse Heroku shutting down workers when there is no traffic and starts it again on first visit*
 
+### Running Demo Application Locally
 
-## Testing
+To run it locally, you must install this package as stand-alone project with dev-dependencis.
 
-#### Overview
-
-The package bundled with phpunit tests and web-application for integration/acceptance tests.
-
-#### Running Tests
-
-1) Install package as stand-alone project and navigate to project folder
-```bash
-composer create-project view-components/view-components
-cd view-components
-```
-
-2) Run tests
-
-```
-composer test
-```
-
-
-#### Running demo application
-
-1) Install package as stand-alone project and navigate to project folder
-```bash
-composer create-project view-components/view-components
-cd view-components
-```
-
-2) Run web-server
+Then, run web-server from the package directory with the following command:
 
 ```
 composer serve
 ```
+This command uses web-server bundled with PHP.
 
-3) Open [http://localhost:8000](http://localhost:8000) in browser. For Windows users it will be opened automatically after starting web-server.
+Now, open [http://localhost:8000](http://localhost:8000) in browser (for Windows users it will be opened automatically after starting web-server).
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Security
+
+If you discover any security related issues, please email mail@vitaliy.in instead of using the issue tracker.
 
 ## License
 
