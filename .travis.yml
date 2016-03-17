@@ -23,4 +23,3 @@ deploy:
   app: view-components
   on:
     repo: view-components/view-components
-  skip_cleanup: true
