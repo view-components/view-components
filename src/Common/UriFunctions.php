@@ -7,6 +7,8 @@ use RuntimeException;
 class UriFunctions
 {
     /**
+     * Modifies query string and returns updated request part of the URI.
+     *
      * @param string|null $uri
      * @param array $newQueryParams
      * @return string
@@ -31,6 +33,8 @@ class UriFunctions
     }
 
     /**
+     * Replaces fragment part and return updated request part of the URI.
+     *
      * @param string|null $uri
      * @param string $newFragment
      * @return string
@@ -42,11 +46,13 @@ class UriFunctions
         }
         $oldFragment = parse_url($uri, PHP_URL_FRAGMENT);
         return $oldFragment
-            ? str_replace('#' . $oldFragment, '#'. $newFragment, $uri)
+            ? str_replace('#' . $oldFragment, '#' . $newFragment, $uri)
             : ($newFragment ? $uri . '#' . $newFragment : $uri);
     }
 
     /**
+     * Returns current request URI.
+     *
      * @return string
      */
     public static function getCurrentRequestUri()
