@@ -13,6 +13,19 @@ PHP View Components
 ViewComponents package allows to build flexible HTML user interface based on components.
 It provides interoperability via object-oriented API and foundation for UI architecture.
 
+## Table of Contents
+- [Requirements](#requirements)
+- [Intallation](#installation)
+  - [Installing into Existing Project](#installing-into-existing-project)
+  - [Installing as Stand-alone Project](#installing-as-stand-alone-project)
+- [Demo Application](#demo-application)
+  - [Working Demo](#working-demo)
+  - [Running Demo Application Locally](#running-demo-application-locally)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [Security](#security)
+- [License](#license)
+
 ## Requirements
 
 * PHP 5.5+ (hhvm & php7 are supported)
@@ -55,7 +68,7 @@ This package bundled with demo-application.
 
 Souce code of demos available [here](https://github.com/view-components/view-components/blob/master/tests/webapp/Controller.php)
 
-### Demo Application on Heroku
+### Working Demo
 
 Travis CI automatically deploys web-application bundled with this package to Heroku.
 
@@ -75,6 +88,24 @@ composer serve
 This command uses web-server bundled with PHP.
 
 Now, open [http://localhost:8000](http://localhost:8000) in browser (for Windows users it will be opened automatically after starting web-server).
+
+## Testing
+
+This application bundled with unit and acceptance tests created with PHPUnit.
+
+To run tests locally, you must install this package as stand-alone project with dev-dependencis.
+
+Command for unit and acceptance tests:
+
+```bash
+composer test
+```
+
+Command for checking code style:
+
+```bash
+composer cs
+```
 
 ## Contributing
 
