@@ -33,15 +33,9 @@ composer require view-components/view-components
 
 For running tests and demo-application bundled with this package on your system you need to install it as stand-alone project.
 
-This kind of installation has additional requirements:
-* ext-curl
-* ext-pdo_sqlite
-
-
 ```
 composer create-project view-components/view-components
 ```
-
 This is the equivalent of doing a git clone followed by a "composer install" of the vendors.
 Composer will automatically run 'post-create-project-cmd' command and that will call interactive installation.
 
@@ -50,6 +44,10 @@ If you want to use default settings and run it silently, just add `--no-interact
 If you already cloned this repository, or you want to reinstall package, navigate to package folder and run `composer create-project` without specifying package name.
 
 If you are sure that you don't need to reinstall composer dependencies, you can execute only bundled installer: `composer run post-create-project-cmd`
+
+This kind of installation has additional requirements:
+* ext-curl
+* ext-pdo_sqlite
 
 ## Demo Application
 
