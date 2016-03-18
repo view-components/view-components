@@ -16,8 +16,6 @@ It provides interoperability via object-oriented API and foundation for UI archi
 ## Requirements
 
 * PHP 5.5+ (hhvm & php7 are supported)
-* [ext_intl](http://php.net/manual/en/book.intl.php) ([bundled with PHP](http://php.net/manual/en/intl.installation.php) as of PHP 5.3.0)
-* ext_curl required for running package tests
 
 ## Installation
 
@@ -38,7 +36,6 @@ For running tests and demo-application bundled with this package on your system 
 ```
 composer create-project view-components/view-components
 ```
-
 This is the equivalent of doing a git clone followed by a "composer install" of the vendors.
 Composer will automatically run 'post-create-project-cmd' command and that will call interactive installation.
 
@@ -48,55 +45,9 @@ If you already cloned this repository, or you want to reinstall package, navigat
 
 If you are sure that you don't need to reinstall composer dependencies, you can execute only bundled installer: `composer run post-create-project-cmd`
 
-## Overview
-
-
-##### 1. Components hierarchy
-
-Сomponents can be organized in a tree structure. 
-[nayjest/tree package](https://github.com/Nayjest/Tree) is used for this purpose.
-Each component implements [Nayjest\Tree\ChildNodeInterface](https://github.com/Nayjest/Tree/blob/master/src/ChildNodeInterface.php) and
-components able to contain another components implements [Nayjest\Tree\ParentNodeInterface](https://github.com/Nayjest/Tree/blob/master/src/ParentNodeInterface.php)
-
-##### 2. Rendering
-
-###### `ComponentInterface::render() : string`
-
-Renders component.
-
-
-
-###### `ComponentInterface::__toString() : string`
-
-Returns rendering result  when object is treated like a string, i.e. components can be used as variables containing strings:
-
-Example 1:
-```php
-<?php
-use ViewComponents\ViewComponents\Component\Html\Tag;
-?>
-<p>Some text</p>
-<?= new Tag('hr') ?>
-```
-Example 2:
-```php
-<?php
-use \ViewComponents\ViewComponents\Component\DataView;
-$text = new DataView("I'm component");
-echo "Component output: $text";
-```
-
-See [PHP Magic Methods: __toString()](http://www.php.net/manual/en/language.oop5.magic.php#object.tostring)
-
-
-
-##### `$component->renderChildren() : string`
-
-Renders child components.
-
-##### 3. Compound components
-
-Compound components are composed from smaller components that implements PartInterface or wrapped into Part instance.
+This kind of installation has additional requirements:
+* ext-curl
+* ext-pdo_sqlite
 
 ## Demo Application
 
