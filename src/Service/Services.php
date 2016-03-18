@@ -27,11 +27,20 @@ class Services
     }
 
     /**
+     * @param string $serviceId
+     * @return mixed
+     */
+    public static function get($serviceId)
+    {
+        return self::container()->get($serviceId);
+    }
+
+    /**
      * @return HtmlBuilder
      */
     public static function htmlBuilder()
     {
-        return self::container()->get(ServiceName::HTML_BUILDER);
+        return self::get(ServiceName::HTML_BUILDER);
     }
 
     /**
@@ -39,7 +48,7 @@ class Services
      */
     public static function resourceManager()
     {
-        return self::container()->get(ServiceName::RESOURCE_MANAGER);
+        return self::get(ServiceName::RESOURCE_MANAGER);
     }
 
     /**
@@ -47,6 +56,6 @@ class Services
      */
     public static function renderer()
     {
-        return self::container()->get(ServiceName::RENDERER);
+        return self::get(ServiceName::RENDERER);
     }
 }
