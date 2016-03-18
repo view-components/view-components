@@ -78,7 +78,7 @@ Now, open [http://localhost:8000](http://localhost:8000) in browser (for Windows
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [Contributing Guidelines](contributing.md) and [Code of Conduct](code-of-conduct.md) for details.
 
 ## Security
 
