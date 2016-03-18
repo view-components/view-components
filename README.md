@@ -32,7 +32,7 @@ It provides interoperability via object-oriented API and foundation for UI archi
 
 ## Installation
 
-### Installing into Existing Project
+#### Installing into Existing Project
 
 The recommended way of installing the component is through [Composer](https://getcomposer.org).
 
@@ -42,7 +42,7 @@ Run following command from your project folder:
 composer require view-components/view-components
 ```
 
-### Installing as Stand-alone Project
+#### Installing as Stand-alone Project
 
 For running tests and demo-application bundled with this package on your system you need to install it as stand-alone project.
 
@@ -68,7 +68,7 @@ This package bundled with demo-application.
 
 Souce code of demos available [here](https://github.com/view-components/view-components/blob/master/tests/webapp/Controller.php)
 
-### Working Demo
+#### Working Demo
 
 Travis CI automatically deploys web-application bundled with this package to Heroku.
 
@@ -76,7 +76,7 @@ Here you can see working demos: <http://view-components.herokuapp.com/>
 
 *First run may be slow becouse Heroku shutting down workers when there is no traffic and starts it again on first visit*
 
-### Running Demo Application Locally
+#### Running Demo Application Locally
 
 To run it locally, you must install this package as stand-alone project with dev-dependencis.
 
