@@ -2,10 +2,10 @@
 
 namespace ViewComponents\ViewComponents\Component\Control\View;
 
+use ViewComponents\ViewComponents\Common\UriFunctions;
 use ViewComponents\ViewComponents\Component\Control\PaginationControl;
 use ViewComponents\ViewComponents\Component\TemplateView;
 use ViewComponents\ViewComponents\Rendering\RendererInterface;
-use League\Uri\Schemes\Http as HttpUri;
 
 class PaginationControlView extends TemplateView
 {
@@ -56,30 +56,40 @@ class PaginationControlView extends TemplateView
         return $this->control;
     }
 
-    public function renderLink($page, $title = null)
+    public function renderLink($pageNumber, $title = null)
     {
-        $title = $title ?: (string)$page;
+        $title = $title ?: (string)$pageNumber;
         return $this->getRenderer()->render($this->linkTemplateName, [
-            'isCurrent' => $this->getControl()->getCurrentPage() == $page,
-            'url' => $this->makeUrl($page),
-            'title' => $title ?: (string)$page
+            'isCurrent' => $this->getControl()->getCurrentPage() == $pageNumber,
+            'url' => $this->makeUrl($pageNumber),
+            'title' => $title ?: (string)$pageNumber
         ]);
     }
 
+    /**
+     * @param int $from
+     * @param int $to
+     * @return string
+     */
     public function renderLinksRange($from, $to)
     {
         $out = '';
-        for ($page = $from; $page <= $to; $page++) {
-            $out .= $this->renderLink($page);
+        for ($pageNumber = $from; $pageNumber <= $to; $pageNumber++) {
+            $out .= $this->renderLink($pageNumber);
         }
         return $out;
     }
 
-    protected function makeUrl($page)
+    /**
+     * @param int|string $pageNumber
+     * @return string
+     */
+    protected function makeUrl($pageNumber)
     {
-        $url = HttpUri::createFromServer($_SERVER);
         $urlKey = $this->getControl()->getPageInputOption()->getKey();
-        $query = $url->query->merge(http_build_query([$urlKey => $page]));
-        return (string)$url->withQuery((string)$query);
+        return UriFunctions::replaceFragment(
+            UriFunctions::modifyQuery(null, [$urlKey => $pageNumber]),
+            ''
+        );
     }
 }
