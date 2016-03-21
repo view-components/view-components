@@ -21,7 +21,7 @@ class ExtendableCustomization extends AbstractRecursiveCustomization
         foreach ($this->callbacks as $class => $callbacks) {
             if ($component instanceof $class) {
                 foreach ($callbacks as $cb) {
-                    call_user_func($cb, $component);
+                    call_user_func($cb, $component, $this);
                 }
             }
         }
