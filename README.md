@@ -1,4 +1,4 @@
-PHP View Components
+ ![Logo](https://raw.githubusercontent.com/view-components/logo/master/view-components-logo-without-text-42.png) PHP View Components 
 =====
 ### `Flexible UI for Enterprise Web Applications`
 
@@ -8,10 +8,24 @@ PHP View Components
 [![Code Coverage](https://scrutinizer-ci.com/g/view-components/view-components/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/view-components/view-components/?branch=master)
 
 
+
 **Project status: pre-alpha**
 
 ViewComponents package allows to build flexible HTML user interface based on components.
 It provides interoperability via object-oriented API and foundation for UI architecture.
+
+## Table of Contents
+- [Requirements](#requirements)
+- [Intallation](#installation)
+  - [Installing into Existing Project](#installing-into-existing-project)
+  - [Installing as Stand-alone Project](#installing-as-stand-alone-project)
+- [Demo Application](#demo-application)
+  - [Working Demo](#working-demo)
+  - [Running Demo Application Locally](#running-demo-application-locally)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [Security](#security)
+- [License](#license)
 
 ## Requirements
 
@@ -19,7 +33,7 @@ It provides interoperability via object-oriented API and foundation for UI archi
 
 ## Installation
 
-### Installing into Existing Project
+#### Installing into Existing Project
 
 The recommended way of installing the component is through [Composer](https://getcomposer.org).
 
@@ -29,7 +43,7 @@ Run following command from your project folder:
 composer require view-components/view-components
 ```
 
-### Installing as Stand-alone Project
+#### Installing as Stand-alone Project
 
 For running tests and demo-application bundled with this package on your system you need to install it as stand-alone project.
 
@@ -55,7 +69,7 @@ This package bundled with demo-application.
 
 Souce code of demos available [here](https://github.com/view-components/view-components/blob/master/tests/webapp/Controller.php)
 
-### Demo Application on Heroku
+#### Working Demo
 
 Travis CI automatically deploys web-application bundled with this package to Heroku.
 
@@ -63,7 +77,7 @@ Here you can see working demos: <http://view-components.herokuapp.com/>
 
 *First run may be slow becouse Heroku shutting down workers when there is no traffic and starts it again on first visit*
 
-### Running Demo Application Locally
+#### Running Demo Application Locally
 
 To run it locally, you must install this package as stand-alone project with dev-dependencis.
 
@@ -76,9 +90,27 @@ This command uses web-server bundled with PHP.
 
 Now, open [http://localhost:8000](http://localhost:8000) in browser (for Windows users it will be opened automatically after starting web-server).
 
+## Testing
+
+This application bundled with unit and acceptance tests created with PHPUnit.
+
+To run tests locally, you must install this package as stand-alone project with dev-dependencis.
+
+Command for unit and acceptance tests:
+
+```bash
+composer test
+```
+
+Command for checking code style:
+
+```bash
+composer cs
+```
+
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [Contributing Guidelines](contributing.md) and [Code of Conduct](code_of_conduct.md) for details.
 
 ## Security
 
