@@ -230,9 +230,13 @@ class ManagedList extends Compound implements DataViewComponentInterface
     {
         return [
             new Part(new Tag('div'), static::CONTAINER_ID, static::ROOT_ID),
-            new Part(new Tag('form'), static::FORM_ID, static::CONTAINER_ID),
+            new Part(new Tag('form', ['data-role' => 'managed_list_form']), static::FORM_ID, static::CONTAINER_ID),
             new Part(new Tag('span'), static::CONTROL_CONTAINER_ID, static::FORM_ID),
-            new Part(new Tag('input', ['type' => 'submit']), static::SUBMIT_BUTTON_ID, static::FORM_ID),
+            new Part(
+                new Tag('input', ['type' => 'submit', 'data-role' => 'managed_list_submit_button']),
+                static::SUBMIT_BUTTON_ID,
+                static::FORM_ID
+            ),
             new Part(new Container(), static::LIST_CONTAINER_ID, static::CONTAINER_ID),
             new Part(new CollectionView(), static::COLLECTION_VIEW_ID, static::LIST_CONTAINER_ID),
             new RecordView(new Json()),
