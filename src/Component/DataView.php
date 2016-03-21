@@ -2,6 +2,7 @@
 
 namespace ViewComponents\ViewComponents\Component;
 
+use Closure;
 use Nayjest\Tree\ChildNodeTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
 use ViewComponents\ViewComponents\Data\DataAggregateTrait;
@@ -22,14 +23,14 @@ class DataView implements DataViewComponentInterface
     /**
      * Constructor.
      *
-     * If using data isn't required, renderer function can be passed to first argument.
+     * If using data isn't required, renderer function can be passed to first argument as Closure.
      *
      * @param $data
      * @param callable|null $renderer
      */
     public function __construct($data = null, callable $renderer = null)
     {
-        if ($renderer === null && is_callable($data)) {
+        if ($renderer === null && $data instanceof Closure) {
             $renderer = $data;
             $data = null;
         }
