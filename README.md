@@ -1,4 +1,4 @@
-PHP View Components
+ ![Logo](https://raw.githubusercontent.com/view-components/logo/master/view-components-logo-without-text-42.png) PHP View Components 
 =====
 ### `Flexible UI for Enterprise Web Applications`
 
@@ -6,6 +6,7 @@ PHP View Components
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/view-components/view-components/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/view-components/view-components/?branch=master)
 [![Build Status](https://travis-ci.org/view-components/view-components.svg?branch=master)](https://travis-ci.org/view-components/view-components)
 [![Code Coverage](https://scrutinizer-ci.com/g/view-components/view-components/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/view-components/view-components/?branch=master)
+
 
 
 **Project status: pre-alpha**
