@@ -1,6 +1,6 @@
  ![Logo](https://raw.githubusercontent.com/view-components/logo/master/view-components-logo-without-text-42.png) PHP View Components 
 =====
-### `Flexible UI for Enterprise Web Applications`
+### `Flexible Framework-Agnostic UI for Enterprise Web Applications`
 
 [![Release](https://img.shields.io/packagist/v/view-components/view-components.svg)](https://packagist.org/packages/view-components/view-components)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/view-components/view-components/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/view-components/view-components/?branch=master)
