@@ -11,7 +11,7 @@
 
 **Project status: pre-alpha**
 
-ViewComponents package allows to build flexible HTML user interface based on components.
+View Components allows to build flexible HTML user interface based on components.
 It provides interoperability via object-oriented API and foundation for UI architecture.
 
 ## Table of Contents
