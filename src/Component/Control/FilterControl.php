@@ -36,8 +36,7 @@ class FilterControl extends Part implements ControlInterface
         $field,
         $operator = FilterOperation::OPERATOR_EQ,
         InputOption $input = null
-    )
-    {
+    ) {
         $this->field = $field;
         $this->operator = $operator;
         $this->valueOption = $input;
