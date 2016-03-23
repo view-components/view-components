@@ -7,11 +7,17 @@ use RuntimeException;
 use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\Html\TagInterface;
-use ViewComponents\ViewComponents\Component\Debug\SymfonyVarDump;
 use ViewComponents\ViewComponents\Component\TemplateView;
 
+/**
+ * Class TargetSelector
+ * @internal
+ */
 class TargetSelector
 {
+    /**
+     * TargetSelector constructor.
+     */
     public function __construct()
     {
     }

@@ -76,16 +76,16 @@ class CoreServiceProvider implements ServiceProviderInterface
             return new HtmlBuilder($container->get(ServiceId::RESOURCE_MANAGER));
         });
 
-        $container->set(ServiceId::BOOTSTRAP_STYLING_CONFIG, function() {
-            return include $this->packageFolder .'/resources/config/styling/twitter_bootstrap.php';
+        $container->set(ServiceId::BOOTSTRAP_STYLING_CONFIG, function () {
+            return include $this->packageFolder . '/resources/config/styling/twitter_bootstrap.php';
         });
 
-        $container->set(ServiceId::FOUNDATION_STYLING_CONFIG, function() {
-            return include $this->packageFolder .'/resources/config/styling/foundation.php';
+        $container->set(ServiceId::FOUNDATION_STYLING_CONFIG, function () {
+            return include $this->packageFolder . '/resources/config/styling/foundation.php';
         });
 
-        $container->set(ServiceId::SEMANTIC_UI_STYLING_CONFIG, function() {
-            return include $this->packageFolder .'/resources/config/styling/semantic-ui.php';
+        $container->set(ServiceId::SEMANTIC_UI_STYLING_CONFIG, function () {
+            return include $this->packageFolder . '/resources/config/styling/semantic-ui.php';
         });
     }
 }

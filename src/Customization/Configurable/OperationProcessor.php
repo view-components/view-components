@@ -6,6 +6,11 @@ use Closure;
 use Nayjest\StrCaseConverter\Str;
 use ViewComponents\ViewComponents\Base\ComponentInterface;
 
+/**
+ * Class OperationProcessor.
+ *
+ * @internal
+ */
 class OperationProcessor
 {
     /**
