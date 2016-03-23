@@ -3,12 +3,13 @@
 namespace ViewComponents\ViewComponents\Component;
 
 use InvalidArgumentException;
+use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
 use ViewComponents\ViewComponents\Component\Layout\Section;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
-use ViewComponents\ViewComponents\Data\DataAggregateTrait;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateInterface;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateTrait;
 use ViewComponents\ViewComponents\Component\Html\Tag;
-use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use ViewComponents\ViewComponents\Resource\ResourceManager;
 use ViewComponents\ViewComponents\Service\Services;
 
@@ -17,9 +18,9 @@ use ViewComponents\ViewComponents\Service\Services;
  * with possibility to group children view components by sections.
  *
  */
-class Layout extends Compound implements DataAggregateInterface
+class Layout extends Compound implements DataViewComponentInterface, ArrayDataAggregateInterface
 {
-    use DataAggregateTrait;
+    use ArrayDataAggregateTrait;
 
     const SECTION_MAIN = 'main';
 

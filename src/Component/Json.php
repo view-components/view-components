@@ -4,17 +4,19 @@ namespace ViewComponents\ViewComponents\Component;
 
 use Nayjest\Tree\ChildNodeTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Data\DataAggregateTrait;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateInterface;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateTrait;
 use ViewComponents\ViewComponents\Rendering\ViewTrait;
 
 /**
- * This component renders custom data as JSON
+ * The component for rendering custom data as JSON
  */
-class Json implements DataViewComponentInterface
+class Json implements DataViewComponentInterface, ArrayDataAggregateInterface
 {
     use ChildNodeTrait;
     use ViewTrait;
-    use DataAggregateTrait;
+    use ArrayDataAggregateTrait;
+
     protected $options;
 
     /**

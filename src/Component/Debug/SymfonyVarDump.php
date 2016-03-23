@@ -3,7 +3,8 @@ namespace ViewComponents\ViewComponents\Component\Debug;
 
 use Nayjest\Tree\ChildNodeTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Data\DataAggregateTrait;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateInterface;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateTrait;
 use ViewComponents\ViewComponents\Rendering\ViewTrait;
 use Symfony\Component\VarDumper\Dumper\CliDumper;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
@@ -15,11 +16,11 @@ use Symfony\Component\VarDumper\Dumper\HtmlDumper;
  * The component displays custom data using Symfony VarDumper.
  *
  */
-class SymfonyVarDump implements DataViewComponentInterface
+class SymfonyVarDump implements DataViewComponentInterface, ArrayDataAggregateInterface
 {
     use ChildNodeTrait;
     use ViewTrait;
-    use DataAggregateTrait;
+    use ArrayDataAggregateTrait;
 
     /**
      * Constructor.
