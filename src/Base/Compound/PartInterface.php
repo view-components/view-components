@@ -49,4 +49,14 @@ interface PartInterface extends ComponentInterface
      * @param Compound $root
      */
     public function attachToCompound(Compound $root);
+
+    /**
+     * @return Compound|null
+     */
+    public function getRoot();
+
+    /**
+     * @return bool
+     */
+    public function isAttached();
 }

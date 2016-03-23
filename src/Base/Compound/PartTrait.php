@@ -26,6 +26,9 @@ trait PartTrait
      */
     public function setId($id)
     {
+        if ($this->root) {
+            $this->root->requireTreeUpdate();
+        }
         $this->id = $id;
         return $this;
     }
@@ -36,6 +39,9 @@ trait PartTrait
      */
     public function setDestinationParentId($destinationParentId)
     {
+        if ($this->root) {
+            $this->root->requireTreeUpdate();
+        }
         $this->destinationParentId = $destinationParentId;
         return $this;
     }
@@ -93,5 +99,18 @@ trait PartTrait
             }
         }
         return;
+    }
+
+    /**
+     * @return null|Compound
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    public function isAttached()
+    {
+        return $this->root !== null;
     }
 }

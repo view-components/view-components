@@ -33,9 +33,7 @@ class Compound implements ContainerComponentInterface
     public function __construct(array $components)
     {
         $this->componentCollection = new ObjectCollection($components);
-        $this->componentCollection->onChange(function () {
-            $this->isTreeReady = false;
-        });
+        $this->componentCollection->onChange([$this, 'requireTreeUpdate']);
         $this->componentCollection->onItemRemove(function (PartInterface $item) {
             $item->detach();
         });
@@ -166,5 +164,10 @@ class Compound implements ContainerComponentInterface
         if (!$this->isTreeReady) {
             $this->buildTree();
         }
+    }
+
+    public function requireTreeUpdate()
+    {
+        $this->isTreeReady = false;
     }
 }
