@@ -7,6 +7,7 @@ use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
+use ViewComponents\ViewComponents\Component\Html\TagWithText;
 use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Component\Html\Tag;
 use ViewComponents\ViewComponents\Component\ManagedList\RecordView;
@@ -236,12 +237,16 @@ class ManagedList extends Compound implements DataViewComponentInterface
                 static::CONTAINER_ID
             ),
             static::CONTROL_CONTAINER_ID => new Part(
-                new Tag('span', ['style' => 'padding:4px;']),
+                new Tag('span', ['style' => 'margin:4px; line-height:2']),
                 static::CONTROL_CONTAINER_ID,
                 static::FORM_ID
             ),
             static::SUBMIT_BUTTON_ID => new Part(
-                new Tag('input', ['type' => 'submit', 'data-role' => 'managed_list_submit_button']),
+                new TagWithText(
+                    'button',
+                    ['type' => 'submit', 'data-role' => 'managed_list_submit_button'],
+                    'Filter'
+                ),
                 static::SUBMIT_BUTTON_ID,
                 static::FORM_ID
             ),
