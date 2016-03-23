@@ -5,6 +5,7 @@ namespace ViewComponents\ViewComponents\Service;
 use Interop\Container\ContainerInterface;
 use ViewComponents\ViewComponents\HtmlBuilder;
 use ViewComponents\ViewComponents\Rendering\RendererInterface;
+use ViewComponents\ViewComponents\Rendering\TemplateFinder;
 use ViewComponents\ViewComponents\Resource\ResourceManager;
 
 /**
@@ -40,7 +41,7 @@ class Services
      */
     public static function htmlBuilder()
     {
-        return self::get(ServiceName::HTML_BUILDER);
+        return self::get(ServiceId::HTML_BUILDER);
     }
 
     /**
@@ -48,7 +49,7 @@ class Services
      */
     public static function resourceManager()
     {
-        return self::get(ServiceName::RESOURCE_MANAGER);
+        return self::get(ServiceId::RESOURCE_MANAGER);
     }
 
     /**
@@ -56,6 +57,14 @@ class Services
      */
     public static function renderer()
     {
-        return self::get(ServiceName::RENDERER);
+        return self::get(ServiceId::RENDERER);
+    }
+
+    /**
+     * @return RendererInterface;
+     */
+    public static function templateFinder()
+    {
+        return self::get(ServiceId::TEMPLATE_FINDER);
     }
 }

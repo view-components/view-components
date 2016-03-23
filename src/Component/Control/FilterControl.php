@@ -3,6 +3,7 @@
 namespace ViewComponents\ViewComponents\Component\Control;
 
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
+use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 use ViewComponents\ViewComponents\Component\TemplateView;
 use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Data\DataAggregateInterface;
@@ -35,7 +36,8 @@ class FilterControl extends Part implements ControlInterface
         $field,
         $operator = FilterOperation::OPERATOR_EQ,
         InputOption $input = null
-    ) {
+    )
+    {
         $this->field = $field;
         $this->operator = $operator;
         $this->valueOption = $input;
@@ -84,27 +86,42 @@ class FilterControl extends Part implements ControlInterface
         return $this->operator;
     }
 
-    protected function makeDefaultView()
+    public function setView(ViewComponentInterface $view = null)
     {
-        return new TemplateView('controls/filter');
-    }
-
-    protected function setViewData()
-    {
-        $view = $this->getView();
-        if (!$view instanceof DataAggregateInterface) {
-            return;
-        }
-        $view->mergeData([
-            'name' => $this->valueOption->getKey(),
-            'label' => StaticStringy::humanize($this->field),
-            'value' => $this->valueOption->getValue()
-        ]);
+        parent::setView($view);
+        $this->setViewData();
+        return $this;
     }
 
     public function render()
     {
         $this->setViewData();
         return parent::render();
+    }
+
+    protected function makeDefaultView()
+    {
+        return new TemplateView('input');
+    }
+
+    protected function setViewData()
+    {
+        $view = $this->getView();
+        if (!$view instanceof TemplateView) {
+            return;
+        }
+        $defaults = [
+            'containerAttributes' => [
+                'data-role' => 'control-container',
+                'data-control' => 'filter',
+            ],
+            'inline' => true,
+            'label' => StaticStringy::humanize($this->field),
+        ];
+        if ($this->valueOption !== null) {
+            $defaults['name'] = $this->valueOption->getKey();
+            $defaults['value'] = $this->valueOption->getValue();
+        }
+        $view->setDefaultData($defaults);
     }
 }

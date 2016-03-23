@@ -12,4 +12,9 @@ interface RendererInterface
      * @return string
      */
     public function render($template, array $viewData = []);
+
+    /**
+     * @return TemplateFinder
+     */
+    public function getFinder();
 }

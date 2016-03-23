@@ -30,7 +30,8 @@ class PageSizeSelectControl extends Part implements ControlInterface
         InputOption $inputOption = null,
         array $variants = [50, 100, 300, 1000],
         PaginationControl $pagination = null
-    ) {
+    )
+    {
         $this->inputOption = $inputOption;
         $this->variants = $variants;
         parent::__construct($this->makeDefaultView(), 'page_size_select', 'control_container');
@@ -111,12 +112,6 @@ class PageSizeSelectControl extends Part implements ControlInterface
         return $this->paginationControl;
     }
 
-    protected function makeDefaultView()
-    {
-        return new TemplateView('controls/page_size');
-    }
-
-
     public function render()
     {
         // try to update pagination one mor time for cases when not configured pagination was used and later configured.
@@ -126,16 +121,30 @@ class PageSizeSelectControl extends Part implements ControlInterface
         return parent::render();
     }
 
+    protected function makeDefaultView()
+    {
+        return new TemplateView('select');
+    }
+
     protected function setViewData()
     {
         $view = $this->getView();
-        if (!$view instanceof DataAggregateInterface) {
+        if (!$view instanceof TemplateView) {
             return;
         }
-        $view->mergeData([
-            'inputName' => $this->inputOption->getKey(),
-            'selected' => $this->inputOption->getValue(),
-            'variants' => $this->getVariants(),
-        ]);
+        $defaults = [
+            'containerAttributes' => [
+                'data-role' => 'control-container',
+                'data-control' => 'page-size-select',
+            ],
+            'inline' => true,
+            'label' => 'Page Size',
+            'options' => $this->getVariants()
+        ];
+        if ($this->inputOption !== null) {
+            $defaults['name'] = $this->inputOption->getKey();
+            $defaults['value'] = $this->inputOption->getValue();
+        }
+        $view->setDefaultData($defaults);
     }
 }

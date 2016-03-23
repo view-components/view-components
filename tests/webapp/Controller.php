@@ -12,6 +12,9 @@ use ViewComponents\ViewComponents\Component\Control\PaginationControl;
 use ViewComponents\ViewComponents\Component\ManagedList\RecordView;
 use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Component\TemplateView;
+use ViewComponents\ViewComponents\Customization\CssFrameworks\BootstrapStyling;
+use ViewComponents\ViewComponents\Customization\CssFrameworks\FoundationStyling;
+use ViewComponents\ViewComponents\Customization\CssFrameworks\SemanticUIStyling;
 use ViewComponents\ViewComponents\Input\InputOption;
 use ViewComponents\ViewComponents\Input\InputSource;
 use ViewComponents\ViewComponents\Component\Container;
@@ -22,9 +25,9 @@ use ViewComponents\ViewComponents\Data\ArrayDataProvider;
 use ViewComponents\ViewComponents\Data\DbTableDataProvider;
 use ViewComponents\ViewComponents\Data\Operation\FilterOperation;
 use ViewComponents\ViewComponents\Data\Operation\SortOperation;
+use ViewComponents\ViewComponents\Rendering\TemplateFinder;
 use ViewComponents\ViewComponents\WebApp\Components\PersonView;
 use ViewComponents\ViewComponents\Rendering\SimpleRenderer;
-use ViewComponents\ViewComponents\Customization\Bootstrap\BootstrapStyling;
 use ViewComponents\ViewComponents\Service\Services;
 
 class Controller
@@ -177,11 +180,11 @@ class Controller
     }
 
     /**
-     * Filtering controls in managed list + styling + pagination + InputSource
+     * Custom styling
      *
      * @return string
      */
-    public function demo4_3()
+    public function demo4_4()
     {
         $provider = $this->getDataProvider();
         $input = new InputSource($_GET);
@@ -212,12 +215,11 @@ class Controller
                 ),
                 new PaginationControl($input('page', 1), 5),
                 new PageSizeSelectControl($input('page_size', 5), [2, 5, 10]),
+                new ManagedList\ResetButton()
             ]
         );
-
-        $styling = new BootstrapStyling();
-        $styling->apply($list);
-
+        $list->attachTo($this->layout());
+        BootstrapStyling::applyTo($list);
         return $this->page($list, 'Filtering controls in managed list + styling + pagination + InputSource');
     }
 
@@ -225,7 +227,7 @@ class Controller
      * Hiding submit button automatically
      * @return string
      */
-    public function demo4_4()
+    public function demo5()
     {
         $provider = $this->getDataProvider();
         $input = new InputSource($_GET);
@@ -240,15 +242,14 @@ class Controller
                 )
             ]
         );
-        $styling = new BootstrapStyling();
-        $styling->apply($list, $list->getComponent('container'));
+        BootstrapStyling::applyTo($list);
         return $this->page($list, 'Hiding submit button automatically');
     }
 
     /**
      * @return string
      */
-    public function demo5()
+    public function demo6()
     {
         $panel = new Tag('div', ['class' => 'panel panel-success']);
         $header = new Tag('div', ['class' => 'panel-heading']);
@@ -264,11 +265,11 @@ class Controller
         $header->addChild(new DataView('<b>Panel Header</b>'));
         $body->addChild(new DataView('Panel Body'));
         $footer->addChild(new DataView('Panel Footer'));
-
-        $container = new Tag('div', ['class' => 'container'], [$compound]);
-        $styling = new BootstrapStyling();
-        $styling->apply($container);
         $compound->addChild(new DataView('Text added after footer'));
+
+        $this->layout()->addChild($compound);
+        BootstrapStyling::applyTo($this->layout());
+
 
         return $this->page($compound, 'Usage of Compounds');
     }
@@ -278,11 +279,11 @@ class Controller
      *
      * @return string
      */
-    public function demo6()
+    public function demo7()
     {
-        $renderer = new SimpleRenderer([
-            __DIR__ . '/resources/views'
-        ]);
+        $renderer = new SimpleRenderer(
+            new TemplateFinder([__DIR__ . '/resources/views'])
+        );
         return $this->page(
             $renderer->render('demo/template1')
             . $renderer->render('demo/template_with_var', ['var' => 'ok']),
@@ -295,12 +296,98 @@ class Controller
      * Template view
      * @return string
      */
-    public function demo7()
+    public function demo8()
     {
-        $renderer = new SimpleRenderer([
-            __DIR__ . '/resources/views'
-        ]);
+        $renderer = new SimpleRenderer(
+            new TemplateFinder([__DIR__ . '/resources/views'])
+        );
         $view = new TemplateView('demo/template_view', [], $renderer);
         return $this->page($view, 'Template view');
     }
+
+
+    protected function prepareDemo9View()
+    {
+        $provider = $this->getDataProvider();
+        $input = new InputSource($_GET);
+        $list = new ManagedList(
+            $provider,
+            [
+                new RecordView(new SymfonyVarDump()),
+                new FilterControl(
+                    'name',
+                    FilterOperation::OPERATOR_EQ,
+                    $input('name_filter')
+                ),
+                (new FilterControl(
+                    'role',
+                    FilterOperation::OPERATOR_EQ,
+                    $input('role_filter')
+                ))->setView(new TemplateView('select', [
+                    'options' => [
+                        '' => 'All Roles',
+                        'User' => 'Users',
+                        'Manager' => 'Managers',
+                        'Admin' => 'Admins',
+                    ]
+                ])),
+                new SortingSelectControl(
+                    [
+                        null => 'None',
+                        'id' => 'ID',
+                        'name' => 'Name',
+                        'role' => 'Role',
+                        'birthday' => 'Birthday',
+                    ],
+                    $input('sort_field'),
+                    $input('sort_dir')
+                ),
+                new PaginationControl($input('page', 1), 5),
+                new PageSizeSelectControl($input('page_size', 5), [2, 5, 10]),
+                new ManagedList\ResetButton()
+            ]
+        );
+        $this->layout()->mainSection()->addChild($list);
+    }
+
+    /**
+     * No styling
+     */
+    public function demo9_0()
+    {
+        $this->prepareDemo9View();
+
+        return $this->page('', 'No styling');
+    }
+
+    /**
+     * Bootstrap styling
+     */
+    public function demo9_1()
+    {
+        $this->prepareDemo9View();
+        BootstrapStyling::applyTo($this->layout());
+        return $this->page('', 'Bootstrap styling');
+    }
+
+    /**
+     * Foundation styling
+     */
+    public function demo9_2()
+    {
+        $this->prepareDemo9View();
+        FoundationStyling::applyTo($this->layout());
+        return $this->page('', 'Foundation styling');
+    }
+
+    /**
+     * Semantic UI styling
+     */
+    public function demo9_3()
+    {
+        $this->prepareDemo9View();
+        SemanticUIStyling::applyTo($this->layout());
+        return $this->page('', 'Semantic UI styling');
+    }
+
 }

@@ -2,10 +2,10 @@
 
 namespace ViewComponents\ViewComponents\Component\Control;
 
+use ViewComponents\ViewComponents\Component\Container;
 use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Component\TemplateView;
-use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use ViewComponents\ViewComponents\Input\InputOption;
 use ViewComponents\ViewComponents\Data\Operation\DummyOperation;
 use ViewComponents\ViewComponents\Data\Operation\SortOperation;
@@ -76,12 +76,6 @@ class SortingSelectControl extends Part implements ControlInterface
         return $this->fields;
     }
 
-    public function render()
-    {
-        $this->setViewData();
-        return parent::render();
-    }
-
     private function validateInput()
     {
         return $this->fieldOption->hasValue()
@@ -99,21 +93,29 @@ class SortingSelectControl extends Part implements ControlInterface
 
     protected function makeDefaultView()
     {
-        return new TemplateView('controls/sorting_select');
-    }
-
-    protected function setViewData()
-    {
-        $view = $this->getView();
-        if (!$view instanceof DataAggregateInterface) {
-            return;
-        }
-        $view->mergeData([
-            'fields' => $this->fields,
-            'fieldSelectName' => $this->getFieldOption()->getKey(),
-            'directionSelectName' => $this->getDirectionOption()->getKey(),
-            'selectedDirection' => $this->getDirectionOption()->getValue(),
-            'selectedField' => $this->getFieldOption()->getValue()
+        return new Container([
+            new TemplateView(
+                'select',
+                [
+                    'label' => 'Sorting',
+                    'inline' => 'true',
+                    'name' => $this->getFieldOption()->getKey(),
+                    'value' => $this->getFieldOption()->getValue(),
+                    'options' => $this->getFields(),
+                ]
+            ),
+            new TemplateView(
+                'select',
+                [
+                    'inline' => 'true',
+                    'name' => $this->getDirectionOption()->getKey(),
+                    'value' => $this->getDirectionOption()->getValue(),
+                    'options' => [
+                        SortOperation::ASC => 'Asc.',
+                        SortOperation::DESC => 'Desc.',
+                    ],
+                ]
+            )
         ]);
     }
 }

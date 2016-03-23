@@ -5,6 +5,7 @@ namespace ViewComponents\ViewComponents\Service;
 use Interop\Container\ContainerInterface;
 use ViewComponents\ViewComponents\HtmlBuilder;
 use ViewComponents\ViewComponents\Rendering\SimpleRenderer;
+use ViewComponents\ViewComponents\Rendering\TemplateFinder;
 use ViewComponents\ViewComponents\Resource\AliasRegistry;
 use ViewComponents\ViewComponents\Resource\IncludedResourcesRegistry;
 use ViewComponents\ViewComponents\Resource\ResourceManager;
@@ -34,12 +35,12 @@ class CoreServiceProvider implements ServiceProviderInterface
      */
     public function register(ServiceContainer $container)
     {
-        $container->set(ServiceName::CONFIG_FILE, function () {
-            return $this->packageFolder . '/resources/config.php';
+        $container->set(ServiceId::CONFIG_FILE, function () {
+            return $this->packageFolder . '/resources/config/config.php';
         });
 
-        $container->set(ServiceName::CONFIG, function (ContainerInterface $container) {
-            $path = $container->get(ServiceName::CONFIG_FILE);
+        $container->set(ServiceId::CONFIG, function (ContainerInterface $container) {
+            $path = $container->get(ServiceId::CONFIG_FILE);
             if (!file_exists($path)) {
                 throw new RuntimeException('Wrong presentation framework configuration path.');
             }
@@ -54,12 +55,16 @@ class CoreServiceProvider implements ServiceProviderInterface
             throw new RuntimeException('Unsupported configuration file type.');
         });
 
-        $container->set(ServiceName::RENDERER, function () {
-            return new SimpleRenderer([$this->packageFolder . '/resources/views']);
+        $container->set(ServiceId::RENDERER, function (ContainerInterface $container) {
+            return new SimpleRenderer($container->get(ServiceId::TEMPLATE_FINDER));
         });
 
-        $container->set(ServiceName::RESOURCE_MANAGER, function (ContainerInterface $container) {
-            $config = $container->get(ServiceName::CONFIG);
+        $container->set(ServiceId::TEMPLATE_FINDER, function () {
+            return new TemplateFinder([$this->packageFolder . '/resources/views']);
+        });
+
+        $container->set(ServiceId::RESOURCE_MANAGER, function (ContainerInterface $container) {
+            $config = $container->get(ServiceId::CONFIG);
             return new ResourceManager(
                 new AliasRegistry(isset($config['js_aliases']) ? $config['js_aliases'] : []),
                 new AliasRegistry(isset($config['css_aliases']) ? $config['css_aliases'] : []),
@@ -67,8 +72,20 @@ class CoreServiceProvider implements ServiceProviderInterface
             );
         });
 
-        $container->set(ServiceName::HTML_BUILDER, function (ContainerInterface $container) {
-            return new HtmlBuilder($container->get(ServiceName::RESOURCE_MANAGER));
+        $container->set(ServiceId::HTML_BUILDER, function (ContainerInterface $container) {
+            return new HtmlBuilder($container->get(ServiceId::RESOURCE_MANAGER));
+        });
+
+        $container->set(ServiceId::BOOTSTRAP_STYLING_CONFIG, function() {
+            return include $this->packageFolder .'/resources/config/styling/twitter_bootstrap.php';
+        });
+
+        $container->set(ServiceId::FOUNDATION_STYLING_CONFIG, function() {
+            return include $this->packageFolder .'/resources/config/styling/foundation.php';
+        });
+
+        $container->set(ServiceId::SEMANTIC_UI_STYLING_CONFIG, function() {
+            return include $this->packageFolder .'/resources/config/styling/semantic-ui.php';
         });
     }
 }
