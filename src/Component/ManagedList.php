@@ -14,8 +14,6 @@ use ViewComponents\ViewComponents\Component\ManagedList\RecordView;
 use ViewComponents\ViewComponents\Data\DataProviderInterface;
 
 /**
- * Class ManagedList
- *
  * ManagedList is a component for rendering data lists with interactive controls.
  */
 class ManagedList extends Compound implements DataViewComponentInterface
@@ -237,7 +235,13 @@ class ManagedList extends Compound implements DataViewComponentInterface
                 static::CONTAINER_ID
             ),
             static::CONTROL_CONTAINER_ID => new Part(
-                new Tag('span', ['style' => 'margin:4px; line-height:2']),
+                new Tag(
+                    'span',
+                    [   // margin for positioning submit-button
+                        // line-height for multi-row appearance
+                        'style' => 'margin:4px;line-height:3'
+                    ]
+                ),
                 static::CONTROL_CONTAINER_ID,
                 static::FORM_ID
             ),
@@ -260,7 +264,7 @@ class ManagedList extends Compound implements DataViewComponentInterface
                 static::COLLECTION_VIEW_ID,
                 static::LIST_CONTAINER_ID
             ),
-            static::RECORD_VIEW_ID =>new RecordView(new Json()),
+            static::RECORD_VIEW_ID => new RecordView(new Json()),
         ];
     }
 }
