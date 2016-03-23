@@ -10,8 +10,20 @@ namespace ViewComponents\ViewComponents\Base\Html;
  */
 trait TagTrait
 {
-
     abstract public function getTagName();
+
+    public static function renderAttributes(array $attributes)
+    {
+        $html = [];
+        foreach ($attributes as $key => $value) {
+            $escaped = htmlentities($value, ENT_QUOTES, 'UTF-8', false);
+            $html[] = is_numeric($key) ?
+                ($escaped . '="' . $escaped . '""')
+                :
+                ("$key=\"$escaped\"");
+        }
+        return count($html) > 0 ? ' ' . implode(' ', $html) : '';
+    }
 
     /**
      * HTML tag attributes.
@@ -74,7 +86,7 @@ trait TagTrait
     {
         return '<'
         . $this->getTagName()
-        . $this->renderAttributes()
+        . static::renderAttributes($this->getAttributes())
         . '>';
     }
 
@@ -86,18 +98,5 @@ trait TagTrait
     protected function renderClosing()
     {
         return "</{$this->getTagName()}>";
-    }
-
-    protected function renderAttributes()
-    {
-        $html = [];
-        foreach ($this->attributes as $key => $value) {
-            $escaped = htmlentities($value, ENT_QUOTES, 'UTF-8', false);
-            $html[] = is_numeric($key) ?
-                ($escaped . '="' . $escaped . '""')
-                :
-                ("$key=\"$escaped\"");
-        }
-        return count($html) > 0 ? ' ' . implode(' ', $html) : '';
     }
 }
