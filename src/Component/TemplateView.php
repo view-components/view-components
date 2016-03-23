@@ -5,14 +5,15 @@ namespace ViewComponents\ViewComponents\Component;
 use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
-use ViewComponents\ViewComponents\Data\DataAggregateTrait;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateInterface;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateTrait;
 use ViewComponents\ViewComponents\Rendering\RendererInterface;
 use ViewComponents\ViewComponents\Service\Services;
 use RuntimeException;
 
-class TemplateView implements DataViewComponentInterface, ContainerComponentInterface
+class TemplateView implements DataViewComponentInterface, ContainerComponentInterface, ArrayDataAggregateInterface
 {
-    use DataAggregateTrait;
+    use ArrayDataAggregateTrait;
     use ContainerComponentTrait;
 
     /** @var  string */

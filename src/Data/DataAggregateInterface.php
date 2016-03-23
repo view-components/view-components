@@ -17,12 +17,4 @@ interface DataAggregateInterface
      * @return mixed
      */
     public function getData();
-
-    /**
-     * Merges new data if possible.
-     *
-     * @param array|object $data
-     * @return $this
-     */
-    public function mergeData($data);
 }
