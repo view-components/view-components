@@ -28,5 +28,6 @@ return [
     'compound_part#control_container' => 'add_class: fields inline',
     'template' => [
         ['override_template' => ['themes/semantic-ui', ['size' => $size]]]
-    ]
+    ],
+    'tag:table' => 'add_class: ui table celled structured',
 ];
