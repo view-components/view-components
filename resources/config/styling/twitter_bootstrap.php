@@ -8,7 +8,7 @@ $helper = new ViewHelper([
     'defaultButtonStyleClass' => 'btn-default',
 
     'baseTableClass' => 'table',
-    'tableStyleClass' => 'table-striped table-hover',
+    'defaultTableStyleClass' => 'table-striped table-hover table-bordered',
 
     'baseInputClass' => 'form-control',
     'inputSizeClass' => 'input-sm',
@@ -23,14 +23,15 @@ return [
     'compound_part#form' => 'add_class:form-inline',
     //'compound_part#submit_button' => [
     'tag&property:type,submit' => [
-        'add_class:btn btn-sm btn-success',
+        'add_class:' . $helper->getButtonClasses('btn-success'),
         $useIcons ? 'prepend_text:<i class="glyphicon glyphicon-refresh"></i>&nbsp;': []
     ],
     //'tag:button[type=reset]' => 'addClass:btn btn-sm btn-warning',
-
+    'tag:table' => 'add_class: '. $helper->getTableClasses(),
+    'tag:button&property:type,button' =>  'add_class: '. $helper->getButtonClasses(),
     'tag:button&property:type,reset' =>
         [
-            ['add_class' => 'btn btn-sm btn-warning'],
+            ['add_class' => $helper->getButtonClasses('btn-warning')],
             $useIcons ? ['prepend_text' => '<i class="glyphicon glyphicon-erase"></i>&nbsp;'] : []
         ],
     'template' => [
