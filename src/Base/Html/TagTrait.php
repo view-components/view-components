@@ -68,7 +68,7 @@ trait TagTrait
      */
     public static function getEmptyTagNames()
     {
-        return static::$emptyTagNames;
+        return self::$emptyTagNames;
     }
 
     /**
