@@ -53,7 +53,7 @@ class Tag implements ContainerComponentInterface, TagInterface
     }
 
     /**
-     * Renders component and returns output.
+     * Renders tag and returns output.
      *
      * @return string
      */

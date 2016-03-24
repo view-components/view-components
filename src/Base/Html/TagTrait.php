@@ -12,6 +12,36 @@ trait TagTrait
 {
     abstract public function getTagName();
 
+    private static $emptyTagNames = [
+        'link',
+        'track',
+        'param',
+        'area',
+        'command',
+        'col',
+        'base',
+        'meta',
+        'hr',
+        'source',
+        'img',
+        'keygen',
+        'br',
+        'wbr',
+        'colgroup', # when the span is present
+        'input',
+        'frame',
+        'basefont',
+        'isindex'
+    ];
+
+
+    /**
+     * HTML tag attributes.
+     * Keys are attribute names and values are attribute values.
+     * @var array
+     */
+    protected $attributes = [];
+
     public static function renderAttributes(array $attributes)
     {
         $html = [];
@@ -25,12 +55,10 @@ trait TagTrait
         return count($html) > 0 ? ' ' . implode(' ', $html) : '';
     }
 
-    /**
-     * HTML tag attributes.
-     * Keys are attribute names and values are attribute values.
-     * @var array
-     */
-    protected $attributes = [];
+    public static function getEmptyTagNames()
+    {
+        return static::$emptyTagNames;
+    }
 
     /**
      * Returns html tag attributes.
@@ -87,6 +115,7 @@ trait TagTrait
         return '<'
         . $this->getTagName()
         . static::renderAttributes($this->getAttributes())
+        . ($this->isEmptyTag() ? '/' : '')
         . '>';
     }
 
@@ -97,6 +126,11 @@ trait TagTrait
      */
     protected function renderClosing()
     {
-        return "</{$this->getTagName()}>";
+        return $this->isEmptyTag() ? '' : "</{$this->getTagName()}>";
+    }
+
+    protected function isEmptyTag()
+    {
+        return in_array($this->getTagName(), static::getEmptyTagNames());
     }
 }
