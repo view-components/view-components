@@ -6,7 +6,7 @@ return [
         'js:foundation',
         'css:foundation'
     ],
-    //'tag:table' => 'add_class:table table-striped table-hover',
+    'tag:table' => 'add_class:stack hover',
     //'compound_part#form' => 'add_class:form-inline',
     'tag:button' =>
         [

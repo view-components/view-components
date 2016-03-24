@@ -21,12 +21,10 @@ return [
         'css:bootstrap'
     ],
     'compound_part#form' => 'add_class:form-inline',
-    //'compound_part#submit_button' => [
     'tag&property:type,submit' => [
         'add_class:' . $helper->getButtonClasses('btn-success'),
         $useIcons ? 'prepend_text:<i class="glyphicon glyphicon-refresh"></i>&nbsp;': []
     ],
-    //'tag:button[type=reset]' => 'addClass:btn btn-sm btn-warning',
     'tag:table' => 'add_class: '. $helper->getTableClasses(),
     'tag:button&property:type,button' =>  'add_class: '. $helper->getButtonClasses(),
     'tag:button&property:type,reset' =>

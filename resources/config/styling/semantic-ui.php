@@ -6,12 +6,9 @@ return [
         'js:semantic-ui',
         'css:semantic-ui',
     ],
-    //'tag:table' => 'add_class:table table-striped table-hover',
-    //'compound_part#form' => 'add_class:form-inline',
     'tag:button' =>
         [
             "add_class:ui medium button",
-            //['set_attribute' =>  ['style','position:relative; top:7px']]
         ],
     'compound_part#submit_button' =>
         [
