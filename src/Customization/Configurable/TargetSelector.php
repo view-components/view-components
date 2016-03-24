@@ -10,7 +10,7 @@ use ViewComponents\ViewComponents\Base\Html\TagInterface;
 use ViewComponents\ViewComponents\Component\TemplateView;
 
 /**
- * Class TargetSelector
+ * Class TargetSelector.
  * @internal
  */
 class TargetSelector
@@ -119,7 +119,8 @@ class TargetSelector
 
     public function checkTemplateCondition(ComponentInterface $component, $templateName = null)
     {
-        return $component instanceof TemplateView && ($templateName ? ($component->getTemplateName() === $templateName) : true);
+        return $component instanceof TemplateView
+        && ($templateName ? ($component->getTemplateName() === $templateName) : true);
     }
 
     public function checkPropertyCondition(ComponentInterface $component, $property, $value)
