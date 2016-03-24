@@ -7,6 +7,9 @@ use ViewComponents\ViewComponents\Base\Html\TagInterface;
 use ViewComponents\ViewComponents\Base\Html\TagTrait;
 use Traversable;
 
+/**
+ * The component that represents HTML tag.
+ */
 class Tag implements ContainerComponentInterface, TagInterface
 {
     use ContainerComponentTrait;
@@ -16,6 +19,8 @@ class Tag implements ContainerComponentInterface, TagInterface
     private $tagName;
 
     /**
+     * Html tag constructor.
+     *
      * @param string $tagName html tag name, optional, default value: 'div'
      * @param array $attributes html tag attributes, optional
      * @param array|Traversable $components child components (will be rendered inside tag) empty by default
@@ -31,7 +36,7 @@ class Tag implements ContainerComponentInterface, TagInterface
     }
 
     /**
-     * Allows to specify HTML tag name.
+     * Allows to specify HTML tag name (span,div,table, etc).
      *
      * @param string $name
      * @return $this

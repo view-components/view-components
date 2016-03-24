@@ -42,6 +42,12 @@ trait TagTrait
      */
     protected $attributes = [];
 
+    /**
+     * Renders HTML tag attributes.
+     *
+     * @param array $attributes
+     * @return string
+     */
     public static function renderAttributes(array $attributes)
     {
         $html = [];
@@ -55,6 +61,11 @@ trait TagTrait
         return count($html) > 0 ? ' ' . implode(' ', $html) : '';
     }
 
+    /**
+     * Returns names of empty tags (br, hr, etc.).
+     *
+     * @return array
+     */
     public static function getEmptyTagNames()
     {
         return static::$emptyTagNames;
@@ -71,6 +82,13 @@ trait TagTrait
         return $this->attributes;
     }
 
+    /**
+     * Returns HTML tag attribute by name.
+     *
+     * @param string $name
+     * @param mixed $default
+     * @return mixed
+     */
     public function getAttribute($name, $default = null)
     {
         if (array_key_exists($name, $this->attributes)) {
@@ -80,6 +98,13 @@ trait TagTrait
         }
     }
 
+    /**
+     * Sets HTML tag attribute.
+     *
+     * @param string $name
+     * @param string $value
+     * @return $this
+     */
     public function setAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
@@ -99,6 +124,13 @@ trait TagTrait
         return $this;
     }
 
+    /**
+     * Adds attributes to HTML tag.
+     * New attributes overwrites existing with same names.
+     *
+     * @param array $attributes
+     * @return $this
+     */
     public function addAttributes(array $attributes)
     {
         $this->attributes = array_merge($this->attributes, $attributes);
