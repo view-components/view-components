@@ -13,7 +13,7 @@
 
 ## Table of Contents
 - [Requirements](#requirements)
-- [Intallation](#installation)
+- [Installation](#installation)
   - [Installing into Existing Project](#installing-into-existing-project)
   - [Installing as Stand-alone Project](#installing-as-stand-alone-project)
 - [Demo Application](#demo-application)
