@@ -31,7 +31,10 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
 
     public function render()
     {
-        return $this->getRenderer()->render($this->templateName, $this->getPreparedData());
+        return $this->getRenderer()->render(
+            $this->getTemplateName(),
+            $this->getPreparedData()
+        );
     }
 
     /**
