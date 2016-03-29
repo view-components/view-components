@@ -1,6 +1,6 @@
 <?php
 
-namespace ViewComponents\Storage;
+namespace ViewComponents\ViewComponents\Storage;
 
 class ObjectStorage implements KeyValueStorageInterface
 {
