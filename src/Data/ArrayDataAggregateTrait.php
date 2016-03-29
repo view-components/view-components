@@ -30,4 +30,20 @@ trait ArrayDataAggregateTrait
         $this->mergeData($data, false);
         return $this;
     }
+
+    public function setDataItem($key, $value)
+    {
+        $this->mergeData([$key => $value]);
+    }
+
+    public function hasDataKey($key)
+    {
+        return array_key_exists($key, $this->getData());
+    }
+
+    public function getDataItem($key, $default = null)
+    {
+        $data = $this->getData();
+        return array_key_exists($key, $data) ? $data[$key] : $default;
+    }
 }
