@@ -6,11 +6,11 @@ use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
 interface ProcessorInterface
 {
     /**
-     * Applies operation to source and returns modified source.
+     * Applies operation to data source and returns modified data source.
      *
      * @param $src
      * @param OperationInterface $operation
-     * @return mixed
+     * @return mixed modified data source
      */
     public function process($src, OperationInterface $operation);
 }
