@@ -11,6 +11,8 @@
 
 **Project status: pre-alpha**
 
+**Have questions? [Ask in issue-tracer](https://github.com/view-components/view-components/issues/new)**.
+
 ## Table of Contents
 - [Requirements](#requirements)
 - [Installation](#installation)
