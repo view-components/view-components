@@ -14,6 +14,7 @@ class ComponentStorage extends ObjectStorage
     public function set($key, $value)
     {
         $parent = $value->parent();
+        $value->internalSetParent(null);
         parent::set($key, $value);
         $value->internalSetParent($parent);
         return $this;
