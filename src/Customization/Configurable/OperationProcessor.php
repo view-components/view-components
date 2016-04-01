@@ -18,11 +18,22 @@ class OperationProcessor
      */
     private $helper;
 
+    /**
+     * Constructor.
+     *
+     * @param Helper $helper
+     */
     public function __construct(Helper $helper)
     {
         $this->helper = $helper;
     }
 
+    /**
+     * Applies operations to target component.
+     *
+     * @param ComponentInterface $component
+     * @param $operations
+     */
     public function apply(ComponentInterface $component, $operations)
     {
         if (is_string($operations) || $operations instanceof Closure) {

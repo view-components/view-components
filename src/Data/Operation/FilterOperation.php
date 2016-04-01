@@ -1,6 +1,9 @@
 <?php
 namespace ViewComponents\ViewComponents\Data\Operation;
 
+/**
+ * DataProvider operation for filtering rows.
+ */
 class FilterOperation implements OperationInterface
 {
     const OPERATOR_LIKE = 'like';
@@ -18,7 +21,9 @@ class FilterOperation implements OperationInterface
     protected $operator;
 
     /**
-     * @param string|null $field
+     * Constructor.
+     *
+     * @param string|null $field name of data field to filter rows by its value
      * @param string|null $operator
      * @param mixed $value
      */
@@ -33,6 +38,8 @@ class FilterOperation implements OperationInterface
     }
 
     /**
+     * Returns name of data field to filter rows by its value.
+     *
      * @return string
      */
     public function getField()
@@ -41,6 +48,8 @@ class FilterOperation implements OperationInterface
     }
 
     /**
+     * Sets name of data field to filter rows by its value.
+     *
      * @param $field
      * @return $this
      */
@@ -59,7 +68,7 @@ class FilterOperation implements OperationInterface
     }
 
     /**
-     * @param $value
+     * @param mixed $value
      * @return $this
      */
     public function setValue($value)

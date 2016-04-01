@@ -4,6 +4,9 @@ namespace ViewComponents\ViewComponents\Storage;
 
 use InvalidArgumentException;
 
+/**
+ * File-based key-value storage.
+ */
 class FileStorage implements KeyValueStorageInterface
 {
     /**
@@ -11,6 +14,11 @@ class FileStorage implements KeyValueStorageInterface
      */
     private $storagePath;
 
+    /**
+     * Constructor.
+     *
+     * @param string $storagePath path to folder storing data.
+     */
     public function __construct($storagePath)
     {
         $this->storagePath = $storagePath;

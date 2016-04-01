@@ -2,6 +2,10 @@
 
 namespace ViewComponents\ViewComponents\Storage;
 
+/**
+ * Key-value storage for serializable PHP objects.
+ * ObjectStorage is a wrapper for key-value storages that performs serialization and deserialization.
+ */
 class ObjectStorage implements KeyValueStorageInterface
 {
     /**

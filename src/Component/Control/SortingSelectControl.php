@@ -25,6 +25,13 @@ class SortingSelectControl extends Part implements ControlInterface
      */
     private $directionOption;
 
+    /**
+     * SortingSelectControl constructor.
+     *
+     * @param string[] $fields
+     * @param InputOption $fieldOption
+     * @param InputOption $directionOption
+     */
     public function __construct(
         array $fields,
         InputOption $fieldOption,

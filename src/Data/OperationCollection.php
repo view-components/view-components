@@ -8,8 +8,6 @@ use ViewComponents\ViewComponents\Common\ChangesWatcherTrait;
 use ViewComponents\ViewComponents\Common\StateHashInterface;
 
 /**
- * Class OperationsCollection
- *
  * Collection of operations applied to data provider.
  */
 class OperationCollection extends ObjectCollection implements

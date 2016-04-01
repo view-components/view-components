@@ -171,6 +171,8 @@ class Layout extends Compound implements DataViewComponentInterface, ArrayDataAg
     }
 
     /**
+     * Returns resource manager instance used by component.
+     *
      * @return ResourceManager
      */
     protected function getResourceManager()

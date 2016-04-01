@@ -15,6 +15,11 @@ class Helper
 {
     protected $resourceManager;
 
+    /**
+     * Constructor.
+     *
+     * @param ResourceManager|null $resourceManager
+     */
     public function __construct(ResourceManager $resourceManager = null)
     {
         $this->resourceManager = $resourceManager;

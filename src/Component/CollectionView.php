@@ -9,7 +9,7 @@ use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use Traversable;
 
 /**
- * View component for collection of items.
+ * Renders collection of items injecting data items to its children views.
  */
 class CollectionView extends Container implements DataViewComponentInterface
 {

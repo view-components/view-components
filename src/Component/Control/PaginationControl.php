@@ -53,6 +53,9 @@ class PaginationControl extends Part implements ControlInterface
         return false;
     }
 
+    /**
+     * @return PaginateOperation
+     */
     public function getOperation()
     {
         if ($this->operation === null) {
@@ -80,6 +83,9 @@ class PaginationControl extends Part implements ControlInterface
         return $this;
     }
 
+    /**
+     * @return int
+     */
     protected function getTotalRecordsCount()
     {
         $operations = $this->getDataProvider()->operations();
@@ -96,9 +102,12 @@ class PaginationControl extends Part implements ControlInterface
         return $count;
     }
 
+    /**
+     * @return int
+     */
     protected function getPageCount()
     {
-        return ceil($this->getTotalRecordsCount() / $this->pageSize);
+        return (int)ceil($this->getTotalRecordsCount() / $this->pageSize);
     }
 
     /**
@@ -121,6 +130,8 @@ class PaginationControl extends Part implements ControlInterface
     }
 
     /**
+     * Sets page size.
+     *
      * @param int $pageSize
      * @return PaginationControl
      */
@@ -130,6 +141,11 @@ class PaginationControl extends Part implements ControlInterface
         return $this;
     }
 
+    /**
+     * Returns current page number.
+     *
+     * @return int
+     */
     public function getCurrentPage()
     {
         return (int)$this->pageInputOption->getValue();
@@ -152,6 +168,11 @@ class PaginationControl extends Part implements ControlInterface
         ]);
     }
 
+    /**
+     * Renders components.
+     *
+     * @return string
+     */
     public function render()
     {
         $this->setViewData();

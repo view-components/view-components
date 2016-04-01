@@ -1,12 +1,21 @@
 <?php
 namespace ViewComponents\ViewComponents\Data\Operation;
 
+/**
+ * DataProvider pagination operation.
+ */
 class PaginateOperation implements OperationInterface
 {
     protected $pageNumber;
 
     protected $pageSize;
 
+    /**
+     * Constructor.
+     *
+     * @param int $pageNumber
+     * @param int $pageSize
+     */
     public function __construct($pageNumber = 1, $pageSize = 50)
     {
         $this->pageNumber = $pageNumber;
@@ -22,7 +31,7 @@ class PaginateOperation implements OperationInterface
     }
 
     /**
-     * @param $pageNumber
+     * @param int $pageNumber
      * @return $this
      */
     public function setPageNumber($pageNumber)
@@ -32,6 +41,7 @@ class PaginateOperation implements OperationInterface
     }
 
     /**
+     * Returns page size.
      * @return int
      */
     public function getPageSize()
@@ -40,6 +50,8 @@ class PaginateOperation implements OperationInterface
     }
 
     /**
+     * Sets page size.
+     *
      * @param $pageSize
      * @return $this
      */

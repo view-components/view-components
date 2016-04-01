@@ -16,6 +16,11 @@ class ViewHelper
     public $defaultInputStyleClass;
     public $inputSizeClass;
 
+    /**
+     * Constructor.
+     *
+     * @param array $config
+     */
     public function __construct(array $config)
     {
         \mp\setValues($this, $config, null);

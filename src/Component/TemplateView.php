@@ -22,6 +22,13 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
     /** @var  RendererInterface */
     private $renderer;
 
+    /**
+     * Constructor.
+     *
+     * @param string|null $templateName
+     * @param array|null $data view data
+     * @param RendererInterface|null $renderer
+     */
     public function __construct($templateName = null, array $data = null, RendererInterface $renderer = null)
     {
         $this->setData($data ?: []);
@@ -29,6 +36,11 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
         $this->setRenderer($renderer);
     }
 
+    /**
+     * Renders component and returns output.
+     *
+     * @return string
+     */
     public function render()
     {
         return $this->getRenderer()->render(
@@ -38,6 +50,8 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
     }
 
     /**
+     * Returns renderer instance used to render template.
+     *
      * @return RendererInterface
      */
     public function getRenderer()
@@ -49,6 +63,8 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
     }
 
     /**
+     * Sets renderer.
+     *
      * @param RendererInterface $renderer
      * @return $this
      */
@@ -59,6 +75,8 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
     }
 
     /**
+     * Returns template name.
+     *
      * @return string
      */
     public function getTemplateName()
@@ -67,6 +85,8 @@ class TemplateView implements DataViewComponentInterface, ContainerComponentInte
     }
 
     /**
+     * Sets template.
+     *
      * @param string $templateName
      * @return $this
      */

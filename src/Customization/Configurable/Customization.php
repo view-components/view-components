@@ -18,6 +18,12 @@ class Customization extends AbstractRecursiveCustomization
      */
     private $config;
 
+    /**
+     * Constructor.
+     *
+     * @param array $config
+     * @param ResourceManager|null $resourceManager
+     */
     public function __construct(array $config, ResourceManager $resourceManager = null)
     {
         $this->helper = new Helper($resourceManager);
@@ -26,6 +32,11 @@ class Customization extends AbstractRecursiveCustomization
         $this->processor = new OperationProcessor($this->helper);
     }
 
+    /**
+     * Applies customization to target component and its children.
+     *
+     * @param ComponentInterface $component
+     */
     public function apply(ComponentInterface $component)
     {
         /**

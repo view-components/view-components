@@ -22,8 +22,8 @@ class Json implements DataViewComponentInterface, ArrayDataAggregateInterface
     /**
      * Constructor.
      *
-     * @param $data
-     * @param int|null $options
+     * @param mixed $data data for encoding to JSON
+     * @param int|null $options json_encode options
      */
     public function __construct(
         $data = null,

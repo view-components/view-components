@@ -7,7 +7,7 @@ use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 
 /**
- * ViewAggregate is a component that aggregates view.
+ * ViewAggregate is a component that delegates it's rendering to aggregated view component.
  *
  * It's a good candidate for extending to component classes that holds logic.
  *
@@ -19,12 +19,19 @@ class ViewAggregate implements ContainerComponentInterface
     /** @var  ViewComponentInterface|null */
     private $view;
 
+    /**
+     * Constructor.
+     *
+     * @param ViewComponentInterface|null $view
+     */
     public function __construct(ViewComponentInterface $view = null)
     {
         $this->setView($view);
     }
 
     /**
+     * Returns view component.
+     *
      * @return ViewComponentInterface|null
      */
     public function getView()
@@ -33,6 +40,8 @@ class ViewAggregate implements ContainerComponentInterface
     }
 
     /**
+     * Sets view component.
+     *
      * @param ViewComponentInterface $view
      * @return $this
      */
@@ -47,6 +56,11 @@ class ViewAggregate implements ContainerComponentInterface
         return $this;
     }
 
+    /**
+     * Renders component and returns output.
+     *
+     * @return string
+     */
     public function render()
     {
         return $this->renderChildren();

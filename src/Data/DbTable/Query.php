@@ -40,6 +40,11 @@ class Query
         $this->table = $table;
     }
 
+    /**
+     * Returns generated SQL.
+     *
+     * @return string
+     */
     public function getSql()
     {
         $where = (count($this->conditions) === 0)
@@ -50,6 +55,8 @@ class Query
     }
 
     /**
+     * Prepares a PDOStatement for execution and returns it.
+     *
      * @return PDOStatement
      */
     protected function getPdoStatement()
@@ -64,6 +71,8 @@ class Query
     }
 
     /**
+     * Executes query.
+     *
      * @return PDOStatement
      */
     public function execute()
@@ -81,6 +90,9 @@ class Query
     }
 
     /**
+     * Returns records count.
+     * Executes separate SQL query to count records.
+     *
      * @return int
      */
     public function count()

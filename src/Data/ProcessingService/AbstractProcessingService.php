@@ -39,7 +39,7 @@ abstract class AbstractProcessingService implements ProcessingServiceInterface
      *
      * @param ProcessorResolverInterface $processorResolver
      * @param OperationCollection $operations
-     * @param $dataSource
+     * @param mixed $dataSource
      */
     public function __construct(
         ProcessorResolverInterface $processorResolver,

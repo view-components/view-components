@@ -87,16 +87,6 @@ class TargetSelector
         return $result;
     }
 
-    protected function getConditionMethod($key)
-    {
-        return 'check' . Str::toCamelCase($key) . 'Condition';
-    }
-
-    protected function isConditionMethod($key)
-    {
-        return method_exists($this, $this->getConditionMethod($key));
-    }
-
     public function checkClassCondition(ComponentInterface $component, $className)
     {
         return $component instanceof $className;
@@ -135,5 +125,15 @@ class TargetSelector
         return
             \mp\getValue($component, $property) == false
              && (!$component instanceof TagInterface || $component->getAttribute($property) == false);
+    }
+
+    protected function getConditionMethod($key)
+    {
+        return 'check' . Str::toCamelCase($key) . 'Condition';
+    }
+
+    protected function isConditionMethod($key)
+    {
+        return method_exists($this, $this->getConditionMethod($key));
     }
 }

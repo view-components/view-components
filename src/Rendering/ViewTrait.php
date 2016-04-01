@@ -10,6 +10,9 @@ trait ViewTrait
      */
     abstract public function render();
 
+    /**
+     * @return string
+     */
     final public function __toString()
     {
         return $this->render();

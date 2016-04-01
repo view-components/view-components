@@ -10,7 +10,7 @@ use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 
 /**
- * Compound contains hierarchy configuration and plain components list.
+ * Compound component composed from parts.
  *
  */
 class Compound implements ContainerComponentInterface
@@ -27,8 +27,9 @@ class Compound implements ContainerComponentInterface
     private $isTreeReady = false;
 
     /**
-     * Compound constructor.
-     * @param PartInterface[] $components
+     * Constructor.
+     *
+     * @param PartInterface[] $components compound parts
      */
     public function __construct(array $components)
     {

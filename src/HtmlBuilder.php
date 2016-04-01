@@ -5,14 +5,21 @@ use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Component\DataView;
 use ViewComponents\ViewComponents\Component\Html\Tag;
 use ViewComponents\ViewComponents\Resource\ResourceManager;
+use ViewComponents\ViewComponents\Service\Services;
 
 class HtmlBuilder
 {
-    protected $resources;
+    /** @var ResourceManager  */
+    protected $resourceManager;
 
-    public function __construct(ResourceManager $resources)
+    /**
+     * Constructor.
+     *
+     * @param ResourceManager $resourceManager
+     */
+    public function __construct(ResourceManager $resourceManager = null)
     {
-        $this->resources = $resources;
+        $this->resourceManager = $resourceManager ?: Services::resourceManager();
     }
 
     public function a($href = '#', $text = '')
@@ -22,12 +29,12 @@ class HtmlBuilder
 
     public function js($src)
     {
-        return $this->resources->js($src);
+        return $this->resourceManager->js($src);
     }
 
     public function css($src, array $attributes = [])
     {
-        return $this->resources->css($src, $attributes);
+        return $this->resourceManager->css($src, $attributes);
     }
 
     /**

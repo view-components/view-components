@@ -2,6 +2,9 @@
 
 namespace ViewComponents\ViewComponents\Storage;
 
+/**
+ * Interface of key-value storage.
+ */
 interface KeyValueStorageInterface
 {
     public function has($key);

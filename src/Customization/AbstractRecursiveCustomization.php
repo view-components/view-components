@@ -8,6 +8,11 @@ abstract class AbstractRecursiveCustomization implements CustomizationInterface
 {
     abstract protected function applyInternal(ComponentInterface $component);
 
+    /**
+     * Applies customizations to target component and its children.
+     *
+     * @param ComponentInterface $component
+     */
     public function apply(ComponentInterface $component)
     {
         $this->applyRecursive($component);

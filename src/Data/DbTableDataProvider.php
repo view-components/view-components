@@ -12,6 +12,8 @@ class DbTableDataProvider extends AbstractDataProvider
 {
 
     /**
+     * Constructor.
+     *
      * @param PDO $connection
      * @param string $table
      * @param OperationInterface[] $operations

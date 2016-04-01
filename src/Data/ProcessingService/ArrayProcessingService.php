@@ -8,6 +8,9 @@ use Traversable;
 class ArrayProcessingService extends AbstractProcessingService
 {
 
+    /**
+     * @return int
+     */
     public function count()
     {
         /** @var ArrayIterator $data */

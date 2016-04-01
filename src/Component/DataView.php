@@ -38,11 +38,16 @@ class DataView implements DataViewComponentInterface
         $this->renderer = $renderer ?: null;
     }
 
+    /**
+     * Renders component.
+     *
+     * @return string
+     */
     public function render()
     {
         return $this->renderer === null
             ? $this->defaultRender()
-            : call_user_func($this->renderer, $this->getData());
+            : (string)call_user_func($this->renderer, $this->getData());
     }
 
     private function canBeString($value)

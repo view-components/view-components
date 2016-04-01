@@ -11,6 +11,9 @@ use ViewComponents\ViewComponents\Data\Processor\PhpArray\SortProcessor;
 
 class ArrayProcessorResolver extends ProcessorResolver
 {
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         $this->register(SortOperation::class, SortProcessor::class);

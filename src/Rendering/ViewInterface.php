@@ -16,7 +16,7 @@ interface ViewInterface
     /**
      * Returns rendering result  when object is treated like a string.
      *
-     * @return mixed
+     * @return string
      */
     public function __toString();
 }

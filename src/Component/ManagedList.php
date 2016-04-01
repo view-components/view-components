@@ -117,6 +117,12 @@ class ManagedList extends Compound implements DataViewComponentInterface
         return $this->getComponent(static::RECORD_VIEW_ID);
     }
 
+    /**
+     * Sets component that will display data record.
+     *
+     * @param ComponentInterface $component
+     * @return $this
+     */
     public function setRecordView(ComponentInterface $component)
     {
         return $this->setComponent($component, static::RECORD_VIEW_ID, static::COLLECTION_VIEW_ID);

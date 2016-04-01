@@ -6,6 +6,9 @@ use ViewComponents\ViewComponents\Component\Html\ResetButton as HtmlResetButton;
 use ViewComponents\ViewComponents\Component\ManagedList;
 use ViewComponents\ViewComponents\Component\Part;
 
+/**
+ * Button that resets form inputs (including values submitted previously).
+ */
 class ResetButton extends Part
 {
     const ID = 'reset_button';

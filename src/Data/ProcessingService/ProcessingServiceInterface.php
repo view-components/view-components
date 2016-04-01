@@ -10,6 +10,12 @@ use Traversable;
 interface ProcessingServiceInterface extends Countable
 {
 
+    /**
+     * ProcessingServiceInterface constructor.
+     * @param ProcessorResolverInterface $processorResolver
+     * @param OperationCollection $operations
+     * @param $dataSource
+     */
     public function __construct(
         ProcessorResolverInterface $processorResolver,
         OperationCollection $operations,

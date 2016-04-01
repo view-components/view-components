@@ -7,13 +7,20 @@ use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartTrait;
 
 /**
- * Class Part represents custom compound part that is a view aggregate and container.
+ * This class is designed to be used with Compound class as a container for compound parts.
  *
  */
 class Part extends ViewAggregate implements ContainerPartInterface
 {
     use PartTrait;
 
+    /**
+     * Constructor.
+     *
+     * @param ViewComponentInterface|null $view
+     * @param string|null $id
+     * @param string $destinationParentId
+     */
     public function __construct(
         ViewComponentInterface $view = null,
         $id = null,
@@ -25,6 +32,8 @@ class Part extends ViewAggregate implements ContainerPartInterface
     }
 
     /**
+     * Returns container component for inherited compound parts.
+     *
      * @return $this|ContainerComponentInterface
      */
     public function getContainer()

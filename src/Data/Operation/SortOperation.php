@@ -1,6 +1,9 @@
 <?php
 namespace ViewComponents\ViewComponents\Data\Operation;
 
+/**
+ * DataProvider operation for sorting rows.
+ */
 class SortOperation implements OperationInterface
 {
     const ASC = 'asc';
@@ -10,23 +13,43 @@ class SortOperation implements OperationInterface
 
     protected $field;
 
+    /**
+     * Creates operation for sorting rows ascending based on values of target field.
+     *
+     * @param string $field name of data field to sort rows by its value
+     * @return SortOperation
+     */
     public static function asc($field)
     {
-        return new self($field, self::ASC);
+        return new self($field, SortOperation::ASC);
     }
 
+    /**
+     *  Creates operation for sorting rows ascending based on values of target field.
+     *
+     * @param string $field name of data field to sort rows by its value
+     * @return SortOperation
+     */
     public static function desc($field)
     {
-        return new self($field, self::DESC);
+        return new self($field, SortOperation::DESC);
     }
 
-    public function __construct($field = null, $order = self::ASC)
+    /**
+     * Constructor.
+     *
+     * @param string|null $field name of data field to sort rows by its value
+     * @param string $order (optional, default value: 'asc'),
+     *                      please use SortOperation::ASC and SortOperation::DESC constants.
+     */
+    public function __construct($field = null, $order = SortOperation::ASC)
     {
         $this->setField($field);
         $this->setOrder($order);
     }
 
     /**
+     * Returns sorting order ('asc' or 'desc').
      * @return string
      */
     public function getOrder()
@@ -35,7 +58,10 @@ class SortOperation implements OperationInterface
     }
 
     /**
-     * @param string $order asc or desc
+     * Sets sorting order.
+     *
+     * @param string $order 'asc' (ascending) or 'desc' (descending),
+     *                      please use SortOperation::ASC and SortOperation::DESC constants.
      * @return $this
      */
     public function setOrder($order)
@@ -45,6 +71,7 @@ class SortOperation implements OperationInterface
     }
 
     /**
+     * Returns name of data field to sort rows by its value.
      * @return string
      */
     public function getField()
@@ -53,6 +80,8 @@ class SortOperation implements OperationInterface
     }
 
     /**
+     * Sets name of data field to sort rows by its value.
+     *
      * @param string $field
      * @return $this
      */

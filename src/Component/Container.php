@@ -23,6 +23,11 @@ class Container implements ContainerComponentInterface
         $this->initializeCollection($components ?: []);
     }
 
+    /**
+     * Renders component.
+     *
+     * @return string
+     */
     public function render()
     {
         return $this->renderChildren();

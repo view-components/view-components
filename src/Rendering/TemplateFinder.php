@@ -21,6 +21,13 @@ class TemplateFinder
         $this->paths = $paths;
     }
 
+    /**
+     * Registers path to views.
+     *
+     * @param string $path
+     * @param bool $highPriority
+     * @return $this
+     */
     public function registerPath($path, $highPriority = true)
     {
         if ($highPriority) {
@@ -32,6 +39,8 @@ class TemplateFinder
     }
 
     /**
+     * Returns full path to template file.
+     *
      * @param string $templateName
      * @return bool|string full path or false
      */
@@ -47,6 +56,12 @@ class TemplateFinder
         return false;
     }
 
+    /**
+     * Returns true if template file can be found, false otherwise.
+     *
+     * @param $templateName
+     * @return bool
+     */
     public function templateExists($templateName)
     {
         return $this->getTemplatePath($templateName) !== false;

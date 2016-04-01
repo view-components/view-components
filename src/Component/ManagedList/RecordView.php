@@ -12,6 +12,7 @@ class RecordView extends Part
 
     /**
      * RecordView constructor.
+     *
      * @param ViewComponentInterface $view
      */
     public function __construct(ViewComponentInterface $view)

@@ -11,10 +11,9 @@ use ViewComponents\ViewComponents\Base\ComponentInterface;
 interface CustomizationInterface
 {
     /**
-     * Applies customizations to component & its children.
+     * Applies customizations to target component and its children.
      *
      * @param ComponentInterface $component
-     * @return mixed
      */
     public function apply(ComponentInterface $component);
 }
