@@ -2,7 +2,7 @@
 /**
  * @var int $total
  * @var int $current
- * @var PaginationControlView $component
+ * @var ViewComponents\ViewComponents\Component\Control\View\PaginationControlView $component
  */
 
 isset($maxLinks) || $maxLinks = 10;
@@ -10,6 +10,9 @@ isset($minNumLinksAroundCurrent) || $minNumLinksAroundCurrent = 2;
 isset($minNumLinksNearEnd) || $minNumLinksNearEnd = 1;
 // without prev & next links
 isset($maxNumLinks) || $maxNumLinks = $maxLinks - 2;
+if ($component->getLinkTemplateName() === 'controls/pagination/link') {
+    $component->setLinkTemplateName('themes/twitter_bootstrap/controls/pagination/link');
+}
 ?>
 <nav data-role="control-container" data-control="pagination">
     <ul class="pagination">
