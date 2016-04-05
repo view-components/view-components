@@ -64,7 +64,6 @@ class OperationProcessor
                 }
                 $func = [$this->helper, $methodName];
                 $arguments = array_merge([$component], is_array($value) ? $value : [$value]);
-
             }
             call_user_func_array($func, $arguments);
         }

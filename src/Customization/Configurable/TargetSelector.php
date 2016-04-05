@@ -74,7 +74,6 @@ class TargetSelector
                 $conditionType = 'class';
                 $conditionArguments = $data;
             }
-
         } else {
             throw new RuntimeException('Error parsing target selector.');
         }
