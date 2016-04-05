@@ -19,7 +19,7 @@ class ResetButton extends Part
      * @param string $text
      * @param array $attributes
      */
-    public function __construct($text = 'Reset', array $attributes = [])
+    public function __construct($text = 'Reset', array $attributes = ['style' => 'margin:2px;'])
     {
         $attributes['onclick'] = 'var form = jQuery(this).parents().filter("form");'
             . 'form.find("input:not([type=\'submit\']), select").val("");'
