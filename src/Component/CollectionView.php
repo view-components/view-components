@@ -9,10 +9,10 @@ use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use Traversable;
 
 /**
- * Renders collection of items.
+ * CollectionView is a component for rendering data collections.
  *
- * CollectionView iterates over its data collection,
- * injects data elements into children views and renders it for each data item.
+ * CollectionView::render() iterates over its data collection,
+ * injects data elements into children components and renders it for each data item.
  */
 class CollectionView extends Container implements DataViewComponentInterface
 {
