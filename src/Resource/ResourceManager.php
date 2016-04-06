@@ -107,4 +107,28 @@ class ResourceManager
             return new DataView();
         }
     }
+
+    /**
+     * @return AliasRegistry
+     */
+    public function jsAliases()
+    {
+        return $this->jsRegistry;
+    }
+
+    /**
+     * @return AliasRegistry
+     */
+    public function cssAliases()
+    {
+        return $this->cssRegistry;
+    }
+
+    /**
+     * @return IncludedResourcesRegistry
+     */
+    public function includedResources()
+    {
+        return $this->included;
+    }
 }
