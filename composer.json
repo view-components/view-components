@@ -28,7 +28,7 @@
   },
   "require-dev": {
     "ext-curl": "*",
-    "view-components/testing-helpers": "^2",
+    "view-components/testing-helpers": "^2.0.1",
     "squizlabs/php_codesniffer": "~2.3"
   },
   "provide": {
