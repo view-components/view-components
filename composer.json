@@ -22,7 +22,7 @@
     "php": "^5.5||^7",
     "nayjest/manipulator": "^3.1.0",
     "nayjest/tree": "^3",
-    "nayjest/collection": "^2.2",
+    "nayjest/collection": "^2.3",
     "danielstjules/stringy": "^1.9|~2.2.0",
     "container-interop/container-interop": "^1.1"
   },

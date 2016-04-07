@@ -76,17 +76,23 @@ class Layout extends Compound implements DataViewComponentInterface, ArrayDataAg
     /**
      * Returns section with specified name.
      *
-     * @param $name
-     * @return Section
+     * @param string $name
+     * @param bool $createIfNotExists
+     * @return Section|null
      */
-    public function section($name)
+    public function section($name, $createIfNotExists = true)
     {
         $section = $this->getComponent('section-' . $name);
-        if (!$section) {
+        if (!$section && $createIfNotExists) {
             $section = new Section($name);
             $section->attachToCompound($this);
         }
         return $section;
+    }
+
+    public function hasSection($name)
+    {
+        return $this->hasComponent('section-' . $name);
     }
 
     /**
@@ -157,16 +163,44 @@ class Layout extends Compound implements DataViewComponentInterface, ArrayDataAg
         return parent::render();
     }
 
+    private function isNotPart($component)
+    {
+        return !$component instanceof PartInterface
+        || !$this->getComponents()->contains($component);
+    }
+
     /**
-     * Moves children attached directly to layout into main section.
+     * Moves children attached directly to layout into main section
+     * considering children position relatively to main section
+     * (components before main section will be prepended
+     * and components after main section will be appended).
      */
     protected function moveChildrenToMainSection()
     {
-        foreach ($this->children() as $component) {
-            if ($component instanceof PartInterface && $this->getComponents()->contains($component)) {
-                continue;
-            }
-            $component->attachTo($this->section(self::SECTION_MAIN));
+        // if main section exists, preserve components order
+        if ($this->hasSection(self::SECTION_MAIN)) {
+            $main = $this->mainSection();
+            $template = $this->getComponent('template', false);
+            $main->children()
+                ->addMany(
+                    $this->children()
+                        ->beforeItem($template)
+                        ->filter([$this, 'isNotPart'])
+                    ,
+                    true
+                )
+                ->addMany(
+                    $this->children()
+                        ->afterItem($template)
+                        ->filter([$this, 'isNotPart'])
+                    ,
+                    false
+                );
+
+        } else {
+            $this->mainSection()->addChildren(
+                $this->children()->filter([$this, 'isNotPart'])
+            );
         }
     }
 
