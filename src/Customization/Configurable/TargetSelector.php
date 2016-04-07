@@ -8,6 +8,7 @@ use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\Html\TagInterface;
 use ViewComponents\ViewComponents\Component\TemplateView;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateInterface;
 
 /**
  * Class TargetSelector.
@@ -110,6 +111,11 @@ class TargetSelector
     {
         return $component instanceof TemplateView
         && ($templateName ? ($component->getTemplateName() === $templateName) : true);
+    }
+
+    public function checkDataItemCondition(ComponentInterface $component, $name, $value)
+    {
+        return $component instanceof ArrayDataAggregateInterface && $component->getDataItem($name) == $value;
     }
 
     public function checkPropertyCondition(ComponentInterface $component, $property, $value)
