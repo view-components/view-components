@@ -112,7 +112,7 @@ class Helper
             if ($prepend) {
                 $js = array_reverse($js);
             }
-            foreach (array_reverse($js) as $item) {
+            foreach ($js as $item) {
                 $this->js($component, $item, $prepend);
             }
             return;
@@ -142,7 +142,7 @@ class Helper
             if ($prepend) {
                 $css = array_reverse($css);
             }
-            foreach (array_reverse($css) as $item) {
+            foreach ($css as $item) {
                 $this->css($component, $item, $prepend);
             }
             return;
