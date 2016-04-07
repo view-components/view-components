@@ -171,7 +171,7 @@ class Layout extends Compound implements DataViewComponentInterface, ArrayDataAg
      */
     protected function moveChildrenToMainSection()
     {
-        $isNotPartFilter = function($component) {
+        $isNotPartFilter = function ($component) {
             return !$component instanceof PartInterface
             || !$this->getComponents()->contains($component);
         };
@@ -179,21 +179,15 @@ class Layout extends Compound implements DataViewComponentInterface, ArrayDataAg
         if ($this->hasSection(self::SECTION_MAIN)) {
             $main = $this->mainSection();
             $template = $this->getComponent('template', false);
+            $prependedChildren = $this->children()
+                ->beforeItem($template)
+                ->filter($isNotPartFilter);
+            $appendedChildren =  $this->children()
+                ->afterItem($template)
+                ->filter($isNotPartFilter);
             $main->children()
-                ->addMany(
-                    $this->children()
-                        ->beforeItem($template)
-                        ->filter($isNotPartFilter)
-                    ,
-                    true
-                )
-                ->addMany(
-                    $this->children()
-                        ->afterItem($template)
-                        ->filter($isNotPartFilter)
-                    ,
-                    false
-                );
+                ->addMany($prependedChildren, true)
+                ->addMany($appendedChildren, false);
 
         } else {
             $this->mainSection()->addChildren(
