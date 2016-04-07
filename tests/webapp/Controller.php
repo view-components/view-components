@@ -390,4 +390,26 @@ class Controller
         return $this->page('', 'Semantic UI styling');
     }
 
+    public function demo10()
+    {
+
+        $birthdayFilter = new FilterControl(
+            'birthday',
+            FilterOperation::OPERATOR_EQ,
+            new InputOption('birthday', $_GET)
+        );
+        $birthdayFilter->getView()->setDataItem('inputType', 'date');
+        $list = new ManagedList(
+            $this->getDataProvider(),
+            [
+                new RecordView(new TemplateView('data_view/table')),
+                $birthdayFilter
+            ]
+        );
+        $this->layout()->mainSection()->addChild($list);
+        BootstrapStyling::applyTo($this->layout());
+
+        return $this->page(null, 'Customizing date input with Bootstrap');
+    }
+
 }
