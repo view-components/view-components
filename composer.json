@@ -56,6 +56,9 @@
     "post-update-cmd": [
       "ViewComponents\\ViewComponents\\Installer::runFromComposer"
     ],
+    "post-install-cmd": [
+      "ViewComponents\\ViewComponents\\Installer::runFromComposer"
+    ],
     "serve": "php vendor/view-components/testing-helpers/serve",
     "test": "php vendor/phpunit/phpunit/phpunit",
     "cs": "php vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=psr2 src/"
