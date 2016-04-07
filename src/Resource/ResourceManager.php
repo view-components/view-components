@@ -4,6 +4,7 @@ namespace ViewComponents\ViewComponents\Resource;
 use InvalidArgumentException;
 use ViewComponents\ViewComponents\Component\DataView;
 use ViewComponents\ViewComponents\Component\Html\Tag;
+use ViewComponents\ViewComponents\Component\Html\TagWithText;
 
 class ResourceManager
 {
@@ -130,5 +131,23 @@ class ResourceManager
     public function includedResources()
     {
         return $this->included;
+    }
+
+    /**
+     * Returns component that renders 'script tag with js code.
+     * @param string $jsCode
+     * @param string|null $uniqueId specify unique id for inline code to avoid embedding it twice
+     * @return DataView|TagWithText
+     */
+    public function inlineJs($jsCode, $uniqueId = null)
+    {
+        if ($uniqueId !== null) {
+            if ($this->included->isIncluded($uniqueId)) {
+                return new DataView();
+            } else {
+                $this->included->markAsIncluded($uniqueId);
+            }
+        }
+        return new TagWithText('script', [], $jsCode);
     }
 }
