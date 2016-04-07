@@ -9,7 +9,7 @@ use ViewComponents\ViewComponents\Service\Services;
 
 abstract class AbstractFrameworkStylingFacade extends Customization
 {
-    const CONFIG_SERVICE_ID = null;
+    const STYLING_CONFIG_SERVICE_ID = null;
 
     /**
      * Applies customization to target component and its children.
@@ -29,6 +29,9 @@ abstract class AbstractFrameworkStylingFacade extends Customization
      */
     public function __construct(ResourceManager $resourceManager = null)
     {
-        parent::__construct(Services::get(static::CONFIG_SERVICE_ID), $resourceManager);
+        parent::__construct(
+            Services::get(static::STYLING_CONFIG_SERVICE_ID),
+            $resourceManager
+        );
     }
 }

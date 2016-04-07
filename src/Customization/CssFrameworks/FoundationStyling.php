@@ -11,5 +11,5 @@ use ViewComponents\ViewComponents\Service\ServiceId;
  */
 class FoundationStyling extends AbstractFrameworkStylingFacade
 {
-    const CONFIG_SERVICE_ID = ServiceId::FOUNDATION_STYLING_CONFIG;
+    const STYLING_CONFIG_SERVICE_ID = ServiceId::FOUNDATION_STYLING_CONFIG;
 }
