@@ -28,7 +28,7 @@
   },
   "require-dev": {
     "ext-curl": "*",
-    "view-components/testing-helpers": "^1.9",
+    "view-components/testing-helpers": "^2",
     "squizlabs/php_codesniffer": "~2.3"
   },
   "provide": {
@@ -51,7 +51,10 @@
   },
   "scripts": {
     "post-create-project-cmd": [
-      "ViewComponents\\ViewComponents\\Installer::postComposerInstall"
+      "ViewComponents\\ViewComponents\\Installer::runFromComposer"
+    ],
+    "post-update-cmd": [
+      "ViewComponents\\ViewComponents\\Installer::runFromComposer"
     ],
     "serve": "php vendor/view-components/testing-helpers/serve",
     "test": "php vendor/phpunit/phpunit/phpunit",
