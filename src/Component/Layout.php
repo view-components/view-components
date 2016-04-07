@@ -188,7 +188,6 @@ class Layout extends Compound implements DataViewComponentInterface, ArrayDataAg
             $main->children()
                 ->addMany($prependedChildren, true)
                 ->addMany($appendedChildren, false);
-
         } else {
             $this->mainSection()->addChildren(
                 $this->children()->filter($isNotPartFilter)
