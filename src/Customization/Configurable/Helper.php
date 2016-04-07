@@ -109,7 +109,10 @@ class Helper
             return;
         }
         if (is_array($js)) {
-            foreach ($js as $item) {
+            if ($prepend) {
+                $js = array_reverse($js);
+            }
+            foreach (array_reverse($js) as $item) {
                 $this->js($component, $item, $prepend);
             }
             return;
@@ -117,13 +120,29 @@ class Helper
         $component->children()->add($this->getResourceManager()->js($js), $prepend);
     }
 
+    public function inlineJs($component, $jsCode, $uniqueId)
+    {
+        if (!$component instanceof ContainerComponentInterface) {
+            return;
+        }
+        $component->children()->add($this->getResourceManager()->inlineJs($jsCode, $uniqueId));
+    }
+
+    /**
+     * @param $component
+     * @param string|array $css
+     * @param bool $prepend false by default
+     */
     public function css($component, $css, $prepend = false)
     {
         if (!$component instanceof ContainerComponentInterface) {
             return;
         }
         if (is_array($css)) {
-            foreach ($css as $item) {
+            if ($prepend) {
+                $css = array_reverse($css);
+            }
+            foreach (array_reverse($css) as $item) {
                 $this->css($component, $item, $prepend);
             }
             return;
@@ -137,6 +156,14 @@ class Helper
             return;
         }
         $component->setDestinationParentId($parentName);
+    }
+
+    public function mergeData($component, $data)
+    {
+        if (!$component instanceof TemplateView) {
+            return;
+        }
+        $component->mergeData($data);
     }
 
     public function overrideTemplate($component, $templatePrefix, array $additionalViewData = null)
