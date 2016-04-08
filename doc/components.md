@@ -17,21 +17,22 @@ injects data elements into children components and renders it for each data item
 
 View-components package contains few classes and interfaces for working with components composed from parts:
 
-Class | Description
+Class or Interface | Description
 --- | ---
 [Compound](https://github.com/view-components/view-components/blob/master/src/Component/Compound.php "ViewComponents\ViewComponents\Component\Compound") | Base class for components composed from parts
 [PartInterface](https://github.com/view-components/view-components/blob/master/src/Base/Compound/PartInterface.php "ViewComponents\ViewComponents\Base\Compound\PartInterface") | Interface for compound part
 [ContainerPartInterface](https://github.com/view-components/view-components/blob/master/src/Base/Compound/ContainerPartInterface.php "ViewComponents\ViewComponents\Base\Compound\ContainerPartInterface") | Interface for compound part
 [Part](https://github.com/view-components/view-components/blob/master/src/Component/Part.php "ViewComponents\ViewComponents\Component\Part") | Wrapper that allows to use any component as compound part 
 
-Base class for components composed from parts.
-Compound parts must implement PartInterface.
+Compound parts are responsible for it's identification and location inside [Compound](https://github.com/view-components/view-components/blob/master/src/Component/Compound.php "ViewComponents\ViewComponents\Component\Compound").
+Any part has "id" and "destination_parent_id" properties with corresponding getters and setters.
+Value of  "destination_parent_id" should be equal to one of another part id's or Compound::ROOT_ID constant.
 
 ### Usage
 
 #### Creating compound component
 
-Compound constructor accepts array of objects implementing PartInterface.
+Constructor of [Compound](https://github.com/view-components/view-components/blob/master/src/Component/Compound.php "ViewComponents\ViewComponents\Component\Compound") accepts array of objects implementing [PartInterface](https://github.com/view-components/view-components/blob/master/src/Base/Compound/PartInterface.php "ViewComponents\ViewComponents\Base\Compound\PartInterface").
 
 #### Example
 
