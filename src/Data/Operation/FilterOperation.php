@@ -7,9 +7,9 @@ namespace ViewComponents\ViewComponents\Data\Operation;
 class FilterOperation implements OperationInterface
 {
     const OPERATOR_LIKE = 'like';
-    const STR_STARTS_WITH = '%like';
-    const STR_ENDS_WITH = 'like%';
-    const STR_CONTAINS = '%like%';
+    const OPERATOR_STR_STARTS_WITH = 'str_starts_with';
+    const OPERATOR_STR_ENDS_WITH = 'str_ends_with';
+    const OPERATOR_STR_CONTAINS = 'str_contains';
     const OPERATOR_EQ = '=';
     const OPERATOR_NOT_EQ = '<>';
     const OPERATOR_GT = '>';
