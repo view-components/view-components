@@ -10,8 +10,9 @@ use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 
 /**
- * Compound component composed from parts.
- *
+ * Base class for components composed from parts.
+ * @see PartInterface
+ * @see Part
  */
 class Compound implements ContainerComponentInterface
 {
