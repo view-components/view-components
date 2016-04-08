@@ -148,6 +148,6 @@ class ResourceManager
                 $this->included->markAsIncluded($uniqueId);
             }
         }
-        return new TagWithText('script', [], $jsCode);
+        return new TagWithText('script', $jsCode);
     }
 }

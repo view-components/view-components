@@ -254,8 +254,8 @@ class ManagedList extends Compound implements DataViewComponentInterface
             static::SUBMIT_BUTTON_ID => new Part(
                 new TagWithText(
                     'button',
-                    ['type' => 'submit', 'data-role' => 'managed_list_submit_button'],
-                    'Filter'
+                    'Filter',
+                    ['type' => 'submit', 'data-role' => 'managed_list_submit_button']
                 ),
                 static::SUBMIT_BUTTON_ID,
                 static::FORM_ID

@@ -7,6 +7,6 @@ class ResetButton extends TagWithText
     public function __construct($text = 'Reset', array $attributes = [])
     {
         $attributes['type'] = 'reset';
-        parent::__construct('button', $attributes, $text);
+        parent::__construct('button', $text, $attributes);
     }
 }

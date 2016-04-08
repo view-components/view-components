@@ -31,7 +31,7 @@ $labelAttributes = array_merge(['class' => $labelClass], $labelAttributes);
 
 <<?= $containerTag ?> <?= Tag::renderAttributes($containerAttributes) ?>>
 
-<?= isset($label) ? new TagWithText('label', $labelAttributes, $label): '' ?>
+<?= isset($label) ? new TagWithText('label', $label, $labelAttributes): '' ?>
 
 <?= new Select($inputAttributes, $options, $value) ?>
 </<?= $containerTag ?>>

@@ -32,7 +32,7 @@ $labelAttributes = array_merge(['class' => $labelClass], $labelAttributes);
 
 <<?= $containerTag ?> <?= Tag::renderAttributes($containerAttributes) ?>>
 
-<?= isset($label) ? new TagWithText('label', $labelAttributes, $label) . '&nbsp;' : '' ?>
+<?= isset($label) ? new TagWithText('label', $label, $labelAttributes) . '&nbsp;' : '' ?>
 
 <input <?= Tag::renderAttributes($inputAttributes) ?>/>
 <?= $component->renderChildren() ?>

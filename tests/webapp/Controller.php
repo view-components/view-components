@@ -9,6 +9,7 @@ use ViewComponents\ViewComponents\Component\Control\PageSizeSelectControl;
 use ViewComponents\ViewComponents\Component\Control\SortingSelectControl;
 use ViewComponents\ViewComponents\Component\DataView;
 use ViewComponents\ViewComponents\Component\Control\PaginationControl;
+use ViewComponents\ViewComponents\Component\Html\TagWithText;
 use ViewComponents\ViewComponents\Component\ManagedList\RecordView;
 use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Component\TemplateView;
@@ -251,26 +252,23 @@ class Controller
      */
     public function demo6()
     {
-        $panel = new Tag('div', ['class' => 'panel panel-success']);
-        $header = new Tag('div', ['class' => 'panel-heading']);
-        $body = new Tag('div', ['class' => 'panel-body']);
-        $footer = new Tag('div', ['class' => 'panel-footer']);
+        $panel   = new Tag('div', ['class' => 'panel panel-success']);
+        $header  = new Tag('div', ['class' => 'panel-heading'], []);
+        $caption = new TagWithText('b', 'Panel Header');
+        $body    = new TagWithText('div', 'Panel Body', ['class' => 'panel-body']);
+        $footer  = new TagWithText('div', 'Panel Footer', ['class' => 'panel-footer']);
+
         $compound = new Compound([
-            (new Part($panel))->setId('panel'),
-            (new Part($header))->setId('header')->setDestinationParentId('panel'),
-            (new Part($body))->setId('body')->setDestinationParentId('panel'),
-            (new Part($footer))->setId('footer')->setDestinationParentId('panel'),
+            new Part($panel, 'panel'),
+            new Part($header, 'header', 'panel'),
+            new Part($caption, 'caption', 'header'),
+            new Part($body, 'body', 'panel'),
+            new Part($footer, 'footer', 'panel'),
         ]);
 
-        $header->addChild(new DataView('<b>Panel Header</b>'));
-        $body->addChild(new DataView('Panel Body'));
-        $footer->addChild(new DataView('Panel Footer'));
-        $compound->addChild(new DataView('Text added after footer'));
+        $compound->addChild(new TagWithText('p', 'Text added after footer'));
 
-        $this->layout()->addChild($compound);
         BootstrapStyling::applyTo($this->layout());
-
-
         return $this->page($compound, 'Usage of Compounds');
     }
 

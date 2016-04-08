@@ -11,13 +11,13 @@ class TagWithText extends Tag
      * TagWithText constructor.
      *
      * @param string $tagName html tag name, optional, default value: 'div'
-     * @param array $attributes html tag attributes, optional
-     * @param string $text
+     * @param string $text tag contents (optional)
+     * @param array $attributes html tag attributes (optional)
      */
     public function __construct(
         $tagName = 'div',
-        array $attributes = [],
-        $text = ''
+        $text = '',
+        array $attributes = []
     ) {
         parent::__construct($tagName, $attributes, [$this->textComponent = new DataView($text)]);
     }
