@@ -71,7 +71,7 @@ function makePanel() {
 echo makePanel();
 ```
 
-[!Screenshot](https://i.gyazo.com/bbefc24e94831c112175fea2294cda31.png)
+![screenshot](https://i.gyazo.com/bbefc24e94831c112175fea2294cda31.png)
 
 See demo-application: 
 [code](https://github.com/view-components/view-components/blob/master/tests/webapp/Controller.php#L252),
