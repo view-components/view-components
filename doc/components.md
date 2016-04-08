@@ -71,6 +71,8 @@ function makePanel() {
 echo makePanel();
 ```
 
+Screenshot:
+
 ![screenshot](https://i.gyazo.com/bbefc24e94831c112175fea2294cda31.png)
 
 See demo-application: 
@@ -82,7 +84,7 @@ See demo-application:
 ##### via component tree
 
 Compound parts can ba accessed via component tree as regular components,
-just don't forget that that target components are wrapped to 
+just don't forget that target components are wrapped to 
 [Part](https://github.com/view-components/view-components/blob/master/src/Component/Part.php "ViewComponents\ViewComponents\Component\Part")
 instances if that not implements
 [PartInterface](https://github.com/view-components/view-components/blob/master/src/Base/Compound/PartInterface.php "ViewComponents\ViewComponents\Base\Compound\PartInterface").
