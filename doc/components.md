@@ -5,9 +5,10 @@ Component Documentation
 
 - [CollectionView](#collectionview)
 - [Compounds](#compounds)
+
 ## CollectionView
 
-CollectionView is a component for rendering data collections.
+[CollectionView](https://github.com/view-components/view-components/blob/master/src/Component/CollectionView.php) is a component for rendering data collections.
  
 CollectionView::render() iterates over its data collection,
 injects data elements into children components and renders it for each data item.
@@ -17,11 +18,11 @@ injects data elements into children components and renders it for each data item
 View-components package contains few classes and interfaces for working with components composed from parts:
 
 Class | Description
- --- | ---
- ViewComponents\ViewComponents\Component\Compound | Base class for components composed from parts
- ViewComponents\ViewComponents\Base\Compound\PartInterface | Interface for compound part
- ViewComponents\ViewComponents\Base\Compound\Container\PartInterface | Interface for compound part
- ViewComponents\ViewComponents\Component\Part | Wrapper that allows to use any component as compound part 
+--- | ---
+[Compound](https://github.com/view-components/view-components/blob/master/src/Component/Compound.php "ViewComponents\ViewComponents\Component\Compound") | Base class for components composed from parts
+[PartInterface](https://github.com/view-components/view-components/blob/master/src/Base/Compound/PartInterface.php "ViewComponents\ViewComponents\Base\Compound\PartInterface") | Interface for compound part
+[ContainerPartInterface](https://github.com/view-components/view-components/blob/master/src/Base/Compound/ContainerPartInterface.php "ViewComponents\ViewComponents\Base\Compound\ContainerPartInterface") | Interface for compound part
+[Part](https://github.com/view-components/view-components/blob/master/src/Component/Part.php "ViewComponents\ViewComponents\Component\Part") | Wrapper that allows to use any component as compound part 
 
 Base class for components composed from parts.
 Compound parts must implement PartInterface.
