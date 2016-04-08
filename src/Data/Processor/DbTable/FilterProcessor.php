@@ -18,11 +18,25 @@ class FilterProcessor implements ProcessorInterface
      */
     public function process($src, OperationInterface $operation)
     {
-        $expected = $operation->getValue();
+        $argument = $operation->getValue();
         $operator = $operation->getOperator();
         $field = $operation->getField();
+        switch ($operator) {
+            case FilterOperation::OPERATOR_STR_STARTS_WITH:
+                $operator = FilterOperation::OPERATOR_LIKE;
+                $argument .= '%';
+                break;
+            case FilterOperation::OPERATOR_STR_ENDS_WITH:
+                $operator = FilterOperation::OPERATOR_LIKE;
+                $argument = '%' . $argument;
+                break;
+            case FilterOperation::OPERATOR_STR_CONTAINS:
+                $operator = FilterOperation::OPERATOR_LIKE;
+                $argument = '%' . $argument . '%';
+                break;
+        }
         $src->conditions[]  = "$field $operator :$field";
-        $src->bindings[':' . $field] = $expected;
+        $src->bindings[':' . $field] = $argument;
         return $src;
     }
 }

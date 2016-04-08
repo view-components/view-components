@@ -21,10 +21,10 @@ class FilterProcessor implements ProcessorInterface
     {
         $res = [];
         foreach ($src as $row) {
-            $value = mp\getValue($row, $operation->getField());
-            $expected = $operation->getValue();
+            $testedValue = mp\getValue($row, $operation->getField());
+            $argument = $operation->getValue();
             $operator = $operation->getOperator();
-            if ($this->checkValue($value, $expected, $operator)) {
+            if ($this->checkValue($testedValue, $operator, $argument)) {
                 $res[] = $row;
             }
         }
@@ -32,28 +32,34 @@ class FilterProcessor implements ProcessorInterface
     }
 
     /**
-     * @param $value
-     * @param $expected
+     * @param $testedValue
      * @param string $operator
+     * @param $argument
      * @return bool
      * @throws InvalidArgumentException
      *
      */
-    protected function checkValue($value, $expected, $operator)
+    protected function checkValue($testedValue, $operator, $argument)
     {
         switch ($operator) {
             case FilterOperation::OPERATOR_EQ:
-                return $value == $expected;
+                return $testedValue == $argument;
             case FilterOperation::OPERATOR_GT:
-                return $value > $expected;
+                return $testedValue > $argument;
             case FilterOperation::OPERATOR_GTE:
-                return $value >= $expected;
+                return $testedValue >= $argument;
             case FilterOperation::OPERATOR_LT:
-                return $value < $expected;
+                return $testedValue < $argument;
             case FilterOperation::OPERATOR_LTE:
-                return $value <= $expected;
+                return $testedValue <= $argument;
             case FilterOperation::OPERATOR_NOT_EQ:
-                return $value != $expected;
+                return $testedValue != $argument;
+            case FilterOperation::OPERATOR_STR_CONTAINS:
+                return strpos($testedValue, $argument) !== false;
+            case FilterOperation::OPERATOR_STR_STARTS_WITH:
+                return strpos($testedValue, $argument) === 0;
+            case FilterOperation::OPERATOR_STR_ENDS_WITH:
+                return strpos($testedValue, $argument, strlen($testedValue) - strlen($argument)) !== false;
             default:
                 throw new InvalidArgumentException(
                     'Unsupported operator ' . $operator
