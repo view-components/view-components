@@ -6,7 +6,7 @@ use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentTrait;
 
 /**
- * The Container component stores and renders it's children.
+ * The Container component stores and renders its children.
  *
  */
 class Container implements ContainerComponentInterface
