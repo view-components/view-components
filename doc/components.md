@@ -2,9 +2,15 @@ Component Documentation
 ===
 
 ## Table of Contents 
-
+- [Container](#container)
 - [CollectionView](#collectionview)
 - [Compounds](#compounds)
+- [DataView](#dataview)
+- [Json](#json)
+
+## Container
+
+[Container](https://github.com/view-components/view-components/blob/master/src/Component/Container.php) is a component that can store and render another components.
 
 ## CollectionView
 
@@ -122,3 +128,11 @@ $compound->getComponent('caption')->setText('New Caption');
 #### Modifying Compound Parts
 
 @todo
+
+## DataView
+
+@todo
+
+## Json
+
+[Json](https://github.com/view-components/view-components/blob/master/src/Component/Json.php) is a component for rendering custom data as JSON.
