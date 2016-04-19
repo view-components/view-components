@@ -10,6 +10,9 @@ namespace ViewComponents\ViewComponents\Resource;
  */
 class AliasRegistry
 {
+    /**
+     * @var string[]
+     */
     protected $aliases;
 
     /**
@@ -43,8 +46,8 @@ class AliasRegistry
      * Returns aliased value or default value if requested alias does not exists.
      *
      * @param string $name
-     * @param null $default
-     * @return null
+     * @param string|null $default
+     * @return string|null
      */
     public function get($name, $default = null)
     {
