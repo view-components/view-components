@@ -8,7 +8,7 @@ Use following methods:
 * ResourceManager::ignoreCss() 
 * ResourceManager::ignoreJs()
 
-Each of listed methods accepts one argument with resource URL or alias or array of URLs or aliases. 
+Each of listed methods accepts one argument with resource URL or alias or array of URL's or aliases. 
 
 ### Example
 ```php
