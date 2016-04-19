@@ -1,6 +1,7 @@
 <?php
 namespace ViewComponents\ViewComponents\Test\Resource;
 
+use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 use ViewComponents\ViewComponents\Resource\AliasRegistry;
 use ViewComponents\ViewComponents\Resource\IncludedResourcesRegistry;
 use ViewComponents\ViewComponents\Resource\ResourceManager;
@@ -16,31 +17,48 @@ class ResourcesTest extends PHPUnit_Framework_TestCase
         return new ResourceManager($jsRegistry, $cssRegistry, $included);
     }
 
+    protected static function assertRendersJs(ViewComponentInterface $component, $url)
+    {
+        $output = $component->render();
+        self::assertStringStartsWith('<script ', $output);
+        self::assertContains("src=\"$url\"", $output);
+    }
+
+    protected static function assertRendersCss(ViewComponentInterface $component, $url)
+    {
+        $output = $component->render();
+        self::assertStringStartsWith('<link ', $output);
+        self::assertContains("href=\"$url\"", $output);
+    }
+
     public function testCss()
     {
         $resources = $this->make();
-
-        $css = $resources->css('/main.css')->render();
-        self::assertStringStartsWith('<link ', $css);
-        self::assertContains('href="/main.css"', $css);
+        self::assertRendersCss(
+            $resources->css('/main.css'),
+            '/main.css'
+        );
     }
 
     public function testJs()
     {
         $resources = $this->make();
-
-        $js = $resources->js('/main.js')->render();
-        self::assertStringStartsWith('<script ', $js);
-        self::assertContains('src="/main.js"', $js);
+        self::assertRendersJs(
+            $resources->js('/main.js'),
+            '/main.js'
+        );
     }
 
     public function testUniqueCss()
     {
         $resources = $this->make();
-        $resources->css('/main.css')->render();
-        $css = $resources->css('/main.css')->render();
+        self::assertRendersCss(
+            $resources->css('/main.css'),
+            '/main.css'
+        );
+        $sameCssAgain = $resources->css('/main.css')->render();
         self::assertEmpty(
-            $css,
+            $sameCssAgain,
             'Same resource must not be included twice.'
         );
     }
@@ -48,10 +66,39 @@ class ResourcesTest extends PHPUnit_Framework_TestCase
     public function testJsAlias()
     {
         $resources = $this->make(['jquery' => 'http://example.com/jquery.js']);
+        self::assertRendersJs(
+            $resources->js('jquery'),
+            'http://example.com/jquery.js'
+        );
+    }
 
-        // test alias
-        $js = $resources->js('jquery')->render();
-        self::assertStringStartsWith('<script', $js);
-        self::assertContains('src="http://example.com/jquery.js"', $js);
+    public function testCssAlias()
+    {
+        $resources = $this->make([], ['main' => '/main.css']);
+        self::assertRendersCss(
+            $resources->css('main'),
+            '/main.css'
+        );
+    }
+
+    public function testIgnoreCss()
+    {
+        $resources = $this->make([], [
+            '1' => '/1.css',
+            '2' => '/2.css',
+            '3' => '/3.css',
+            '4' => '/4.css'
+        ]);
+        $res = $resources->ignoreCss(['1', '/3.css']);
+        self::assertTrue($res === $resources);
+        self::assertEmpty($resources->css('1')->render());
+        self::assertRendersCss($resources->css('2'), '/2.css');
+        // should not render same css again
+        self::assertEmpty($resources->css('2')->render());
+        self::assertEmpty($resources->css('3')->render());
+
+        $res = $resources->ignoreCss('4');
+        self::assertTrue($res === $resources);
+        self::assertEmpty($resources->css('4')->render());
     }
 }

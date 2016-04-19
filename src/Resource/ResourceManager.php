@@ -31,42 +31,15 @@ class ResourceManager
     }
 
     /**
-     * @param string $name
-     * @return bool
-     */
-    protected static function isJsUrl($name)
-    {
-        return strpos($name, '.js') !== false || strpos($name, '//') !== false;
-    }
-
-    /**
-     * @param string $name
-     * @return bool
-     */
-    protected static function isCssUrl($name)
-    {
-        return strpos($name, '.css') !== false || strpos($name, '//') !== false;
-    }
-
-    /**
-     * Returns component that renders html script tag for including specified javascript resource.
-     * Returns component that renders empty string if resource was already included.
+     * Returns component that renders html script tag for including specified javascript resource
+     * or component that renders empty string if resource was already included.
      *
-     * @param string $name script URL or alias
-     * @return Tag
+     * @param string $aliasOrUrl script URL or alias
+     * @return Tag|DataView
      */
-    public function js($name)
+    public function js($aliasOrUrl)
     {
-
-        if ($this->jsRegistry->has($name)) {
-            $url = $this->jsRegistry->get($name);
-        } else {
-            if (static::isJsUrl($name)) {
-                $url = $name;
-            } else {
-                throw new InvalidArgumentException('Unknown JavaScript alias or invalid URL: ' . $name);
-            }
-        }
+        $url = $this->getJsUrl($aliasOrUrl);
         if (!$this->included->isIncluded($url)) {
             $this->included->markAsIncluded($url);
             $type = 'text/javascript';
@@ -77,25 +50,16 @@ class ResourceManager
     }
 
     /**
-     * Returns component that includes CSS resource to html page.
-     * Returns component that renders empty string if resource was already included.
+     * Returns component that includes CSS resource to html page or
+     * component that renders empty string if resource was already included.
      *
-     * @param string $name CSS URL or alias
+     * @param string $aliasOrUrl CSS URL or alias
      * @param array $attributes
-     * @return Tag
+     * @return Tag|DataView
      */
-    public function css($name, array $attributes = [])
+    public function css($aliasOrUrl, array $attributes = [])
     {
-
-        if ($this->cssRegistry->has($name)) {
-            $url = $this->cssRegistry->get($name);
-        } else {
-            if (static::isCssUrl($name)) {
-                $url = $name;
-            } else {
-                throw new InvalidArgumentException('Unknown CSS alias or invalid URL');
-            }
-        }
+        $url = $this->getCssUrl($aliasOrUrl);
         if (!$this->included->isIncluded($url)) {
             $this->included->markAsIncluded($url);
             return new Tag('link', array_merge([
@@ -107,6 +71,44 @@ class ResourceManager
         } else {
             return new DataView();
         }
+    }
+
+    /**
+     * @param string|string[] $aliasOrUrl
+     * @return $this
+     */
+    public function ignoreCss($aliasOrUrl)
+    {
+        if (is_array($aliasOrUrl)) {
+            foreach($aliasOrUrl as $item) {
+                $this->ignoreCss($item);
+            }
+            return $this;
+        }
+        $url = $this->getCssUrl($aliasOrUrl);
+        if (!$this->included->isIncluded($url)) {
+            $this->included->markAsIncluded($url);
+        }
+        return $this;
+    }
+
+    /**
+     * @param string|string[] $aliasOrUrl
+     * @return $this
+     */
+    public function ignoreJs($aliasOrUrl)
+    {
+        if (is_array($aliasOrUrl)) {
+            foreach($aliasOrUrl as $item) {
+                $this->ignoreJs($item);
+            }
+            return $this;
+        }
+        $url = $this->getJsUrl($aliasOrUrl);
+        if (!$this->included->isIncluded($url)) {
+            $this->included->markAsIncluded($url);
+        }
+        return $this;
     }
 
     /**
@@ -134,7 +136,7 @@ class ResourceManager
     }
 
     /**
-     * Returns component that renders 'script tag with js code.
+     * Returns component that renders 'script' tag with js code.
      * @param string $jsCode
      * @param string|null $uniqueId specify unique id for inline code to avoid embedding it twice
      * @return DataView|TagWithText
@@ -149,5 +151,77 @@ class ResourceManager
             }
         }
         return new TagWithText('script', $jsCode);
+    }
+
+    /**
+     * Returns component that renders 'style' tag with css code.
+     * @param string $cssCode
+     * @param string|null $uniqueId specify unique id for inline code to avoid embedding it twice
+     * @return DataView|TagWithText
+     */
+    public function inlineCss($cssCode, $uniqueId = null)
+    {
+        if ($uniqueId !== null) {
+            if ($this->included->isIncluded($uniqueId)) {
+                return new DataView();
+            } else {
+                $this->included->markAsIncluded($uniqueId);
+            }
+        }
+        return new TagWithText('style', $cssCode);
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    protected static function isJsUrl($name)
+    {
+        return strpos($name, '.js') !== false || strpos($name, '//') !== false;
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    protected static function isCssUrl($name)
+    {
+        return strpos($name, '.css') !== false || strpos($name, '//') !== false;
+    }
+
+    /**
+     * @param string $aliasOrUrl
+     * @return null|string
+     */
+    protected function getJsUrl($aliasOrUrl)
+    {
+        if ($this->jsRegistry->has($aliasOrUrl)) {
+            $url = $this->jsRegistry->get($aliasOrUrl);
+        } else {
+            if (static::isJsUrl($aliasOrUrl)) {
+                $url = $aliasOrUrl;
+            } else {
+                throw new InvalidArgumentException('Unknown JavaScript alias or invalid URL: ' . $aliasOrUrl);
+            }
+        }
+        return $url;
+    }
+
+    /**
+     * @param string $aliasOrUrl
+     * @return null|string
+     */
+    protected function getCssUrl($aliasOrUrl)
+    {
+        if ($this->cssRegistry->has($aliasOrUrl)) {
+            $url = $this->cssRegistry->get($aliasOrUrl);
+        } else {
+            if (static::isCssUrl($aliasOrUrl)) {
+                $url = $aliasOrUrl;
+            } else {
+                throw new InvalidArgumentException('Unknown CSS alias or invalid URL: ' . $aliasOrUrl);
+            }
+        }
+        return $url;
     }
 }
