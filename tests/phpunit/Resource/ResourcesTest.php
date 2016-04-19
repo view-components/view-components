@@ -101,4 +101,25 @@ class ResourcesTest extends PHPUnit_Framework_TestCase
         self::assertTrue($res === $resources);
         self::assertEmpty($resources->css('4')->render());
     }
+
+    public function testIgnoreJs()
+    {
+        $resources = $this->make([
+            '1' => '/1.js',
+            '2' => '/2.js',
+            '3' => '/3.js',
+            '4' => '/4.js'
+        ]);
+        $res = $resources->ignoreJs(['1', '/3.js']);
+        self::assertTrue($res === $resources);
+        self::assertEmpty($resources->js('1')->render());
+        self::assertRendersJs($resources->js('2'), '/2.js');
+        // should not render same css again
+        self::assertEmpty($resources->js('2')->render());
+        self::assertEmpty($resources->js('3')->render());
+
+        $res = $resources->ignoreJs('4');
+        self::assertTrue($res === $resources);
+        self::assertEmpty($resources->js('4')->render());
+    }
 }
