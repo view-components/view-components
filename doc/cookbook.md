@@ -21,9 +21,9 @@ If you need to ignore css & js resources on concrete page, place this code befor
 
 If you need to ignore css & js resources on all pages of your application, there are two options:
 
-a. Place this code to your application bootstrap
+a. Place this code to your application bootstrap.
 
-b. Register service provider in view-components bootstrap. This will allow to avoid execution of this code if view-components isn't used inside any page or console command.
+b. Register service provider in view-components bootstrap. This will allow to avoid execution of mentioned code on pages that don't use view-components and console commands that share same application bootstrap.
 
 
 ServiceProvider class:
