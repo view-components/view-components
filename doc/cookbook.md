@@ -19,7 +19,7 @@ Services::resourceManager()
 
 If you need to ignore css & js resources on concrete page, place this code before components rendering.
 
-If you need to ignore css & js resources on all pages of your application, there is two options:
+If you need to ignore css & js resources on all pages of your application, there are two options:
 
 a. Place this code to your application bootstrap
 
