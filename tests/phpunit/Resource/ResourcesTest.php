@@ -114,7 +114,7 @@ class ResourcesTest extends PHPUnit_Framework_TestCase
         self::assertTrue($res === $resources);
         self::assertEmpty($resources->js('1')->render());
         self::assertRendersJs($resources->js('2'), '/2.js');
-        // should not render same css again
+        // should not render same js again
         self::assertEmpty($resources->js('2')->render());
         self::assertEmpty($resources->js('3')->render());
 
