@@ -17,7 +17,7 @@ Services::resourceManager()
     ->ignoreJs(['bootstrap', 'bootstrap-datepicker']);
 ```
 
-If you need to ignore css & js resources one concrete page, place this code before components rendering.
+If you need to ignore css & js resources on concrete page, place this code before components rendering.
 
 If you need to ignore css & js resources on all pages of your application, there is two options:
 
