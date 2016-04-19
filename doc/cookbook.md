@@ -102,7 +102,8 @@ Bootstrap::registerServiceProvider(function(ServiceContainer $container) {
 });
 ```
 
-Alternatively you can override ServiceId::CONFIG instead of ServiceId::CONFIG_FILE.
-DI container stores PHP array with configuration options inside element with ServiceId::CONFIG key.
-It will allow to merge your configuration with default
-and avoid problems with updating view-components package if new configuration options will be added in further releases.
+Alternatively you can override ServiceId::CONFIG instead of ServiceId::CONFIG_FILE
+(DI container stores PHP array with configuration options inside element with ServiceId::CONFIG key).
+
+This approach will allow to merge your configuration with default one 
+and avoid problems with updating view-components package related to new configuration options that can be added in further releases.
