@@ -54,7 +54,7 @@ Composer will automatically run 'post-create-project-cmd' command and that will 
 
 If you want to use default settings and run it silently, just add `--no-interaction` option.
 
-If you already cloned this repository, or you want to reinstall package, navigate to package folder and run `composer create-project` without specifying package name.
+If you already cloned this repository, or you want to reinstall the package, navigate to the package folder and run `composer create-project` command without specifying package name.
 
 If you are sure that you don't need to reinstall composer dependencies, you can execute only bundled installer: `composer run post-create-project-cmd`
 
@@ -74,7 +74,7 @@ Travis CI automatically deploys web-application bundled with this package to Her
 
 Here you can see working demos: <http://view-components.herokuapp.com/>
 
-*First run may be slow becouse Heroku shutting down workers when there is no traffic and starts it again on first visit*
+*First run may be slow because Heroku shutting down workers when there is no traffic and starts it again on first visit*
 
 #### Running Demo Application Locally
 
@@ -87,7 +87,7 @@ composer serve
 ```
 This command uses web-server bundled with PHP.
 
-Now, open [http://localhost:8000](http://localhost:8000) in browser (for Windows users it will be opened automatically after starting web-server).
+Now, open [http://localhost:8000](http://localhost:8000) in the browser (for Windows users it will be opened automatically after starting web-server).
 
 ## Testing
 
