@@ -1,7 +1,7 @@
 View Components Cookbook
 ========================
 
-## How to avoid including css & js files required by components if they are already included to layout not via view-components
+## How to avoid including css & js files required by components if they are already included to page layout (not via view-components)
 
 Use following methods:
 
@@ -85,7 +85,7 @@ Note that logic added via Bootstrap class will work only for default resource ma
 
 ## How to override URL's of CSS/JS resources used by default
 
-All resources required by view-components has aliases stored in configuration, therefore you need to override configuration file.
+All resources used by view-components has aliases stored in configuration, therefore you need to override configuration file.
 It can be done in service provider.
 
 1. Copy vendor/view-components/view-components/resources/config/config.php to place where you store configurations.
