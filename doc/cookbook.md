@@ -50,13 +50,13 @@ class MyServiceProvider implements ServiceProviderInterface
 }
 ```
 
-Service provider registration (place it to your application bootstrap)
+Service provider registration (place it to your application bootstrap):
 
 ```php
 use MyApp\MyServiceProvider;
 use ViewComponents\ViewComponents\Service\Bootstrap;
 
-Bootstrap::registerServiceProvider(ServiceProvider::class);
+Bootstrap::registerServiceProvider(MyServiceProvider::class);
 
 ```
 
