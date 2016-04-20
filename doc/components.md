@@ -157,6 +157,8 @@ $layout = new Layout(
 );
 $layout->section('menu')->addChild(new TemplateView('my_menu');
 
+echo $layout->render();
+
 ```
 
 Layout template:
