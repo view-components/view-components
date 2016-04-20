@@ -108,3 +108,24 @@ Alternatively you can override ServiceId::CONFIG instead of ServiceId::CONFIG_FI
 
 This approach will allow to merge your configuration with default one 
 and avoid problems with updating view-components package related to new configuration options that can be added in further releases.
+
+## How to use custom view templates / override core templates.
+
+To use custom view templates, you need to register path to folder containing your templates in [TemplateFinder](https://github.com/view-components/view-components/blob/master/src/Rendering/TemplateFinder.php) instance linked to used Renderer.
+
+Code example that will work for default renderer:
+
+```php
+use ViewComponents\ViewComponents\Service\Services;
+Services::renderer()->getFinder()->registerPath(dirname(__DIR__) . '/resources/views', $highPriority = true);
+
+```
+Note that second argument of `registerPath()` allows to specify folder priority, it's used when locating requested templates.
+If templates with same name are placed into different registered folders, template inside folder with higher priority will be used.
+
+If you need to override core templates, register templates folder with higher priority (pass true to second argument).
+
+If you need to provide fallback for some templates (they can be absent in already registered paths), pass false to second argument.
+
+
+
