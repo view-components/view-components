@@ -1,7 +1,9 @@
 View Components Cookbook
 ========================
+## Table of contents
+@todo
 
-## How to avoid including css & js files required by components if they are already included to page layout (not via view-components)
+## 1. How to avoid including css & js files required by components if they are already included to page layout (not via view-components)
 
 Use following methods:
 
@@ -84,7 +86,7 @@ Bootstrap::registerServiceProvider(function(ServiceContainer $container) {
 Note that logic added via Bootstrap class will work only for default resource manager stored in DI container (i.e. resources will not be ignored if you use another instances of ResourceManager).
 
 
-## How to override URL's of CSS/JS resources used by default
+## 2. How to override URL's of CSS/JS resources used by default
 
 All resources used by view-components has aliases stored in configuration, therefore you need to override configuration file.
 It can be done in service provider.
@@ -109,7 +111,7 @@ Alternatively you can override ServiceId::CONFIG instead of ServiceId::CONFIG_FI
 This approach will allow to merge your configuration with default one 
 and avoid problems with updating view-components package related to new configuration options that can be added in further releases.
 
-## How to use custom view templates / override core templates.
+## 3. How to use custom view templates / override core templates.
 
 To use custom view templates, you need to register path to folder containing your templates in [TemplateFinder](https://github.com/view-components/view-components/blob/master/src/Rendering/TemplateFinder.php) instance linked to used Renderer.
 
