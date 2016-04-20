@@ -60,10 +60,11 @@ Bootstrap::registerServiceProvider(MyServiceProvider::class);
 
 ```
 
-If you don't want to create class for service provider, you can use anonymous function in view-components bootstrap:
+If you don't want to create class for service provider, you can use anonymous function:
 
 
 ```php
+// somewhere in your app bootstrap
 use ViewComponents\ViewComponents\Service\Bootstrap;
 use ViewComponents\ViewComponents\Service\ServiceContainer;
 use ViewComponents\ViewComponents\Service\ServiceId;
