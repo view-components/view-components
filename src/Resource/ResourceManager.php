@@ -74,13 +74,15 @@ class ResourceManager
     }
 
     /**
+     * Ignores target css file (adds it to registry of included resources).
+     *
      * @param string|string[] $aliasOrUrl
      * @return $this
      */
     public function ignoreCss($aliasOrUrl)
     {
         if (is_array($aliasOrUrl)) {
-            foreach($aliasOrUrl as $item) {
+            foreach ($aliasOrUrl as $item) {
                 $this->ignoreCss($item);
             }
             return $this;
@@ -93,13 +95,15 @@ class ResourceManager
     }
 
     /**
+     * Ignores target js file (adds it to registry of included resources).
+     *
      * @param string|string[] $aliasOrUrl
      * @return $this
      */
     public function ignoreJs($aliasOrUrl)
     {
         if (is_array($aliasOrUrl)) {
-            foreach($aliasOrUrl as $item) {
+            foreach ($aliasOrUrl as $item) {
                 $this->ignoreJs($item);
             }
             return $this;
@@ -112,6 +116,8 @@ class ResourceManager
     }
 
     /**
+     * Returns registry of js aliases.
+     *
      * @return AliasRegistry
      */
     public function jsAliases()
@@ -120,6 +126,8 @@ class ResourceManager
     }
 
     /**
+     * Returns registry of css aliases.
+     *
      * @return AliasRegistry
      */
     public function cssAliases()
@@ -128,6 +136,8 @@ class ResourceManager
     }
 
     /**
+     * Returns registry of included resources.
+     *
      * @return IncludedResourcesRegistry
      */
     public function includedResources()
@@ -137,6 +147,7 @@ class ResourceManager
 
     /**
      * Returns component that renders 'script' tag with js code.
+     *
      * @param string $jsCode
      * @param string|null $uniqueId specify unique id for inline code to avoid embedding it twice
      * @return DataView|TagWithText
@@ -155,6 +166,7 @@ class ResourceManager
 
     /**
      * Returns component that renders 'style' tag with css code.
+     *
      * @param string $cssCode
      * @param string|null $uniqueId specify unique id for inline code to avoid embedding it twice
      * @return DataView|TagWithText
