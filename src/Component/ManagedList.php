@@ -52,26 +52,47 @@ class ManagedList extends Compound implements DataViewComponentInterface
         return $this->getChildrenRecursive()->filterByType(ControlInterface::class);
     }
 
+    /**
+     * Returns container component.
+     */
     public function getContainer()
     {
         return $this->getComponent(static::CONTAINER_ID);
     }
 
+    /**
+     * Sets container component.
+     *
+     * @param $component
+     * @return $this
+     */
     public function setContainer(ComponentInterface $component)
     {
         return $this->setComponent($component, static::CONTAINER_ID, static::ROOT_ID);
     }
 
+    /**
+     * Returns component that renders form
+     */
     public function getForm()
     {
         return $this->getComponent(static::FORM_ID);
     }
 
+    /**
+     * Sets component for rendering form.
+     *
+     * @param ComponentInterface $form
+     * @return $this
+     */
     public function setForm(ComponentInterface $form)
     {
         return $this->setComponent($form, static::FORM_ID, static::CONTAINER_ID);
     }
 
+    /**
+     * Returns control container component.
+     */
     public function getControlContainer()
     {
         return $this->getComponent(static::CONTROL_CONTAINER_ID);
@@ -82,6 +103,9 @@ class ManagedList extends Compound implements DataViewComponentInterface
         return $this->setComponent($component, static::CONTROL_CONTAINER_ID, static::FORM_ID);
     }
 
+    /**
+     * Returns submit button component.
+     */
     public function getSubmitButton()
     {
         return $this->getComponent(static::SUBMIT_BUTTON_ID);
@@ -92,6 +116,9 @@ class ManagedList extends Compound implements DataViewComponentInterface
         return $this->setComponent($component, static::SUBMIT_BUTTON_ID, static::FORM_ID);
     }
 
+    /**
+     * Returns list container component.
+     */
     public function getListContainer()
     {
         return $this->getComponent(static::LIST_CONTAINER_ID);
@@ -102,6 +129,9 @@ class ManagedList extends Compound implements DataViewComponentInterface
         return $this->setComponent($component, static::LIST_CONTAINER_ID, static::CONTAINER_ID);
     }
 
+    /**
+     * Returns collection view component.
+     */
     public function getCollectionView()
     {
         return $this->getComponent(static::COLLECTION_VIEW_ID);
@@ -112,6 +142,9 @@ class ManagedList extends Compound implements DataViewComponentInterface
         return $this->setComponent($component, static::COLLECTION_VIEW_ID, static::LIST_CONTAINER_ID);
     }
 
+    /**
+     * Returns record view component.
+     */
     public function getRecordView()
     {
         return $this->getComponent(static::RECORD_VIEW_ID);
