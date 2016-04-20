@@ -3,10 +3,7 @@
 namespace ViewComponents\ViewComponents\Input;
 
 /**
- * Class InputSource.
- *
- * InputSource class is a factory for InputOption objects.
- *
+ * InputSource is a factory class for InputOption instances.
  */
 class InputSource
 {

@@ -3,17 +3,17 @@
 namespace ViewComponents\ViewComponents\Input;
 
 /**
- * Class InputOption.
- *
- * InputOption class resolves option specified by key
- * from input or returns pre-configured default value.
- *
+ * InputOption represents option specified by key inside input array ($_GET, $_POST, etc.) and its default value.
  */
 class InputOption
 {
-
+    /** @var mixed */
     private $inputValue;
+
+    /** @var string */
     private $key;
+
+    /** @var mixed */
     private $default;
 
     /**
@@ -28,14 +28,13 @@ class InputOption
         array $inputSource,
         $default = null
     ) {
-
         $this->inputValue = array_key_exists($key, $inputSource) ? $inputSource[$key] : null;
         $this->default = $default;
         $this->key = $key;
     }
 
     /**
-     * Returns value (from input or default).
+     * Returns value from input or default value if input is not provided.
      *
      * @return mixed
      */
@@ -67,6 +66,8 @@ class InputOption
     }
 
     /**
+     * Returns input key.
+     *
      * @return string
      */
     public function getKey()
@@ -75,7 +76,7 @@ class InputOption
     }
 
     /**
-     * Returns true if object has value (default or from input).
+     * Returns true if InputOption has value (default or received from input).
      *
      * @return bool
      */
@@ -84,6 +85,11 @@ class InputOption
         return $this->getValue() !== null;
     }
 
+    /**
+     * Returns true if InputOption has value received from input (this method does not use default value).
+     *
+     * @return bool
+     */
     private function hasInputValue()
     {
         return $this->inputValue !== null && $this->inputValue !== '';
