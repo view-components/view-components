@@ -1,6 +1,8 @@
 Component Documentation
 ===
 
+Work on this document still in progress, it's a draft and it don't covers functionality of all available components.
+
 ## Table of Contents 
 - [Container](#container)
 - [CollectionView](#collectionview)
