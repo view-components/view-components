@@ -61,7 +61,7 @@ class Services
     }
 
     /**
-     * @return RendererInterface;
+     * @return TemplateFinder;
      */
     public static function templateFinder()
     {
