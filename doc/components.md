@@ -9,6 +9,7 @@ Work on this document still in progress, it's a draft and it don't covers functi
 - [Compounds](#compounds)
 - [DataView](#dataview)
 - [Json](#json)
+- [Layout](#layout)
 
 ## Container
 
@@ -137,4 +138,52 @@ $compound->getComponent('caption')->setText('New Caption');
 
 ## Json
 
-[Json](https://github.com/view-components/view-components/blob/master/src/Component/Json.php) is a component for rendering custom data as JSON.
+[Json](https://github.com/view-components/view-components/blob/master/src/Component/Json.php "ViewComponents\ViewComponents\Component\Json") is a component for rendering custom data as JSON.
+
+## Layout
+
+[Layout](https://github.com/view-components/view-components/blob/master/src/Component/Layout.php "ViewComponents\ViewComponents\Component\Layout") is a template view component with possibility to group children components by sections.
+
+### Usage Example
+
+Creating layout instance:
+```php
+$layout = new Layout(
+    'layout',
+    [   // custom variables that can be used in layout template
+        'title' => 'Page title',
+        'meta' => 'meta tags here'
+    ]
+);
+$layout->section('menu')->addChild(new TemplateView('my_menu');
+
+echo $layout->render();
+
+```
+
+Layout template:
+```html
+<?php
+use ViewComponents\ViewComponents\Component\Layout;
+/** @var Layout $layout */
+/** @var string $title */
+?>
+<html>
+<head>
+    <title><?= $title ?></title>
+    <?= $layout->section('head')->render() ?>
+</head>
+<body>
+<?= $layout->section('menu')->render() ?>
+<div class="container">
+    <?= $layout->mainSection()->render() ?>
+</div>
+<?= $layout->section('footer')->render() ?>
+</body>
+</html>
+```
+Components also can be attached directly to layout. Layout instance will reattach them to main section (`$layout->mainSection()` or `$layout->section('main')`).
+
+Sections are created dynamically when you call `section($id)` method with new ID. 
+
+If layout template has no instruction for rendering concrete section, components attached to that section will not be rendered.
