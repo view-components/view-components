@@ -1,4 +1,3 @@
-
 <table class="table table-bordered table-striped">
     <?php
     /** @var TemplateView $component */
@@ -9,22 +8,28 @@
         if (is_object($value) && !method_exists($value, '__toString')) {
             continue;
         }
+        if (is_array($value)) {
+            $view = new TemplateView(
+                $component->getTemplateName(),
+                $value,
+                $component->getRenderer()
+            );
+            $valueText = $view->render();
+
+        } else {
+            $valueText = $value;
+        }
+
         ?>
         <tr>
-            <td><?= StaticStringy::humanize($key) ?></td>
-            <td><?php
-                if (is_array($value)) {
-                    $view = new TemplateView(
-                        $component->getTemplateName(),
-                        $value,
-                        $component->getRenderer()
-                    );
-                    echo $view->render();
+            <?php if (is_int($key)): ?>
+                <td colspan="2">
+                    <?= $valueText ?>
+                </td>
+            <?php else: ?>
+                <td><?= StaticStringy::humanize($key) ?></td>
+                <td><?= $valueText ?></td>
+            <?php endif ?>
 
-                } else {
-                    echo $value;
-                }
-                ?></td>
-        </tr>
     <?php endforeach ?>
 </table>
