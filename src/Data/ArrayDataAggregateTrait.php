@@ -34,6 +34,7 @@ trait ArrayDataAggregateTrait
     public function setDataItem($key, $value)
     {
         $this->mergeData([$key => $value]);
+        return $this;
     }
 
     public function hasDataKey($key)
