@@ -6,6 +6,7 @@ use ViewComponents\ViewComponents\Component\CollectionView;
 use ViewComponents\ViewComponents\Component\Compound;
 use ViewComponents\ViewComponents\Component\Control\FilterControl;
 use ViewComponents\ViewComponents\Component\Control\PageSizeSelectControl;
+use ViewComponents\ViewComponents\Component\Control\SelectFilterControl;
 use ViewComponents\ViewComponents\Component\Control\SortingSelectControl;
 use ViewComponents\ViewComponents\Component\DataView;
 use ViewComponents\ViewComponents\Component\Control\PaginationControl;
@@ -408,6 +409,56 @@ class Controller
         BootstrapStyling::applyTo($this->layout());
 
         return $this->page(null, 'Customizing date input with Bootstrap');
+    }
+
+    public function demo11_1()
+    {
+        $list = new ManagedList(
+            $this->getDataProvider(),
+            [
+                new RecordView(new SymfonyVarDump()),
+                new SelectFilterControl(
+                    'role',
+                    [
+                        'User' => 'Users',
+                        'Manager' => 'Managers',
+                        'Admin' => 'Admins',
+                    ],
+                    new InputOption('role', $_GET, 'Manager')
+                ),
+            ]
+        );
+        return $this->styledPage($list, 'SelectFilterControl + def.value');
+    }
+
+    public function demo11_2()
+    {
+        $list = new ManagedList(
+            $this->getDataProvider(),
+            [
+                new RecordView(new SymfonyVarDump()),
+                (new SelectFilterControl(
+                    'role',
+                    [
+                        '' => 'All Roles',
+                        'User' => 'Users',
+                        'Manager' => 'Managers',
+                        'Admin' => 'Admins',
+                    ],
+                    new InputOption('role', $_GET)
+                ))->enableAutoSubmitting(),
+                (new PageSizeSelectControl(new InputOption('page_size', $_GET), [5,10]))->enableAutoSubmitting(),
+                new PaginationControl(new InputOption('p', $_GET, 1), 5)
+            ]
+        );
+        return $this->styledPage($list, 'SelectFilterControl + auto-submit + PageSize');
+    }
+
+    protected function styledPage($view, $title = '')
+    {
+        $this->layout()->mainSection()->addChild($view);
+        BootstrapStyling::applyTo($this->layout());
+        return $this->page(null, $title);
     }
 
 }

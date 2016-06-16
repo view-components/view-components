@@ -3,11 +3,14 @@
 namespace ViewComponents\ViewComponents\Component\Html;
 
 use Nayjest\Tree\ChildNodeInterface;
+use ViewComponents\ViewComponents\Base\Html\AutoSubmittingInputInterface;
+use ViewComponents\ViewComponents\Base\Html\AutoSubmittingInputTagTrait;
 use ViewComponents\ViewComponents\Base\Html\TagInterface;
 use ViewComponents\ViewComponents\Component\DataView;
 
-class Select extends Tag
+class Select extends Tag implements AutoSubmittingInputInterface
 {
+    use AutoSubmittingInputTagTrait;
     /**
      * @param array|null $attributes
      * @param array $options components or 'value' => 'label' array

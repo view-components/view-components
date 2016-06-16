@@ -3,6 +3,8 @@
 namespace ViewComponents\ViewComponents\Component\Control;
 
 use Nayjest\Tree\Utils;
+use ViewComponents\ViewComponents\Base\Control\AutoSubmittingControlTrait;
+use ViewComponents\ViewComponents\Base\Html\AutoSubmittingInputInterface;
 use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Component\Compound;
@@ -11,8 +13,10 @@ use ViewComponents\ViewComponents\Data\Operation\DummyOperation;
 use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
 use ViewComponents\ViewComponents\Input\InputOption;
 
-class PageSizeSelectControl extends Part implements ControlInterface
+class PageSizeSelectControl extends Part implements ControlInterface, AutoSubmittingInputInterface
 {
+
+    use AutoSubmittingControlTrait;
 
     /** @var int[] */
     private $variants;
@@ -25,6 +29,13 @@ class PageSizeSelectControl extends Part implements ControlInterface
      */
     private $inputOption;
 
+    /**
+     * PageSizeSelectControl constructor.
+     *
+     * @param InputOption|null $inputOption
+     * @param array $variants
+     * @param PaginationControl|null $pagination required only in case of usage outside of compound component having pagination
+     */
     public function __construct(
         InputOption $inputOption = null,
         array $variants = [50, 100, 300, 1000],
@@ -36,7 +47,9 @@ class PageSizeSelectControl extends Part implements ControlInterface
     }
 
     /**
-     * Creates operation.
+     * Creates dummy operation.
+     *
+     * Instead of providing operation to data-provider, this control modifies pagination control.
      *
      * @return OperationInterface
      */
@@ -46,14 +59,8 @@ class PageSizeSelectControl extends Part implements ControlInterface
     }
 
     /**
-     * @return bool
-     */
-    public function isManualFormSubmitRequired()
-    {
-        return true;
-    }
-
-    /**
+     * Sets page size variants.
+     *
      * @param int[] $variants
      * @return PageSizeSelectControl
      */
@@ -65,6 +72,7 @@ class PageSizeSelectControl extends Part implements ControlInterface
 
     /**
      * Returns variants. Makes array keys equal array values.
+     *
      * @return int[]
      */
     public function getVariants()
@@ -72,6 +80,10 @@ class PageSizeSelectControl extends Part implements ControlInterface
         return array_combine(array_values($this->variants), array_values($this->variants));
     }
 
+    /**
+     * @param Compound $root
+     * @param bool $prepend
+     */
     public function attachToCompound(Compound $root, $prepend = false)
     {
         parent::attachToCompound($root, $prepend);
@@ -83,6 +95,8 @@ class PageSizeSelectControl extends Part implements ControlInterface
     }
 
     /**
+     * Sets pagination control affected by page size select control.
+     *
      * @param null|PaginationControl $paginationControl
      * @return PageSizeSelectControl
      */
@@ -93,15 +107,6 @@ class PageSizeSelectControl extends Part implements ControlInterface
         return $this;
     }
 
-    private function updatePagination()
-    {
-        $value = $this->inputOption->getValue();
-        if (!$value || $this->paginationControl->getPageSize() == $value) {
-            return;
-        }
-        $this->paginationControl->setPageSize($value);
-    }
-
     /**
      * @return null|PaginationControl
      */
@@ -110,6 +115,11 @@ class PageSizeSelectControl extends Part implements ControlInterface
         return $this->paginationControl;
     }
 
+    /**
+     * Renders component and returns output.
+     *
+     * @return string
+     */
     public function render()
     {
         // try to update pagination one mor time for cases when not configured pagination was used and later configured.
@@ -144,5 +154,14 @@ class PageSizeSelectControl extends Part implements ControlInterface
             $defaults['value'] = $this->inputOption->getValue();
         }
         $view->setDefaultData($defaults);
+    }
+
+    private function updatePagination()
+    {
+        $value = $this->inputOption->getValue();
+        if (!$value || $this->paginationControl->getPageSize() == $value) {
+            return;
+        }
+        $this->paginationControl->setPageSize($value);
     }
 }
