@@ -27,6 +27,15 @@ $inputAttributes = array_merge([
 ], $inputAttributes);
 $containerAttributes = array_merge(['class' => $containerClass], $containerAttributes);
 $labelAttributes = array_merge(['class' => $labelClass], $labelAttributes);
+
+// support of auto-submitting form on value change
+if (isset($autosubmit) && $autosubmit === true) {
+    if (array_key_exists('onchange', $inputAttributes)) {
+        $inputAttributes['onchange'] .= ';this.form.submit();';
+    } else {
+        $inputAttributes['onchange'] = 'this.form.submit()';
+    }
+}
 ?>
 
 <<?= $containerTag ?> <?= Tag::renderAttributes($containerAttributes) ?>>
