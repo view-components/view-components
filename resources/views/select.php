@@ -29,7 +29,7 @@ $containerAttributes = array_merge(['class' => $containerClass], $containerAttri
 $labelAttributes = array_merge(['class' => $labelClass], $labelAttributes);
 
 // support of auto-submitting form on value change
-if (isset($autosubmit) && $autosubmit === true) {
+if (isset($autoSubmit) && $autoSubmit === true) {
     if (array_key_exists('onchange', $inputAttributes)) {
         $inputAttributes['onchange'] .= ';this.form.submit();';
     } else {
