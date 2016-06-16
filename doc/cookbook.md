@@ -15,7 +15,7 @@ Each of listed methods accepts one argument with resource URL or alias or array 
 ### Example
 ```php
 Services::resourceManager()
-    ->ignoreCss(['boostrap', 'bootstrap-datepicker'])
+    ->ignoreCss(['bootstrap', 'bootstrap-datepicker'])
     ->ignoreJs(['bootstrap', 'bootstrap-datepicker']);
 ```
 
