@@ -189,7 +189,7 @@ Sections are created dynamically when you call `section($id)` method with new ID
 
 If layout template has no instruction for rendering concrete section, components attached to that section will not be rendered.
 
-## Managed List
+## ManagedList
 
 [ManagedList](https://github.com/view-components/view-components/blob/master/src/Component/ManagedList.php) is a component for rendering data lists with interactive controls.
 Technicaly it's a [compound component](#compounds). This package contains variety of components designed to work with ManagedList.
