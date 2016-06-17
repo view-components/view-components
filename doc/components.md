@@ -10,6 +10,7 @@ Work on this document still in progress, it's a draft and it don't covers functi
 - [DataView](#dataview)
 - [Json](#json)
 - [Layout](#layout)
+- [ManagedList](#managedlist)
 
 ## Container
 
@@ -187,3 +188,30 @@ Components also can be attached directly to layout. Layout instance will reattac
 Sections are created dynamically when you call `section($id)` method with new ID. 
 
 If layout template has no instruction for rendering concrete section, components attached to that section will not be rendered.
+
+## Managed List
+
+[ManagedList](https://github.com/view-components/view-components/blob/master/src/Component/ManagedList.php) is a component for rendering data lists with interactive controls.
+Technicaly it's a [compound component](#compounds). This package contains variety of components designed to work with ManagedList.
+[Demo](http://view-components.herokuapp.com/index.php/demo9_1) 
+
+### Code example
+```php
+// available data providers: querying database via PDO, Eloquent query builder (Laravel), Doctrine, php array as data source, etc.
+// Note: framework-specific data-providers are moved to separate packages.
+$dataProvider = new DbTableDataProvider($pdoConnection, 'users_table');
+$list = new ManagedList($dataProvider, [
+    new RecordView(new SymfonyVarDump()),
+    new FilterControl(
+        'name',
+        FilterOperation::OPERATOR_EQ,
+        new InputOption('name_filter', $_GET)
+    ),
+    new FilterControl(
+        'role',
+        FilterOperation::OPERATOR_EQ,
+        new InputOption('role_filter', $_GET)
+    ),
+]);
+```
+
