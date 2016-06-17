@@ -1,5 +1,7 @@
 View Components Cookbook
 ========================
+**Work in progress. Contributions are extremely welcome!**
+
 ## Table of contents
 @todo
 
