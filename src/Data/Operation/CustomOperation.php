@@ -2,7 +2,7 @@
 
 namespace ViewComponents\ViewComponents\Data\Operation;
 
-class CustomOperation
+class CustomOperation implements OperationInterface
 {
     /**
      * @var callable
