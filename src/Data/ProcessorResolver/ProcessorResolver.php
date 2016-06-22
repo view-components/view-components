@@ -2,8 +2,10 @@
 
 namespace ViewComponents\ViewComponents\Data\ProcessorResolver;
 
+use ViewComponents\ViewComponents\Data\Operation\CustomOperation;
 use ViewComponents\ViewComponents\Data\Operation\DummyOperation;
 use ViewComponents\ViewComponents\Data\Operation\OperationInterface;
+use ViewComponents\ViewComponents\Data\Processor\CustomProcessor;
 use ViewComponents\ViewComponents\Data\Processor\DummyProcessor;
 use ViewComponents\ViewComponents\Data\Processor\ProcessorInterface;
 use ViewComponents\ViewComponents\Exceptions\ProcessorNotFoundException;
@@ -16,7 +18,8 @@ use ViewComponents\ViewComponents\Exceptions\ProcessorNotFoundException;
 class ProcessorResolver implements ProcessorResolverInterface
 {
     protected $processors = [
-        DummyOperation::class => DummyProcessor::class
+        DummyOperation::class => DummyProcessor::class,
+        CustomOperation::class => CustomProcessor::class
     ];
 
     /**
