@@ -16,11 +16,11 @@ use ViewComponents\ViewComponents\Base\ViewComponentInterface;
  */
 class Compound implements ContainerComponentInterface
 {
-    const ROOT_ID = 'root';
-
     use ContainerComponentTrait {
         ContainerComponentTrait::children as private childrenInternal;
     }
+
+    const ROOT_ID = 'root';
 
     /** @var ObjectCollection|PartInterface[] */
     private $componentCollection;
@@ -73,15 +73,20 @@ class Compound implements ContainerComponentInterface
         return $this->childrenInternal();
     }
 
+    /**
+     * Renders component and returns output.
+     *
+     * @return string
+     */
     public function render()
     {
         return $this->renderChildren();
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @param bool $extractView
-     * @return null|PartInterface|ViewComponentInterface|Part
+     * @return PartInterface|ViewComponentInterface|Part|null
      */
     public function getComponent($id, $extractView = true)
     {
