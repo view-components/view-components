@@ -40,8 +40,9 @@ trait AutoSubmittingControlTrait
             return;
         }
         if ($view instanceof TemplateView) {
-            if ($view->setDataItem('autoSubmit', $this->getAutoSubmitting()))
+            if ($view->setDataItem('autoSubmit', $this->getAutoSubmitting())) {
                 return;
+            }
         }
         if ($view === null) {
             return;

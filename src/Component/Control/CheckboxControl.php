@@ -20,8 +20,7 @@ class CheckboxControl extends Part implements ControlInterface
         OperationInterface $operation,
         InputOption $inputOption,
         $label = null
-    )
-    {
+    ) {
         $this->label = $label;
         $this->inputOption = $inputOption;
         $this->operation = $operation;
