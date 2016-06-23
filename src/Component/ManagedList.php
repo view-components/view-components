@@ -3,10 +3,11 @@ namespace ViewComponents\ViewComponents\Component;
 
 use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Collection\Extended\ObjectCollection;
-use ViewComponents\ViewComponents\Base\ComponentInterface;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
+use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
+use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 use ViewComponents\ViewComponents\Component\Html\TagWithText;
 use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Component\Html\Tag;
@@ -53,7 +54,9 @@ class ManagedList extends Compound implements DataViewComponentInterface
     }
 
     /**
-     * Returns container component.
+     * Returns container component (by default 'div' html tag).
+     *
+     * @return ContainerComponentInterface|Tag
      */
     public function getContainer()
     {
@@ -63,16 +66,18 @@ class ManagedList extends Compound implements DataViewComponentInterface
     /**
      * Sets container component.
      *
-     * @param $component
+     * @param ContainerComponentInterface $component
      * @return $this
      */
-    public function setContainer(ComponentInterface $component)
+    public function setContainer(ContainerComponentInterface $component)
     {
         return $this->setComponent($component, static::CONTAINER_ID, static::ROOT_ID);
     }
 
     /**
-     * Returns component that renders form
+     * Returns component that renders form.
+     *
+     * @return ViewComponentInterface|Tag
      */
     public function getForm()
     {
@@ -82,62 +87,76 @@ class ManagedList extends Compound implements DataViewComponentInterface
     /**
      * Sets component for rendering form.
      *
-     * @param ComponentInterface $form
+     * @param ViewComponentInterface $form
      * @return $this
      */
-    public function setForm(ComponentInterface $form)
+    public function setForm(ViewComponentInterface $form)
     {
         return $this->setComponent($form, static::FORM_ID, static::CONTAINER_ID);
     }
 
     /**
      * Returns control container component.
+     *
+     * @return ContainerComponentInterface
      */
     public function getControlContainer()
     {
         return $this->getComponent(static::CONTROL_CONTAINER_ID);
     }
 
-    public function setControlContainer(ComponentInterface $component)
+    public function setControlContainer(ContainerComponentInterface $component)
     {
         return $this->setComponent($component, static::CONTROL_CONTAINER_ID, static::FORM_ID);
     }
 
     /**
      * Returns submit button component.
+     *
+     * @return ViewComponentInterface|null
      */
     public function getSubmitButton()
     {
         return $this->getComponent(static::SUBMIT_BUTTON_ID);
     }
 
-    public function setSubmitButton(ComponentInterface $component)
+    public function setSubmitButton(ViewComponentInterface $component)
     {
         return $this->setComponent($component, static::SUBMIT_BUTTON_ID, static::FORM_ID);
     }
 
     /**
      * Returns list container component.
+     *
+     * @return ContainerComponentInterface
      */
     public function getListContainer()
     {
         return $this->getComponent(static::LIST_CONTAINER_ID);
     }
 
-    public function setListContainer(ComponentInterface $component)
+    public function setListContainer(ContainerComponentInterface $component)
     {
         return $this->setComponent($component, static::LIST_CONTAINER_ID, static::CONTAINER_ID);
     }
 
     /**
      * Returns collection view component.
+     *
+     * @return CollectionView|ViewComponentInterface|null
      */
     public function getCollectionView()
     {
         return $this->getComponent(static::COLLECTION_VIEW_ID);
     }
 
-    public function setCollectionView(ComponentInterface $component)
+    /**
+     * Sets collection view component.
+     *
+     * @param ViewComponentInterface $component
+     * @return $this
+     */
+    public function setCollectionView(ViewComponentInterface $component)
     {
         return $this->setComponent($component, static::COLLECTION_VIEW_ID, static::LIST_CONTAINER_ID);
     }
@@ -153,10 +172,10 @@ class ManagedList extends Compound implements DataViewComponentInterface
     /**
      * Sets component that will display data record.
      *
-     * @param ComponentInterface $component
+     * @param ViewComponentInterface $component
      * @return $this
      */
-    public function setRecordView(ComponentInterface $component)
+    public function setRecordView(ViewComponentInterface $component)
     {
         return $this->setComponent($component, static::RECORD_VIEW_ID, static::COLLECTION_VIEW_ID);
     }
