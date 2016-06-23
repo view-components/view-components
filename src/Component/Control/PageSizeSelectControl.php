@@ -5,6 +5,7 @@ namespace ViewComponents\ViewComponents\Component\Control;
 use Nayjest\Tree\Utils;
 use ViewComponents\ViewComponents\Base\Control\AutoSubmittingControlTrait;
 use ViewComponents\ViewComponents\Base\Html\AutoSubmittingInputInterface;
+use ViewComponents\ViewComponents\Component\ManagedList;
 use ViewComponents\ViewComponents\Component\Part;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Component\Compound;
@@ -17,6 +18,8 @@ class PageSizeSelectControl extends Part implements ControlInterface, AutoSubmit
 {
 
     use AutoSubmittingControlTrait;
+
+    const ID = 'page_size_select';
 
     /** @var int[] */
     private $variants;
@@ -34,7 +37,8 @@ class PageSizeSelectControl extends Part implements ControlInterface, AutoSubmit
      *
      * @param InputOption|null $inputOption
      * @param array $variants
-     * @param PaginationControl|null $pagination required only in case of usage outside of compound component having pagination
+     * @param PaginationControl|null $pagination required only in case of usage
+     *                                           outside compound component having pagination
      */
     public function __construct(
         InputOption $inputOption = null,
@@ -43,7 +47,7 @@ class PageSizeSelectControl extends Part implements ControlInterface, AutoSubmit
     ) {
         $this->inputOption = $inputOption;
         $this->variants = $variants;
-        parent::__construct($this->makeDefaultView(), 'page_size_select', 'control_container');
+        parent::__construct($this->makeDefaultView(), static::ID, ManagedList::CONTROL_CONTAINER_ID);
     }
 
     /**
