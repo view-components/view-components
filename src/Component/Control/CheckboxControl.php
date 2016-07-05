@@ -16,6 +16,13 @@ class CheckboxControl extends Part implements ControlInterface
     protected $operation;
     protected $label;
 
+    /**
+     * CheckboxControl constructor.
+     *
+     * @param OperationInterface $operation
+     * @param InputOption $inputOption
+     * @param string|null $label
+     */
     public function __construct(
         OperationInterface $operation,
         InputOption $inputOption,
@@ -31,11 +38,23 @@ class CheckboxControl extends Part implements ControlInterface
         );
     }
 
+    /**
+     * This method is used by root component (e.g. ManagedList)
+     * to determine that submit button should be present.
+     *
+     * @see \ViewComponents\ViewComponents\Component\ManagedList::hideSubmitButtonIfNotUsed
+     *
+     * @return bool
+     */
     public function isManualFormSubmitRequired()
     {
         return true;
     }
 
+    /**
+     * @param ViewComponentInterface|null $view
+     * @return $this
+     */
     public function setView(ViewComponentInterface $view = null)
     {
         parent::setView($view);
@@ -43,6 +62,9 @@ class CheckboxControl extends Part implements ControlInterface
         return $this;
     }
 
+    /**
+     * @return OperationInterface|DummyOperation
+     */
     public function getOperation()
     {
         if (!$this->inputOption->hasValue()) {

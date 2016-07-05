@@ -46,11 +46,24 @@ class FilterControl extends Part implements ControlInterface
         );
     }
 
+    /**
+     * This method is used by root component (e.g. ManagedList)
+     * to determine that submit button should be present.
+     *
+     * @see \ViewComponents\ViewComponents\Component\ManagedList::hideSubmitButtonIfNotUsed
+     *
+     * @return bool
+     */
     public function isManualFormSubmitRequired()
     {
         return true;
     }
 
+    /**
+     * Returns value from input or default value if input is not provided.
+     *
+     * @return mixed
+     */
     public function getValue()
     {
         return $this->valueOption->getValue();

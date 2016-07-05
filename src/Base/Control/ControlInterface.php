@@ -14,6 +14,11 @@ interface ControlInterface extends PartInterface
     public function getOperation();
 
     /**
+     * This method is used by root component (e.g. ManagedList)
+     * to determine that submit button should be present.
+     *
+     * @see \ViewComponents\ViewComponents\Component\ManagedList::hideSubmitButtonIfNotUsed
+     *
      * @return bool
      */
     public function isManualFormSubmitRequired();

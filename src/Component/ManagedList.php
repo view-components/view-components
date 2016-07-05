@@ -238,6 +238,9 @@ class ManagedList extends Compound implements DataViewComponentInterface
         if (!$submit) {
             return;
         }
+        /**
+         * @see \ViewComponents\ViewComponents\Base\Control\ControlInterface::isManualFormSubmitRequired
+         */
         if (!$this
             ->getChildrenRecursive()
             ->filterByProperty('manual_form_submit_required', true, true)
@@ -249,6 +252,9 @@ class ManagedList extends Compound implements DataViewComponentInterface
         $submit->parent()->setView(null);
     }
 
+    /**
+     * Applies operations provided by controls to data provider.
+     */
     protected function applyOperations()
     {
         if (!$this->isOperationsApplied) {
@@ -259,6 +265,9 @@ class ManagedList extends Compound implements DataViewComponentInterface
         }
     }
 
+    /**
+     * @return callable
+     */
     protected function makeDataInjector()
     {
         $record = $this->getComponent('record_view');

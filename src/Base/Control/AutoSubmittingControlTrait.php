@@ -27,6 +27,15 @@ trait AutoSubmittingControlTrait
         return $this;
     }
 
+    /**
+     * This method is used by root component (e.g. ManagedList)
+     * to determine that submit button should be present.
+     *
+     * @see \ViewComponents\ViewComponents\Component\ManagedList::hideSubmitButtonIfNotUsed
+     * @see \ViewComponents\ViewComponents\Base\Control\ControlInterface::isManualFormSubmitRequired
+     *
+     * @return bool
+     */
     public function isManualFormSubmitRequired()
     {
         return !$this->isAutoSubmitted();

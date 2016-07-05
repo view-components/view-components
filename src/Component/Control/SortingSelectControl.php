@@ -43,6 +43,14 @@ class SortingSelectControl extends Part implements ControlInterface
         parent::__construct($this->makeDefaultView(), 'sorting_select', 'control_container');
     }
 
+    /**
+     * This method is used by root component (e.g. ManagedList)
+     * to determine that submit button should be present.
+     *
+     * @see \ViewComponents\ViewComponents\Component\ManagedList::hideSubmitButtonIfNotUsed
+     *
+     * @return bool
+     */
     public function isManualFormSubmitRequired()
     {
         return true;

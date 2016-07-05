@@ -48,6 +48,14 @@ class PaginationControl extends Part implements ControlInterface
         $this->dataProvider = $dataProvider;
     }
 
+    /**
+     * This method is used by root component (e.g. ManagedList)
+     * to determine that submit button should be present.
+     *
+     * @see \ViewComponents\ViewComponents\Component\ManagedList::hideSubmitButtonIfNotUsed
+     *
+     * @return bool
+     */
     public function isManualFormSubmitRequired()
     {
         return false;
