@@ -1,4 +1,8 @@
 <?php
+/** 
+ * This template renders input with optional label inside container tag('div' by default).
+ * All tag attributes can be customized via view variables.
+ */
 use ViewComponents\ViewComponents\Component\Html\Tag;
 use ViewComponents\ViewComponents\Component\Html\TagWithText;
 use ViewComponents\ViewComponents\Component\TemplateView;
