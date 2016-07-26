@@ -6,7 +6,7 @@ View Components Cookbook
 
 * [Preventing inclusion of CSS / JS resources](#1-preventing-inclusion-of-css--js-resources)
 * [Changing URL's of CSS/JS resources used by default](#2-changing-urls-of-css--js-resources-used-by-default)
-* [Using custom view templates and overriding core templates](#)
+* [Using custom view templates and overriding core templates](#3-using-custom-view-templates-and-overriding-core-templates)
 * [Creating input with date picker for filtering data](#4-creating-input-with-date-picker-for-filtering-data)
 
 ## 1. Preventing inclusion of CSS / JS resources
