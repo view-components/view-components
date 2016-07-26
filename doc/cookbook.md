@@ -3,9 +3,13 @@ View Components Cookbook
 **Work in progress. Contributions are extremely welcome!**
 
 ## Table of contents
-@todo
 
-## 1. Preventing inclusion of CSS / JS resources.
+* [Preventing inclusion of CSS / JS resources](#1-preventing-inclusion-of-css--js-resources)
+* [Changing URL's of CSS/JS resources used by default](#2-changing-urls-of-css--js-resources-used-by-default)
+* [Using custom view templates and overriding core templates](#)
+* [Creating input with date picker for filtering data](#4-creating-input-with-date-picker-for-filtering-data)
+
+## 1. Preventing inclusion of CSS / JS resources
 
 In some situations you may have CSS & JS resources that's required by component already included to page layout.
 
@@ -96,7 +100,7 @@ Bootstrap::registerServiceProvider(function(ServiceContainer $container) {
 Note that logic added via Bootstrap class will work only for default resource manager stored in DI container (i.e. resources will not be ignored if you use another instances of ResourceManager).
 
 
-## 2. Changing URL's of CSS/JS resources used by default
+## 2. Changing URL's of CSS / JS resources used by default
 
 All resources used by view-components has aliases stored in configuration, therefore you need to override configuration file.
 It can be done in service provider.
@@ -121,7 +125,7 @@ Alternatively you can override ServiceId::CONFIG instead of ServiceId::CONFIG_FI
 This approach will allow to merge your configuration with default one 
 and avoid problems with updating view-components package related to new configuration options that can be added in further releases.
 
-## 3. How to use custom view templates / override core templates.
+## 3. Using custom view templates and overriding core templates
 
 To use custom view templates, you need to register path to folder containing your templates in [TemplateFinder](https://github.com/view-components/view-components/blob/master/src/Rendering/TemplateFinder.php) instance linked to used Renderer.
 
