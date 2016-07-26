@@ -5,7 +5,15 @@ View Components Cookbook
 ## Table of contents
 @todo
 
-## 1. How to avoid including css & js files required by components if they are already included to page layout (not via view-components)
+## 1. Preventing inclusion of CSS / JS resources.
+
+In some situations you may have CSS & JS resources that's required by component already included to page layout.
+
+ViewComponents handles such situations and prevents including resources twice.
+
+But it doesn't works if you included it to your page manually.
+
+If you do so, mark this resources in resource manager as ignored. 
 
 Use following methods:
 
@@ -21,7 +29,7 @@ Services::resourceManager()
     ->ignoreJs(['bootstrap', 'bootstrap-datepicker']);
 ```
 
-If you need to ignore css & js resources on concrete page, place this code before components rendering.
+Place this code before components rendering.
 
 If you need to ignore css & js resources on all pages of your application, there are two options:
 
@@ -88,7 +96,7 @@ Bootstrap::registerServiceProvider(function(ServiceContainer $container) {
 Note that logic added via Bootstrap class will work only for default resource manager stored in DI container (i.e. resources will not be ignored if you use another instances of ResourceManager).
 
 
-## 2. How to override URL's of CSS/JS resources used by default
+## 2. Changing URL's of CSS/JS resources used by default
 
 All resources used by view-components has aliases stored in configuration, therefore you need to override configuration file.
 It can be done in service provider.
@@ -131,5 +139,43 @@ If you need to override core templates, register templates folder with higher pr
 
 If you need to provide fallback for some templates (they can be absent in already registered paths), pass false to second argument.
 
+
+## 4. Creating input with date picker for filtering data
+
+Let's say we have a filter:
+```php
+$someDateFilter =  new FilterControl(
+    'some_date',
+    FilterOperation::OPERATOR_EQ,
+    $input->option('some_date')))
+);
+```
+
+It uses ["input" template](https://github.com/view-components/view-components/blob/master/resources/views/input.php) for rendering control, we need to add 'type' attribute with 'date' value to input tag.
+
+See ["input" template](https://github.com/view-components/view-components/blob/master/resources/views/input.php) for available view variables.
+
+Wee need to provide 'inputType' view variable. It can be done by initializing FilterControl by new TemplateView or setting view variables to existing TemplateView.
+
+a)
+```php
+$someDateFilter =  new FilterControl(
+    'some_date',
+    FilterOperation::OPERATOR_EQ,
+    $input->option('some_date'))),
+    new TemplateView('input', [
+        'label' => 'Some date',
+        'placeholder' => 'enter date here',
+        'inputType' => 'date',
+    ])
+);
+```
+
+b)
+```php
+$someDateFilter->getView()->setDataItem('inputClass', 'datepicker');
+```
+
+Now some magic: if you use twitter bootstrap styling, it will automatically add bootstrap-date-picker javascript to date inputs.
 
 
