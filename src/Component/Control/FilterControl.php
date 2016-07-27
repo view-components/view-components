@@ -30,17 +30,19 @@ class FilterControl extends Part implements ControlInterface
      * @param string $field
      * @param string $operator
      * @param InputOption $input
+     * @param $viewComponent
      */
     public function __construct(
         $field,
         $operator = FilterOperation::OPERATOR_EQ,
-        InputOption $input = null
+        InputOption $input = null,
+        $viewComponent = null
     ) {
         $this->field = $field;
         $this->operator = $operator;
         $this->valueOption = $input;
         parent::__construct(
-            $this->makeDefaultView(),
+            $viewComponent ?: $this->makeDefaultView(),
             $this->field . '_filter' . rand(0, PHP_INT_MAX),
             'control_container'
         );
