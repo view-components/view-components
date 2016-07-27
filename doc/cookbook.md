@@ -166,7 +166,7 @@ a)
 $someDateFilter =  new FilterControl(
     'some_date',
     FilterOperation::OPERATOR_EQ,
-    $input->option('some_date'))),
+    $input->option('some_date'),
     new TemplateView('input', [
         'label' => 'Some date',
         'placeholder' => 'enter date here',
