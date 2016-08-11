@@ -177,7 +177,7 @@ $someDateFilter =  new FilterControl(
 
 b)
 ```php
-$someDateFilter->getView()->setDataItem('inputClass', 'datepicker');
+$someDateFilter->getView()->setDataItem('inputType', 'date');
 ```
 
 Now some magic: if you use twitter bootstrap styling, it will automatically add bootstrap-date-picker javascript to date inputs.
