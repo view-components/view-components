@@ -9,6 +9,8 @@ use ViewComponents\ViewComponents\Base\Control\ControlInterface;
 use ViewComponents\ViewComponents\Base\DataViewComponentInterface;
 use ViewComponents\ViewComponents\Base\ViewComponentInterface;
 use ViewComponents\ViewComponents\Component\Html\TagWithText;
+use ViewComponents\ViewComponents\Data\ArrayDataAggregateInterface;
+use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use ViewComponents\ViewComponents\Data\DataAggregateTrait;
 use ViewComponents\ViewComponents\Component\Html\Tag;
 use ViewComponents\ViewComponents\Component\ManagedList\RecordView;
@@ -270,9 +272,19 @@ class ManagedList extends Compound implements DataViewComponentInterface
      */
     protected function makeDataInjector()
     {
+        /** @var DataViewComponentInterface $record */
         $record = $this->getComponent('record_view');
         return function ($row) use ($record) {
-            $record->mergeData($row);
+            if ($record instanceof ArrayDataAggregateInterface) {
+                $record->mergeData($row);
+            } else {
+                $data = $record->getData() ?: [];
+                if (is_array($data) && is_array($row)) {
+                    $record->setData(array_merge($data, $row));
+                } else {
+                    $record->setData($data);
+                }
+            }
         };
     }
 
