@@ -9,7 +9,7 @@
 
 
 
-**Project status: pre-alpha**
+**Project status: alpha since 2016-08-12**
 
 **Have questions? [Ask in issue-tracker](https://github.com/view-components/view-components/issues/new)**.
 
