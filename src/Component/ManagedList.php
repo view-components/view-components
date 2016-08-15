@@ -283,7 +283,7 @@ class ManagedList extends Compound implements DataViewComponentInterface
                 if (is_array($data) && is_array($row)) {
                     $record->setData(array_merge($data, $row));
                 } else {
-                    $record->setData($data);
+                    $record->setData($row);
                 }
             } else {
                 throw new RuntimeException(
