@@ -3,6 +3,7 @@ namespace ViewComponents\ViewComponents\Component;
 
 use Nayjest\Collection\Decorator\ReadonlyObjectCollection;
 use Nayjest\Collection\Extended\ObjectCollection;
+use RuntimeException;
 use ViewComponents\ViewComponents\Base\Compound\PartInterface;
 use ViewComponents\ViewComponents\Base\ContainerComponentInterface;
 use ViewComponents\ViewComponents\Base\Control\ControlInterface;
@@ -277,13 +278,17 @@ class ManagedList extends Compound implements DataViewComponentInterface
         return function ($row) use ($record) {
             if ($record instanceof ArrayDataAggregateInterface) {
                 $record->mergeData($row);
-            } else {
+            } elseif($record instanceof DataAggregateInterface) {
                 $data = $record->getData() ?: [];
                 if (is_array($data) && is_array($row)) {
                     $record->setData(array_merge($data, $row));
                 } else {
                     $record->setData($data);
                 }
+            } else {
+                throw new RuntimeException(
+                    'No way to inject data. Default data injector expects that record_view implements DataAggregateInterface.'
+                );
             }
         };
     }
