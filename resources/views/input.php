@@ -17,7 +17,6 @@ isset($labelClass) || $labelClass = '';
 isset($name) || $name = '';
 isset($value) || $value = '';
 isset($inputType) || $inputType = 'text';
-isset($showLabel) || $showLabel = true;
 isset($placeholder) || $placeholder = isset($label) ? $label : '';
 isset($inputAttributes) || $inputAttributes = [];
 isset($labelAttributes) || $labelAttributes = [];

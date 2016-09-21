@@ -15,7 +15,6 @@ isset($options) || $options = [];
 isset($name) || $name = '';
 isset($value) || $value = '';
 isset($inputType) || $inputType = 'text';
-isset($showLabel) || $showLabel = true;
 isset($inputAttributes) || $inputAttributes = [];
 isset($labelAttributes) || $labelAttributes = [];
 isset($containerAttributes) || $containerAttributes = [];
