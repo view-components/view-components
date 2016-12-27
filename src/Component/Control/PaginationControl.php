@@ -8,6 +8,7 @@ use ViewComponents\ViewComponents\Component\Control\View\PaginationControlView;
 use ViewComponents\ViewComponents\Component\ManagedList;
 use ViewComponents\ViewComponents\Data\DataAggregateInterface;
 use ViewComponents\ViewComponents\Data\DataProviderInterface;
+use ViewComponents\ViewComponents\Data\Operation\SortOperation;
 use ViewComponents\ViewComponents\Input\InputOption;
 use ViewComponents\ViewComponents\Data\Operation\PaginateOperation;
 use RuntimeException;
@@ -41,7 +42,8 @@ class PaginationControl extends Part implements ControlInterface
         InputOption $page,
         $pageSize,
         DataProviderInterface $dataProvider = null
-    ) {
+    )
+    {
         $this->pageInputOption = $page;
         $this->pageSize = $pageSize;
         parent::__construct($this->makeDefaultView(), 'pagination', 'container');
@@ -96,17 +98,19 @@ class PaginationControl extends Part implements ControlInterface
      */
     protected function getTotalRecordsCount()
     {
+        /** remove sorting because it will produce invalid SQL that fails on Postgres
+         * @see https://github.com/view-components/view-components/issues/33
+         */
         $operations = $this->getDataProvider()->operations();
-
-        if ($this->operation === null || !$operations->contains($this->operation)) {
-            throw new RuntimeException(
-                'Trying to get total count for pagination
-                from data provider having not configured operations.'
-            );
+        $removed = [];
+        foreach ($operations as $operation) {
+            if ($operation instanceof SortOperation || $operation instanceof PaginateOperation) {
+                $removed[] = $operation;
+                $operations->remove($operation);
+            }
         }
-        $operations->remove($this->operation);
         $count = $this->getDataProvider()->count();
-        $operations->add($this->operation);
+        $operations->addMany($removed);
         return $count;
     }
 
