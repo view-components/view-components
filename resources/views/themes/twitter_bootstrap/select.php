@@ -1,3 +1,4 @@
 <?php
-$inputClass = $helper->getInputClasses();
+$inputClass = $helper->getInputClasses()
+    . (isset($inputClass) ? " $inputClass" : '');
 include __DIR__ . '/../../select.php';
