@@ -10,6 +10,8 @@ class FilterOperation implements OperationInterface
     const OPERATOR_STR_STARTS_WITH = 'str_starts_with';
     const OPERATOR_STR_ENDS_WITH = 'str_ends_with';
     const OPERATOR_STR_CONTAINS = 'str_contains';
+    const OPERATOR_SET_CONTAINS  = 'set_contains';
+    const OPERATOR_IN   = 'IN';
     const OPERATOR_EQ = '=';
     const OPERATOR_NOT_EQ = '<>';
     const OPERATOR_GT = '>';
